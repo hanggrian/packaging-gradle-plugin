@@ -1,38 +1,37 @@
 package com.hendraanggrian.packr
 
 import com.badlogicgames.packr.PackrConfig.Platform
+import com.hendraanggrian.packr.scene.textListView
 import javafx.application.Application
 import javafx.geometry.Insets
 import javafx.scene.Scene
 import javafx.scene.control.Accordion
 import javafx.scene.control.ChoiceBox
 import javafx.scene.control.ListView
-import javafx.scene.control.SelectionMode.MULTIPLE
 import javafx.scene.control.TextField
 import javafx.scene.control.Tooltip
-import javafx.scene.control.cell.TextFieldListCell.forListView
 import javafx.scene.image.ImageView
+import javafx.scene.layout.GridPane.setHgrow
+import javafx.scene.layout.Priority.ALWAYS
 import javafx.stage.Stage
-import kotfx.bindings.isEmpty
 import kotfx.collections.toObservableList
-import kotfx.dialogs.fileChooser
+import kotfx.dialogs.directoryChooser
 import kotfx.gap
 import kotfx.scene.accordion
 import kotfx.scene.button
 import kotfx.scene.choiceBox
-import kotfx.scene.contextMenu
 import kotfx.scene.gridPane
 import kotfx.scene.label
-import kotfx.scene.listView
+import kotfx.scene.menu
 import kotfx.scene.menuBar
 import kotfx.scene.menuItem
-import kotfx.scene.separatorMenuItem
 import kotfx.scene.textField
 import kotfx.scene.toolBar
 import kotfx.scene.vbox
 import kotlinx.coroutines.experimental.delay
 import kotlinx.coroutines.experimental.javafx.JavaFx
 import kotlinx.coroutines.experimental.launch
+import java.lang.System.getProperty
 
 class App : Application() {
 
@@ -44,6 +43,8 @@ class App : Application() {
     private lateinit var jdkField: TextField
     private lateinit var executableField: TextField
     private lateinit var classpathAccordion: Accordion
+    private lateinit var classpathIncludeList: ListView<String>
+    private lateinit var classpathExcludeList: ListView<String>
     private lateinit var mainClassField: TextField
     private lateinit var resourcesList: ListView<String>
     private lateinit var vmArgsList: ListView<String>
@@ -55,6 +56,10 @@ class App : Application() {
     override fun start(stage: Stage) {
         stage.scene = Scene(vbox {
             menuBar {
+                isUseSystemMenuBar = true
+                menu("File") {
+                    menuItem("Save") { }
+                }
             }
             toolBar {
                 button {
@@ -66,16 +71,17 @@ class App : Application() {
 
                 label("Platform") row 0 col 0
                 platformChoice = choiceBox(Platform.values().toObservableList()) {
-
                 } row 0 col 1 colSpan 3
 
                 label("JDK") row 1 col 0
-                jdkField = textField() row 1 col 1
+                jdkField = textField { setHgrow(this, ALWAYS) } row 1 col 1
                 button(graphic = ImageView(R.image.ic_home)) {
                     tooltip = Tooltip("Use java.home")
+                    setOnAction { getProperty("java.home")?.let { jdkField.text = it } }
                 } row 1 col 2
                 button(graphic = ImageView(R.image.ic_folder)) {
                     tooltip = Tooltip("Browse")
+                    setOnAction { directoryChooser().showDialog(stage)?.let { jdkField.text = it.path } }
                 } row 1 col 3
 
                 label("Executable") row 2 col 0
@@ -83,7 +89,12 @@ class App : Application() {
                 } row 2 col 1 colSpan 3
 
                 label("Classpath") row 3 col 0
-                classpathAccordion = accordion(stage.classpathPane("Include"), stage.classpathPane("Exclude")) {
+                classpathIncludeList = textListView("Jar file", true, false, "jar")
+                classpathExcludeList = textListView("Jar file", true, false, "jar")
+                classpathAccordion = accordion(
+                    kotfx.scene.titledPane("Include", classpathIncludeList),
+                    kotfx.scene.titledPane("Exclude", classpathExcludeList)
+                ) {
                     minHeight = 192.0
                     maxHeight = 192.0
                     expandedPane = panes[0]
@@ -99,14 +110,10 @@ class App : Application() {
                 mainClassField = textField() row 4 col 1 colSpan 3
 
                 label("Resources") row 5 col 0
-                resourcesList = listView<String> {
-                    maxHeight = 77.0
-                } row 5 col 1 colSpan 3
+                resourcesList = textListView("Resource files", true, true) { maxHeight = 77.0 } row 5 col 1 colSpan 3
 
                 label("VM args") row 6 col 0
-                vmArgsList = listView<String> {
-                    maxHeight = 77.0
-                } row 6 col 1 colSpan 3
+                vmArgsList = textListView("Arguments") { maxHeight = 77.0 } row 6 col 1 colSpan 3
 
                 label("Minimize JRE") row 7 col 0
                 minimizeChoice = choiceBox(MinimizeOption.values().toObservableList()) { } row 7 col 1 colSpan 3
@@ -128,40 +135,7 @@ class App : Application() {
             }
         })
         stage.show()
+        stage.minWidth = stage.scene.width
+        stage.minHeight = stage.scene.height
     }
-
-    private fun Stage.classpathPane(title: String) = kotfx.scene.titledPane(title, listView<String> {
-        selectionModel.selectionMode = MULTIPLE
-        isEditable = true
-        cellFactory = forListView()
-        setOnEditCommit {
-            items[it.index] = it.newValue
-            items.sort()
-        }
-        contextMenu = contextMenu {
-            menuItem("Add") {
-                setOnAction {
-                    this@listView.items.add(".jar")
-                    this@listView.items.sort()
-                }
-            }
-            menuItem("Browse") {
-                setOnAction {
-                    fileChooser("Jar file", "*.jar").showOpenMultipleDialog(this@classpathPane)?.forEach { file ->
-                        this@listView.items.add(file.absolutePath)
-                        this@listView.items.sort()
-                    }
-                }
-            }
-            separatorMenuItem()
-            menuItem("Delete") {
-                disableProperty().bind(this@listView.selectionModel.selectedItems.isEmpty)
-                setOnAction { this@listView.selectionModel.selectedIndices.forEach { this@listView.items.removeAt(it) } }
-            }
-            menuItem("Clear") {
-                disableProperty().bind(this@listView.items.isEmpty)
-                setOnAction { this@listView.items.clear() }
-            }
-        }
-    })
 }
