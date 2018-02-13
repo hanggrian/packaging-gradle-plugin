@@ -7,7 +7,6 @@ import kotfx.bindings.isEmpty
 import kotfx.dialogs.directoryChooser
 import kotfx.dialogs.fileChooser
 import kotfx.dialogs.inputDialog
-import kotfx.dialogs.promptText
 import kotfx.scene.menuItem
 import kotfx.scene.separatorMenuItem
 
@@ -31,7 +30,7 @@ class TextListView(
                 setOnAction {
                     inputDialog {
                         contentText = desc
-                        promptText = desc
+                        editor.promptText = desc
                     }.showAndWait().ifPresent {
                         this@TextListView.items.add(it)
                         this@TextListView.items.sort()

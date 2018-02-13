@@ -14,7 +14,7 @@ inline val Plugin.r get() = id("r")
 inline val Plugin.buildconfig get() = id("buildconfig")
 const val rVersion = "0.2"
 const val buildconfigVersion = "0.8"
-const val kotfxVersion = "0.22"
+const val kotfxVersion = "0.23"
 
 fun Dependency.packr() = "com.badlogicgames.packr:packr:2.0-SNAPSHOT"
 
