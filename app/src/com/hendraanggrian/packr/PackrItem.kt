@@ -1,5 +1,6 @@
 package com.hendraanggrian.packr
 
+/** POJO used for GSON serialization/deserialization. */
 data class PackrItem(
     var platform: String? = null,
     var jdk: String? = null,

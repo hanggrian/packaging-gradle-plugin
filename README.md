@@ -1,8 +1,21 @@
 Packr
 =====
-Graphical interface to packages your JAR for native distribution
+JavaFX app that wraps JARs into native bundle for Windows, MacOS, and Linux.
+Basically GUI version of amazing [packr] library.
 
 ![demo][demo]
+
+Download
+--------
+Head to [releases] to download this app in following flavors:
+ * Executable jar file, requires JRE 1.8.
+ * MacOS app file that doesn't require JRE.
+
+Windows and Linux bundles are currently unsupported, use JAR at this time.
+
+How to build
+------------
+Use `shadowJar` to build a fat jar which then should be packed either with `packr.jar` or with this app itself.
 
 License
 -------
@@ -21,3 +34,5 @@ License
     limitations under the License.
     
 [demo]: /art/demo.png
+[releases]: https://github.com/hendraanggrian/packr-gui/releases
+[packr]: https://github.com/libgdx/packr
