@@ -1,4 +1,4 @@
-package com.hendraanggrian.packr.gson
+package com.hendraanggrian.packr
 
 data class PackrItem(
     var platform: String? = null,
@@ -9,5 +9,7 @@ data class PackrItem(
     var vmargs: ArrayList<String>? = null,
     var resources: ArrayList<String>? = null,
     var minimizejre: String? = null,
-    var output: String? = null
+    var output: String? = null,
+    var icon: String? = null,
+    var bundle: String? = null
 )

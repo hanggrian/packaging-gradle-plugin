@@ -5,5 +5,9 @@ enum class MinimizeOption {
     Hard,
     OracleJRE8;
 
-    val value: String get() = toString().toLowerCase()
+    val desc: String get() = toString().toLowerCase()
+
+    companion object {
+        fun byDesc(desc: String): MinimizeOption = values().first { it.desc.equals(desc, true) }
+    }
 }

@@ -1,0 +1,17 @@
+{
+  "platform": "windows64",
+  "jdk": "/Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home",
+  "executable": "packr",
+  "classpath": [
+    "release/packr-0.1.jar"
+  ],
+  "mainclass": "com.hendraanggrian.packr.App",
+  "vmargs": [
+    "Xmx1G"
+  ],
+  "resources": [
+    "app/res"
+  ],
+  "minimizejre": "soft",
+  "output": "release/Packr"
+}

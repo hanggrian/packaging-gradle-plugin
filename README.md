@@ -2,6 +2,8 @@ Packr
 =====
 Graphical interface to packages your JAR for native distribution
 
+![demo][demo]
+
 License
 -------
     Copyright 2018 Hendra Anggrian
@@ -17,3 +19,5 @@ License
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+    
+[demo]: /art/demo.png
