@@ -18,6 +18,8 @@ const val kotfxVersion = "0.23"
 
 fun Dependency.packr() = "com.badlogicgames.packr:packr:2.0-SNAPSHOT"
 
+fun Dependency.gson() = "com.google.code.gson:gson:2.8.2"
+
 fun Dependency.shadow() = "com.github.jengelman.gradle.plugins:shadow:2.0.2"
 inline val Plugin.shadow get() = id("com.github.johnrengelman.shadow")
 

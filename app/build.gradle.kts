@@ -42,6 +42,7 @@ dependencies {
     implementation(kotlinx("coroutines-javafx", coroutinesVersion))
     implementation(hendraanggrian("kotfx", kotfxVersion))
     implementation(packr())
+    implementation(gson())
     ktlint()
     testImplementation(kotlin("test", kotlinVersion))
     testImplementation(kotlin("reflect", kotlinVersion))

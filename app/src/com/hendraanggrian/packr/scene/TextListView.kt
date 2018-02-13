@@ -12,7 +12,6 @@ import kotfx.scene.separatorMenuItem
 
 class TextListView(
     desc: String,
-    canBrowseFiles: Boolean,
     canBrowseDirectory: Boolean,
     extension: String?
 ) : ListView<String>() {
@@ -37,7 +36,7 @@ class TextListView(
                     }
                 }
             }
-            if (canBrowseFiles) menuItem("Browse files") {
+            menuItem("Browse files") {
                 setOnAction {
                     (if (extension != null) fileChooser(desc, "*.$extension") else fileChooser())
                         .showOpenMultipleDialog(this@TextListView.scene.window)
