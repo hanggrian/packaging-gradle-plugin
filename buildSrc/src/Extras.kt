@@ -1,6 +1,5 @@
 const val releaseGroup = "com.hendraanggrian"
 const val releaseArtifact = "packr"
-const val releaseDebug = true
 const val releaseVersion = "0.1"
 
 const val kotlinVersion = "1.2.21"

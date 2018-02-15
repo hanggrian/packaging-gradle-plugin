@@ -12,7 +12,7 @@
   "resources": [
     "app/res"
   ],
-  "minimizejre": "soft",
+  "minimizejre": "hard",
   "output": "release/Packr.app",
   "icon": "art/mac.icns",
   "bundle": "com.hendraanggrian.packr"

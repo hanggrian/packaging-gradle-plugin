@@ -12,6 +12,6 @@
   "resources": [
     "app/res"
   ],
-  "minimizejre": "soft",
+  "minimizejre": "hard",
   "output": "release/Packr"
 }

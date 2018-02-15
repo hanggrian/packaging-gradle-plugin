@@ -58,7 +58,7 @@ dependencies {
 
 (tasks["shadowJar"] as ShadowJar).apply {
     destinationDir = project.file("../release")
-    manifest.attributes(mapOf("Main-Class" to "$releaseGroup.App"))
+    manifest.attributes(mapOf("Main-Class" to "$releaseGroup.$releaseArtifact.App"))
     baseName = releaseArtifact
     classifier = null
 }

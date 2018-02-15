@@ -7,10 +7,10 @@ import kotfx.scene.ChildManager
 import java.io.File
 
 inline fun ChildManager.textListView(
-    initialFile: File,
+    jsonFile: File,
     hint: String,
     canBrowseFile: Boolean = false,
     canBrowseDirectory: Boolean = false,
     extension: String? = null,
     noinline init: ((@SceneDsl TextListView).() -> Unit)? = null
-): TextListView = TextListView(initialFile, hint, canBrowseFile, canBrowseDirectory, extension).apply { init?.invoke(this) }.add()
+): TextListView = TextListView(jsonFile, hint, canBrowseFile, canBrowseDirectory, extension).apply { init?.invoke(this) }.add()

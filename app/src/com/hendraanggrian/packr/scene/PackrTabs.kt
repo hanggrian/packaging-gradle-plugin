@@ -6,6 +6,6 @@ import kotfx.annotations.SceneDsl
 import java.io.File
 
 inline fun packrTab(
-    initialFile: File,
+    jsonFile: File,
     noinline init: ((@SceneDsl PackrTab).() -> Unit)? = null
-): PackrTab = PackrTab(initialFile).apply { init?.invoke(this) }
+): PackrTab = PackrTab(jsonFile).apply { init?.invoke(this) }

@@ -8,10 +8,9 @@ Basically GUI version of amazing [packr] library.
 Download
 --------
 Head to [releases] to download this app in following flavors:
- * Executable jar file, requires JRE 1.8.
- * MacOS app file that doesn't require JRE.
-
-Windows and Linux bundles are currently unsupported, use JAR at this time.
+ * Executable jar file, requires JRE 1.8
+ * MacOS app
+ * Windows 64-bit exe
 
 How to build
 ------------

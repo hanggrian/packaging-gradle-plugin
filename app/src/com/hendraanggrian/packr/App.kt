@@ -25,11 +25,14 @@ import kotfx.dialogs.addButton
 import kotfx.dialogs.content
 import kotfx.dialogs.dialog
 import kotfx.dialogs.fileChooser
+import kotfx.dialogs.icon
 import kotfx.exit
 import kotfx.icon
 import kotfx.maxSize
 import kotfx.scene.anchorPane
 import kotfx.scene.borderPane
+import kotfx.scene.button
+import kotfx.scene.hbox
 import kotfx.scene.hyperlink
 import kotfx.scene.imageView
 import kotfx.scene.loadFont
@@ -51,7 +54,7 @@ import java.net.URI
 class App : Application() {
 
     companion object {
-        private val PACKR_FILE_FILTER = FileChooser.ExtensionFilter("Packr configuration initialPath", "*.json")
+        private val PACKR_FILE_FILTER = FileChooser.ExtensionFilter("Packr configuration file", "*.json")
 
         @JvmStatic fun main(args: Array<String>) = Application.launch(App::class.java, *args)
     }
@@ -74,6 +77,7 @@ class App : Application() {
                     menuItem("About", ImageView(R.image.menu_about)) {
                         setOnAction {
                             dialog<Unit>("About") {
+                                icon = Image(R.image.ic_about)
                                 content = kotfx.scene.hbox {
                                     padding = Insets(48.0)
                                     imageView(Image(R.image.logo_packr)) {
@@ -89,20 +93,23 @@ class App : Application() {
                                         text("Version $VERSION") { loadFont(R.font.lato_regular.form, 12.0) } marginTop 2
                                         text("Built using open-source software.") { loadFont(R.font.lato_bold.form, 12.0) } marginTop 20
                                         textFlow {
-                                            text("Powered by  ") { loadFont(R.font.lato_bold.form, 12.0) }
+                                            text("Powered by ") { loadFont(R.font.lato_bold.form, 12.0) }
                                             hyperlink("packr") {
                                                 loadFont(R.font.lato_regular.form, 12.0)
                                                 setOnAction { getDesktop().browse(URI("https://github.com/libgdx/packr")) }
                                             }
                                         } marginTop 4
                                         textFlow {
-                                            text("Author  ") { loadFont(R.font.lato_bold.form, 12.0) }
+                                            text("Author ") { loadFont(R.font.lato_bold.form, 12.0) }
                                             hyperlink("Hendra Anggrian") {
                                                 loadFont(R.font.lato_regular.form, 12.0)
                                                 setOnAction { getDesktop().browse(URI("https://github.com/hendraanggrian")) }
                                             }
-                                        } marginTop 4
-                                        hyperlink("Check for updates") { setOnAction { getDesktop().browse(URI("https://github.com/hendraanggrian/packr-gui/releases")) } } marginTop 20
+                                        }
+                                        hbox {
+                                            button("GitHub") { setOnAction { getDesktop().browse(URI("https://github.com/hendraanggrian/packr-gui")) } } marginRight 8
+                                            button("Check for updates") { setOnAction { getDesktop().browse(URI("https://github.com/hendraanggrian/packr-gui/releases")) } }
+                                        } marginTop 20
                                     } marginLeft 48
                                     addButton(CLOSE)
                                 }
