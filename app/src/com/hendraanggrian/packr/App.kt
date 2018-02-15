@@ -1,10 +1,14 @@
 package com.hendraanggrian.packr
 
 import com.google.gson.Gson
+import com.hendraanggrian.packr.BuildConfig.VERSION
 import com.hendraanggrian.packr.scene.packrTab
 import javafx.application.Application
 import javafx.collections.ObservableList
+import javafx.geometry.Insets
+import javafx.geometry.Pos.CENTER_LEFT
 import javafx.scene.Scene
+import javafx.scene.control.ButtonType.CLOSE
 import javafx.scene.control.Tab
 import javafx.scene.control.TabPane
 import javafx.scene.image.Image
@@ -17,12 +21,18 @@ import kotfx.bindings.booleanBindingOf
 import kotfx.bindings.isEmpty
 import kotfx.bindings.lessEq
 import kotfx.bindings.sizeBinding
+import kotfx.dialogs.addButton
+import kotfx.dialogs.content
+import kotfx.dialogs.dialog
 import kotfx.dialogs.fileChooser
+import kotfx.exit
 import kotfx.icon
 import kotfx.maxSize
 import kotfx.scene.anchorPane
 import kotfx.scene.borderPane
 import kotfx.scene.hyperlink
+import kotfx.scene.imageView
+import kotfx.scene.loadFont
 import kotfx.scene.menu
 import kotfx.scene.menuBar
 import kotfx.scene.menuItem
@@ -30,10 +40,13 @@ import kotfx.scene.separatorMenuItem
 import kotfx.scene.setFont
 import kotfx.scene.tabPane
 import kotfx.scene.text
+import kotfx.scene.textFlow
 import kotfx.scene.vbox
 import kotfx.setMinSize
 import kotfx.setSize
+import java.awt.Desktop.getDesktop
 import java.io.File
+import java.net.URI
 
 class App : Application() {
 
@@ -54,6 +67,48 @@ class App : Application() {
                 menu("File") {
                     menuItem("New") { setOnAction { stage.create() } }
                     menuItem("Open...", ImageView(R.image.menu_folder)) { setOnAction { stage.open() } }
+                    separatorMenuItem()
+                    menuItem("Quit Packr") { setOnAction { exit() } }
+                }
+                menu("Help") {
+                    menuItem("About", ImageView(R.image.menu_about)) {
+                        setOnAction {
+                            dialog<Unit>("About") {
+                                content = kotfx.scene.hbox {
+                                    padding = Insets(48.0)
+                                    imageView(Image(R.image.logo_packr)) {
+                                        fitWidth = 172.0
+                                        fitHeight = 172.0
+                                    }
+                                    vbox {
+                                        alignment = CENTER_LEFT
+                                        textFlow {
+                                            text("Packr ") { loadFont(R.font.lato_bold.form, 24.0) }
+                                            text("GUI ") { loadFont(R.font.lato_light.form, 24.0) }
+                                        }
+                                        text("Version $VERSION") { loadFont(R.font.lato_regular.form, 12.0) } marginTop 2
+                                        text("Built using open-source software.") { loadFont(R.font.lato_bold.form, 12.0) } marginTop 20
+                                        textFlow {
+                                            text("Powered by  ") { loadFont(R.font.lato_bold.form, 12.0) }
+                                            hyperlink("packr") {
+                                                loadFont(R.font.lato_regular.form, 12.0)
+                                                setOnAction { getDesktop().browse(URI("https://github.com/libgdx/packr")) }
+                                            }
+                                        } marginTop 4
+                                        textFlow {
+                                            text("Author  ") { loadFont(R.font.lato_bold.form, 12.0) }
+                                            hyperlink("Hendra Anggrian") {
+                                                loadFont(R.font.lato_regular.form, 12.0)
+                                                setOnAction { getDesktop().browse(URI("https://github.com/hendraanggrian")) }
+                                            }
+                                        } marginTop 4
+                                        hyperlink("Check for updates") { setOnAction { getDesktop().browse(URI("https://github.com/hendraanggrian/packr-gui/releases")) } } marginTop 20
+                                    } marginLeft 48
+                                    addButton(CLOSE)
+                                }
+                            }.showAndWait()
+                        }
+                    }
                 }
             }
             anchorPane {
@@ -112,5 +167,7 @@ class App : Application() {
         })
     }
 
-    private val tabs: ObservableList<Tab> get() = this@App.tabPane.tabs
+    private inline val tabs: ObservableList<Tab> get() = this@App.tabPane.tabs
+
+    private inline val String.form: String get() = App::class.java.getResource(this).toExternalForm()
 }

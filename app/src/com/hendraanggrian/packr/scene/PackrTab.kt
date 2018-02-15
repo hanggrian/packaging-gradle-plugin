@@ -46,7 +46,10 @@ import java.io.File
 
 class PackrTab(initialFile: File) : Tab(initialFile.nameWithoutExtension) {
 
-    private val gson: Gson = GsonBuilder().setPrettyPrinting().create()
+    companion object {
+        private val GSON: Gson = GsonBuilder().setPrettyPrinting().create()
+    }
+
     private lateinit var item: PackrItem
 
     private lateinit var processButton: Button
@@ -64,7 +67,7 @@ class PackrTab(initialFile: File) : Tab(initialFile.nameWithoutExtension) {
     private lateinit var bundleField: TextField
 
     init {
-        initialFile.inputStream().use { item = gson.fromJson(IOUtils.toString(it), PackrItem::class.java) }
+        initialFile.inputStream().use { item = GSON.fromJson(IOUtils.toString(it), PackrItem::class.java) }
         content = vbox {
             gridPane {
                 padding = Insets(8.0)
@@ -153,7 +156,7 @@ class PackrTab(initialFile: File) : Tab(initialFile.nameWithoutExtension) {
                 setPadding(left = 8.0, right = 8.0, bottom = 8.0)
                 button("Save", ImageView(R.image.btn_save)) {
                     setOnAction {
-                        initialFile.writeText(gson.toJson(item.apply {
+                        initialFile.writeText(GSON.toJson(item.apply {
                             platform = platformChoice.value?.desc
                             jdk = jdkField.text.notEmptyOrNull
                             executable = executableField.text.notEmptyOrNull
