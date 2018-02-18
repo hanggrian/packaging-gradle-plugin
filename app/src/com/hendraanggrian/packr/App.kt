@@ -7,6 +7,7 @@ import javafx.application.Application
 import javafx.collections.ObservableList
 import javafx.geometry.Insets
 import javafx.geometry.Pos.CENTER_LEFT
+import javafx.geometry.VPos.TOP
 import javafx.scene.Scene
 import javafx.scene.control.ButtonType.CLOSE
 import javafx.scene.control.Tab
@@ -25,8 +26,10 @@ import kotfx.dialogs.addButton
 import kotfx.dialogs.content
 import kotfx.dialogs.dialog
 import kotfx.dialogs.fileChooser
+import kotfx.dialogs.headerTitle
 import kotfx.dialogs.icon
 import kotfx.exit
+import kotfx.gap
 import kotfx.icon
 import kotfx.maxSize
 import kotfx.scene.anchorPane
@@ -35,6 +38,7 @@ import kotfx.scene.button
 import kotfx.scene.hbox
 import kotfx.scene.hyperlink
 import kotfx.scene.imageView
+import kotfx.scene.label
 import kotfx.scene.loadFont
 import kotfx.scene.menu
 import kotfx.scene.menuBar
@@ -74,9 +78,29 @@ class App : Application() {
                     menuItem("Quit Packr") { setOnAction { exit() } }
                 }
                 menu("Help") {
+                    menuItem("How-to") {
+                        setOnAction {
+                            dialog<Unit> {
+                                headerTitle = text
+                                content = kotfx.scene.gridPane {
+                                    gap = 8.0
+                                    label("1.") row 0 col 0 vpos TOP
+                                    textFlow {
+                                        text("JSON file containing ${BuildConfig.NAME} configuration is required to start packing.\nCreate a new one or open existing file by selecting ") { loadFont(R.font.lato_regular.form, 13.0) }
+                                        text("File") { loadFont(R.font.lato_bold.form, 13.0) }
+                                        text(" menu.") { loadFont(R.font.lato_regular.form, 13.0) }
+                                    } row 0 col 1
+                                    label("2.") row 1 col 0 vpos TOP
+                                    textFlow {
+                                    } row 1 col 1
+                                }
+                            }.showAndWait()
+                        }
+                    }
+                    separatorMenuItem()
                     menuItem("About", ImageView(R.image.menu_about)) {
                         setOnAction {
-                            dialog<Unit>("About") {
+                            dialog<Unit>(text) {
                                 icon = Image(R.image.ic_about)
                                 content = kotfx.scene.hbox {
                                     padding = Insets(48.0)

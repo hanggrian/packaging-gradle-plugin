@@ -33,7 +33,7 @@ java.sourceSets {
 kotlin.experimental.coroutines = ENABLE
 
 r.resourcesDir = "res"
-buildconfig.name = releaseArtifact
+buildconfig.name = "Packr"
 
 configurations.create("ktlint")
 
