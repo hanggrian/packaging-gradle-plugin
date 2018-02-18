@@ -6,6 +6,11 @@ import kotfx.annotations.SceneDsl
 import kotfx.scene.ChildManager
 import java.io.File
 
+inline fun packrTab(
+    jsonFile: File,
+    noinline init: ((@SceneDsl PackrTab).() -> Unit)? = null
+): PackrTab = PackrTab(jsonFile).apply { init?.invoke(this) }
+
 inline fun ChildManager.textListView(
     jsonFile: File,
     hint: String,

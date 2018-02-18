@@ -1,6 +1,7 @@
 package com.hendraanggrian.packr
 
 import com.google.gson.Gson
+import com.hendraanggrian.packr.BuildConfig.NAME
 import com.hendraanggrian.packr.BuildConfig.VERSION
 import com.hendraanggrian.packr.scene.packrTab
 import javafx.application.Application
@@ -26,6 +27,7 @@ import kotfx.dialogs.addButton
 import kotfx.dialogs.content
 import kotfx.dialogs.dialog
 import kotfx.dialogs.fileChooser
+import kotfx.dialogs.graphicIcon
 import kotfx.dialogs.headerTitle
 import kotfx.dialogs.icon
 import kotfx.exit
@@ -58,8 +60,6 @@ import java.net.URI
 class App : Application() {
 
     companion object {
-        private val PACKR_FILE_FILTER = FileChooser.ExtensionFilter("Packr configuration file", "*.json")
-
         @JvmStatic fun main(args: Array<String>) = Application.launch(App::class.java, *args)
     }
 
@@ -81,19 +81,41 @@ class App : Application() {
                     menuItem("How-to") {
                         setOnAction {
                             dialog<Unit> {
-                                headerTitle = text
+                                headerTitle = "How-to"
+                                graphicIcon = ImageView(R.image.logo_packr).apply {
+                                    fitWidth = 72.0
+                                    fitHeight = 72.0
+                                }
                                 content = kotfx.scene.gridPane {
                                     gap = 8.0
                                     label("1.") row 0 col 0 vpos TOP
                                     textFlow {
-                                        text("JSON file containing ${BuildConfig.NAME} configuration is required to start packing.\nCreate a new one or open existing file by selecting ") { loadFont(R.font.lato_regular.form, 13.0) }
-                                        text("File") { loadFont(R.font.lato_bold.form, 13.0) }
-                                        text(" menu.") { loadFont(R.font.lato_regular.form, 13.0) }
+                                        text("JSON file containing $NAME configuration is required to open a tab.\nCreate a new one or load existing file by selecting ") { loadFont(R.font.lato_regular.form, 14.0) }
+                                        text("File") { loadFont(R.font.lato_bold.form, 14.0) }
+                                        text(" menu.") { loadFont(R.font.lato_regular.form, 14.0) }
                                     } row 0 col 1
                                     label("2.") row 1 col 0 vpos TOP
                                     textFlow {
+                                        text("Fill out the forms accordingly.\n") { loadFont(R.font.lato_regular.form, 14.0) }
+                                        text("Resources") { loadFont(R.font.lato_bold.form, 14.0) }
+                                        text(", ") { loadFont(R.font.lato_regular.form, 14.0) }
+                                        text("Mac icon") { loadFont(R.font.lato_bold.form, 14.0) }
+                                        text(", ") { loadFont(R.font.lato_regular.form, 14.0) }
+                                        text("Mac bundle") { loadFont(R.font.lato_bold.form, 14.0) }
+                                        text(" are optional.\n") { loadFont(R.font.lato_regular.form, 14.0) }
+                                        text("Hover the box") { loadFont(R.font.lato_bold.form, 14.0) }
+                                        text(" to display description.")
                                     } row 1 col 1
+                                    label("3.") row 2 col 0 vpos TOP
+                                    textFlow {
+                                        text("Click ") { loadFont(R.font.lato_regular.form, 14.0) }
+                                        text("Save") { loadFont(R.font.lato_bold.form, 14.0) }
+                                        text(" to update JSON file, or ") { loadFont(R.font.lato_regular.form, 14.0) }
+                                        text("Process") { loadFont(R.font.lato_bold.form, 14.0) }
+                                        text(" start packing.") { loadFont(R.font.lato_regular.form, 14.0) }
+                                    } row 2 col 1
                                 }
+                                addButton(CLOSE)
                             }.showAndWait()
                         }
                     }
@@ -104,10 +126,7 @@ class App : Application() {
                                 icon = Image(R.image.ic_about)
                                 content = kotfx.scene.hbox {
                                     padding = Insets(48.0)
-                                    imageView(Image(R.image.logo_packr)) {
-                                        fitWidth = 172.0
-                                        fitHeight = 172.0
-                                    }
+                                    imageView(Image(R.image.logo_packr))
                                     vbox {
                                         alignment = CENTER_LEFT
                                         textFlow {
@@ -166,13 +185,13 @@ class App : Application() {
         setSize(500.0, 700.0)
     }.show()
 
-    private fun Stage.create() = fileChooser(PACKR_FILE_FILTER).showSaveDialog(this)?.let {
+    private fun Stage.create() = fileChooser(packrFileExtension).showSaveDialog(this)?.let {
         it.writeText(Gson().toJson(PackrItem()))
         it.addToTab()
         tabPane.selectionModel.select(tabs.lastIndex)
     }
 
-    private fun Stage.open() = fileChooser(PACKR_FILE_FILTER).showOpenMultipleDialog(this)?.let {
+    private fun Stage.open() = fileChooser(packrFileExtension).showOpenMultipleDialog(this)?.let {
         it.forEach { it.addToTab() }
         tabPane.selectionModel.select(tabs.lastIndex)
     }
@@ -198,7 +217,9 @@ class App : Application() {
         })
     }
 
-    private inline val tabs: ObservableList<Tab> get() = this@App.tabPane.tabs
-
     private inline val String.form: String get() = App::class.java.getResource(this).toExternalForm()
+
+    private inline val packrFileExtension get() = FileChooser.ExtensionFilter("Packr configuration file", "*.json")
+
+    private inline val tabs: ObservableList<Tab> get() = this@App.tabPane.tabs
 }
