@@ -55,6 +55,7 @@ import org.apache.commons.io.IOUtils
 import java.awt.Desktop.getDesktop
 import java.io.File
 
+/** A tab of Packr configuration. */
 class PackrTab(jsonFile: File) : Tab(jsonFile.nameWithoutExtension) {
 
     companion object {

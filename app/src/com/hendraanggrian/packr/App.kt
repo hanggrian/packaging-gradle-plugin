@@ -57,6 +57,7 @@ import java.awt.Desktop.getDesktop
 import java.io.File
 import java.net.URI
 
+/** Main Packr application. */
 class App : Application() {
 
     companion object {

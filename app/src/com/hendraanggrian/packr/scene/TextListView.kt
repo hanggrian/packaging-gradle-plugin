@@ -15,6 +15,7 @@ import kotfx.scene.menuItem
 import kotfx.scene.separatorMenuItem
 import java.io.File
 
+/** ListView containing editable text and options to add and browse through context menus. */
 class TextListView(
     private val jsonFile: File,
     desc: String,

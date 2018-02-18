@@ -1,5 +1,9 @@
 package com.hendraanggrian.packr
 
+/**
+ * Enumeration representing Packr minimize JRE option with
+ * [com.badlogicgames.packr.PackrConfig.Platform] convention.
+ */
 enum class MinimizeOption {
     Soft,
     Hard,
