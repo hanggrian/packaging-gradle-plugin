@@ -2,15 +2,13 @@ package com.hendraanggrian.packr.scene
 
 import com.badlogicgames.packr.Packr
 import com.badlogicgames.packr.PackrConfig
+import com.badlogicgames.packr.PackrConfig.Platform
 import com.badlogicgames.packr.desc
 import com.badlogicgames.packr.toPlatform
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.hendraanggrian.packr.MinimizeOption
 import com.hendraanggrian.packr.PackrItem
 import com.hendraanggrian.packr.R
-import com.hendraanggrian.packr.minus
-import com.hendraanggrian.packr.relativeTo
 import javafx.geometry.Insets
 import javafx.scene.control.ButtonBar.ButtonData.CANCEL_CLOSE
 import javafx.scene.control.ChoiceBox
@@ -63,14 +61,14 @@ class PackrTab(jsonFile: File) : Tab(jsonFile.nameWithoutExtension) {
     }
 
     private lateinit var item: PackrItem
-    private lateinit var platformChoice: ChoiceBox<PackrConfig.Platform>
+    private lateinit var platformChoice: ChoiceBox<Platform>
     private lateinit var jdkField: TextField
     private lateinit var executableField: TextField
     private lateinit var classpathList: ListView<String>
     private lateinit var mainclassField: TextField
     private lateinit var resourcesList: ListView<String>
     private lateinit var vmargsList: ListView<String>
-    private lateinit var minimizeChoice: ChoiceBox<MinimizeOption>
+    private lateinit var minimizeChoice: ChoiceBox<Minimize>
     private lateinit var outputField: TextField
     private lateinit var iconField: TextField
     private lateinit var bundleField: TextField
@@ -84,7 +82,7 @@ class PackrTab(jsonFile: File) : Tab(jsonFile.nameWithoutExtension) {
                     gap = 8.0
 
                     label("Platform") row 0 col 0
-                    platformChoice = choiceBox(PackrConfig.Platform.values().toObservableList()) {
+                    platformChoice = choiceBox(Platform.values().toObservableList()) {
                         tooltip("One of \"windows32\", \"windows64\", \"linux32\", \"linux64\", \"mac\".")
                         item.platform?.let { value = it.toPlatform() }
                     } row 0 col 1 colSpan 3
@@ -141,9 +139,9 @@ class PackrTab(jsonFile: File) : Tab(jsonFile.nameWithoutExtension) {
                     } row 6 col 1 colSpan 3
 
                     label("Minimize JRE") row 7 col 0
-                    minimizeChoice = choiceBox(MinimizeOption.values().toObservableList()) {
+                    minimizeChoice = choiceBox(Minimize.values().toObservableList()) {
                         tooltip("Minimize the JRE by removing directories and files as specified by an additional config file.")
-                        item.minimizejre?.let { value = MinimizeOption.byDesc(it) }
+                        item.minimizejre?.let { value = Minimize.byDesc(it) }
                     } row 7 col 1 colSpan 3
 
                     label("Output directory") row 8 col 0
@@ -231,7 +229,7 @@ class PackrTab(jsonFile: File) : Tab(jsonFile.nameWithoutExtension) {
                                 setRightAnchor(this, 0.0)
                             }
                             isClosable = false
-                            mainPane.children += loadingPane
+                            pane.children += loadingPane
                             launch {
                                 val outputFile = File(jsonFile.parent, outputField.text)
                                 try {
@@ -251,7 +249,7 @@ class PackrTab(jsonFile: File) : Tab(jsonFile.nameWithoutExtension) {
                                     })
                                     launch(JavaFx) {
                                         isClosable = true
-                                        mainPane.children -= loadingPane
+                                        pane.children -= loadingPane
                                         infoAlert("Packr process finished.") { addButton("Open folder", CANCEL_CLOSE) }
                                             .showAndWait()
                                             .filter { it.buttonData == CANCEL_CLOSE }
@@ -260,7 +258,7 @@ class PackrTab(jsonFile: File) : Tab(jsonFile.nameWithoutExtension) {
                                 } catch (e: Exception) {
                                     launch(JavaFx) {
                                         isClosable = true
-                                        mainPane.children -= loadingPane
+                                        pane.children -= loadingPane
                                         errorAlert(e.message ?: "Unknown error!").showAndWait()
                                     }
                                 }
@@ -272,8 +270,20 @@ class PackrTab(jsonFile: File) : Tab(jsonFile.nameWithoutExtension) {
         }
     }
 
-    private inline val mainPane: Pane get() = content as Pane
+    /** Tab content is always a [Pane]. */
+    private inline val pane: Pane get() = content as Pane
 
     /** Returns not empty text or null instead. */
     private inline val String.notEmptyOrNull: String? get() = if (isEmpty()) null else this
+
+    /** Enumeration representing Packr JRE minimization using [Platform] convention. */
+    private enum class Minimize(val desc: String) {
+        Soft("soft"),
+        Hard("hard"),
+        OracleJRE8("oraclejre8");
+
+        companion object {
+            fun byDesc(desc: String): Minimize = values().single { it.desc.equals(desc, true) }
+        }
+    }
 }

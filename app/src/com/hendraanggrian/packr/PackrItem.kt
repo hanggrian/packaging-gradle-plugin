@@ -1,7 +1,7 @@
 package com.hendraanggrian.packr
 
 /** POJO used for GSON serialization/deserialization. */
-data class PackrItem(
+data class PackrItem @JvmOverloads constructor(
     var platform: String? = null,
     var jdk: String? = null,
     var executable: String? = null,

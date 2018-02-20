@@ -1,7 +1,5 @@
 package com.hendraanggrian.packr.scene
 
-import com.hendraanggrian.packr.minus
-import com.hendraanggrian.packr.relativeTo
 import javafx.scene.control.ListView
 import javafx.scene.control.SelectionMode.MULTIPLE
 import javafx.scene.control.cell.TextFieldListCell.forListView

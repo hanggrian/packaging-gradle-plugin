@@ -198,7 +198,7 @@ class App : Application() {
     }
 
     private fun File.addToTab() {
-        tabs.add(packrTab(this) {
+        tabs += packrTab(this) {
             contextMenu = kotfx.scene.contextMenu {
                 separatorMenuItem()
                 menuItem("Close tab") { setOnAction { tabs.remove(this@packrTab) } }
@@ -215,7 +215,7 @@ class App : Application() {
                     }
                 }
             }
-        })
+        }
     }
 
     private inline val String.form: String get() = App::class.java.getResource(this).toExternalForm()

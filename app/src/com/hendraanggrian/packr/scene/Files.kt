@@ -1,6 +1,6 @@
 @file:Suppress("NOTHING_TO_INLINE")
 
-package com.hendraanggrian.packr
+package com.hendraanggrian.packr.scene
 
 import java.io.File
 import java.io.File.separatorChar
