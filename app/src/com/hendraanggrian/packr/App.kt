@@ -23,6 +23,7 @@ import kotfx.bindings.booleanBindingOf
 import kotfx.bindings.isEmpty
 import kotfx.bindings.lessEq
 import kotfx.bindings.sizeBinding
+import kotfx.coroutines.onAction
 import kotfx.dialogs.addButton
 import kotfx.dialogs.content
 import kotfx.dialogs.dialog
@@ -33,24 +34,25 @@ import kotfx.dialogs.icon
 import kotfx.exit
 import kotfx.gap
 import kotfx.icon
+import kotfx.layout.anchorPane
+import kotfx.layout.borderPane
+import kotfx.layout.button
+import kotfx.layout.contextMenu
+import kotfx.layout.hbox
+import kotfx.layout.hyperlink
+import kotfx.layout.imageView
+import kotfx.layout.label
+import kotfx.layout.menu
+import kotfx.layout.menuBar
+import kotfx.layout.menuItem
+import kotfx.layout.separatorMenuItem
+import kotfx.layout.tabPane
+import kotfx.layout.text
+import kotfx.layout.textFlow
+import kotfx.layout.vbox
+import kotfx.loadFont
 import kotfx.maxSize
-import kotfx.scene.anchorPane
-import kotfx.scene.borderPane
-import kotfx.scene.button
-import kotfx.scene.hbox
-import kotfx.scene.hyperlink
-import kotfx.scene.imageView
-import kotfx.scene.label
-import kotfx.scene.loadFont
-import kotfx.scene.menu
-import kotfx.scene.menuBar
-import kotfx.scene.menuItem
-import kotfx.scene.separatorMenuItem
-import kotfx.scene.setFont
-import kotfx.scene.tabPane
-import kotfx.scene.text
-import kotfx.scene.textFlow
-import kotfx.scene.vbox
+import kotfx.setFont
 import kotfx.setMinSize
 import kotfx.setSize
 import java.awt.Desktop.getDesktop
@@ -73,21 +75,21 @@ class App : Application() {
             menuBar {
                 isUseSystemMenuBar = true
                 menu("File") {
-                    menuItem("New") { setOnAction { stage.create() } }
-                    menuItem("Open...", ImageView(R.image.menu_folder)) { setOnAction { stage.open() } }
+                    menuItem("New") { onAction { stage.create() } }
+                    menuItem("Open...", ImageView(R.image.menu_folder)) { onAction { stage.open() } }
                     separatorMenuItem()
-                    menuItem("Quit Packr") { setOnAction { exit() } }
+                    menuItem("Quit Packr") { onAction { exit() } }
                 }
                 menu("Help") {
                     menuItem("How-to") {
-                        setOnAction {
+                        onAction {
                             dialog<Unit> {
                                 headerTitle = "How-to"
                                 graphicIcon = ImageView(R.image.logo_packr).apply {
                                     fitWidth = 72.0
                                     fitHeight = 72.0
                                 }
-                                content = kotfx.scene.gridPane {
+                                content = kotfx.layout.gridPane {
                                     gap = 8.0
                                     label("1.") row 0 col 0 vpos TOP
                                     textFlow {
@@ -122,10 +124,10 @@ class App : Application() {
                     }
                     separatorMenuItem()
                     menuItem("About", ImageView(R.image.menu_about)) {
-                        setOnAction {
+                        onAction {
                             dialog<Unit>(text) {
                                 icon = Image(R.image.ic_about)
-                                content = kotfx.scene.hbox {
+                                content = kotfx.layout.hbox {
                                     padding = Insets(48.0)
                                     imageView(Image(R.image.logo_packr))
                                     vbox {
@@ -140,19 +142,19 @@ class App : Application() {
                                             text("Powered by ") { loadFont(R.font.lato_bold.form, 12.0) }
                                             hyperlink("packr") {
                                                 loadFont(R.font.lato_regular.form, 12.0)
-                                                setOnAction { getDesktop().browse(URI("https://github.com/libgdx/packr")) }
+                                                onAction { getDesktop().browse(URI("https://github.com/libgdx/packr")) }
                                             }
                                         } marginTop 4
                                         textFlow {
                                             text("Author ") { loadFont(R.font.lato_bold.form, 12.0) }
                                             hyperlink("Hendra Anggrian") {
                                                 loadFont(R.font.lato_regular.form, 12.0)
-                                                setOnAction { getDesktop().browse(URI("https://github.com/hendraanggrian")) }
+                                                onAction { getDesktop().browse(URI("https://github.com/hendraanggrian")) }
                                             }
                                         }
                                         hbox {
-                                            button("GitHub") { setOnAction { getDesktop().browse(URI("https://github.com/hendraanggrian/packr-gui")) } } marginRight 8
-                                            button("Check for updates") { setOnAction { getDesktop().browse(URI("https://github.com/hendraanggrian/packr-gui/releases")) } }
+                                            button("GitHub") { onAction { getDesktop().browse(URI("https://github.com/hendraanggrian/packr-gui")) } } marginRight 8
+                                            button("Check for updates") { onAction { getDesktop().browse(URI("https://github.com/hendraanggrian/packr-gui/releases")) } }
                                         } marginTop 20
                                     } marginLeft 48
                                     addButton(CLOSE)
@@ -166,17 +168,17 @@ class App : Application() {
                 tabPane = tabPane() anchor 0
                 borderPane {
                     visibleProperty().bind(tabPane.tabs.isEmpty)
-                    center = kotfx.scene.textFlow {
+                    center = kotfx.layout.textFlow {
                         maxSize = USE_PREF_SIZE
                         text("No tabs opened,") { setFont(size = 18.0) }
                         hyperlink("create new") {
                             setFont(size = 18.0)
-                            setOnAction { stage.create() }
+                            onAction { stage.create() }
                         }
                         text("or") { setFont(size = 18.0) }
                         hyperlink("open existing") {
                             setFont(size = 18.0)
-                            setOnAction { stage.open() }
+                            onAction { stage.open() }
                         }
                     }
                 } anchor 0
@@ -199,20 +201,16 @@ class App : Application() {
 
     private fun File.addToTab() {
         tabs += packrTab(this) {
-            contextMenu = kotfx.scene.contextMenu {
+            contextMenu {
                 separatorMenuItem()
-                menuItem("Close tab") { setOnAction { tabs.remove(this@packrTab) } }
+                menuItem("Close tab") { onAction { tabs.remove(this@packrTab) } }
                 menuItem("Delete other tabs") {
                     disableProperty().bind(tabs.sizeBinding lessEq 1)
-                    setOnAction {
-                        tabs.removeAll(tabs.toMutableList().apply { remove(this@packrTab) })
-                    }
+                    onAction { tabs.removeAll(tabs.toMutableList().apply { remove(this@packrTab) }) }
                 }
                 menuItem("Delete tabs to the right") {
                     disableProperty().bind(booleanBindingOf(tabs) { tabs.indexOf(this@packrTab) == tabs.lastIndex })
-                    setOnAction {
-                        tabs.removeAll(tabs.toList().takeLast(tabs.lastIndex - tabs.indexOf(this@packrTab)))
-                    }
+                    onAction { tabs.removeAll(tabs.toList().takeLast(tabs.lastIndex - tabs.indexOf(this@packrTab))) }
                 }
             }
         }

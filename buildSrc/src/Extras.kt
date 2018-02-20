@@ -9,7 +9,7 @@ const val junitPlatformVersion = "1.0.0"
 
 const val rVersion = "0.2"
 const val buildconfigVersion = "0.8"
-const val kotfxVersion = "0.26"
+const val kotfxVersion = "0.28"
 
 fun Dependency.kotlinx(module: String, version: String? = null) = "org.jetbrains.kotlinx:kotlinx-$module${version?.let { ":$version" }
     ?: ""}"

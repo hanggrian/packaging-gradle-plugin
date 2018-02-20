@@ -5,12 +5,14 @@ import javafx.scene.control.SelectionMode.MULTIPLE
 import javafx.scene.control.cell.TextFieldListCell.forListView
 import javafx.stage.FileChooser.ExtensionFilter
 import kotfx.bindings.isEmpty
+import kotfx.coroutines.onAction
+import kotfx.coroutines.onEditCommit
 import kotfx.dialogs.directoryChooser
 import kotfx.dialogs.errorAlert
 import kotfx.dialogs.fileChooser
 import kotfx.dialogs.inputDialog
-import kotfx.scene.menuItem
-import kotfx.scene.separatorMenuItem
+import kotfx.layout.menuItem
+import kotfx.layout.separatorMenuItem
 import java.io.File
 
 /** ListView containing editable text and options to add and browse through context menus. */
@@ -26,13 +28,13 @@ class TextListView(
         selectionModel.selectionMode = MULTIPLE
         isEditable = true
         cellFactory = forListView()
-        setOnEditCommit {
+        onEditCommit {
             items[it.index] = it.newValue
             items.sort()
         }
-        contextMenu = kotfx.scene.contextMenu {
+        contextMenu = kotfx.layout.contextMenu {
             menuItem("Add") {
-                setOnAction {
+                onAction {
                     inputDialog {
                         contentText = desc
                         editor.promptText = desc
@@ -43,7 +45,7 @@ class TextListView(
                 }
             }
             if (canBrowseFile) menuItem("Browse files") {
-                setOnAction {
+                onAction {
                     (if (extension != null) fileChooser(jsonFile.parentFile, null, ExtensionFilter(desc, "*.$extension")) else fileChooser(jsonFile.parentFile, null))
                         .showOpenMultipleDialog(this@TextListView.scene.window)
                         ?.let { files ->
@@ -58,7 +60,7 @@ class TextListView(
                 }
             }
             if (canBrowseDirectory) menuItem("Browse directory") {
-                setOnAction {
+                onAction {
                     directoryChooser(jsonFile.parentFile)
                         .showDialog(this@TextListView.scene.window)
                         ?.let { file ->
@@ -75,11 +77,11 @@ class TextListView(
             separatorMenuItem()
             menuItem("Remove") {
                 disableProperty().bind(this@TextListView.selectionModel.selectedItems.isEmpty)
-                setOnAction { this@TextListView.selectionModel.selectedIndices.forEach { this@TextListView.items.removeAt(it) } }
+                onAction { this@TextListView.selectionModel.selectedIndices.forEach { this@TextListView.items.removeAt(it) } }
             }
             menuItem("Clear") {
                 disableProperty().bind(this@TextListView.items.isEmpty)
-                setOnAction { this@TextListView.items.clear() }
+                onAction { this@TextListView.items.clear() }
             }
         }
     }
