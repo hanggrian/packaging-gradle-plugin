@@ -28,7 +28,7 @@ import javafx.stage.FileChooser.ExtensionFilter
 import kotfx.bindings.booleanBindingOf
 import kotfx.bindings.or
 import kotfx.collections.toObservableList
-import kotfx.coroutines.launchFX
+import kotfx.coroutines.FX
 import kotfx.coroutines.onAction
 import kotfx.dialogs.addButton
 import kotfx.dialogs.directoryChooser
@@ -47,7 +47,8 @@ import kotfx.layout.textField
 import kotfx.layout.tooltip
 import kotfx.layout.vbox
 import kotfx.maxSize
-import kotfx.setPadding
+import kotfx.minSize
+import kotfx.padding
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.launch
 import org.apache.commons.io.IOUtils
@@ -80,7 +81,7 @@ class PackrTab(jsonFile: File) : Tab(jsonFile.nameWithoutExtension) {
         launch {
             jsonFile.inputStream().use {
                 item = GSON.fromJson(IOUtils.toString(it), PackrItem::class.java)
-                launchFX {
+                launch(FX) {
                     item.platform?.let { platformChoice.value = it.toPlatform() }
                     item.jdk?.let { jdkField.text = it }
                     item.executable?.let { executableField.text = it }
@@ -99,8 +100,8 @@ class PackrTab(jsonFile: File) : Tab(jsonFile.nameWithoutExtension) {
         content = anchorPane {
             vbox {
                 gridPane {
-                    padding = Insets(8.0)
-                    gap = 8.0
+                    padding(8)
+                    gap = 8
 
                     label("Platform") row 0 col 0
                     platformChoice = choiceBox(Platform.values().toObservableList()) {
@@ -141,15 +142,15 @@ class PackrTab(jsonFile: File) : Tab(jsonFile.nameWithoutExtension) {
                     label("VM args") row 5 col 0
                     vmargsList = textListView(jsonFile, "Arguments") {
                         tooltip("List of arguments for the JVM, without leading dashes, e.g. \"Xmx1G\".")
-                        minHeight = 77.0
-                        maxHeight = 77.0
+                        minSize(height = 77)
+                        maxSize(width = 77)
                     } row 5 col 1 colSpan 3
 
                     label("Resources") row 6 col 0
                     resourcesList = textListView(jsonFile, "Resource files", true, true) {
                         tooltip("List of files and directories to be packaged next to the native executable.")
-                        minHeight = 77.0
-                        maxHeight = 77.0
+                        minSize(height = 77)
+                        maxSize(width = 77)
                     } row 6 col 1 colSpan 3
 
                     label("Minimize JRE") row 7 col 0
@@ -202,7 +203,7 @@ class PackrTab(jsonFile: File) : Tab(jsonFile.nameWithoutExtension) {
                     } row 10 col 1 colSpan 3
                 }
                 buttonBar {
-                    setPadding(left = 8.0, right = 8.0, bottom = 8.0)
+                    padding(left = 8, right = 8, bottom = 8)
                     button("Save", ImageView(R.image.btn_save)) {
                         onAction(CommonPool) {
                             jsonFile.writeText(GSON.toJson(item.apply {
@@ -218,7 +219,7 @@ class PackrTab(jsonFile: File) : Tab(jsonFile.nameWithoutExtension) {
                                 icon = iconField.text.notEmptyOrNull
                                 bundle = bundleField.text.notEmptyOrNull
                             }))
-                            launchFX { infoAlert("${jsonFile.nameWithoutExtension} successfully saved!").showAndWait() }
+                            launch(FX) { infoAlert("${jsonFile.nameWithoutExtension} successfully saved!").showAndWait() }
                         }
                     }
                     button("Process", ImageView(R.image.btn_process)) {
@@ -249,7 +250,7 @@ class PackrTab(jsonFile: File) : Tab(jsonFile.nameWithoutExtension) {
                                         iconField.text?.let { iconResource = File(jsonFile.parent, it) }
                                         bundleField.text?.let { bundleIdentifier = it }
                                     })
-                                    launchFX {
+                                    launch(FX) {
                                         isClosable = true
                                         contents -= loadingPane
                                         infoAlert("Packr process finished.") { addButton("Open folder", CANCEL_CLOSE) }
@@ -258,7 +259,7 @@ class PackrTab(jsonFile: File) : Tab(jsonFile.nameWithoutExtension) {
                                             .ifPresent { getDesktop().open(outputFile.parentFile) }
                                     }
                                 } catch (e: Exception) {
-                                    launchFX {
+                                    launch(FX) {
                                         isClosable = true
                                         contents -= loadingPane
                                         errorAlert(e.message ?: "Unknown error!").showAndWait()
@@ -271,7 +272,7 @@ class PackrTab(jsonFile: File) : Tab(jsonFile.nameWithoutExtension) {
             } anchor 0
             loadingPane = borderPane {
                 background = Background(BackgroundFill(rgb(255, 255, 255, 0.75), CornerRadii.EMPTY, Insets.EMPTY))
-                center = kotfx.layout.progressIndicator { maxSize = 156.0 }
+                center = kotfx.layout.progressIndicator { maxSize = 156 }
             } anchor 0
         }
     }

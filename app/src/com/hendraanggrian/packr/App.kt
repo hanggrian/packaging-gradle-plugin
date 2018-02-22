@@ -6,7 +6,6 @@ import com.hendraanggrian.packr.BuildConfig.VERSION
 import com.hendraanggrian.packr.scene.packrTab
 import javafx.application.Application
 import javafx.collections.ObservableList
-import javafx.geometry.Insets
 import javafx.geometry.Pos.CENTER_LEFT
 import javafx.geometry.VPos.TOP
 import javafx.scene.Scene
@@ -32,6 +31,7 @@ import kotfx.dialogs.graphicIcon
 import kotfx.dialogs.headerTitle
 import kotfx.dialogs.icon
 import kotfx.exit
+import kotfx.font
 import kotfx.gap
 import kotfx.icon
 import kotfx.layout.anchorPane
@@ -50,14 +50,14 @@ import kotfx.layout.tabPane
 import kotfx.layout.text
 import kotfx.layout.textFlow
 import kotfx.layout.vbox
-import kotfx.loadFont
 import kotfx.maxSize
-import kotfx.setFont
-import kotfx.setMinSize
-import kotfx.setSize
+import kotfx.minSize
+import kotfx.padding
+import kotfx.size
 import java.awt.Desktop.getDesktop
 import java.io.File
 import java.net.URI
+import java.net.URL
 
 /** Main Packr application. */
 class App : Application() {
@@ -90,32 +90,32 @@ class App : Application() {
                                     fitHeight = 72.0
                                 }
                                 content = kotfx.layout.gridPane {
-                                    gap = 8.0
+                                    gap = 8
                                     label("1.") row 0 col 0 vpos TOP
                                     textFlow {
-                                        text("JSON file containing $NAME configuration is required to open a tab.\nCreate a new one or load existing file by selecting ") { loadFont(R.font.lato_regular.form, 14.0) }
-                                        text("File") { loadFont(R.font.lato_bold.form, 14.0) }
-                                        text(" menu.") { loadFont(R.font.lato_regular.form, 14.0) }
+                                        text("JSON file containing $NAME configuration is required to open a tab.\nCreate a new one or load existing file by selecting ") { font(getResources(R.font.lato_regular), 14) }
+                                        text("File") { font(getResources(R.font.lato_bold), 14) }
+                                        text(" menu.") { font(getResources(R.font.lato_regular), 14) }
                                     } row 0 col 1
                                     label("2.") row 1 col 0 vpos TOP
                                     textFlow {
-                                        text("Fill out the forms accordingly.\n") { loadFont(R.font.lato_regular.form, 14.0) }
-                                        text("Resources") { loadFont(R.font.lato_bold.form, 14.0) }
-                                        text(", ") { loadFont(R.font.lato_regular.form, 14.0) }
-                                        text("Mac icon") { loadFont(R.font.lato_bold.form, 14.0) }
-                                        text(", ") { loadFont(R.font.lato_regular.form, 14.0) }
-                                        text("Mac bundle") { loadFont(R.font.lato_bold.form, 14.0) }
-                                        text(" are optional.\n") { loadFont(R.font.lato_regular.form, 14.0) }
-                                        text("Hover the box") { loadFont(R.font.lato_bold.form, 14.0) }
+                                        text("Fill out the forms accordingly.\n") { font(getResources(R.font.lato_regular), 14) }
+                                        text("Resources") { font(getResources(R.font.lato_bold), 14) }
+                                        text(", ") { font(getResources(R.font.lato_regular), 14) }
+                                        text("Mac icon") { font(getResources(R.font.lato_bold), 14) }
+                                        text(", ") { font(getResources(R.font.lato_regular), 14) }
+                                        text("Mac bundle") { font(getResources(R.font.lato_bold), 14) }
+                                        text(" are optional.\n") { font(getResources(R.font.lato_regular), 14) }
+                                        text("Hover the box") { font(getResources(R.font.lato_bold), 14) }
                                         text(" to display description.")
                                     } row 1 col 1
                                     label("3.") row 2 col 0 vpos TOP
                                     textFlow {
-                                        text("Click ") { loadFont(R.font.lato_regular.form, 14.0) }
-                                        text("Save") { loadFont(R.font.lato_bold.form, 14.0) }
-                                        text(" to update JSON file, or ") { loadFont(R.font.lato_regular.form, 14.0) }
-                                        text("Process") { loadFont(R.font.lato_bold.form, 14.0) }
-                                        text(" start packing.") { loadFont(R.font.lato_regular.form, 14.0) }
+                                        text("Click ") { font(getResources(R.font.lato_regular), 14) }
+                                        text("Save") { font(getResources(R.font.lato_regular), 14) }
+                                        text(" to update JSON file, or ") { font(getResources(R.font.lato_regular), 14) }
+                                        text("Process") { font(getResources(R.font.lato_regular), 14) }
+                                        text(" start packing.") { font(getResources(R.font.lato_regular), 14) }
                                     } row 2 col 1
                                 }
                                 addButton(CLOSE)
@@ -128,27 +128,27 @@ class App : Application() {
                             dialog<Unit>(text) {
                                 icon = Image(R.image.ic_about)
                                 content = kotfx.layout.hbox {
-                                    padding = Insets(48.0)
+                                    padding(48)
                                     imageView(Image(R.image.logo_packr))
                                     vbox {
                                         alignment = CENTER_LEFT
                                         textFlow {
-                                            text("Packr ") { loadFont(R.font.lato_bold.form, 24.0) }
-                                            text("GUI ") { loadFont(R.font.lato_light.form, 24.0) }
+                                            text("Packr ") { font(getResources(R.font.lato_regular), 24) }
+                                            text("GUI ") { font(getResources(R.font.lato_regular), 24) }
                                         }
-                                        text("Version $VERSION") { loadFont(R.font.lato_regular.form, 12.0) } marginTop 2
-                                        text("Built using open-source software.") { loadFont(R.font.lato_bold.form, 12.0) } marginTop 20
+                                        text("Version $VERSION") { font(getResources(R.font.lato_regular), 12) } marginTop 2
+                                        text("Built using open-source software.") { font(getResources(R.font.lato_regular), 12) } marginTop 20
                                         textFlow {
-                                            text("Powered by ") { loadFont(R.font.lato_bold.form, 12.0) }
+                                            text("Powered by ") { font(getResources(R.font.lato_regular), 12) }
                                             hyperlink("packr") {
-                                                loadFont(R.font.lato_regular.form, 12.0)
+                                                font(getResources(R.font.lato_regular), 12)
                                                 onAction { getDesktop().browse(URI("https://github.com/libgdx/packr")) }
                                             }
                                         } marginTop 4
                                         textFlow {
-                                            text("Author ") { loadFont(R.font.lato_bold.form, 12.0) }
+                                            text("Author ") { font(getResources(R.font.lato_regular), 12) }
                                             hyperlink("Hendra Anggrian") {
-                                                loadFont(R.font.lato_regular.form, 12.0)
+                                                font(getResources(R.font.lato_regular), 12)
                                                 onAction { getDesktop().browse(URI("https://github.com/hendraanggrian")) }
                                             }
                                         }
@@ -170,22 +170,22 @@ class App : Application() {
                     visibleProperty().bind(tabPane.tabs.isEmpty)
                     center = kotfx.layout.textFlow {
                         maxSize = USE_PREF_SIZE
-                        text("No tabs opened,") { setFont(size = 18.0) }
+                        text("No tabs opened,") { font(size = 18) }
                         hyperlink("create new") {
-                            setFont(size = 18.0)
+                            font(size = 18)
                             onAction { stage.create() }
                         }
-                        text("or") { setFont(size = 18.0) }
+                        text("or") { font(size = 18) }
                         hyperlink("open existing") {
-                            setFont(size = 18.0)
+                            font(size = 18)
                             onAction { stage.open() }
                         }
                     }
                 } anchor 0
             } vpriority ALWAYS
         })
-        setMinSize(500.0, 700.0)
-        setSize(500.0, 700.0)
+        minSize(500, 700)
+        size(500, 700)
     }.show()
 
     private fun Stage.create() = fileChooser(packrFileExtension).showSaveDialog(this)?.let {
@@ -216,7 +216,7 @@ class App : Application() {
         }
     }
 
-    private inline val String.form: String get() = App::class.java.getResource(this).toExternalForm()
+    private fun getResources(name: String): URL = App::class.java.getResource(name)
 
     private inline val packrFileExtension get() = FileChooser.ExtensionFilter("Packr configuration file", "*.json")
 
