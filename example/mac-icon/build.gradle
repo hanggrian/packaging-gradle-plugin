@@ -19,7 +19,7 @@ version '1.0'
 
 shadowJar {
     destinationDir new File(buildDir, 'release')
-    baseName 'simple'
+    baseName 'mac-icon'
     classifier null
     version '1.0'
 }
@@ -27,5 +27,6 @@ shadowJar {
 packr {
     platform.mac = '/Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home'
     mainClass 'com.example.App'
-    classpath("build/release/simple-1.0.jar")
+    classpath("build/release/mac-icon-1.0.jar")
+    icon 'art/example.icns'
 }

@@ -1,20 +1,28 @@
 package com.hendraanggrian.packr
 
+import com.badlogicgames.packr.PackrConfig
+import com.badlogicgames.packr.PackrConfig.Platform
+import com.badlogicgames.packr.PackrConfig.Platform.Linux32
+import com.badlogicgames.packr.PackrConfig.Platform.Linux64
+import com.badlogicgames.packr.PackrConfig.Platform.MacOS
+import com.badlogicgames.packr.PackrConfig.Platform.Windows32
+import com.badlogicgames.packr.PackrConfig.Platform.Windows64
+import org.gradle.api.Project
+import java.io.File
 import kotlin.DeprecationLevel.ERROR
 
-open class PackrExtension {
+open class PackrExtension(val project: Project) {
 
-    val platform: Platform = Platform()
-    internal var _executable: String? = null
-    internal val _classpath: MutableList<String> = mutableListOf()
-    internal var _mainClass: String? = null
-    internal val _vmArgs: MutableList<String> = mutableListOf()
-    internal val _resources: MutableList<String> = mutableListOf()
-    internal var _minimizeJre: String? = null
-    internal var _outputDir: String? = null
-    internal var _macWrapApp: Boolean = true
-    internal var _macIcon: String? = null
-    internal var _macBundle: String? = null
+    val platform: JDK = JDK()
+    private var _executable: String = project.name
+    private val _classpath: MutableList<String> = mutableListOf()
+    private var _mainClass: String? = null
+    private val _vmArgs: MutableList<String> = mutableListOf()
+    private val _resources: MutableList<File> = mutableListOf()
+    private var _minimizeJre: String = "soft"
+    private var _outputDir: File = project.buildDir.resolve("release").resolve(_executable)
+    private var _icon: File? = null
+    private var _bundle: String? = null
 
     /**
      * Name of the native executable, without extension such as ".exe".
@@ -30,12 +38,12 @@ open class PackrExtension {
      * File locations of the JAR files to package.
      */
     fun classpath(vararg jars: String) {
-        _classpath += jars
+        _classpath += jars.map { File(project.projectDir, it).path }
     }
 
     /**
      * The fully qualified name of the main class, using dots to delimit package names.
-     * Should be defined or will throw an exception.
+     * Must be defined or else will throw an exception.
      */
     var mainClass: String
         @Deprecated(NO_GETTER, level = ERROR) get() = noGetter()
@@ -54,7 +62,7 @@ open class PackrExtension {
      * List of files and directories to be packaged next to the native executable.
      */
     fun resources(vararg resources: String) {
-        _resources += resources
+        _resources += resources.map { File(project.projectDir, it) }
     }
 
     /**
@@ -69,39 +77,58 @@ open class PackrExtension {
         }
 
     /**
-     * The output directory
+     * The output directory.
+     * Default is `release` directory in project's build directory.
      */
     var outputDir: String
         @Deprecated(NO_GETTER, level = ERROR) get() = noGetter()
         set(value) {
-            _outputDir = value
-        }
-
-    var macWrapApp: Boolean
-        @Deprecated(NO_GETTER, level = ERROR) get() = noGetter()
-        set(value) {
-            _macWrapApp = value
+            _outputDir = project.buildDir.resolve(value).resolve(_executable)
         }
 
     /**
      * Location of an AppBundle icon resource (.icns file).
+     * This is an optional property.
      */
-    var macIcon: String
+    var icon: String
         @Deprecated(NO_GETTER, level = ERROR) get() = noGetter()
         set(value) {
-            _macIcon = value
+            _icon = project.projectDir.resolve(value)
         }
 
     /**
      * The bundle identifier of your Java application, e.g. "com.my.app".
+     * This is an optional property.
      */
-    var macBundle: String
+    var bundle: String
         @Deprecated(NO_GETTER, level = ERROR) get() = noGetter()
         set(value) {
-            _macBundle = value
+            _bundle = value
         }
 
-    data class Platform(
+    internal fun toConfigs(): List<PackrConfig> = mutableListOf<PackrConfig>().apply {
+        if (platform.mac != null) this += MacOS with platform.mac!!
+        if (platform.windows32 != null) this += Windows32 with platform.windows32!!
+        if (platform.windows64 != null) this += Windows64 with platform.windows64!!
+        if (platform.linux32 != null) this += Linux32 with platform.linux32!!
+        if (platform.linux64 != null) this += Linux64 with platform.linux64!!
+    }
+
+    private infix fun Platform.with(jdkPath: String): PackrConfig = PackrConfig().apply {
+        platform = this@with
+        jdk = jdkPath
+        executable = _executable
+        classpath = _classpath
+        mainClass = _mainClass ?: error("Undefined main class")
+        outDir = if (platform == MacOS) File(_outputDir.parent, "${_outputDir.name}.app") else _outputDir
+        vmArgs = _vmArgs
+        resources = _resources
+        minimizeJre = _minimizeJre
+        if (_icon != null) iconResource = _icon
+        if (_bundle != null) bundleIdentifier = _bundle
+    }
+
+    data class JDK(
         var mac: String? = null,
         var windows32: String? = null,
         var windows64: String? = null,

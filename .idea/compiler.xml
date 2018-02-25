@@ -8,8 +8,12 @@
       <module name="buildSrc_test" target="1.8" />
       <module name="example_main" target="1.8" />
       <module name="example_test" target="1.8" />
+      <module name="mac-icon_main" target="1.8" />
+      <module name="mac-icon_test" target="1.8" />
       <module name="mac_main" target="1.8" />
       <module name="mac_test" target="1.8" />
+      <module name="multiple-platforms_main" target="1.8" />
+      <module name="multiple-platforms_test" target="1.8" />
       <module name="packr-gui-buildSrc_main" target="1.8" />
       <module name="packr-gui-buildSrc_test" target="1.8" />
       <module name="packr-gui_main" target="1.8" />
