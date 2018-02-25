@@ -11,7 +11,7 @@ import org.gradle.api.Project
 import java.io.File
 import kotlin.DeprecationLevel.ERROR
 
-open class PackrExtension(val project: Project) {
+open class PackrExtension(private val project: Project) {
 
     val platforms: Platforms = Platforms()
     private var _executable: String = project.name
@@ -118,11 +118,11 @@ open class PackrExtension(val project: Project) {
         }
 
     internal fun toConfigs(): List<PackrConfig> = mutableListOf<PackrConfig>().apply {
-        if (platforms.mac != null) this += MacOS with platforms.mac!!
-        if (platforms.windows32 != null) this += Windows32 with platforms.windows32!!
-        if (platforms.windows64 != null) this += Windows64 with platforms.windows64!!
-        if (platforms.linux32 != null) this += Linux32 with platforms.linux32!!
-        if (platforms.linux64 != null) this += Linux64 with platforms.linux64!!
+        if (platforms.mac != null) add(MacOS with platforms.mac!!)
+        if (platforms.windows32 != null) add(Windows32 with platforms.windows32!!)
+        if (platforms.windows64 != null) add(Windows64 with platforms.windows64!!)
+        if (platforms.linux32 != null) add(Linux32 with platforms.linux32!!)
+        if (platforms.linux64 != null) add(Linux64 with platforms.linux64!!)
     }
 
     private infix fun Platform.with(jdkPath: String): PackrConfig = PackrConfig().apply {
