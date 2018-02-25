@@ -4,9 +4,9 @@ buildscript {
     }
     dependencies {
         classpath(kotlin("gradle-plugin", kotlinVersion))
-        classpath(hendraanggrian("r", rVersion))
-        classpath(hendraanggrian("buildconfig", buildconfigVersion))
-        classpath(shadow())
+        classpath(dokka())
+        classpath(gitPublish())
+        classpath(bintrayRelease())
         classpath(junitPlatform("gradle-plugin", junitPlatformVersion))
     }
 }
@@ -26,5 +26,5 @@ task<Delete>("clean") {
 }
 
 task<Wrapper>("wrapper") {
-    gradleVersion = "4.5"
+    gradleVersion = "4.4.1"
 }

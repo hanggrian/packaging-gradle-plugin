@@ -1,1 +1,3 @@
-include(":app")
+include(":packr")
+
+include(":example:simple")

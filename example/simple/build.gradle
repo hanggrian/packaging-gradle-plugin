@@ -1,0 +1,31 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = "https://oss.sonatype.org/content/repositories/snapshots" }
+    }
+    dependencies {
+        classpath files("../packr-0.1.jar")
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.2'
+        classpath 'com.badlogicgames.packr:packr:2.0-SNAPSHOT'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'packr'
+
+group 'com.example'
+version '1.0'
+
+shadowJar {
+    destinationDir project.file("release")
+    baseName 'simple'
+    classifier null
+    version '1.0'
+}
+
+packr {
+    jdk("/Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home")
+    mainClass "com.example.App"
+    classpath("release/simple-0.1.jar")
+}

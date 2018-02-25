@@ -6,12 +6,22 @@
       <module name="app_test" target="1.8" />
       <module name="buildSrc_main" target="1.8" />
       <module name="buildSrc_test" target="1.8" />
+      <module name="example_main" target="1.8" />
+      <module name="example_test" target="1.8" />
+      <module name="mac_main" target="1.8" />
+      <module name="mac_test" target="1.8" />
       <module name="packr-gui-buildSrc_main" target="1.8" />
       <module name="packr-gui-buildSrc_test" target="1.8" />
       <module name="packr-gui_main" target="1.8" />
       <module name="packr-gui_test" target="1.8" />
+      <module name="packr-plugin-packr-plugin_main" target="1.8" />
+      <module name="packr-plugin-packr-plugin_test" target="1.8" />
       <module name="packr_main" target="1.8" />
       <module name="packr_test" target="1.8" />
+      <module name="simple_main" target="1.8" />
+      <module name="simple_test" target="1.8" />
+      <module name="windows64_main" target="1.8" />
+      <module name="windows64_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
