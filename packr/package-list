@@ -1,0 +1,5 @@
+$dokka.format:html
+$dokka.linkExtension:html
+$dokka.location:com.badlogicgames.packr$toPlatform(kotlin.String)com.badlogicgames.packr/kotlin.-string/to-platform.html
+com.badlogicgames.packr
+com.hendraanggrian.packr
