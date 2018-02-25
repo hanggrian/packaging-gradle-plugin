@@ -39,7 +39,7 @@ open class PackrExtension(private val project: Project) {
      * File locations of the JAR files to package.
      */
     fun classpath(vararg jars: String) {
-        _classpath += jars.map { File(project.projectDir, it).path }
+        _classpath += jars.map { project.projectDir.resolve(it).path }
     }
 
     /**
@@ -63,7 +63,7 @@ open class PackrExtension(private val project: Project) {
      * List of files and directories to be packaged next to the native executable.
      */
     fun resources(vararg resources: String) {
-        _resources += resources.map { File(project.projectDir, it) }
+        _resources += resources.map { project.projectDir.resolve(it) }
     }
 
     /**
@@ -131,7 +131,7 @@ open class PackrExtension(private val project: Project) {
         executable = _executable
         classpath = _classpath
         mainClass = _mainClass ?: error("Undefined main class")
-        outDir = if (platform == MacOS) File(_outputDirectory, "$_outputName.app") else _outputDirectory.resolve(_outputName)
+        outDir = if (platform == MacOS) _outputDirectory.resolve("$_outputName.app") else _outputDirectory.resolve(_outputName)
         vmArgs = _vmArgs
         resources = _resources
         minimizeJre = _minimizeJRE
