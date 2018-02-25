@@ -86,7 +86,10 @@ tasks {
     gitPublish {
         repoUri = releaseWeb
         branch = "gh-pages"
-        contents.from(dokka.outputDirectory)
+        contents.from(
+            "pages",
+            dokka.outputDirectory
+        )
     }
 }
 

@@ -28,3 +28,7 @@ task<Delete>("clean") {
 task<Wrapper>("wrapper") {
     gradleVersion = "4.4.1"
 }
+
+/** bintray upload snippet
+./gradlew bintrayUpload -PdryRun=false -PbintrayUser=hendraanggrian -PbintrayKey=
+ */

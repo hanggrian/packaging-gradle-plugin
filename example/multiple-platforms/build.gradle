@@ -25,8 +25,8 @@ shadowJar {
 }
 
 packr {
-    platform.mac = '/Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home'
-    platform.windows64 = 'C:/Program Files/Java/jdk1.8.0_162'
+    platforms.mac = '/Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home'
+    platforms.windows64 = 'C:/Program Files/Java/jdk1.8.0_162'
     mainClass 'com.example.App'
     classpath("build/release/multiple-platforms-1.0.jar")
 }

@@ -13,14 +13,15 @@ import kotlin.DeprecationLevel.ERROR
 
 open class PackrExtension(val project: Project) {
 
-    val platform: JDK = JDK()
+    val platforms: Platforms = Platforms()
     private var _executable: String = project.name
     private val _classpath: MutableList<String> = mutableListOf()
     private var _mainClass: String? = null
     private val _vmArgs: MutableList<String> = mutableListOf()
     private val _resources: MutableList<File> = mutableListOf()
-    private var _minimizeJre: String = "soft"
-    private var _outputDir: File = project.buildDir.resolve("release").resolve(_executable)
+    private var _minimizeJRE: String = "soft"
+    private var _outputName: String = project.name
+    private var _outputDirectory: File = project.buildDir.resolve("release")
     private var _icon: File? = null
     private var _bundle: String? = null
 
@@ -70,20 +71,30 @@ open class PackrExtension(val project: Project) {
      * Comes with a few config files out of the box.
      * Default is `soft`.
      */
-    var minimizeJre: String
+    var minimizeJRE: String
         @Deprecated(NO_GETTER, level = ERROR) get() = noGetter()
         set(value) {
-            _minimizeJre = value
+            _minimizeJRE = value
+        }
+
+    /**
+     * The directory name.
+     * Default is project's name.
+     */
+    var outputName: String
+        @Deprecated(NO_GETTER, level = ERROR) get() = noGetter()
+        set(value) {
+            _outputName = value
         }
 
     /**
      * The output directory.
      * Default is `release` directory in project's build directory.
      */
-    var outputDir: String
+    var outputDirectory: String
         @Deprecated(NO_GETTER, level = ERROR) get() = noGetter()
         set(value) {
-            _outputDir = project.buildDir.resolve(value).resolve(_executable)
+            _outputDirectory = project.buildDir.resolve(value)
         }
 
     /**
@@ -107,11 +118,11 @@ open class PackrExtension(val project: Project) {
         }
 
     internal fun toConfigs(): List<PackrConfig> = mutableListOf<PackrConfig>().apply {
-        if (platform.mac != null) this += MacOS with platform.mac!!
-        if (platform.windows32 != null) this += Windows32 with platform.windows32!!
-        if (platform.windows64 != null) this += Windows64 with platform.windows64!!
-        if (platform.linux32 != null) this += Linux32 with platform.linux32!!
-        if (platform.linux64 != null) this += Linux64 with platform.linux64!!
+        if (platforms.mac != null) this += MacOS with platforms.mac!!
+        if (platforms.windows32 != null) this += Windows32 with platforms.windows32!!
+        if (platforms.windows64 != null) this += Windows64 with platforms.windows64!!
+        if (platforms.linux32 != null) this += Linux32 with platforms.linux32!!
+        if (platforms.linux64 != null) this += Linux64 with platforms.linux64!!
     }
 
     private infix fun Platform.with(jdkPath: String): PackrConfig = PackrConfig().apply {
@@ -120,15 +131,15 @@ open class PackrExtension(val project: Project) {
         executable = _executable
         classpath = _classpath
         mainClass = _mainClass ?: error("Undefined main class")
-        outDir = if (platform == MacOS) File(_outputDir.parent, "${_outputDir.name}.app") else _outputDir
+        outDir = if (platform == MacOS) File(_outputDirectory, "$_outputName.app") else _outputDirectory.resolve(_outputName)
         vmArgs = _vmArgs
         resources = _resources
-        minimizeJre = _minimizeJre
+        minimizeJre = _minimizeJRE
         if (_icon != null) iconResource = _icon
         if (_bundle != null) bundleIdentifier = _bundle
     }
 
-    data class JDK(
+    data class Platforms(
         var mac: String? = null,
         var windows32: String? = null,
         var windows64: String? = null,
