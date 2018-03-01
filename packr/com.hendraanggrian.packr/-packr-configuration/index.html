@@ -1,0 +1,223 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>PackrConfiguration - packr</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">packr</a>&nbsp;/&nbsp;<a href="../index.html">com.hendraanggrian.packr</a>&nbsp;/&nbsp;<a href=".">PackrConfiguration</a><br/>
+<br/>
+<h1>PackrConfiguration</h1>
+<code><span class="keyword">interface </span><span class="identifier">PackrConfiguration</span></code>
+<p>Base configuration for packr task and extension.</p>
+<p><strong>See Also</strong><br/>
+<p><a href="../-packr-extension/index.html">PackrExtension</a></p>
+<p><a href="../-pack-task/index.html">PackTask</a></p>
+</p>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="bundle-id.html">bundleId</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">var </span><span class="identifier">bundleId</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code>
+<p>The bundle identifier of your Java application, e.g. <code>com.my.app</code>.
+This is an optional property.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="classpath.html">classpath</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">var </span><span class="identifier">classpath</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html"><span class="identifier">MutableList</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
+<p>File locations of the JAR files to package.
+Default is empty.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="executable.html">executable</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">var </span><span class="identifier">executable</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code>
+<p>Name of the native executable, without extension such as <code>.exe</code>.
+Default is project's name.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="icon-dir.html">iconDir</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">var </span><span class="identifier">iconDir</span><span class="symbol">: </span><span class="identifier">File</span><span class="symbol">?</span></code>
+<p>Location of an AppBundle icon resource (.icns file).
+This is an optional property.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="jdk.html">jdk</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">var </span><span class="identifier">jdk</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code>
+<p>Directory, ZIP file, or URL to ZIP file of an OpenJDK or Oracle JDK build containing a JRE.
+Must be defined or will throw an exception.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="main-class.html">mainClass</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">var </span><span class="identifier">mainClass</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code>
+<p>The fully qualified name of the main class, using dots to delimit package names.
+Must be defined or will throw an exception.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="minimize-jre.html">minimizeJre</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">var </span><span class="identifier">minimizeJre</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code>
+<p>Minimize the JRE by removing directories and files as specified by an additional config file.
+Comes with a few config files out of the box.
+Default is <code>soft</code>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="open-on-done.html">openOnDone</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">var </span><span class="identifier">openOnDone</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">?</span></code>
+<p>Open <a href="output-dir.html">outputDir</a> upon packing completion.
+This is an optional property.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="output-dir.html">outputDir</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">var </span><span class="identifier">outputDir</span><span class="symbol">: </span><span class="identifier">File</span><span class="symbol">?</span></code>
+<p>The output directory.
+Default is <code>release</code> directory in project's build directory.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="output-name.html">outputName</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">var </span><span class="identifier">outputName</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code>
+<p>The output name.
+Default is project's name.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="resources.html">resources</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">var </span><span class="identifier">resources</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html"><span class="identifier">MutableList</span></a><span class="symbol">&lt;</span><span class="identifier">File</span><span class="symbol">&gt;</span></code>
+<p>List of files and directories to be packaged next to the native executable.
+Default is empty.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="verbose.html">verbose</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">var </span><span class="identifier">verbose</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">?</span></code>
+<p>Print extra messages about JRE minimization when set to <code>true</code>.
+This is an optional property.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="vm-args.html">vmArgs</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">var </span><span class="identifier">vmArgs</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html"><span class="identifier">MutableList</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
+<p>List of arguments for the JVM, without leading dashes, e.g. <code>Xmx1G</code>.
+Default is empty.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="classpath.html">classpath</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">classpath</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="com.hendraanggrian.packr.PackrConfiguration$classpath(kotlin.Array((kotlin.String)))/jars">jars</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Add relative file locations of the JAR files to package.</p>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">classpath</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="com.hendraanggrian.packr.PackrConfiguration$classpath(kotlin.Array((java.io.File)))/jars">jars</span><span class="symbol">:</span>&nbsp;<span class="identifier">File</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Add absolute file locations of the JAR files to package.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-project.html">getProject</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getProject</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Project</span></code>
+<p>Internal method to obtain relative paths. Shadowed when being implemented in task.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="resources.html">resources</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">resources</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="com.hendraanggrian.packr.PackrConfiguration$resources(kotlin.Array((kotlin.String)))/files">files</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Add relative resources files or directories.</p>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">resources</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="com.hendraanggrian.packr.PackrConfiguration$resources(kotlin.Array((java.io.File)))/files">files</span><span class="symbol">:</span>&nbsp;<span class="identifier">File</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Add absolute resources files or directories.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="vm-args.html">vmArgs</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">vmArgs</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="com.hendraanggrian.packr.PackrConfiguration$vmArgs(kotlin.Array((kotlin.String)))/args">args</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Add VM arguments.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-pack-task/index.html">PackTask</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">PackTask</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">DefaultTask</span><span class="symbol">, </span><span class="identifier">PackrConfiguration</span></code>
+<p>Task that will generate native distribution on each platform.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-packr-extension/index.html">PackrExtension</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">PackrExtension</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">PackrConfiguration</span></code>
+<p>Packr main extension, modifications of this POJO will be applied to all <a href="../-pack-task/index.html">PackTask</a>.
+It is not mandatory to modify this extension, configuring each <a href="../-pack-task/index.html">PackTask</a> will result in same behavior.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
