@@ -1,27 +1,28 @@
 package com.hendraanggrian.packr
 
-import com.badlogicgames.packr.PackrConfig.Platform
-import com.badlogicgames.packr.PackrConfig.Platform.Linux32
-import com.badlogicgames.packr.PackrConfig.Platform.Linux64
-import com.badlogicgames.packr.PackrConfig.Platform.MacOS
-import com.badlogicgames.packr.PackrConfig.Platform.Windows32
-import com.badlogicgames.packr.PackrConfig.Platform.Windows64
+import com.badlogicgames.packr.PackrConfig
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.closureOf
+import org.gradle.kotlin.dsl.invoke
 
 class PackrPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
-        project.createTask(MacOS)
-        project.createTask(Windows32)
-        project.createTask(Windows64)
-        project.createTask(Linux32)
-        project.createTask(Linux64)
+        val extension = project.extensions.create(EXTENSION_NAME, PackrExtension::class.java, project)
+        project.run {
+            tasks {
+                PackrConfig.Platform.values().forEach {
+                    val packTask = "pack$it"(PackTask::class) {
+                        group = EXTENSION_NAME
+                        setPlatform(it)
+                    }
+                    afterEvaluate { extension applyTo packTask }
+                }
+            }
+        }
     }
 
-    private fun Project.createTask(platform: Platform) = task(
-        mapOf("type" to PackTask::class.java, "group" to "packr"),
-        "pack$platform",
-        closureOf<PackTask> { setPlatform(platform) })
+    private companion object {
+        const val EXTENSION_NAME = "packr"
+    }
 }

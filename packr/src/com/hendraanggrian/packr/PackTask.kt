@@ -3,86 +3,74 @@ package com.hendraanggrian.packr
 import com.badlogicgames.packr.Packr
 import com.badlogicgames.packr.PackrConfig
 import com.badlogicgames.packr.PackrConfig.Platform
-import com.badlogicgames.packr.PackrConfig.Platform.MacOS
 import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.Classpath
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.InputFile
+import org.gradle.api.tasks.InputFiles
+import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
+import java.awt.Desktop.Action.OPEN
+import java.awt.Desktop.getDesktop
 import java.io.File
 import java.io.IOException
 
-open class PackTask : DefaultTask() {
+/**
+ * Task that will generate native distribution on each platform.
+ * When [PackrPlugin] is applied, several instances of this task with different platform name will be created.
+ */
+open class PackTask : DefaultTask(), PackrConfiguration {
 
-    private lateinit var platform: Platform
+    private val packr: Packr = Packr()
+    private var platform: Platform? = null
 
-    @Input var jdk: String? = null
-    @Input var executable: String = project.name
-    @Input val classpath: MutableList<String> = mutableListOf()
-    @Input var mainClass: String? = null
-    @Input val vmArgs: MutableList<String> = mutableListOf()
-    @Input val resources: MutableList<File> = mutableListOf()
-    @Input var minimizeJRE: String = "soft"
-    @Input var outputName: String = project.name
-    @InputDirectory var outputDir: File = project.buildDir.resolve("release")
-    @InputDirectory var iconDirectory: File = File("")
-    @Input var bundleIdentifier: String = ""
+    @Input override var jdk: String? = null
+    @Input override var executable: String? = null
+    @Classpath @InputFiles override var classpath: MutableList<String> = mutableListOf()
+    @Input override var mainClass: String? = null
+    @Input override var vmArgs: MutableList<String> = mutableListOf()
+    @InputFiles override var resources: MutableList<File> = mutableListOf()
+    @Input override var minimizeJre: String? = null
+    @Input override var outputName: String? = null
+    @InputDirectory override var outputDir: File? = null
 
-    internal fun setPlatform(platform: Platform) {
-        this.platform = platform
-    }
-
-    /**
-     * File locations of the JAR files to package.
-     * Input [jars] are relative to project directory.
-     */
-    fun classpath(vararg jars: String) {
-        classpath += jars.map { project.projectDir.resolve(it).path }
-    }
-
-    /**
-     * File locations of the JAR files to package.
-     * Input [jars] are absolute.
-     */
-    fun classpath(vararg jars: File) {
-        classpath += jars.map { it.path }
-    }
-
-    /**
-     * List of files and directories to be packaged next to the native executable.
-     * Input [files] are relative to project directory.
-     */
-    fun resources(vararg files: String) {
-        resources += files.map { project.projectDir.resolve(it) }
-    }
-
-    /**
-     * List of files and directories to be packaged next to the native executable.
-     * Input [resources] are absolute.
-     */
-    fun resources(vararg files: File) {
-        resources += files
-    }
+    @Optional @InputFile override var iconDir: File? = null
+    @Optional @Input override var bundleId: String? = null
+    @Optional @Input override var verbose: Boolean? = null
+    @Optional @Input override var openOnDone: Boolean? = null
 
     @TaskAction
     @Throws(IOException::class)
     fun pack() {
-        val outputFile = if (platform == MacOS) outputDir.resolve("$outputName.app") else outputDir.resolve(outputName)
+        require(mainClass!!.isNotEmpty()) { "Undefined main class" }
+
+        val outputFile = outputDir!!.resolve(outputName!!)
         outputFile.deleteRecursively()
 
         val config = PackrConfig()
-        config.platform = platform
-        config.jdk = jdk
-        config.executable = executable
+        config.platform = platform!!
+        config.jdk = jdk!!
+        config.executable = executable!!
         config.classpath = classpath
-        config.mainClass = mainClass ?: error("Undefined main class")
+        config.mainClass = mainClass!!
         config.outDir = outputFile
         config.vmArgs = vmArgs
         config.resources = resources
-        config.minimizeJre = minimizeJRE
-        if (iconDirectory.path.isNotEmpty()) config.iconResource = iconDirectory
-        if (bundleIdentifier.isNotEmpty()) config.bundleIdentifier = bundleIdentifier
-        config.verbose = true // always print minimization result
+        config.minimizeJre = minimizeJre!!
+        if (iconDir != null) config.iconResource = iconDir
+        if (bundleId != null) config.bundleIdentifier = bundleId
+        config.verbose = verbose!!
 
-        Packr().pack(config)
+        packr.pack(config)
+
+        if (openOnDone!!) getDesktop().run {
+            require(isSupported(OPEN))
+            open(outputDir)
+        }
+    }
+
+    internal fun setPlatform(platform: Platform) {
+        this.platform = platform
     }
 }
