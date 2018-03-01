@@ -94,4 +94,4 @@ License
     limitations under the License.
     
 [packr]: https://github.com/libgdx/packr
-[PackrConfiguration]: blob/master/packr/src/com/hendraanggrian/packr/PackrConfiguration.kt
+[PackrConfiguration]: https://hendraanggrian.github.io/packr-plugin/packr/com.hendraanggrian.packr/-packr-configuration/index.html

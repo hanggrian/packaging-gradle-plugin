@@ -1,5 +1,7 @@
 package com.hendraanggrian.packr
 
+import org.gradle.api.Project
+import org.gradle.api.tasks.Internal
 import java.io.File
 
 /**
@@ -89,9 +91,9 @@ interface PackrConfiguration {
      */
     var openOnDone: Boolean?
 
-    /** Add absolute file locations of the JAR files to package. */
+    /** Add relative file locations of the JAR files to package. */
     fun classpath(vararg jars: String) {
-        classpath.addAll(jars)
+        classpath.addAll(jars.map { getProject().projectDir.resolve(it).path })
     }
 
     /** Add absolute file locations of the JAR files to package. */
@@ -106,11 +108,14 @@ interface PackrConfiguration {
 
     /** Add relative resources files or directories. */
     fun resources(vararg files: String) {
-        resources.addAll(files.map { File(it) })
+        resources.addAll(files.map { getProject().projectDir.resolve(it) })
     }
 
     /** Add absolute resources files or directories. */
     fun resources(vararg files: File) {
         resources.addAll(files)
     }
+
+    /** Internal method to obtain relative paths. Shadowed when being implemented in task. */
+    @Internal fun getProject(): Project
 }

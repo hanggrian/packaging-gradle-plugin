@@ -25,7 +25,7 @@ shadowJar {
 }
 
 packr {
-    jdk '/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home'
+    jdk '/Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home'
     mainClass 'com.example.App'
     classpath('build/release/mac-icon-1.0.jar')
     outputName 'mac-icon.app'

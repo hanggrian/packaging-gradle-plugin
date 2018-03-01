@@ -34,11 +34,11 @@ tasks.withType(com.hendraanggrian.packr.PackTask.class).all {
 }
 
 tasks.getByName('packMacOS') {
-    jdk = '/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home'
+    jdk = '/Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home'
     outputName = 'mac.app'
 }
 
 tasks.getByName('packWindows32') {
-    jdk = '/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home'
+    jdk = '/Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home'
     outputName = 'windows32'
 }

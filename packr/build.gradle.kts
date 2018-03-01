@@ -91,6 +91,8 @@ tasks {
             dokka.outputDirectory
         )
     }
+
+    get("gitPublishCopy").dependsOn(dokka)
 }
 
 publish {

@@ -14,7 +14,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        maven("https://oss.sonatype.org/content/repositories/snapshots") // packr 2.0 is still in snapshot
+        maven("https://oss.sonatype.org/content/repositories/snapshots") // packr 2.1 is still in snapshot
     }
     tasks.withType(Delete::class.java) {
         delete(projectDir.resolve("out"))

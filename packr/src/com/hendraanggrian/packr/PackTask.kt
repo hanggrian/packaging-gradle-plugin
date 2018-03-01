@@ -16,14 +16,11 @@ import java.awt.Desktop.getDesktop
 import java.io.File
 import java.io.IOException
 
-/**
- * Task that will generate native distribution on each platform.
- * When [PackrPlugin] is applied, several instances of this task with different platform name will be created.
- */
+/** Task that will generate native distribution on each platform. */
 open class PackTask : DefaultTask(), PackrConfiguration {
 
     private val packr: Packr = Packr()
-    private var platform: Platform? = null
+    private lateinit var platform: Platform
 
     @Input override var jdk: String? = null
     @Input override var executable: String? = null
@@ -49,7 +46,7 @@ open class PackTask : DefaultTask(), PackrConfiguration {
         outputFile.deleteRecursively()
 
         val config = PackrConfig()
-        config.platform = platform!!
+        config.platform = platform
         config.jdk = jdk!!
         config.executable = executable!!
         config.classpath = classpath
@@ -65,12 +62,13 @@ open class PackTask : DefaultTask(), PackrConfiguration {
         packr.pack(config)
 
         if (openOnDone!!) getDesktop().run {
-            require(isSupported(OPEN))
+            require(isSupported(OPEN)) { "`openOnDone` is not supported in this system" }
             open(outputDir)
+
         }
     }
 
-    internal fun setPlatform(platform: Platform) {
+    internal fun platform(platform: Platform) {
         this.platform = platform
     }
 }
