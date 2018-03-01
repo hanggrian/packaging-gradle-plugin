@@ -13,7 +13,7 @@ buildscript {
         maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
     }
     dependencies {
-        classpath 'com.hendraanggrian:packr:0.1'
+        classpath 'com.hendraanggrian:packr:0.2'
     }
 }
 ```
@@ -44,10 +44,10 @@ packr {
     resources('resources', 'image.jpg') // default is empty
     minimizeJRE 'hard'                  // default is `soft`
     outputName 'Example'                // default is project's name
-    outputDirectory 'packr-output'      // default is `release` directory in build directoy
+    outputPath 'packr-output'      // default is `release` directory in build directoy
     
-    icon 'icon.icns'                    // optional mac icon
-    bundle 'com.example.app'            // optional mac bundle
+    iconPath 'icon.icns'                    // optional mac icon
+    bundleIdentifier 'com.example.app'            // optional mac bundle
 }
 ```
 

@@ -1,7 +1,7 @@
 const val releaseUser = "hendraanggrian"
 const val releaseGroup = "com.$releaseUser"
 const val releaseArtifact = "packr"
-const val releaseVersion = "0.1"
+const val releaseVersion = "0.2"
 const val releaseDesc = "Package your JAR for native distributions with gradle plugin"
 const val releaseWeb = "https://github.com/$releaseUser/$releaseArtifact-plugin"
 
@@ -12,7 +12,7 @@ const val junitPlatformVersion = "1.0.0"
 fun Dependency.dokka() = "org.jetbrains.dokka:dokka-gradle-plugin:0.9.15"
 inline val Plugin.dokka get() = id("org.jetbrains.dokka")
 
-fun Dependency.packr() = "com.badlogicgames.packr:packr:2.0-SNAPSHOT"
+fun Dependency.packr() = "com.badlogicgames.packr:packr:2.1-SNAPSHOT"
 
 fun Dependency.ktlint(): org.gradle.api.artifacts.Dependency = add("ktlint", "com.github.shyiko:ktlint:0.15.0")
 

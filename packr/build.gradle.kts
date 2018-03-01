@@ -76,10 +76,10 @@ tasks {
     }
 
     val dokka by getting(DokkaTask::class) {
-        outputDirectory = "$buildDir/docs"
+        outputDirectory = buildDir.resolve("docs").path
         doFirst {
             file(outputDirectory).deleteRecursively()
-            file("$buildDir/gitPublish").deleteRecursively()
+            buildDir.resolve("gitPublish").deleteRecursively()
         }
     }
 

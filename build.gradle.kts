@@ -17,7 +17,7 @@ allprojects {
         maven("https://oss.sonatype.org/content/repositories/snapshots") // packr 2.0 is still in snapshot
     }
     tasks.withType(Delete::class.java) {
-        delete(File(projectDir, "out"))
+        delete(projectDir.resolve("out"))
     }
 }
 
