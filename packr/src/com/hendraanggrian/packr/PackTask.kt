@@ -64,7 +64,6 @@ open class PackTask : DefaultTask(), PackrConfiguration {
         if (openOnDone!!) getDesktop().run {
             require(isSupported(OPEN)) { "`openOnDone` is not supported in this system" }
             open(outputDir)
-
         }
     }
 

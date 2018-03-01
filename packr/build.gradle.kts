@@ -23,8 +23,8 @@ group = releaseGroup
 version = releaseVersion
 
 java.sourceSets {
-    get("main").java.srcDir("src")
-    get("test").java.srcDir("tests/src")
+    "main" { java.srcDir("src") }
+    "test" { java.srcDir("tests/src") }
 }
 
 gradlePlugin {

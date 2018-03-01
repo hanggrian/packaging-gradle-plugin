@@ -2,4 +2,4 @@ plugins {
     `kotlin-dsl`
 }
 
-java.sourceSets.getByName("main").java.srcDir("src")
+java.sourceSets["main"].java.srcDir("src")
