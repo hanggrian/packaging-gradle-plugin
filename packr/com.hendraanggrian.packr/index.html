@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="../../style.css">
 </HEAD>
 <BODY>
-<a href="../index.html">packr</a>&nbsp;/&nbsp;<a href=".">com.hendraanggrian.packr</a><br/>
+<a href="../index.html">packr</a>&nbsp;/&nbsp;<a href="./index.html">com.hendraanggrian.packr</a><br/>
 <br/>
 <h2>Package com.hendraanggrian.packr</h2>
 <h3>Types</h3>
@@ -16,27 +16,8 @@
 <p><a href="-pack-task/index.html">PackTask</a></p>
 </td>
 <td>
-<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">PackTask</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">DefaultTask</span><span class="symbol">, </span><a href="-packr-configuration/index.html"><span class="identifier">PackrConfiguration</span></a></code>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">PackTask</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">DefaultTask</span></code>
 <p>Task that will generate native distribution on each platform.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="-packr-configuration/index.html">PackrConfiguration</a></p>
-</td>
-<td>
-<code><span class="keyword">interface </span><span class="identifier">PackrConfiguration</span></code>
-<p>Base configuration for packr task and extension.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="-packr-extension/index.html">PackrExtension</a></p>
-</td>
-<td>
-<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">PackrExtension</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-packr-configuration/index.html"><span class="identifier">PackrConfiguration</span></a></code>
-<p>Packr main extension, modifications of this POJO will be applied to all <a href="-pack-task/index.html">PackTask</a>.
-It is not mandatory to modify this extension, configuring each <a href="-pack-task/index.html">PackTask</a> will result in same behavior.</p>
 </td>
 </tr>
 <tr>
@@ -44,9 +25,7 @@ It is not mandatory to modify this extension, configuring each <a href="-pack-ta
 <p><a href="-packr-plugin/index.html">PackrPlugin</a></p>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">PackrPlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Plugin</span><span class="symbol">&lt;</span><span class="identifier">Project</span><span class="symbol">&gt;</span></code>
-<p>When <a href="-packr-plugin/index.html">PackrPlugin</a> is applied, several instances of this <a href="-pack-task/index.html">PackTask</a> with different platform name will be created.</p>
-</td>
+<code><span class="keyword">class </span><span class="identifier">PackrPlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Plugin</span><span class="symbol">&lt;</span><span class="identifier">Project</span><span class="symbol">&gt;</span></code></td>
 </tr>
 </tbody>
 </table>
