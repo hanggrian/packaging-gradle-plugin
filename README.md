@@ -52,10 +52,10 @@ task.withType(PackTask) {
 You can then pack native distribution by providing platform and jdk property:
 ```gradle
 // pack for mac
-./gradlew pack -Pmac:path/to/mac/jdk
+./gradlew pack -Pmac=path/to/mac/jdk
 
 // pack for multiple platforms
-./gradlew pack -Pmac:path/to/mac/jdk -Pwindows64:path/to/windows/jdk
+./gradlew pack -Pmac=path/to/mac/jdk -Pwindows64=path/to/windows/jdk
 ```
 
 Available platforms are `mac`, `windows32`, `windows64`, `linux32`, and `linux64`.
