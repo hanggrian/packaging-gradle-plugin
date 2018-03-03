@@ -13,7 +13,7 @@ buildscript {
         maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
     }
     dependencies {
-        classpath 'com.hendraanggrian:packr:0.2'
+        classpath 'com.hendraanggrian:packr:0.3'
     }
 }
 ```
@@ -26,13 +26,11 @@ apply plugin: 'packr'
 
 Usage
 -----
-Configure `packr` extension, below are available configurations.
-See [PackrConfiguration] for meaning of each parameter.
+Configure `packr` task, below are available configurations.
+See [PackrTask] for meaning of each parameter.
 
 ```gradle
-packr {
-    jdk 'path/to/jdk'                   // path to jdk directory of zip file
-    
+task.withType(PackTask) {
     executable 'example'                // default is project's name
     classpath('my.jar', 'other.jar')    // default is empty
     mainClass 'com.example.App'         // must be defined or will throw an exception
@@ -42,40 +40,25 @@ packr {
     outputName 'Example App'            // default is project's name
     outputDir 'packr-output'            // default is `release` directory in build directoy
     
-    iconDir 'icon.icns'                 // optional mac icon
-    bundleId 'com.example.app'          // optional mac bundle
+    wrapApp false                       // default is true
+    iconDir 'icon.icns'                 // optional, no default
+    bundleId 'com.example.app'          // optional, no default
     
+    verbose                             // default is false
     openOnDone true                     // default is false
 }
 ```
 
-`packr` tasks will be created for each platform's jdk defined. You can then pack with each task:
+You can then pack native distribution by providing platform and jdk property:
 ```gradle
-./gradlew packMacOS
-./gradlew packWindows32
-./gradlew packWindows64
-./gradlew packLinux32
-./gradlew packLinux64
+// pack for mac
+./gradlew pack -Pmac:path/to/mac/jdk
+
+// pack for multiple platforms
+./gradlew pack -Pmac:path/to/mac/jdk -Pwindows64:path/to/windows/jdk
 ```
 
-Multiple platforms
-------------------
-Sometimes configurations are different on specific platforms (most likely `jdk` and `outputName`).
-To override `packr` extension configurations, modify each tasks:
-
-```gradle
-tasks.getByName('packMacOS') {
-    jdk 'my/jdk/path'
-    outputName 'Mac App'
-}
-
-tasks.getByName('packWindows64') {
-    vmArgs('-SomeWindowsArgument')
-    outputDir 'somewhere/else'
-}
-```  
-
-These tasks have the same properties as `packr` extension.
+Available platforms are `mac`, `windows32`, `windows64`, `linux32`, and `linux64`.
 
 License
 -------
@@ -94,4 +77,4 @@ License
     limitations under the License.
     
 [packr]: https://github.com/libgdx/packr
-[PackrConfiguration]: https://hendraanggrian.github.io/packr-plugin/packr/com.hendraanggrian.packr/-packr-configuration/index.html
+[PackrTask]: https://hendraanggrian.github.io/packr-plugin/packr/com.hendraanggrian.packr/-packr-task/index.html
