@@ -4,6 +4,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.invoke
 
+@Suppress("unused")
 class PackrPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
@@ -13,7 +14,6 @@ class PackrPlugin : Plugin<Project> {
                     group = "packr"
                     afterEvaluate {
                         if (executable == null) executable = project.name
-                        if (outputName == null) outputName = project.name
                         if (outputDir == null) outputDir = project.buildDir.resolve("release")
                     }
                 }

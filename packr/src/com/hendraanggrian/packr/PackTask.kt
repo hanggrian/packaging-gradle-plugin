@@ -2,16 +2,14 @@ package com.hendraanggrian.packr
 
 import com.badlogicgames.packr.Packr
 import com.badlogicgames.packr.PackrConfig
-import com.badlogicgames.packr.PackrConfig.Platform.MacOS
-import com.badlogicgames.packr.PackrConfig.Platform.values
-import com.badlogicgames.packr.desc
+import com.badlogicgames.packr.PackrConfig.Platform
+import com.hendraanggrian.packr.dist.Distribution
+import com.hendraanggrian.packr.dist.MacDistribution
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Classpath
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
-import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.InputFiles
-import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 import java.awt.Desktop.Action.OPEN
 import java.awt.Desktop.getDesktop
@@ -21,7 +19,15 @@ import java.io.IOException
 /** Task that will generate native distribution on each platform. */
 open class PackTask : DefaultTask() {
 
+    @Suppress("unused")
+    companion object {
+        const val MINIMIZATION_SOFT = "soft"
+        const val MINIMIZATION_HARD = "hard"
+        const val MINIMIZATION_ORACLEJRE8 = "oraclejre8"
+    }
+
     private val packr: Packr = Packr()
+    private val distributions: MutableList<Distribution> = mutableListOf()
 
     /**
      * Name of the native executable, without extension such as `.exe`.
@@ -42,12 +48,6 @@ open class PackTask : DefaultTask() {
     @Input var mainClass: String = ""
 
     /**
-     * List of arguments for the JVM, without leading dashes, e.g. `Xmx1G`.
-     * Default is empty.
-     */
-    @Input var vmArgs: MutableList<String> = mutableListOf()
-
-    /**
      * List of files and directories to be packaged next to the native executable.
      * Default is empty.
      */
@@ -58,37 +58,13 @@ open class PackTask : DefaultTask() {
      * Comes with a few config files out of the box.
      * Default is `soft`.
      */
-    @Input var minimizeJre: String = "soft"
-
-    /**
-     * The output name.
-     * Default is project's name.
-     */
-    @Input var outputName: String? = null
+    @Input var minimization: String = MINIMIZATION_SOFT
 
     /**
      * The output directory.
      * Default is `release` directory in project's build directory.
      */
     @InputDirectory var outputDir: File? = null
-
-    /**
-     * Append app file extension to mac distribution.
-     * Default is true.
-     */
-    @Input var wrapApp: Boolean = true
-
-    /**
-     * Location of an AppBundle icon resource (.icns file).
-     * This is an optional property.
-     */
-    @Optional @InputFile var iconDir: File? = null
-
-    /**
-     * The bundle identifier of your Java application, e.g. `com.my.app`.
-     * This is an optional property.
-     */
-    @Optional @Input var bundleId: String? = null
 
     /**
      * Print extra messages about JRE minimization when set to `true`.
@@ -108,37 +84,59 @@ open class PackTask : DefaultTask() {
     /** Add absolute file locations of the JAR files to package. */
     fun classpath(vararg jars: File): Boolean = classpath.addAll(jars.map { it.path })
 
-    /** Add VM arguments. */
-    fun vmArgs(vararg args: String): Boolean = vmArgs.addAll(args)
-
     /** Add relative resources files or directories. */
     fun resources(vararg files: String): Boolean = resources.addAll(files.map { project.projectDir.resolve(it) })
 
     /** Add absolute resources files or directories. */
     fun resources(vararg files: File): Boolean = resources.addAll(files)
 
+    /** Configure macOS distribution. Unlike other distributions, mac configuration have some OS-specific properties. */
+    fun mac(config: MacDistribution.() -> Unit) {
+        distributions += MacDistribution(project).apply(config)
+    }
+
+    /** Configure Windows 32-bit distribution. */
+    fun windows32(config: Distribution.() -> Unit) {
+        distributions += Distribution(Platform.Windows32, project).apply(config)
+    }
+
+    /** Configure Windows 64-bit distribution. */
+    fun windows64(config: Distribution.() -> Unit) {
+        distributions += Distribution(Platform.Windows64, project).apply(config)
+    }
+
+    /** Configure Linux 32-bit distribution. */
+    fun linux32(config: Distribution.() -> Unit) {
+        distributions += Distribution(Platform.Linux32, project).apply(config)
+    }
+
+    /** Configure Linux 64-bit distribution. */
+    fun linux64(config: Distribution.() -> Unit) {
+        distributions += Distribution(Platform.Linux64, project).apply(config)
+    }
+
     @TaskAction
     @Throws(IOException::class)
+    @Suppress("unused")
     fun pack() {
-        val platforms = values().filter { project.hasProperty(it.desc) }
-        require(platforms.isNotEmpty()) { "Missing platform" }
-        require(mainClass.isNotEmpty()) { "Undefined main class" }
-
-        platforms.forEach {
-            println("Packing $it:")
+        check(mainClass.isNotEmpty()) { "Undefined main class" }
+        distributions.forEach {
+            println("Packing ${it.platform}:")
 
             val config = PackrConfig()
-            config.platform = it
-            config.jdk = project.findProperty(it.desc).toString()
+            config.platform = it.platform
+            config.jdk = checkNotNull(it.jdkDir) { "JDK path has not yet been initialized" }
             config.executable = executable!!
             config.classpath = classpath
             config.mainClass = mainClass
-            config.outDir = outputDir!!.resolve("$outputName-${it.desc}${if (it == MacOS && wrapApp) ".app" else ""}")
-            config.vmArgs = vmArgs
+            config.outDir = outputDir!!.resolve(it.name)
+            config.vmArgs = it.vmArgs
             config.resources = resources
-            config.minimizeJre = minimizeJre
-            if (iconDir != null) config.iconResource = iconDir
-            if (bundleId != null) config.bundleIdentifier = bundleId
+            config.minimizeJre = minimization
+            if (it is MacDistribution) {
+                if (it.iconDir != null) config.iconResource = File(it.iconDir!!)
+                if (it.bundleId != null) config.bundleIdentifier = it.bundleId
+            }
             config.verbose = verbose
 
             config.outDir.deleteRecursively()

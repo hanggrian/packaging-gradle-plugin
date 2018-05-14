@@ -1,0 +1,6 @@
+const val releaseUser = "hendraanggrian"
+const val releaseGroup = "com.$releaseUser"
+const val releaseArtifact = "packr"
+const val releaseVersion = "0.4"
+const val releaseDesc = "Start making native distributions for your JAR"
+const val releaseWeb = "https://github.com/$releaseUser/$releaseArtifact-plugin"

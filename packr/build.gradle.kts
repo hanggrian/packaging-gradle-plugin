@@ -39,19 +39,19 @@ gradlePlugin {
 val ktlint by configurations.creating
 
 dependencies {
-    implementation(kotlin("stdlib", kotlinVersion))
+    implementation(kotlin("stdlib", VERSION_KOTLIN))
     implementation(packr())
     ktlint(ktlint())
-    testImplementation(kotlin("test", kotlinVersion))
-    testImplementation(kotlin("reflect", kotlinVersion))
-    testImplementation(spek("api", spekVersion)) {
+    testImplementation(kotlin("test", VERSION_KOTLIN))
+    testImplementation(kotlin("reflect", VERSION_KOTLIN))
+    testImplementation(spek("api")) {
         exclude("org.jetbrains.kotlin")
     }
-    testRuntime(spek("junit-platform-engine", spekVersion)) {
+    testRuntime(spek("junit-platform-engine")) {
         exclude("org.jetbrains.kotlin")
         exclude("org.junit.platform")
     }
-    testImplementation(junitPlatform("runner", junitPlatformVersion))
+    testImplementation(junitPlatform("runner"))
 }
 
 tasks {

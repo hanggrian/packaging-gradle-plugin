@@ -3,11 +3,11 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath(kotlin("gradle-plugin", kotlinVersion))
+        classpath(kotlin("gradle-plugin", VERSION_KOTLIN))
         classpath(dokka())
         classpath(gitPublish())
         classpath(bintrayRelease())
-        classpath(junitPlatform("gradle-plugin", junitPlatformVersion))
+        classpath(junitPlatform("gradle-plugin"))
     }
 }
 
@@ -26,7 +26,7 @@ task<Delete>("clean") {
 }
 
 task<Wrapper>("wrapper") {
-    gradleVersion = "4.5.1"
+    gradleVersion = VERSION_GRADLE
 }
 
 /** bintray upload snippet

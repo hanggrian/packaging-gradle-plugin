@@ -12,11 +12,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/example/mac-icon/mac-icon.iml" filepath="$PROJECT_DIR$/.idea/modules/example/mac-icon/mac-icon.iml" group="example/mac-icon" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/example/mac-icon/mac-icon_main.iml" filepath="$PROJECT_DIR$/.idea/modules/example/mac-icon/mac-icon_main.iml" group="example/mac-icon" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/example/mac-icon/mac-icon_test.iml" filepath="$PROJECT_DIR$/.idea/modules/example/mac-icon/mac-icon_test.iml" group="example/mac-icon" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/example/multiple-platforms/multiple-platforms.iml" filepath="$PROJECT_DIR$/.idea/modules/example/multiple-platforms/multiple-platforms.iml" group="example/multiple-platforms" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/example/multiple-platforms/multiple-platforms_main.iml" filepath="$PROJECT_DIR$/.idea/modules/example/multiple-platforms/multiple-platforms_main.iml" group="example/multiple-platforms" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/example/multiple-platforms/multiple-platforms_test.iml" filepath="$PROJECT_DIR$/.idea/modules/example/multiple-platforms/multiple-platforms_test.iml" group="example/multiple-platforms" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/packr-plugin/packr.iml" filepath="$PROJECT_DIR$/.idea/modules/packr-plugin/packr.iml" group="packr" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/packr/packr.iml" filepath="$PROJECT_DIR$/.idea/modules/packr/packr.iml" group="packr" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/packr-plugin/packr.iml" filepath="$PROJECT_DIR$/.idea/modules/packr-plugin/packr.iml" group="packr" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/packr-gui.iml" filepath="$PROJECT_DIR$/.idea/modules/packr-gui.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/packr-gui-buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/packr-gui-buildSrc.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/packr-gui-buildSrc_main.iml" filepath="$PROJECT_DIR$/.idea/modules/packr-gui-buildSrc_main.iml" group="buildSrc" />
