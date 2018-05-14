@@ -4,7 +4,6 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.invoke
 
-@Suppress("unused")
 class PackrPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {

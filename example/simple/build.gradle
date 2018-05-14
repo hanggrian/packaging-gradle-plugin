@@ -27,13 +27,13 @@ tasks.withType(com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {
 tasks.withType(com.hendraanggrian.packr.PackTask) {
     dependsOn('shadowJar')
     mainClass 'com.example.App'
-    classpath('build/release/simple-1.0.jar')
+    classpath += 'build/release/simple-1.0.jar'
     mac {
-        it.name = 'Simple App.App'
-        it.jdkDir = '/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home'
+        it.jdk '/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home'
+        it.name 'Simple App.App'
     }
     windows64 {
-        it.name = 'SimpleApp'
-        it.jdkDir = '/Users/hendraanggrian/Desktop/jdk1.8.0_172'
+        it.jdk '/Users/hendraanggrian/Desktop/jdk1.8.0_172'
+        it.name 'SimpleApp'
     }
 }

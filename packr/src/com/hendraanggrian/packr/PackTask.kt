@@ -19,7 +19,6 @@ import java.io.IOException
 /** Task that will generate native distribution on each platform. */
 open class PackTask : DefaultTask() {
 
-    @Suppress("unused")
     companion object {
         const val MINIMIZATION_SOFT = "soft"
         const val MINIMIZATION_HARD = "hard"
@@ -51,7 +50,7 @@ open class PackTask : DefaultTask() {
      * List of files and directories to be packaged next to the native executable.
      * Default is empty.
      */
-    @InputFiles var resources: MutableList<File> = mutableListOf()
+    @InputFiles var resources: MutableList<String> = mutableListOf()
 
     /**
      * Minimize the JRE by removing directories and files as specified by an additional config file.
@@ -77,18 +76,6 @@ open class PackTask : DefaultTask() {
      * This is an optional property.
      */
     @Input var openOnDone: Boolean = false
-
-    /** Add relative file locations of the JAR files to package. */
-    fun classpath(vararg jars: String): Boolean = classpath.addAll(jars.map { project.projectDir.resolve(it).path })
-
-    /** Add absolute file locations of the JAR files to package. */
-    fun classpath(vararg jars: File): Boolean = classpath.addAll(jars.map { it.path })
-
-    /** Add relative resources files or directories. */
-    fun resources(vararg files: String): Boolean = resources.addAll(files.map { project.projectDir.resolve(it) })
-
-    /** Add absolute resources files or directories. */
-    fun resources(vararg files: File): Boolean = resources.addAll(files)
 
     /** Configure macOS distribution. Unlike other distributions, mac configuration have some OS-specific properties. */
     fun mac(config: MacDistribution.() -> Unit) {
@@ -117,7 +104,6 @@ open class PackTask : DefaultTask() {
 
     @TaskAction
     @Throws(IOException::class)
-    @Suppress("unused")
     fun pack() {
         check(mainClass.isNotEmpty()) { "Undefined main class" }
         distributions.forEach {
@@ -125,16 +111,16 @@ open class PackTask : DefaultTask() {
 
             val config = PackrConfig()
             config.platform = it.platform
-            config.jdk = checkNotNull(it.jdkDir) { "JDK path has not yet been initialized" }
+            config.jdk = checkNotNull(it.jdk) { "JDK path has not yet been initialized" }
             config.executable = executable!!
-            config.classpath = classpath
+            config.classpath = classpath.map { project.projectDir.resolve(it).path }
             config.mainClass = mainClass
             config.outDir = outputDir!!.resolve(it.name)
             config.vmArgs = it.vmArgs
-            config.resources = resources
+            config.resources = resources.map { project.projectDir.resolve(it) }
             config.minimizeJre = minimization
             if (it is MacDistribution) {
-                if (it.iconDir != null) config.iconResource = File(it.iconDir!!)
+                if (it.icon != null) config.iconResource = project.projectDir.resolve(it.icon!!)
                 if (it.bundleId != null) config.bundleIdentifier = it.bundleId
             }
             config.verbose = verbose
