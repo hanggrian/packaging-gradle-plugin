@@ -28,12 +28,8 @@ tasks.withType(com.hendraanggrian.packr.PackTask) {
     dependsOn('shadowJar')
     mainClass 'com.example.App'
     classpath += 'build/release/simple-1.0.jar'
-    mac {
-        it.jdk '/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home'
-        it.name 'Simple App.App'
+    mac('/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home') {
+        it.name = 'Simple App.App'
     }
-    windows64 {
-        it.jdk '/Users/hendraanggrian/Desktop/jdk1.8.0_172'
-        it.name 'SimpleApp'
-    }
+    windows64('/Users/hendraanggrian/Desktop/jdk1.8.0_172')
 }

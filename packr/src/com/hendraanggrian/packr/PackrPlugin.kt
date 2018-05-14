@@ -13,7 +13,7 @@ class PackrPlugin : Plugin<Project> {
                     group = "packr"
                     afterEvaluate {
                         if (executable == null) executable = project.name
-                        if (outputDir == null) outputDir = project.buildDir.resolve("release")
+                        if (outputDir == null) outputDir = "${project.buildDir}/release"
                     }
                 }
             }

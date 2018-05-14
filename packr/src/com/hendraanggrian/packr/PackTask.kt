@@ -5,6 +5,7 @@ import com.badlogicgames.packr.PackrConfig
 import com.badlogicgames.packr.PackrConfig.Platform
 import com.hendraanggrian.packr.dist.Distribution
 import com.hendraanggrian.packr.dist.MacDistribution
+import com.hendraanggrian.packr.internal.VMArged
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Classpath
 import org.gradle.api.tasks.Input
@@ -17,7 +18,7 @@ import java.io.File
 import java.io.IOException
 
 /** Task that will generate native distribution on each platform. */
-open class PackTask : DefaultTask() {
+open class PackTask : DefaultTask(), VMArged {
 
     companion object {
         const val MINIMIZATION_SOFT = "soft"
@@ -63,7 +64,9 @@ open class PackTask : DefaultTask() {
      * The output directory.
      * Default is `release` directory in project's build directory.
      */
-    @InputDirectory var outputDir: File? = null
+    @InputDirectory var outputDir: String? = null
+
+    @Input override var vmArgs: MutableList<String> = mutableListOf()
 
     /**
      * Print extra messages about JRE minimization when set to `true`.
@@ -78,28 +81,28 @@ open class PackTask : DefaultTask() {
     @Input var openOnDone: Boolean = false
 
     /** Configure macOS distribution. Unlike other distributions, mac configuration have some OS-specific properties. */
-    fun mac(config: MacDistribution.() -> Unit) {
-        distributions += MacDistribution(project).apply(config)
+    @JvmOverloads fun mac(jdk: String, config: (MacDistribution.() -> Unit)? = null) {
+        distributions += MacDistribution(project, jdk).apply { if (config != null) config() }
     }
 
     /** Configure Windows 32-bit distribution. */
-    fun windows32(config: Distribution.() -> Unit) {
-        distributions += Distribution(Platform.Windows32, project).apply(config)
+    @JvmOverloads fun windows32(jdk: String, config: (Distribution.() -> Unit)? = null) {
+        distributions += Distribution(Platform.Windows32, project, jdk).apply { if (config != null) config() }
     }
 
     /** Configure Windows 64-bit distribution. */
-    fun windows64(config: Distribution.() -> Unit) {
-        distributions += Distribution(Platform.Windows64, project).apply(config)
+    @JvmOverloads fun windows64(jdk: String, config: (Distribution.() -> Unit)? = null) {
+        distributions += Distribution(Platform.Windows64, project, jdk).apply { if (config != null) config() }
     }
 
     /** Configure Linux 32-bit distribution. */
-    fun linux32(config: Distribution.() -> Unit) {
-        distributions += Distribution(Platform.Linux32, project).apply(config)
+    @JvmOverloads fun linux32(jdk: String, config: (Distribution.() -> Unit)? = null) {
+        distributions += Distribution(Platform.Linux32, project, jdk).apply { if (config != null) config() }
     }
 
     /** Configure Linux 64-bit distribution. */
-    fun linux64(config: Distribution.() -> Unit) {
-        distributions += Distribution(Platform.Linux64, project).apply(config)
+    @JvmOverloads fun linux64(jdk: String, config: (Distribution.() -> Unit)? = null) {
+        distributions += Distribution(Platform.Linux64, project, jdk).apply { if (config != null) config() }
     }
 
     @TaskAction
@@ -115,8 +118,8 @@ open class PackTask : DefaultTask() {
             config.executable = executable!!
             config.classpath = classpath.map { project.projectDir.resolve(it).path }
             config.mainClass = mainClass
-            config.outDir = outputDir!!.resolve(it.name)
-            config.vmArgs = it.vmArgs
+            config.outDir = project.projectDir.resolve(outputDir!!).resolve(it.name)
+            config.vmArgs = vmArgs + it.vmArgs
             config.resources = resources.map { project.projectDir.resolve(it) }
             config.minimizeJre = minimization
             if (it is MacDistribution) {
@@ -131,7 +134,7 @@ open class PackTask : DefaultTask() {
 
         if (openOnDone) getDesktop().run {
             require(isSupported(OPEN)) { "`openOnDone` is not supported in this system" }
-            open(outputDir)
+            open(File(outputDir))
         }
     }
 }

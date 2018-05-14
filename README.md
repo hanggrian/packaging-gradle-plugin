@@ -13,7 +13,7 @@ buildscript {
         maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
     }
     dependencies {
-        classpath 'com.hendraanggrian:packr:0.3'
+        classpath 'com.hendraanggrian:packr:0.4'
     }
 }
 ```
@@ -51,11 +51,14 @@ task.withType(PackTask) {
 
 You can then pack native distribution by providing platform and jdk property:
 ```gradle
-// pack for mac
-./gradlew pack -Pmac=path/to/mac/jdk
-
-// pack for multiple platforms
-./gradlew pack -Pmac=path/to/mac/jdk -Pwindows64=path/to/windows/jdk
+task.withType(PackTask) {
+    ...
+    
+    mac('path/to/jdk') {
+        icon = 'path/to/icon'
+    }
+    windows64('path/to/win/jdk')
+}
 ```
 
 Available platforms are `mac`, `windows32`, `windows64`, `linux32`, and `linux64`.

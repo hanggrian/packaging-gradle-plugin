@@ -28,9 +28,8 @@ tasks.withType(com.hendraanggrian.packr.PackTask) {
     dependsOn('shadowJar')
     mainClass 'com.example.App'
     classpath += 'build/release/mac-icon-1.0.jar'
-    mac {
-        it.jdk '/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home'
-        it.name 'Mac Icon.App'
-        it.icon 'art/example.icns'
+    mac('/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home') {
+        it.name = 'Mac Icon.App'
+        it.icon = 'art/example.icns'
     }
 }
