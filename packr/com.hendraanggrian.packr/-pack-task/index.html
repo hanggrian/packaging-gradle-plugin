@@ -29,16 +29,6 @@
 <tbody>
 <tr>
 <td>
-<p><a href="bundle-id.html">bundleId</a></p>
-</td>
-<td>
-<code><span class="keyword">var </span><span class="identifier">bundleId</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code>
-<p>The bundle identifier of your Java application, e.g. <code>com.my.app</code>.
-This is an optional property.</p>
-</td>
-</tr>
-<tr>
-<td>
 <p><a href="classpath.html">classpath</a></p>
 </td>
 <td>
@@ -59,16 +49,6 @@ Default is project's name.</p>
 </tr>
 <tr>
 <td>
-<p><a href="icon-dir.html">iconDir</a></p>
-</td>
-<td>
-<code><span class="keyword">var </span><span class="identifier">iconDir</span><span class="symbol">: </span><a href="http://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">?</span></code>
-<p>Location of an AppBundle icon resource (.icns file).
-This is an optional property.</p>
-</td>
-</tr>
-<tr>
-<td>
 <p><a href="main-class.html">mainClass</a></p>
 </td>
 <td>
@@ -79,10 +59,10 @@ Must be defined or will throw an exception.</p>
 </tr>
 <tr>
 <td>
-<p><a href="minimize-jre.html">minimizeJre</a></p>
+<p><a href="minimization.html">minimization</a></p>
 </td>
 <td>
-<code><span class="keyword">var </span><span class="identifier">minimizeJre</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<code><span class="keyword">var </span><span class="identifier">minimization</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
 <p>Minimize the JRE by removing directories and files as specified by an additional config file.
 Comes with a few config files out of the box.
 Default is <code>soft</code>.</p>
@@ -110,16 +90,6 @@ Default is <code>release</code> directory in project's build directory.</p>
 </tr>
 <tr>
 <td>
-<p><a href="output-name.html">outputName</a></p>
-</td>
-<td>
-<code><span class="keyword">var </span><span class="identifier">outputName</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code>
-<p>The output name.
-Default is project's name.</p>
-</td>
-</tr>
-<tr>
-<td>
 <p><a href="resources.html">resources</a></p>
 </td>
 <td>
@@ -138,26 +108,6 @@ Default is empty.</p>
 This is an optional property.</p>
 </td>
 </tr>
-<tr>
-<td>
-<p><a href="vm-args.html">vmArgs</a></p>
-</td>
-<td>
-<code><span class="keyword">var </span><span class="identifier">vmArgs</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html"><span class="identifier">MutableList</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
-<p>List of arguments for the JVM, without leading dashes, e.g. <code>Xmx1G</code>.
-Default is empty.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="wrap-app.html">wrapApp</a></p>
-</td>
-<td>
-<code><span class="keyword">var </span><span class="identifier">wrapApp</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
-<p>Append app file extension to mac distribution.
-Default is true.</p>
-</td>
-</tr>
 </tbody>
 </table>
 <h3>Functions</h3>
@@ -172,6 +122,33 @@ Default is true.</p>
 <p>Add relative file locations of the JAR files to package.</p>
 <code><span class="keyword">fun </span><span class="identifier">classpath</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="com.hendraanggrian.packr.PackTask$classpath(kotlin.Array((java.io.File)))/jars">jars</span><span class="symbol">:</span>&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
 <p>Add absolute file locations of the JAR files to package.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="linux32.html">linux32</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">linux32</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackTask$linux32(kotlin.Function1((com.hendraanggrian.packr.dist.Distribution, kotlin.Unit)))/config">config</span><span class="symbol">:</span>&nbsp;<a href="../../com.hendraanggrian.packr.dist/-distribution/index.html"><span class="identifier">Distribution</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Configure Linux 32-bit distribution.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="linux64.html">linux64</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">linux64</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackTask$linux64(kotlin.Function1((com.hendraanggrian.packr.dist.Distribution, kotlin.Unit)))/config">config</span><span class="symbol">:</span>&nbsp;<a href="../../com.hendraanggrian.packr.dist/-distribution/index.html"><span class="identifier">Distribution</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Configure Linux 64-bit distribution.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="mac.html">mac</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">mac</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackTask$mac(kotlin.Function1((com.hendraanggrian.packr.dist.MacDistribution, kotlin.Unit)))/config">config</span><span class="symbol">:</span>&nbsp;<a href="../../com.hendraanggrian.packr.dist/-mac-distribution/index.html"><span class="identifier">MacDistribution</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Configure macOS distribution. Unlike other distributions, mac configuration have some OS-specific properties.</p>
 </td>
 </tr>
 <tr>
@@ -194,12 +171,47 @@ Default is true.</p>
 </tr>
 <tr>
 <td>
-<p><a href="vm-args.html">vmArgs</a></p>
+<p><a href="windows32.html">windows32</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">vmArgs</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="com.hendraanggrian.packr.PackTask$vmArgs(kotlin.Array((kotlin.String)))/args">args</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
-<p>Add VM arguments.</p>
+<code><span class="keyword">fun </span><span class="identifier">windows32</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackTask$windows32(kotlin.Function1((com.hendraanggrian.packr.dist.Distribution, kotlin.Unit)))/config">config</span><span class="symbol">:</span>&nbsp;<a href="../../com.hendraanggrian.packr.dist/-distribution/index.html"><span class="identifier">Distribution</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Configure Windows 32-bit distribution.</p>
 </td>
+</tr>
+<tr>
+<td>
+<p><a href="windows64.html">windows64</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">windows64</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackTask$windows64(kotlin.Function1((com.hendraanggrian.packr.dist.Distribution, kotlin.Unit)))/config">config</span><span class="symbol">:</span>&nbsp;<a href="../../com.hendraanggrian.packr.dist/-distribution/index.html"><span class="identifier">Distribution</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Configure Windows 64-bit distribution.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-m-i-n-i-m-i-z-a-t-i-o-n_-h-a-r-d.html">MINIMIZATION_HARD</a></p>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">MINIMIZATION_HARD</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-m-i-n-i-m-i-z-a-t-i-o-n_-o-r-a-c-l-e-j-r-e8.html">MINIMIZATION_ORACLEJRE8</a></p>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">MINIMIZATION_ORACLEJRE8</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-m-i-n-i-m-i-z-a-t-i-o-n_-s-o-f-t.html">MINIMIZATION_SOFT</a></p>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">MINIMIZATION_SOFT</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 </tbody>
 </table>

@@ -2,3 +2,4 @@ $dokka.format:html
 $dokka.linkExtension:html
 
 com.hendraanggrian.packr
+com.hendraanggrian.packr.dist
