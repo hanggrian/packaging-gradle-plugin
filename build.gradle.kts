@@ -6,6 +6,7 @@ buildscript {
         classpath(kotlin("gradle-plugin", VERSION_KOTLIN))
         classpath(dokka())
         classpath(gitPublish())
+        classpath(bintray())
         classpath(bintrayRelease())
         classpath(junitPlatform("gradle-plugin"))
     }
@@ -21,14 +22,11 @@ allprojects {
     }
 }
 
-task<Delete>("clean") {
-    delete(rootProject.buildDir)
+tasks {
+    "clean"(Delete::class) {
+        delete(rootProject.buildDir)
+    }
+    "wrapper"(Wrapper::class) {
+        gradleVersion = VERSION_GRADLE
+    }
 }
-
-task<Wrapper>("wrapper") {
-    gradleVersion = VERSION_GRADLE
-}
-
-/** bintray upload snippet
-./gradlew bintrayUpload -PdryRun=false -PbintrayUser=hendraanggrian -PbintrayKey=
- */

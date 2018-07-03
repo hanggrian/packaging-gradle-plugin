@@ -9,29 +9,31 @@ import org.jetbrains.dokka.gradle.DokkaTask
 import org.junit.platform.gradle.plugin.FiltersExtension
 import org.junit.platform.gradle.plugin.EnginesExtension
 import org.junit.platform.gradle.plugin.JUnitPlatformExtension
+import org.gradle.language.base.plugins.LifecycleBasePlugin.*
 
 plugins {
     `java-gradle-plugin`
     `kotlin-dsl`
     dokka
     `git-publish`
+    bintray
     `bintray-release`
     `junit-platform`
 }
 
-group = releaseGroup
-version = releaseVersion
+group = RELEASE_GROUP
+version = RELEASE_VERSION
 
 java.sourceSets {
-    "main" { java.srcDir("src") }
-    "test" { java.srcDir("tests/src") }
+    get("main").java.srcDir("src")
+    get("test").java.srcDir("tests/src")
 }
 
 gradlePlugin {
     (plugins) {
-        releaseArtifact {
-            id = releaseArtifact
-            implementationClass = "$releaseGroup.$releaseArtifact.PackrPlugin"
+        RELEASE_GROUP {
+            id = RELEASE_GROUP
+            implementationClass = "$RELEASE_GROUP.PackrPlugin"
         }
     }
 }
@@ -41,7 +43,7 @@ val ktlint by configurations.creating
 dependencies {
     implementation(kotlin("stdlib", VERSION_KOTLIN))
     implementation(packr())
-    ktlint(ktlint())
+
     testImplementation(kotlin("test", VERSION_KOTLIN))
     testImplementation(kotlin("reflect", VERSION_KOTLIN))
     testImplementation(spek("api")) {
@@ -52,56 +54,58 @@ dependencies {
         exclude("org.junit.platform")
     }
     testImplementation(junitPlatform("runner"))
+
+    ktlint(ktlint())
 }
 
 tasks {
-    val ktlint by creating(JavaExec::class) {
-        group = "verification"
+    "ktlint"(JavaExec::class) {
+        get("check").dependsOn(ktlint)
+        group = VERIFICATION_GROUP
         inputs.dir("src")
         outputs.dir("src")
         description = "Check Kotlin code style."
-        classpath = configurations["ktlint"]
+        classpath = ktlint
         main = "com.github.shyiko.ktlint.Main"
         args("src/**/*.kt")
     }
-    get("check").dependsOn(ktlint)
     "ktlintFormat"(JavaExec::class) {
         group = "formatting"
         inputs.dir("src")
         outputs.dir("src")
         description = "Fix Kotlin code style deviations."
-        classpath = configurations["ktlint"]
+        classpath = ktlint
         main = "com.github.shyiko.ktlint.Main"
         args("-F", "src/**/*.kt")
     }
 
     val dokka by getting(DokkaTask::class) {
-        outputDirectory = buildDir.resolve("docs").path
+        get("gitPublishCopy").dependsOn(this)
+        outputDirectory = "$buildDir/docs"
         doFirst {
             file(outputDirectory).deleteRecursively()
             buildDir.resolve("gitPublish").deleteRecursively()
         }
     }
-
     gitPublish {
-        repoUri = releaseWeb
+        repoUri = RELEASE_WEBSITE
         branch = "gh-pages"
-        contents.from(
-            "pages",
-            dokka.outputDirectory
-        )
+        contents.from(dokka.outputDirectory)
     }
-
-    get("gitPublishCopy").dependsOn(dokka)
 }
 
 publish {
-    userOrg = releaseUser
-    groupId = releaseGroup
-    artifactId = releaseArtifact
-    publishVersion = releaseVersion
-    desc = releaseDesc
-    website = releaseWeb
+    bintrayUser = bintrayUserEnv
+    bintrayKey = bintrayKeyEnv
+    dryRun = false
+    repoName = RELEASE_ARTIFACT
+
+    userOrg = RELEASE_USER
+    groupId = RELEASE_GROUP
+    artifactId = RELEASE_ARTIFACT
+    publishVersion = RELEASE_VERSION
+    desc = RELEASE_DESC
+    website = RELEASE_WEBSITE
 }
 
 configure<JUnitPlatformExtension> {

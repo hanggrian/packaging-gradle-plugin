@@ -13,7 +13,7 @@
             <option value="$PROJECT_DIR$/example" />
             <option value="$PROJECT_DIR$/example/mac-icon" />
             <option value="$PROJECT_DIR$/example/simple" />
-            <option value="$PROJECT_DIR$/packr" />
+            <option value="$PROJECT_DIR$/packr-gradle-plugin" />
           </set>
         </option>
       </GradleProjectSettings>
