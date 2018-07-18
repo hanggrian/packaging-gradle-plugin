@@ -10,6 +10,7 @@ import org.junit.platform.gradle.plugin.FiltersExtension
 import org.junit.platform.gradle.plugin.EnginesExtension
 import org.junit.platform.gradle.plugin.JUnitPlatformExtension
 import org.gradle.language.base.plugins.LifecycleBasePlugin.*
+import org.jetbrains.kotlin.serialization.js.DynamicTypeDeserializer.id
 
 plugins {
     `java-gradle-plugin`
@@ -31,7 +32,7 @@ java.sourceSets {
 
 gradlePlugin {
     (plugins) {
-        RELEASE_GROUP {
+        RELEASE_ARTIFACT {
             id = RELEASE_GROUP
             implementationClass = "$RELEASE_GROUP.PackrPlugin"
         }
@@ -95,10 +96,10 @@ tasks {
 }
 
 publish {
-    bintrayUser = bintrayUserEnv
-    bintrayKey = bintrayKeyEnv
+    bintrayUser = BINTRAY_USER
+    bintrayKey = BINTRAY_KEY
     dryRun = false
-    repoName = RELEASE_ARTIFACT
+    repoName = RELEASE_REPO
 
     userOrg = RELEASE_USER
     groupId = RELEASE_GROUP
