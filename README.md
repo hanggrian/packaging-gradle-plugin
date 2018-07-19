@@ -1,8 +1,9 @@
 Packr Plugin
 ============
-[![Download](https://api.bintray.com/packages/hendraanggrian/packr-gradle-plugin/packr-gradle-plugin/images/download.svg) ](https://bintray.com/hendraanggrian/packr-gradle-plugin/packr-gradle-plugin/_latestVersion)
-[![Build Status](https://travis-ci.org/hendraanggrian/packr-gradle-plugin.svg)](https://travis-ci.org/hendraanggrian/packr-gradle-plugin)
-[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
+[![bintray](https://img.shields.io/badge/bintray-packr-brightgreen.svg)](https://bintray.com/hendraanggrian/packr)
+[![download](https://api.bintray.com/packages/hendraanggrian/packr/packr-gradle-plugin/images/download.svg) ](https://bintray.com/hendraanggrian/packr/packr-gradle-plugin/_latestVersion)
+[![build](https://travis-ci.org/hendraanggrian/packr-gradle-plugin.svg)](https://travis-ci.org/hendraanggrian/packr-gradle-plugin)
+[![license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
 Gradle plugin of [packr] which wraps JARs into native bundle for Windows, MacOS, and Linux.
 
