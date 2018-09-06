@@ -26,8 +26,8 @@ open class PackTask : DefaultTask(), VMArged {
         const val MINIMIZATION_ORACLEJRE8 = "oraclejre8"
     }
 
-    private val packr: Packr = Packr()
-    private val distributions: MutableList<Distribution> = mutableListOf()
+    private val packr = Packr()
+    private val distributions = mutableListOf<Distribution>()
 
     /**
      * Name of the native executable, without extension such as `.exe`.
@@ -109,22 +109,22 @@ open class PackTask : DefaultTask(), VMArged {
     @Throws(IOException::class)
     fun pack() {
         check(mainClass.isNotEmpty()) { "Undefined main class" }
-        distributions.forEach {
-            println("Packing ${it.platform}:")
+        distributions.forEach { dist ->
+            println("Packing ${dist.platform}:")
 
             val config = PackrConfig()
-            config.platform = it.platform
-            config.jdk = checkNotNull(it.jdk) { "JDK path has not yet been initialized" }
+            config.platform = dist.platform
+            config.jdk = checkNotNull(dist.jdk) { "JDK path has not yet been initialized" }
             config.executable = executable!!
             config.classpath = classpath.map { project.projectDir.resolve(it).path }
             config.mainClass = mainClass
-            config.outDir = project.projectDir.resolve(outputDir!!).resolve(it.name)
-            config.vmArgs = vmArgs + it.vmArgs
+            config.outDir = project.projectDir.resolve(outputDir!!).resolve(dist.name)
+            config.vmArgs = vmArgs + dist.vmArgs
             config.resources = resources.map { project.projectDir.resolve(it) }
             config.minimizeJre = minimization
-            if (it is MacDistribution) {
-                if (it.icon != null) config.iconResource = project.projectDir.resolve(it.icon!!)
-                if (it.bundleId != null) config.bundleIdentifier = it.bundleId
+            if (dist is MacDistribution) {
+                if (dist.icon != null) config.iconResource = project.projectDir.resolve(dist.icon!!)
+                if (dist.bundleId != null) config.bundleIdentifier = dist.bundleId
             }
             config.verbose = verbose
 

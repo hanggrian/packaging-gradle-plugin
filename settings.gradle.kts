@@ -1,4 +1,4 @@
-include(":$RELEASE_ARTIFACT")
+include(RELEASE_ARTIFACT)
 
-include(":example:simple")
-include(":example:mac-icon")
+include("samples:simple")
+include("samples:mac-icon")

@@ -1,5 +1,11 @@
+import org.gradle.kotlin.dsl.`kotlin-dsl`
+
+repositories {
+    jcenter()
+}
+
 plugins {
     `kotlin-dsl`
 }
 
-java.sourceSets["main"].java.srcDir("src")
+sourceSets["main"].java.srcDir("src")

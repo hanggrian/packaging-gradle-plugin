@@ -16,6 +16,8 @@
       <module name="multiple-platforms_test" target="1.8" />
       <module name="packr-gradle-plugin-packr-gradle-plugin_main" target="1.8" />
       <module name="packr-gradle-plugin-packr-gradle-plugin_test" target="1.8" />
+      <module name="packr-gradle-plugin_buildSrc_main" target="1.8" />
+      <module name="packr-gradle-plugin_buildSrc_test" target="1.8" />
       <module name="packr-gui-buildSrc_main" target="1.8" />
       <module name="packr-gui-buildSrc_test" target="1.8" />
       <module name="packr-gui_main" target="1.8" />
