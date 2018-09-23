@@ -5,25 +5,20 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="app" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app_main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app_main.iml" group="app" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app_test.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app_test.iml" group="app" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/buildSrc.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/buildSrc_main.iml" filepath="$PROJECT_DIR$/.idea/modules/buildSrc_main.iml" group="buildSrc" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/buildSrc_test.iml" filepath="$PROJECT_DIR$/.idea/modules/buildSrc_test.iml" group="buildSrc" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/example/example.iml" filepath="$PROJECT_DIR$/.idea/modules/example/example.iml" group="example" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/samples/mac-icon/com.example-mac-icon.iml" filepath="$PROJECT_DIR$/.idea/modules/samples/mac-icon/com.example-mac-icon.iml" group="samples/mac-icon" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/samples/mac-icon/com.example-mac-icon_main.iml" filepath="$PROJECT_DIR$/.idea/modules/samples/mac-icon/com.example-mac-icon_main.iml" group="samples/mac-icon" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/samples/mac-icon/com.example-mac-icon_test.iml" filepath="$PROJECT_DIR$/.idea/modules/samples/mac-icon/com.example-mac-icon_test.iml" group="samples/mac-icon" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/samples/simple/com.example-simple.iml" filepath="$PROJECT_DIR$/.idea/modules/samples/simple/com.example-simple.iml" group="samples/simple" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/samples/simple/com.example-simple_main.iml" filepath="$PROJECT_DIR$/.idea/modules/samples/simple/com.example-simple_main.iml" group="samples/simple" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/samples/simple/com.example-simple_test.iml" filepath="$PROJECT_DIR$/.idea/modules/samples/simple/com.example-simple_test.iml" group="samples/simple" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/samples/mac-icon/mac-icon.iml" filepath="$PROJECT_DIR$/.idea/modules/samples/mac-icon/mac-icon.iml" group="samples/mac-icon" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/example/mac-icon/mac-icon.iml" filepath="$PROJECT_DIR$/.idea/modules/example/mac-icon/mac-icon.iml" group="example/mac-icon" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/samples/mac-icon/mac-icon_main.iml" filepath="$PROJECT_DIR$/.idea/modules/samples/mac-icon/mac-icon_main.iml" group="samples/mac-icon" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/example/mac-icon/mac-icon_main.iml" filepath="$PROJECT_DIR$/.idea/modules/example/mac-icon/mac-icon_main.iml" group="example/mac-icon" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/samples/mac-icon/mac-icon_test.iml" filepath="$PROJECT_DIR$/.idea/modules/samples/mac-icon/mac-icon_test.iml" group="samples/mac-icon" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/example/mac-icon/mac-icon_test.iml" filepath="$PROJECT_DIR$/.idea/modules/example/mac-icon/mac-icon_test.iml" group="example/mac-icon" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/packr/packr.iml" filepath="$PROJECT_DIR$/.idea/modules/packr/packr.iml" group="packr" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/packr-plugin/packr.iml" filepath="$PROJECT_DIR$/.idea/modules/packr-plugin/packr.iml" group="packr" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/packr-gradle-plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/packr-gradle-plugin.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/packr-gradle-plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/packr-gradle-plugin.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/packr-gradle-plugin/packr-gradle-plugin-packr-gradle-plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/packr-gradle-plugin/packr-gradle-plugin-packr-gradle-plugin.iml" group="packr-gradle-plugin" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/packr-gradle-plugin/packr-gradle-plugin-packr-gradle-plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/packr-gradle-plugin/packr-gradle-plugin-packr-gradle-plugin.iml" group="packr-gradle-plugin" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/packr-gradle-plugin/packr-gradle-plugin-packr-gradle-plugin_main.iml" filepath="$PROJECT_DIR$/.idea/modules/packr-gradle-plugin/packr-gradle-plugin-packr-gradle-plugin_main.iml" group="packr-gradle-plugin" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/packr-gradle-plugin/packr-gradle-plugin-packr-gradle-plugin_main.iml" filepath="$PROJECT_DIR$/.idea/modules/packr-gradle-plugin/packr-gradle-plugin-packr-gradle-plugin_main.iml" group="packr-gradle-plugin" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/packr-gradle-plugin/packr-gradle-plugin-packr-gradle-plugin_test.iml" filepath="$PROJECT_DIR$/.idea/modules/packr-gradle-plugin/packr-gradle-plugin-packr-gradle-plugin_test.iml" group="packr-gradle-plugin" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/packr-gradle-plugin/packr-gradle-plugin-packr-gradle-plugin_test.iml" filepath="$PROJECT_DIR$/.idea/modules/packr-gradle-plugin/packr-gradle-plugin-packr-gradle-plugin_test.iml" group="packr-gradle-plugin" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/packr-gradle-plugin_buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/packr-gradle-plugin_buildSrc.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/packr-gradle-plugin_buildSrc_main.iml" filepath="$PROJECT_DIR$/.idea/modules/packr-gradle-plugin_buildSrc_main.iml" group="packr-gradle-plugin_buildSrc" />
@@ -37,11 +32,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/packr/packr_test.iml" filepath="$PROJECT_DIR$/.idea/modules/packr/packr_test.iml" group="packr" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/samples/samples.iml" filepath="$PROJECT_DIR$/.idea/modules/samples/samples.iml" group="samples" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/samples/simple/simple.iml" filepath="$PROJECT_DIR$/.idea/modules/samples/simple/simple.iml" group="samples/simple" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/example/simple/simple.iml" filepath="$PROJECT_DIR$/.idea/modules/example/simple/simple.iml" group="example/simple" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/samples/simple/simple_main.iml" filepath="$PROJECT_DIR$/.idea/modules/samples/simple/simple_main.iml" group="samples/simple" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/example/simple/simple_main.iml" filepath="$PROJECT_DIR$/.idea/modules/example/simple/simple_main.iml" group="example/simple" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/samples/simple/simple_test.iml" filepath="$PROJECT_DIR$/.idea/modules/samples/simple/simple_test.iml" group="samples/simple" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/example/simple/simple_test.iml" filepath="$PROJECT_DIR$/.idea/modules/example/simple/simple_test.iml" group="example/simple" />
     </modules>
   </component>
 </project>

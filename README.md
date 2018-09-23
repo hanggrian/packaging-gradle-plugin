@@ -55,14 +55,17 @@ task.withType(PackTask) {
 ```
 
 You can then pack native distribution by providing platform and jdk property:
+
 ```gradle
 task.withType(PackTask) {
     ...
-    
-    mac('path/to/jdk') {
-        icon = 'path/to/icon'
+    mac {
+        jdk = 'path/to/jdk' // default is java home
+        icon = 'path/to/icon' // only supported in mac
     }
-    windows64('path/to/win/jdk')
+    windows64 {
+        jdk = 'path/to/win/jdk'
+    }
 }
 ```
 

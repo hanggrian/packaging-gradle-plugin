@@ -56,28 +56,32 @@ dependencies {
     }
     testImplementation(junitPlatform("runner"))
 
-    ktlint.get()(ktlint())
+    ktlint {
+        invoke(ktlint())
+    }
 }
 
 tasks {
-    register("ktlint", JavaExec::class) {
-        get("check").dependsOn(ktlint)
-        group = VERIFICATION_GROUP
+    val ktlint by registering(JavaExec::class) {
+        group = LifecycleBasePlugin.VERIFICATION_GROUP
         inputs.dir("src")
         outputs.dir("src")
         description = "Check Kotlin code style."
-        classpath(ktlint.get())
+        classpath(configurations["ktlint"])
         main = "com.github.shyiko.ktlint.Main"
-        args("src/**.kt")
+        args("src/**/*.kt")
     }
-    register("ktlintformat", JavaExec::class) {
+    "check" {
+        dependsOn(ktlint)
+    }
+    register("ktlintFormat", JavaExec::class) {
         group = "formatting"
         inputs.dir("src")
         outputs.dir("src")
         description = "Fix Kotlin code style deviations."
-        classpath(ktlint.get())
+        classpath(configurations["ktlint"])
         main = "com.github.shyiko.ktlint.Main"
-        args("-F", "src*.kt")
+        args("-F", "src/**/*.kt")
     }
 
     val dokka by existing(DokkaTask::class) {

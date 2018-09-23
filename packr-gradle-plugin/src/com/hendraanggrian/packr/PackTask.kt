@@ -5,15 +5,13 @@ import com.badlogicgames.packr.PackrConfig
 import com.badlogicgames.packr.PackrConfig.Platform
 import com.hendraanggrian.packr.dist.Distribution
 import com.hendraanggrian.packr.dist.MacDistribution
-import com.hendraanggrian.packr.internal.VMArged
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Classpath
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.TaskAction
-import java.awt.Desktop.Action.OPEN
-import java.awt.Desktop.getDesktop
+import java.awt.Desktop
 import java.io.File
 import java.io.IOException
 
@@ -27,7 +25,7 @@ open class PackTask : DefaultTask(), VMArged {
     }
 
     private val packr = Packr()
-    private val distributions = mutableListOf<Distribution>()
+    private val distributions: MutableCollection<Distribution> = mutableListOf()
 
     /**
      * Name of the native executable, without extension such as `.exe`.
@@ -39,7 +37,7 @@ open class PackTask : DefaultTask(), VMArged {
      * File locations of the JAR files to package.
      * Default is empty.
      */
-    @Classpath @InputFiles var classpath: MutableList<String> = mutableListOf()
+    @Classpath @InputFiles var classpath: MutableCollection<String> = mutableListOf()
 
     /**
      * The fully qualified name of the main class, using dots to delimit package names.
@@ -51,7 +49,7 @@ open class PackTask : DefaultTask(), VMArged {
      * List of files and directories to be packaged next to the native executable.
      * Default is empty.
      */
-    @InputFiles var resources: MutableList<String> = mutableListOf()
+    @InputFiles var resources: MutableCollection<String> = mutableListOf()
 
     /**
      * Minimize the JRE by removing directories and files as specified by an additional config file.
@@ -66,7 +64,7 @@ open class PackTask : DefaultTask(), VMArged {
      */
     @InputDirectory var outputDir: String? = null
 
-    @Input override var vmArgs: MutableList<String> = mutableListOf()
+    @Input override var vmArgs: MutableCollection<String> = mutableListOf()
 
     /**
      * Print extra messages about JRE minimization when set to `true`.
@@ -81,28 +79,28 @@ open class PackTask : DefaultTask(), VMArged {
     @Input var openOnDone: Boolean = false
 
     /** Configure macOS distribution. Unlike other distributions, mac configuration have some OS-specific properties. */
-    @JvmOverloads fun mac(jdk: String, config: (MacDistribution.() -> Unit)? = null) {
-        distributions += MacDistribution(project, jdk).apply { if (config != null) config() }
+    @JvmOverloads fun mac(init: (MacDistribution.() -> Unit)? = null) {
+        distributions += MacDistribution(project).apply { if (init != null) init() }
     }
 
     /** Configure Windows 32-bit distribution. */
-    @JvmOverloads fun windows32(jdk: String, config: (Distribution.() -> Unit)? = null) {
-        distributions += Distribution(Platform.Windows32, project, jdk).apply { if (config != null) config() }
+    @JvmOverloads fun windows32(init: (Distribution.() -> Unit)? = null) {
+        distributions += Distribution(project, Platform.Windows32).apply { if (init != null) init() }
     }
 
     /** Configure Windows 64-bit distribution. */
-    @JvmOverloads fun windows64(jdk: String, config: (Distribution.() -> Unit)? = null) {
-        distributions += Distribution(Platform.Windows64, project, jdk).apply { if (config != null) config() }
+    @JvmOverloads fun windows64(init: (Distribution.() -> Unit)? = null) {
+        distributions += Distribution(project, Platform.Windows64).apply { if (init != null) init() }
     }
 
     /** Configure Linux 32-bit distribution. */
-    @JvmOverloads fun linux32(jdk: String, config: (Distribution.() -> Unit)? = null) {
-        distributions += Distribution(Platform.Linux32, project, jdk).apply { if (config != null) config() }
+    @JvmOverloads fun linux32(init: (Distribution.() -> Unit)? = null) {
+        distributions += Distribution(project, Platform.Linux32).apply { if (init != null) init() }
     }
 
     /** Configure Linux 64-bit distribution. */
-    @JvmOverloads fun linux64(jdk: String, config: (Distribution.() -> Unit)? = null) {
-        distributions += Distribution(Platform.Linux64, project, jdk).apply { if (config != null) config() }
+    @JvmOverloads fun linux64(init: (Distribution.() -> Unit)? = null) {
+        distributions += Distribution(project, Platform.Linux64).apply { if (init != null) init() }
     }
 
     @TaskAction
@@ -132,9 +130,12 @@ open class PackTask : DefaultTask(), VMArged {
             packr.pack(config)
         }
 
-        if (openOnDone) getDesktop().run {
-            require(isSupported(OPEN)) { "`openOnDone` is not supported in this system" }
-            open(File(outputDir))
+        if (openOnDone) {
+            require(Desktop.isDesktopSupported()) { "Desktop is not supported, disable `openOnDone`." }
+            Desktop.getDesktop().run {
+                require(isSupported(Desktop.Action.OPEN)) { "Opening folder is not supported, disable `openOnDone`." }
+                open(File(outputDir))
+            }
         }
     }
 }

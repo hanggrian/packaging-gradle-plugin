@@ -15,7 +15,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        maven("https://oss.sonatype.org/content/repositories/snapshots") // packr 2.1 is still in snapshot
+        maven("https://oss.sonatype.org/content/repositories/snapshots") // packr 2.1-SNAPSHOT
     }
     tasks.withType(Delete::class.java) {
         delete(projectDir.resolve("out"))
@@ -23,10 +23,10 @@ allprojects {
 }
 
 tasks {
-    val clean by registering(Delete::class) {
+    register("clean", Delete::class) {
         delete(rootProject.buildDir)
     }
-    val wrapper by registering(Wrapper::class) {
+    register("wrapper", Wrapper::class) {
         gradleVersion = VERSION_GRADLE
     }
 }

@@ -4,7 +4,7 @@ buildscript {
         maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
     }
     dependencies {
-        classpath files('../packr-gradle-plugin-0.2.jar')
+        classpath files('../packr-gradle-plugin-0.3.jar')
         classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
         classpath 'com.badlogicgames.packr:packr:2.1-SNAPSHOT'
     }
@@ -28,7 +28,7 @@ tasks.withType(com.hendraanggrian.packr.PackTask) {
     dependsOn('shadowJar')
     mainClass 'com.example.App'
     classpath += 'build/release/mac-icon-1.0.jar'
-    mac('/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home') {
+    mac {
         it.name = 'Mac Icon.App'
         it.icon = 'art/example.icns'
     }
