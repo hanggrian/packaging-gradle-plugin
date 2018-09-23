@@ -9,8 +9,9 @@
 <br/>
 <h1>jdk</h1>
 <a name="com.hendraanggrian.packr.dist.Distribution$jdk"></a>
-<code><span class="keyword">val </span><span class="identifier">jdk</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
-<p>Directory, ZIP file, or URL to ZIP file of an OpenJDK or Oracle JDK build containing a JRE.
-Must be defined or else will throw <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-null-pointer-exception/index.html">NullPointerException</a>.</p>
+<code><span class="keyword">var </span><span class="identifier">jdk</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code>
+<p>Directory, ZIP file, or URL to ZIP file of an OpenJDK or Oracle JDK build containing a JRE used to build
+this distribution.
+Default is Java Home path, if any.</p>
 </BODY>
 </HTML>

@@ -17,7 +17,7 @@
 <p><a href="-init-.html">&lt;init&gt;</a></p>
 </td>
 <td>
-<code><span class="identifier">MacDistribution</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.dist.MacDistribution$<init>(org.gradle.api.Project, kotlin.String)/project">project</span><span class="symbol">:</span>&nbsp;<span class="identifier">Project</span><span class="symbol">, </span><span class="identifier" id="com.hendraanggrian.packr.dist.MacDistribution$<init>(org.gradle.api.Project, kotlin.String)/jdk">jdk</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span></code></td>
+<code><span class="identifier">MacDistribution</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.dist.MacDistribution$<init>(org.gradle.api.Project)/project">project</span><span class="symbol">:</span>&nbsp;<span class="identifier">Project</span><span class="symbol">)</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -54,9 +54,10 @@ This is an optional property.</p>
 <p><a href="../-distribution/jdk.html">jdk</a></p>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">jdk</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
-<p>Directory, ZIP file, or URL to ZIP file of an OpenJDK or Oracle JDK build containing a JRE.
-Must be defined or else will throw <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-null-pointer-exception/index.html">NullPointerException</a>.</p>
+<code><span class="keyword">var </span><span class="identifier">jdk</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code>
+<p>Directory, ZIP file, or URL to ZIP file of an OpenJDK or Oracle JDK build containing a JRE used to build
+this distribution.
+Default is Java Home path, if any.</p>
 </td>
 </tr>
 <tr>
@@ -75,7 +76,8 @@ Default is project's name.</p>
 </td>
 <td>
 <code><span class="keyword">val </span><span class="identifier">platform</span><span class="symbol">: </span><span class="identifier">Platform</span></code>
-<p>target platform.</p>
+<p>target platform.
+Must be defined or else will throw <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-null-pointer-exception/index.html">NullPointerException</a>.</p>
 </td>
 </tr>
 <tr>
@@ -83,7 +85,7 @@ Default is project's name.</p>
 <p><a href="../-distribution/vm-args.html">vmArgs</a></p>
 </td>
 <td>
-<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">vmArgs</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html"><span class="identifier">MutableList</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">vmArgs</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-collection/index.html"><span class="identifier">MutableCollection</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
 <p>List of arguments for the JVM, without leading dashes, e.g. <code>Xmx1G</code>.
 Default is empty.</p>
 </td>
