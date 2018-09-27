@@ -108,6 +108,7 @@ open class PackTask : DefaultTask(), VMArged {
     fun pack() {
         check(mainClass.isNotEmpty()) { "Undefined main class" }
         distributions.forEach { dist ->
+            println() // extra line to separate distribution processes
             println("Packing ${dist.platform}:")
 
             val config = PackrConfig()
