@@ -11,9 +11,19 @@ class MacOSDistribution(name: String) : Distribution(Platform.MacOS, name) {
      */
     var icon: File? = null
 
+    /** Groovy-specific method to change icon path. */
+    fun icon(icon: File) {
+        this.icon = icon
+    }
+
     /**
      * The bundle identifier of your Java application, e.g. `com.my.app`.
      * This is an optional property.
      */
     var bundleId: String? = null
+
+    /** Groovy-specific method to change bundle identifier. */
+    fun bundleId(bundleId: String) {
+        this.bundleId = bundleId
+    }
 }

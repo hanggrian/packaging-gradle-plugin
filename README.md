@@ -37,10 +37,10 @@ See documentation for description and default value of each property.
 ```gradle
 task.withType(PackTask) {
     executable 'example'
-    classpath.addAll('my.jar', 'other.jar')
+    classpath 'my.jar', 'other.jar'
     mainClass 'com.example.App'
-    vmArgs.addAll('Xmx1G')
-    resources.addAll('resources', 'image.jpg')
+    vmArgs 'Xmx1G'
+    resources 'resources', 'image.jpg'
     minimizeJre 'hard'
     outputName 'Example App'
     outputDir 'packr-output'   
@@ -55,12 +55,12 @@ You can then pack native distribution by providing platform and jdk property:
 task.withType(PackTask) {
     ...
     macOS {
-        name = "App for Mac"
-        icon = 'path/to/icon' // only supported in mac
+        it.name 'App for Mac'
+        it.icon 'path/to/icon' // only supported in mac
     }
     windows64 {
-        jdk = 'path/to/win/jdk' // default is java home
-        name = "App for Windows"
+        it.jdk 'path/to/win/jdk' // default is java home
+        it.name 'App for Windows'
     }
 }
 ```

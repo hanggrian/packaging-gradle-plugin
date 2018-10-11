@@ -5,7 +5,6 @@ import com.badlogicgames.packr.PackrConfig
 import com.badlogicgames.packr.PackrConfig.Platform
 import com.hendraanggrian.packr.dist.Distribution
 import com.hendraanggrian.packr.dist.MacOSDistribution
-import groovy.lang.Closure
 import org.gradle.api.DefaultTask
 import org.gradle.api.logging.LogLevel.INFO
 import org.gradle.api.tasks.Classpath
@@ -13,13 +12,12 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
-import org.gradle.kotlin.dsl.invoke
 import java.awt.Desktop
 import java.io.File
 import java.io.IOException
 
 /** Task that will generate native distribution on each platform. */
-open class PackTask : DefaultTask(), VMArged {
+open class PackTask : DefaultTask(), VmArged {
 
     companion object {
         const val MINIMIZE_SOFT = "soft"
@@ -42,6 +40,11 @@ open class PackTask : DefaultTask(), VMArged {
      */
     @Classpath @InputFiles var classpath: MutableList<String> = mutableListOf()
 
+    /** Groovy-specific method to add classpath. */
+    @Classpath @InputFiles fun classpath(vararg classpath: String) {
+        this.classpath.addAll(classpath)
+    }
+
     /**
      * The fully qualified name of the main class, using dots to delimit package names.
      * Must be defined or will throw an exception.
@@ -53,6 +56,11 @@ open class PackTask : DefaultTask(), VMArged {
      * Default is empty.
      */
     @InputFiles var resources: MutableList<File> = mutableListOf()
+
+    /** Groovy-specific method to add resources. */
+    @InputFiles fun resources(vararg resources: File) {
+        this.resources.addAll(resources)
+    }
 
     /**
      * Minimize the JRE by removing directories and files as specified by an additional config file.
@@ -82,27 +90,27 @@ open class PackTask : DefaultTask(), VMArged {
     @Input var openOnDone: Boolean = false
 
     /** Configure macOS distribution. Unlike other distributions, mac configuration have some OS-specific properties. */
-    @JvmOverloads fun macOS(init: Closure<MacOSDistribution>? = null) {
+    @JvmOverloads fun macOS(init: (MacOSDistribution.() -> Unit)? = null) {
         distributions += MacOSDistribution(project.name).also { init?.invoke(it) }
     }
 
     /** Configure Windows 32-bit distribution. */
-    @JvmOverloads fun windows32(init: Closure<Distribution>? = null) {
+    @JvmOverloads fun windows32(init: (Distribution.() -> Unit)? = null) {
         distributions += Distribution(Platform.Windows32, project.name).also { init?.invoke(it) }
     }
 
     /** Configure Windows 64-bit distribution. */
-    @JvmOverloads fun windows64(init: Closure<Distribution>? = null) {
+    @JvmOverloads fun windows64(init: (Distribution.() -> Unit)? = null) {
         distributions += Distribution(Platform.Windows64, project.name).also { init?.invoke(it) }
     }
 
     /** Configure Linux 32-bit distribution. */
-    @JvmOverloads fun linux32(init: Closure<Distribution>? = null) {
+    @JvmOverloads fun linux32(init: (Distribution.() -> Unit)? = null) {
         distributions += Distribution(Platform.Linux32, project.name).also { init?.invoke(it) }
     }
 
     /** Configure Linux 64-bit distribution. */
-    @JvmOverloads fun linux64(init: Closure<Distribution>? = null) {
+    @JvmOverloads fun linux64(init: (Distribution.() -> Unit)? = null) {
         distributions += Distribution(Platform.Linux64, project.name).also { init?.invoke(it) }
     }
 

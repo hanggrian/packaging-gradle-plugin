@@ -25,12 +25,12 @@ tasks.withType(com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {
 }
 
 tasks.withType(com.hendraanggrian.packr.PackTask) {
-    dependsOn('shadowJar')
+    dependsOn 'shadowJar'
     mainClass 'com.example.App'
-    classpath += 'build/release/mac-icon-1.0.jar'
+    classpath 'build/release/mac-icon-1.0.jar'
     macOS {
-        it.name = 'Mac Icon.app'
-        it.setIcon(file('art/example.icns'))
-        // it.icon = file('art/example.icns')
+        it.name 'Mac Icon.app'
+        it.bundleId 'com.example.app'
+        it.icon file('art/example.icns')
     }
 }
