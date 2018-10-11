@@ -38,11 +38,11 @@ open class PackTask : DefaultTask(), VmArged {
      * File locations of the JAR files to package.
      * Default is empty.
      */
-    @Classpath @InputFiles var classpath: MutableList<String> = mutableListOf()
+    @Classpath @InputFiles val classpath: MutableList<String> = mutableListOf()
 
     /** Groovy-specific method to add classpath. */
     @Classpath @InputFiles fun classpath(vararg classpath: String) {
-        this.classpath.addAll(classpath)
+        this.classpath += classpath
     }
 
     /**
@@ -55,11 +55,11 @@ open class PackTask : DefaultTask(), VmArged {
      * List of files and directories to be packaged next to the native executable.
      * Default is empty.
      */
-    @InputFiles var resources: MutableList<File> = mutableListOf()
+    @InputFiles val resources: MutableList<File> = mutableListOf()
 
     /** Groovy-specific method to add resources. */
     @InputFiles fun resources(vararg resources: File) {
-        this.resources.addAll(resources)
+        this.resources += resources
     }
 
     /**
@@ -75,7 +75,7 @@ open class PackTask : DefaultTask(), VmArged {
      */
     @OutputDirectory lateinit var outputDir: File
 
-    @Input override var vmArgs: MutableCollection<String> = mutableListOf()
+    @Input override val vmArgs: MutableCollection<String> = mutableSetOf()
 
     /**
      * Print extra messages about JRE minimizeJre when set to `true`.

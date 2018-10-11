@@ -22,5 +22,5 @@ open class Distribution(val platform: Platform, var name: String) : VmArged {
         this.jdk = jdk
     }
 
-    override val vmArgs: MutableCollection<String> = mutableListOf()
+    override val vmArgs: MutableCollection<String> = mutableSetOf()
 }

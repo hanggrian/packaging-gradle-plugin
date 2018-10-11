@@ -12,6 +12,6 @@ internal interface VmArged {
 
     /** Groovy-specific method to add vm arguments. */
     @Input fun vmArgs(vararg args: String) {
-        vmArgs.addAll(args)
+        vmArgs += args
     }
 }
