@@ -1,4 +1,4 @@
-const val VERSION_GRADLE = "4.10.1"
+const val VERSION_GRADLE = "4.10.2"
 const val VERSION_KOTLIN = "1.2.61"
 
 internal const val VERSION_PACKR = "2.1-SNAPSHOT"
@@ -8,4 +8,4 @@ internal const val VERSION_JUNIT_PLATFORM = "1.0.0"
 internal const val VERSION_BINTRAY = "1.8.4"
 internal const val VERSION_BINTRAY_RELEASE = "0.8.1"
 internal const val VERSION_GIT_PUBLISH = "0.3.3"
-internal const val VERSION_KTLINT = "0.28.0"
+internal const val VERSION_KTLINT = "0.29.0"

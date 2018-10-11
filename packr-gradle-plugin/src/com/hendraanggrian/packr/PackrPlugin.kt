@@ -7,15 +7,20 @@ import org.gradle.kotlin.dsl.register
 
 class PackrPlugin : Plugin<Project> {
 
+    private companion object {
+        const val TASK_NAME = "pack"
+        const val GROUP_NAME = "packr"
+    }
+
     override fun apply(project: Project) {
         project.tasks {
-            val pack = register("pack", PackTask::class) {
-                group = "packr"
+            val pack = register(TASK_NAME, PackTask::class) {
+                group = GROUP_NAME
+                outputDir = project.buildDir.resolve("release")
             }
             project.afterEvaluate {
                 pack {
-                    if (executable == null) executable = project.name
-                    if (outputDir == null) outputDir = "${project.buildDir}/release"
+                    if (executable.isEmpty()) executable = project.name
                 }
             }
         }

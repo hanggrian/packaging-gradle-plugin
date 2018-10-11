@@ -1,4 +1,6 @@
 include(RELEASE_ARTIFACT)
 
-include("samples:simple")
-include("samples:mac-icon")
+File("demo")
+    .walk()
+    .filter { it.isDirectory }
+    .forEach { include("demo:${it.name}") }

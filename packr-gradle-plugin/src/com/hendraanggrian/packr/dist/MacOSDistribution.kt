@@ -1,15 +1,15 @@
 package com.hendraanggrian.packr.dist
 
 import com.badlogicgames.packr.PackrConfig.Platform
-import org.gradle.api.Project
+import java.io.File
 
-class MacDistribution(project: Project) : Distribution(project, Platform.MacOS) {
+class MacOSDistribution(name: String) : Distribution(Platform.MacOS, name) {
 
     /**
      * Location of an AppBundle icon resource (.icns file) relative to project directory.
      * This is an optional property.
      */
-    var icon: String? = null
+    var icon: File? = null
 
     /**
      * The bundle identifier of your Java application, e.g. `com.my.app`.

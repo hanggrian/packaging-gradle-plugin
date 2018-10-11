@@ -5,7 +5,7 @@ Packr Plugin
 [![build](https://travis-ci.com/hendraanggrian/packr-gradle-plugin.svg)](https://travis-ci.com/hendraanggrian/packr-gradle-plugin)
 [![license](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 
-Gradle plugin of [packr], a library that wraps JARs into native bundle for Windows, MacOS, and Linux.
+Gradle plugin of [packr], a library that wraps JARs into native bundle for Windows, macOS, and Linux.
 
 Download
 --------
@@ -32,25 +32,20 @@ apply plugin: 'com.hendraanggrian.packr'
 Usage
 -----
 Configure `packr` task, below are available configurations.
-See [PackrTask] for meaning of each parameter.
+See documentation for description and default value of each property.
 
 ```gradle
 task.withType(PackTask) {
-    executable 'example'                // default is project's name
-    classpath('my.jar', 'other.jar')    // default is empty
-    mainClass 'com.example.App'         // must be defined or will throw an exception
-    vmArgs('Xmx1G')                     // default is empty
-    resources('resources', 'image.jpg') // default is empty
-    minimizeJre 'hard'                  // default is `soft`
-    outputName 'Example App'            // default is project's name
-    outputDir 'packr-output'            // default is `release` directory in build directoy
-    
-    wrapApp false                       // default is true
-    iconDir 'icon.icns'                 // optional, no default
-    bundleId 'com.example.app'          // optional, no default
-    
-    verbose                             // default is false
-    openOnDone true                     // default is false
+    executable 'example'
+    classpath.addAll('my.jar', 'other.jar')
+    mainClass 'com.example.App'
+    vmArgs.addAll('Xmx1G')
+    resources.addAll('resources', 'image.jpg')
+    minimizeJre 'hard'
+    outputName 'Example App'
+    outputDir 'packr-output'   
+    verbose true
+    openOnDone true
 }
 ```
 
@@ -59,17 +54,18 @@ You can then pack native distribution by providing platform and jdk property:
 ```gradle
 task.withType(PackTask) {
     ...
-    mac {
-        jdk = 'path/to/jdk' // default is java home
+    macOS {
+        name = "App for Mac"
         icon = 'path/to/icon' // only supported in mac
     }
     windows64 {
-        jdk = 'path/to/win/jdk'
+        jdk = 'path/to/win/jdk' // default is java home
+        name = "App for Windows"
     }
 }
 ```
 
-Available platforms are `mac`, `windows32`, `windows64`, `linux32`, and `linux64`.
+Available platforms are `macOS`, `windows32`, `windows64`, `linux32`, and `linux64`.
 
 License
 -------
