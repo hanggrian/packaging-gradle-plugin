@@ -20,6 +20,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo/example/example.iml" filepath="$PROJECT_DIR$/.idea/modules/demo/example/example.iml" group="demo/example" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo/jar/jar.iml" filepath="$PROJECT_DIR$/.idea/modules/demo/jar/jar.iml" group="demo/jar" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo/java/java.iml" filepath="$PROJECT_DIR$/.idea/modules/demo/java/java.iml" group="demo/java" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo/kotlin-dsl/kotlin-dsl.iml" filepath="$PROJECT_DIR$/.idea/modules/demo/kotlin-dsl/kotlin-dsl.iml" group="demo/kotlin-dsl" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo/kotlin-dsl/kotlin-dsl_main.iml" filepath="$PROJECT_DIR$/.idea/modules/demo/kotlin-dsl/kotlin-dsl_main.iml" group="demo/kotlin-dsl" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo/kotlin-dsl/kotlin-dsl_test.iml" filepath="$PROJECT_DIR$/.idea/modules/demo/kotlin-dsl/kotlin-dsl_test.iml" group="demo/kotlin-dsl" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo/libs/libs.iml" filepath="$PROJECT_DIR$/.idea/modules/demo/libs/libs.iml" group="demo/libs" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo/mac-icon/mac-icon.iml" filepath="$PROJECT_DIR$/.idea/modules/demo/mac-icon/mac-icon.iml" group="demo/mac-icon" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo/mac-icon/mac-icon_main.iml" filepath="$PROJECT_DIR$/.idea/modules/demo/mac-icon/mac-icon_main.iml" group="demo/mac-icon" />

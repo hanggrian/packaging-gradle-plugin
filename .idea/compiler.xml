@@ -12,6 +12,8 @@
       <module name="com.example-simple_test" target="1.8" />
       <module name="example_main" target="1.8" />
       <module name="example_test" target="1.8" />
+      <module name="kotlin-dsl_main" target="1.8" />
+      <module name="kotlin-dsl_test" target="1.8" />
       <module name="mac-icon_main" target="1.8" />
       <module name="mac-icon_test" target="1.8" />
       <module name="mac_main" target="1.8" />

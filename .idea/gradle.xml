@@ -20,6 +20,7 @@
             <option value="$PROJECT_DIR$/demo/example" />
             <option value="$PROJECT_DIR$/demo/jar" />
             <option value="$PROJECT_DIR$/demo/java" />
+            <option value="$PROJECT_DIR$/demo/kotlin-dsl" />
             <option value="$PROJECT_DIR$/demo/libs" />
             <option value="$PROJECT_DIR$/demo/mac-icon" />
             <option value="$PROJECT_DIR$/demo/main" />

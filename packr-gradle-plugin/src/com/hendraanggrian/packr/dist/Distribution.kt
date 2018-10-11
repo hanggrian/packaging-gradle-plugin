@@ -3,7 +3,7 @@ package com.hendraanggrian.packr.dist
 import com.badlogicgames.packr.PackrConfig.Platform
 import com.hendraanggrian.packr.VMArged
 
-open class Distribution(var name: String, val platform: Platform) : VMArged {
+open class Distribution(val platform: Platform, var name: String) : VMArged {
 
     /**
      * Directory, ZIP file, or URL to ZIP file of an OpenJDK or Oracle JDK build containing a JRE used to build

@@ -5,6 +5,7 @@ import com.badlogicgames.packr.PackrConfig
 import com.badlogicgames.packr.PackrConfig.Platform
 import com.hendraanggrian.packr.dist.Distribution
 import com.hendraanggrian.packr.dist.MacOSDistribution
+import groovy.lang.Closure
 import org.gradle.api.DefaultTask
 import org.gradle.api.logging.LogLevel.INFO
 import org.gradle.api.tasks.Classpath
@@ -12,6 +13,7 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
+import org.gradle.kotlin.dsl.invoke
 import java.awt.Desktop
 import java.io.File
 import java.io.IOException
@@ -80,27 +82,27 @@ open class PackTask : DefaultTask(), VMArged {
     @Input var openOnDone: Boolean = false
 
     /** Configure macOS distribution. Unlike other distributions, mac configuration have some OS-specific properties. */
-    @JvmOverloads fun macOS(init: (MacOSDistribution.() -> Unit)? = null) {
+    @JvmOverloads fun macOS(init: Closure<MacOSDistribution>? = null) {
         distributions += MacOSDistribution(project.name).also { init?.invoke(it) }
     }
 
     /** Configure Windows 32-bit distribution. */
-    @JvmOverloads fun windows32(init: (Distribution.() -> Unit)? = null) {
+    @JvmOverloads fun windows32(init: Closure<Distribution>? = null) {
         distributions += Distribution(Platform.Windows32, project.name).also { init?.invoke(it) }
     }
 
     /** Configure Windows 64-bit distribution. */
-    @JvmOverloads fun windows64(init: (Distribution.() -> Unit)? = null) {
+    @JvmOverloads fun windows64(init: Closure<Distribution>? = null) {
         distributions += Distribution(Platform.Windows64, project.name).also { init?.invoke(it) }
     }
 
     /** Configure Linux 32-bit distribution. */
-    @JvmOverloads fun linux32(init: (Distribution.() -> Unit)? = null) {
+    @JvmOverloads fun linux32(init: Closure<Distribution>? = null) {
         distributions += Distribution(Platform.Linux32, project.name).also { init?.invoke(it) }
     }
 
     /** Configure Linux 64-bit distribution. */
-    @JvmOverloads fun linux64(init: (Distribution.() -> Unit)? = null) {
+    @JvmOverloads fun linux64(init: Closure<Distribution>? = null) {
         distributions += Distribution(Platform.Linux64, project.name).also { init?.invoke(it) }
     }
 
