@@ -4,6 +4,7 @@ import com.badlogicgames.packr.Packr
 import com.badlogicgames.packr.PackrConfig
 import com.badlogicgames.packr.PackrConfig.Platform
 import com.hendraanggrian.packr.dist.Distribution
+import com.hendraanggrian.packr.dist.DistributionDsl
 import com.hendraanggrian.packr.dist.MacOSDistribution
 import org.gradle.api.DefaultTask
 import org.gradle.api.logging.LogLevel.INFO
@@ -77,6 +78,8 @@ open class PackTask : DefaultTask(), VmArged {
 
     @Input override val vmArgs: MutableCollection<String> = mutableSetOf()
 
+    @Input override fun vmArgs(vararg vmArgs: String) = super.vmArgs(*vmArgs)
+
     /**
      * Print extra messages about JRE minimizeJre when set to `true`.
      * This is an optional property.
@@ -90,27 +93,27 @@ open class PackTask : DefaultTask(), VmArged {
     @Input var openOnDone: Boolean = false
 
     /** Configure macOS distribution. Unlike other distributions, mac configuration have some OS-specific properties. */
-    @JvmOverloads fun macOS(init: (MacOSDistribution.() -> Unit)? = null) {
+    @JvmOverloads fun macOS(init: ((@DistributionDsl MacOSDistribution).() -> Unit)? = null) {
         distributions += MacOSDistribution(project.name).also { init?.invoke(it) }
     }
 
     /** Configure Windows 32-bit distribution. */
-    @JvmOverloads fun windows32(init: (Distribution.() -> Unit)? = null) {
+    @JvmOverloads fun windows32(init: ((@DistributionDsl Distribution).() -> Unit)? = null) {
         distributions += Distribution(Platform.Windows32, project.name).also { init?.invoke(it) }
     }
 
     /** Configure Windows 64-bit distribution. */
-    @JvmOverloads fun windows64(init: (Distribution.() -> Unit)? = null) {
+    @JvmOverloads fun windows64(init: ((@DistributionDsl Distribution).() -> Unit)? = null) {
         distributions += Distribution(Platform.Windows64, project.name).also { init?.invoke(it) }
     }
 
     /** Configure Linux 32-bit distribution. */
-    @JvmOverloads fun linux32(init: (Distribution.() -> Unit)? = null) {
+    @JvmOverloads fun linux32(init: ((@DistributionDsl Distribution).() -> Unit)? = null) {
         distributions += Distribution(Platform.Linux32, project.name).also { init?.invoke(it) }
     }
 
     /** Configure Linux 64-bit distribution. */
-    @JvmOverloads fun linux64(init: (Distribution.() -> Unit)? = null) {
+    @JvmOverloads fun linux64(init: ((@DistributionDsl Distribution).() -> Unit)? = null) {
         distributions += Distribution(Platform.Linux64, project.name).also { init?.invoke(it) }
     }
 

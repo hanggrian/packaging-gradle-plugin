@@ -1,7 +1,5 @@
 package com.hendraanggrian.packr
 
-import org.gradle.api.tasks.Input
-
 internal interface VmArged {
 
     /**
@@ -11,7 +9,7 @@ internal interface VmArged {
     val vmArgs: MutableCollection<String>
 
     /** Groovy-specific method to add vm arguments. */
-    @Input fun vmArgs(vararg args: String) {
-        vmArgs += args
+    fun vmArgs(vararg vmArgs: String) {
+        this.vmArgs += vmArgs
     }
 }
