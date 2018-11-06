@@ -3,7 +3,9 @@ package com.hendraanggrian.packr.dist
 import com.badlogicgames.packr.PackrConfig.Platform
 import com.hendraanggrian.packr.VmArged
 
-open class Distribution(val platform: Platform, var name: String) : VmArged {
+open class Distribution(val platform: Platform) : VmArged {
+
+    var name: String? = null
 
     /** Groovy-specific method to change name. */
     fun name(name: String) {
