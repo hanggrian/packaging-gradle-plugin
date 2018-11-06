@@ -2,7 +2,6 @@ package com.hendraanggrian.packr
 
 import com.badlogicgames.packr.Packr
 import com.badlogicgames.packr.PackrConfig
-import com.hendraanggrian.packr.dist.MacOSDistribution
 import org.gradle.api.DefaultTask
 import org.gradle.api.logging.LogLevel
 import org.gradle.api.logging.LogLevel.INFO
