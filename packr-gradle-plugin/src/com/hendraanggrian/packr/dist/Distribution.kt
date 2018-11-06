@@ -1,9 +1,8 @@
 package com.hendraanggrian.packr.dist
 
-import com.badlogicgames.packr.PackrConfig.Platform
 import com.hendraanggrian.packr.VmArged
 
-open class Distribution(val platform: Platform) : VmArged {
+open class Distribution : VmArged {
 
     var name: String? = null
 

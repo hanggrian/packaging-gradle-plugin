@@ -22,7 +22,7 @@ open class PackTask : DefaultTask() {
     fun pack() {
         check(extension.mainClass.isNotEmpty()) { "Undefined main class" }
 
-        val dist = extension.distributions.singleOrNull { it.platform == platform }
+        val dist = extension.distributions[platform]
         if (dist == null) {
             logger.log(INFO, "No configuration found for $platform")
             return
@@ -30,7 +30,7 @@ open class PackTask : DefaultTask() {
         logger.log(INFO, "Creating configuration for $platform")
 
         val config = PackrConfig()
-        config.platform = dist.platform
+        config.platform = platform
         config.jdk = checkNotNull(dist.jdk) { "JDK path has not yet been specified" }
         config.executable = extension.executable
         config.classpath = extension.classpath

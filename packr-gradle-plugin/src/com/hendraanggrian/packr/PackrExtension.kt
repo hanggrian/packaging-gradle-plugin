@@ -14,7 +14,7 @@ open class PackrExtension : VmArged {
         const val MINIMIZE_ORACLEJRE8 = "oraclejre8"
     }
 
-    internal val distributions = mutableListOf<Distribution>()
+    internal val distributions = mutableMapOf<PackrConfig.Platform, Distribution>()
 
     /**
      * Name of the native executable, without extension such as `.exe`.
@@ -78,27 +78,32 @@ open class PackrExtension : VmArged {
     var openOnDone: Boolean = false
 
     /** Configure macOS distribution. Unlike other distributions, mac configuration have some OS-specific properties. */
-    @JvmOverloads fun macOS(init: ((@DistributionDsl MacOSDistribution).() -> Unit)? = null) {
-        distributions += MacOSDistribution().also { init?.invoke(it) }
+    @JvmOverloads
+    fun macOS(init: ((@DistributionDsl MacOSDistribution).() -> Unit)? = null) {
+        distributions[PackrConfig.Platform.MacOS] = MacOSDistribution().also { init?.invoke(it) }
     }
 
     /** Configure Windows 32-bit distribution. */
-    @JvmOverloads fun windows32(init: ((@DistributionDsl Distribution).() -> Unit)? = null) {
-        distributions += Distribution(PackrConfig.Platform.Windows32).also { init?.invoke(it) }
+    @JvmOverloads
+    fun windows32(init: ((@DistributionDsl Distribution).() -> Unit)? = null) {
+        distributions[PackrConfig.Platform.Windows32] = Distribution().also { init?.invoke(it) }
     }
 
     /** Configure Windows 64-bit distribution. */
-    @JvmOverloads fun windows64(init: ((@DistributionDsl Distribution).() -> Unit)? = null) {
-        distributions += Distribution(PackrConfig.Platform.Windows64).also { init?.invoke(it) }
+    @JvmOverloads
+    fun windows64(init: ((@DistributionDsl Distribution).() -> Unit)? = null) {
+        distributions[PackrConfig.Platform.Windows64] = Distribution().also { init?.invoke(it) }
     }
 
     /** Configure Linux 32-bit distribution. */
-    @JvmOverloads fun linux32(init: ((@DistributionDsl Distribution).() -> Unit)? = null) {
-        distributions += Distribution(PackrConfig.Platform.Linux32).also { init?.invoke(it) }
+    @JvmOverloads
+    fun linux32(init: ((@DistributionDsl Distribution).() -> Unit)? = null) {
+        distributions[PackrConfig.Platform.Linux32] = Distribution().also { init?.invoke(it) }
     }
 
     /** Configure Linux 64-bit distribution. */
-    @JvmOverloads fun linux64(init: ((@DistributionDsl Distribution).() -> Unit)? = null) {
-        distributions += Distribution(PackrConfig.Platform.Linux64).also { init?.invoke(it) }
+    @JvmOverloads
+    fun linux64(init: ((@DistributionDsl Distribution).() -> Unit)? = null) {
+        distributions[PackrConfig.Platform.Linux64] = Distribution().also { init?.invoke(it) }
     }
 }
