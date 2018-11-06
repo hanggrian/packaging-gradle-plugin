@@ -5,22 +5,10 @@
 <link rel="stylesheet" href="../../../style.css">
 </HEAD>
 <BODY>
-<a href="../../index.html">packr-gradle-plugin</a>&nbsp;/&nbsp;<a href="../index.html">com.hendraanggrian.packr.dist</a>&nbsp;/&nbsp;<a href="./index.html">Distribution</a><br/>
+<a href="../../index.html">packr-gradle-plugin</a>&nbsp;/&nbsp;<a href="../index.html">com.hendraanggrian.packr</a>&nbsp;/&nbsp;<a href="./index.html">Distribution</a><br/>
 <br/>
 <h1>Distribution</h1>
-<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Distribution</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">VmArged</span></code>
-<h3>Constructors</h3>
-<table>
-<tbody>
-<tr>
-<td>
-<p><a href="-init-.html">&lt;init&gt;</a></p>
-</td>
-<td>
-<code><span class="identifier">Distribution</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
-</tr>
-</tbody>
-</table>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">Distribution</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">VmArged</span></code>
 <h3>Properties</h3>
 <table>
 <tbody>
@@ -40,7 +28,9 @@ Default is Java Home path, if any.</p>
 <p><a href="name.html">name</a></p>
 </td>
 <td>
-<code><span class="keyword">var </span><span class="identifier">name</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+<code><span class="keyword">var </span><span class="identifier">name</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code>
+<p>File name of this distribution that will be generated.</p>
+</td>
 </tr>
 <tr>
 <td>
@@ -62,7 +52,7 @@ Default is empty.</p>
 <p><a href="jdk.html">jdk</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">jdk</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.dist.Distribution$jdk(kotlin.String)/jdk">jdk</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<code><span class="keyword">fun </span><span class="identifier">jdk</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.Distribution$jdk(kotlin.String)/jdk">jdk</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
 <p>Groovy-specific method to change jdk path.</p>
 </td>
 </tr>
@@ -71,7 +61,7 @@ Default is empty.</p>
 <p><a href="name.html">name</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">name</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.dist.Distribution$name(kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<code><span class="keyword">fun </span><span class="identifier">name</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.Distribution$name(kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
 <p>Groovy-specific method to change name.</p>
 </td>
 </tr>
@@ -86,6 +76,13 @@ Default is empty.</p>
 </td>
 <td>
 <code><span class="keyword">class </span><span class="identifier">MacOSDistribution</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Distribution</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../-simple-distribution/index.html">SimpleDistribution</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SimpleDistribution</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Distribution</span></a></code></td>
 </tr>
 </tbody>
 </table>
