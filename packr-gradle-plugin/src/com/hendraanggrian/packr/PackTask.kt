@@ -22,9 +22,11 @@ open class PackTask : DefaultTask() {
     fun pack() {
         check(extension.mainClass.isNotEmpty()) { "Undefined main class" }
 
-        val dist = extension.distributions
-            .singleOrNull { it.platform == platform }
-            ?: error("No ${platform.name} distribution found")
+        val dist = extension.distributions.singleOrNull { it.platform == platform }
+        if (dist == null) {
+            logger.log(INFO, "No configuration found for $platform")
+            return
+        }
         logger.log(INFO, "Creating configuration for $platform")
 
         val config = PackrConfig()
