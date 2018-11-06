@@ -35,7 +35,7 @@ Configure `packr` task, below are available configurations.
 See documentation for description and default value of each property.
 
 ```gradle
-task.withType(PackTask) {
+packr {
     executable 'example'
     classpath 'my.jar', 'other.jar'
     mainClass 'com.example.App'
@@ -47,12 +47,16 @@ task.withType(PackTask) {
     verbose true
     openOnDone true
 }
+
+tasks.getByName('packAll') {
+    dependsOn 'otherTask'
+}
 ```
 
 You can then pack native distribution by providing platform and jdk property:
 
 ```gradle
-task.withType(PackTask) {
+packr {
     ...
     macOS {
         it.name 'App for Mac'
