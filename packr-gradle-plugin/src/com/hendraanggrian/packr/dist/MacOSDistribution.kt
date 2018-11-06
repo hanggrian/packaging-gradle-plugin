@@ -1,9 +1,8 @@
 package com.hendraanggrian.packr.dist
 
-import com.badlogicgames.packr.PackrConfig.Platform
 import java.io.File
 
-class MacOSDistribution(name: String) : Distribution(Platform.MacOS, name) {
+class MacOSDistribution : Distribution() {
 
     /**
      * Location of an AppBundle icon resource (.icns file) relative to project directory.
