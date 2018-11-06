@@ -8,7 +8,7 @@
 <a href="../../index.html">packr-gradle-plugin</a>&nbsp;/&nbsp;<a href="../index.html">com.hendraanggrian.packr</a>&nbsp;/&nbsp;<a href="./index.html">PackTask</a><br/>
 <br/>
 <h1>PackTask</h1>
-<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">PackTask</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">DefaultTask</span><span class="symbol">, </span><span class="identifier">VmArged</span></code>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">PackTask</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">DefaultTask</span></code>
 <p>Task that will generate native distribution on each platform.</p>
 <h3>Constructors</h3>
 <table>
@@ -29,94 +29,17 @@
 <tbody>
 <tr>
 <td>
-<p><a href="classpath.html">classpath</a></p>
+<p><a href="extension.html">extension</a></p>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">classpath</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html"><span class="identifier">MutableList</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
-<p>File locations of the JAR files to package.
-Default is empty.</p>
-</td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">extension</span><span class="symbol">: </span><a href="../-packr-extension/index.html"><span class="identifier">PackrExtension</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="executable.html">executable</a></p>
+<p><a href="platform.html">platform</a></p>
 </td>
 <td>
-<code><span class="keyword">var </span><span class="identifier">executable</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
-<p>Name of the native executable, without extension such as <code>.exe</code>.
-Default is project's name.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="main-class.html">mainClass</a></p>
-</td>
-<td>
-<code><span class="keyword">var </span><span class="identifier">mainClass</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
-<p>The fully qualified name of the main class, using dots to delimit package names.
-Must be defined or will throw an exception.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="minimize-jre.html">minimizeJre</a></p>
-</td>
-<td>
-<code><span class="keyword">var </span><span class="identifier">minimizeJre</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
-<p>Minimize the JRE by removing directories and files as specified by an additional config file.
-Comes with a few config files out of the box.
-Default is <code>soft</code>.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="open-on-done.html">openOnDone</a></p>
-</td>
-<td>
-<code><span class="keyword">var </span><span class="identifier">openOnDone</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
-<p>Open <a href="output-dir.html">outputDir</a> upon packing completion.
-This is an optional property.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="output-dir.html">outputDir</a></p>
-</td>
-<td>
-<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">outputDir</span><span class="symbol">: </span><a href="http://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a></code>
-<p>The output directory.
-Default is <code>release</code> directory in project's build directory.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="resources.html">resources</a></p>
-</td>
-<td>
-<code><span class="keyword">val </span><span class="identifier">resources</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html"><span class="identifier">MutableList</span></a><span class="symbol">&lt;</span><a href="http://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">&gt;</span></code>
-<p>List of files and directories to be packaged next to the native executable.
-Default is empty.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="verbose.html">verbose</a></p>
-</td>
-<td>
-<code><span class="keyword">var </span><span class="identifier">verbose</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
-<p>Print extra messages about JRE minimizeJre when set to <code>true</code>.
-This is an optional property.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="vm-args.html">vmArgs</a></p>
-</td>
-<td>
-<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">vmArgs</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-collection/index.html"><span class="identifier">MutableCollection</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
-<p>List of arguments for the JVM, without leading dashes, e.g. <code>Xmx1G</code>.
-Default is empty.</p>
-</td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">platform</span><span class="symbol">: </span><span class="identifier">Platform</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -125,99 +48,10 @@ Default is empty.</p>
 <tbody>
 <tr>
 <td>
-<p><a href="classpath.html">classpath</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">classpath</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="com.hendraanggrian.packr.PackTask$classpath(kotlin.Array((kotlin.String)))/classpath">classpath</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Groovy-specific method to add classpath.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="linux32.html">linux32</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">linux32</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackTask$linux32(kotlin.Function1((com.hendraanggrian.packr.dist.Distribution, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../../com.hendraanggrian.packr.dist/-distribution/index.html"><span class="identifier">Distribution</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Configure Linux 32-bit distribution.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="linux64.html">linux64</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">linux64</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackTask$linux64(kotlin.Function1((com.hendraanggrian.packr.dist.Distribution, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../../com.hendraanggrian.packr.dist/-distribution/index.html"><span class="identifier">Distribution</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Configure Linux 64-bit distribution.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="mac-o-s.html">macOS</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">macOS</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackTask$macOS(kotlin.Function1((com.hendraanggrian.packr.dist.MacOSDistribution, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../../com.hendraanggrian.packr.dist/-mac-o-s-distribution/index.html"><span class="identifier">MacOSDistribution</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Configure macOS distribution. Unlike other distributions, mac configuration have some OS-specific properties.</p>
-</td>
-</tr>
-<tr>
-<td>
 <p><a href="pack.html">pack</a></p>
 </td>
 <td>
 <code><span class="keyword">fun </span><span class="identifier">pack</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
-</tr>
-<tr>
-<td>
-<p><a href="resources.html">resources</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">resources</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="com.hendraanggrian.packr.PackTask$resources(kotlin.Array((java.io.File)))/resources">resources</span><span class="symbol">:</span>&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Groovy-specific method to add resources.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="windows32.html">windows32</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">windows32</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackTask$windows32(kotlin.Function1((com.hendraanggrian.packr.dist.Distribution, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../../com.hendraanggrian.packr.dist/-distribution/index.html"><span class="identifier">Distribution</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Configure Windows 32-bit distribution.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="windows64.html">windows64</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">windows64</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackTask$windows64(kotlin.Function1((com.hendraanggrian.packr.dist.Distribution, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../../com.hendraanggrian.packr.dist/-distribution/index.html"><span class="identifier">Distribution</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Configure Windows 64-bit distribution.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3>Companion Object Properties</h3>
-<table>
-<tbody>
-<tr>
-<td>
-<p><a href="-m-i-n-i-m-i-z-e_-h-a-r-d.html">MINIMIZE_HARD</a></p>
-</td>
-<td>
-<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">MINIMIZE_HARD</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
-</tr>
-<tr>
-<td>
-<p><a href="-m-i-n-i-m-i-z-e_-o-r-a-c-l-e-j-r-e8.html">MINIMIZE_ORACLEJRE8</a></p>
-</td>
-<td>
-<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">MINIMIZE_ORACLEJRE8</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
-</tr>
-<tr>
-<td>
-<p><a href="-m-i-n-i-m-i-z-e_-s-o-f-t.html">MINIMIZE_SOFT</a></p>
-</td>
-<td>
-<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">MINIMIZE_SOFT</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 </tbody>
 </table>
