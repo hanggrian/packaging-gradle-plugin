@@ -8,7 +8,7 @@
 <a href="../../index.html">packr-gradle-plugin</a>&nbsp;/&nbsp;<a href="../index.html">com.hendraanggrian.packr</a>&nbsp;/&nbsp;<a href="./index.html">PackrExtension</a><br/>
 <br/>
 <h1>PackrExtension</h1>
-<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">PackrExtension</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">VmArged</span></code>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">PackrExtension</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-vm-arged/index.html"><span class="identifier">VmArged</span></a></code>
 <h3>Constructors</h3>
 <table>
 <tbody>
@@ -39,7 +39,7 @@ Default is empty.</p>
 <p><a href="executable.html">executable</a></p>
 </td>
 <td>
-<code><span class="keyword">var </span><span class="identifier">executable</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<code><span class="keyword">var </span><span class="identifier">executable</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code>
 <p>Name of the native executable, without extension such as <code>.exe</code>.
 Default is project's name.</p>
 </td>
@@ -49,7 +49,7 @@ Default is project's name.</p>
 <p><a href="main-class.html">mainClass</a></p>
 </td>
 <td>
-<code><span class="keyword">var </span><span class="identifier">mainClass</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<code><span class="keyword">var </span><span class="identifier">mainClass</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code>
 <p>The fully qualified name of the main class, using dots to delimit package names.
 Must be defined or will throw an exception.</p>
 </td>
@@ -131,6 +131,15 @@ Default is empty.</p>
 </tr>
 <tr>
 <td>
+<p><a href="executable.html">executable</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">executable</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$executable(kotlin.String)/executable">executable</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Groovy-specific method to set executable.</p>
+</td>
+</tr>
+<tr>
+<td>
 <p><a href="linux32.html">linux32</a></p>
 </td>
 <td>
@@ -158,11 +167,56 @@ Default is empty.</p>
 </tr>
 <tr>
 <td>
+<p><a href="main-class.html">mainClass</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">mainClass</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$mainClass(kotlin.String)/mainClass">mainClass</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Groovy-specific method to set main class.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="minimize-jre.html">minimizeJre</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">minimizeJre</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$minimizeJre(kotlin.String)/minimizeJre">minimizeJre</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Groovy-specific method to minimize jre.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="open-on-done.html">openOnDone</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">openOnDone</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$openOnDone(kotlin.Boolean)/openOnDone">openOnDone</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Groovy-specific method to change open on done.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="output-dir.html">outputDir</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">outputDir</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$outputDir(java.io.File)/outputDir">outputDir</span><span class="symbol">:</span>&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Groovy-specific method to change output directory.</p>
+</td>
+</tr>
+<tr>
+<td>
 <p><a href="resources.html">resources</a></p>
 </td>
 <td>
 <code><span class="keyword">fun </span><span class="identifier">resources</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="com.hendraanggrian.packr.PackrExtension$resources(kotlin.Array((java.io.File)))/resources">resources</span><span class="symbol">:</span>&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
 <p>Groovy-specific method to add resources.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="verbose.html">verbose</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">verbose</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$verbose(kotlin.Boolean)/verbose">verbose</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Groovy-specific method to change verbose.</p>
 </td>
 </tr>
 <tr>
@@ -181,6 +235,20 @@ Default is empty.</p>
 <td>
 <code><span class="keyword">fun </span><span class="identifier">windows64</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$windows64(kotlin.Function1((com.hendraanggrian.packr.Distribution, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-distribution/index.html"><span class="identifier">Distribution</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
 <p>Configure Windows 64-bit distribution.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inherited Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-vm-arged/vm-args.html">vmArgs</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">vmArgs</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="com.hendraanggrian.packr.VmArged$vmArgs(kotlin.Array((kotlin.String)))/vmArgs">vmArgs</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Groovy-specific method to add vm arguments.</p>
 </td>
 </tr>
 </tbody>
