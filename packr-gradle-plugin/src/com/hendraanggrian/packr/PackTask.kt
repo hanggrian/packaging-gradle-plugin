@@ -19,7 +19,10 @@ open class PackTask : DefaultTask() {
     @TaskAction
     @Throws(IOException::class)
     fun pack() {
-        check(extension.mainClass.isNotEmpty()) { "Undefined main class" }
+        val names = extension.distributions.values.map { it.name }
+        if (names.size != names.distinct().size) {
+            error("Duplicate name found, rename distributions individually")
+        }
 
         val dist = extension.distributions[platform]
         if (dist == null) {
@@ -31,29 +34,27 @@ open class PackTask : DefaultTask() {
         val config = PackrConfig()
         config.platform = platform
         config.jdk = checkNotNull(dist.jdk) { "JDK path has not yet been specified" }
-        config.executable = extension.executable
+        config.executable = checkNotNull(extension.executable) { "Undefined executable" }
         config.classpath = extension.classpath
-        config.mainClass = extension.mainClass
+        config.mainClass = checkNotNull(extension.mainClass) { "Undefined main class" }
         config.outDir = extension.outputDir.resolve(dist.name ?: project.name)
         config.vmArgs = extension.vmArgs + dist.vmArgs
         config.resources = extension.resources
         config.minimizeJre = extension.minimizeJre
         if (dist is MacOSDistribution) {
-            if (dist.icon != null) config.iconResource = dist.icon
-            if (dist.bundleId != null) config.bundleIdentifier = dist.bundleId
+            dist.icon?.let { config.iconResource = it }
+            dist.bundleId?.let { config.bundleIdentifier = it }
         }
         config.verbose = extension.verbose
 
-        when {
-            config.outDir.exists() -> {
-                logger.log(LogLevel.INFO, "Deleting old output")
-                config.outDir.deleteRecursively()
-            }
-            else -> {
-                logger.log(LogLevel.INFO, "Preparing output")
-                extension.outputDir.mkdirs()
-            }
+        if (config.outDir.exists()) {
+            logger.log(LogLevel.INFO, "Deleting old output")
+            config.outDir.deleteRecursively()
         }
+
+        logger.log(LogLevel.INFO, "Preparing output")
+        extension.outputDir.mkdirs()
+
         Packr().pack(config)
         logger.log(LogLevel.INFO, "Pack completed")
 

@@ -11,9 +11,10 @@ import org.gradle.kotlin.dsl.registering
 import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.provideDelegate // ktlint-disable
 
+@Suppress("unused")
 class PackrPlugin : Plugin<Project> {
 
-    private companion object {
+    companion object {
         const val GROUP_NAME = "packr"
     }
 
@@ -48,17 +49,11 @@ class PackrPlugin : Plugin<Project> {
             }
             register("packAll") {
                 group = GROUP_NAME
-                dependsOn(
-                    packWindows32.get(),
-                    packWindows64.get(),
-                    packLinux32.get(),
-                    packLinux64.get(),
-                    packMacOS.get()
-                )
+                dependsOn(packWindows32.get(), packWindows64.get(), packLinux32.get(), packLinux64.get(), packMacOS.get())
             }
         }
         project.afterEvaluate {
-            if (ext.executable.isEmpty()) {
+            if (ext.executable == null) {
                 ext.executable = project.name
             }
         }

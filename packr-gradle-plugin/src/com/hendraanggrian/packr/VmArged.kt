@@ -1,6 +1,6 @@
 package com.hendraanggrian.packr
 
-internal interface VmArged {
+interface VmArged {
 
     /**
      * List of arguments for the JVM, without leading dashes, e.g. `Xmx1G`.

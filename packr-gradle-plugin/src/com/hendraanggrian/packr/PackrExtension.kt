@@ -17,7 +17,12 @@ open class PackrExtension : VmArged {
      * Name of the native executable, without extension such as `.exe`.
      * Default is project's name.
      */
-    var executable: String = ""
+    var executable: String? = null
+
+    /** Groovy-specific method to set executable. */
+    fun executable(executable: String) {
+        this.executable = executable
+    }
 
     /**
      * File locations of the JAR files to package.
@@ -34,7 +39,12 @@ open class PackrExtension : VmArged {
      * The fully qualified name of the main class, using dots to delimit package names.
      * Must be defined or will throw an exception.
      */
-    var mainClass: String = ""
+    var mainClass: String? = null
+
+    /** Groovy-specific method to set main class. */
+    fun mainClass(mainClass: String) {
+        this.mainClass = mainClass
+    }
 
     /**
      * List of files and directories to be packaged next to the native executable.
@@ -54,11 +64,21 @@ open class PackrExtension : VmArged {
      */
     var minimizeJre: String = MINIMIZE_SOFT
 
+    /** Groovy-specific method to minimize jre. */
+    fun minimizeJre(minimizeJre: String) {
+        this.minimizeJre = minimizeJre
+    }
+
     /**
      * The output directory.
      * Default is `release` directory in project's build directory.
      */
     lateinit var outputDir: File
+
+    /** Groovy-specific method to change output directory. */
+    fun outputDir(outputDir: File) {
+        this.outputDir = outputDir
+    }
 
     override val vmArgs: MutableCollection<String> = mutableSetOf()
 
@@ -68,11 +88,21 @@ open class PackrExtension : VmArged {
      */
     var verbose: Boolean = false
 
+    /** Groovy-specific method to change verbose. */
+    fun verbose(verbose: Boolean) {
+        this.verbose = verbose
+    }
+
     /**
      * Open [outputDir] upon packing completion.
      * This is an optional property.
      */
     var openOnDone: Boolean = false
+
+    /** Groovy-specific method to change open on done. */
+    fun openOnDone(openOnDone: Boolean) {
+        this.openOnDone = openOnDone
+    }
 
     /** Configure macOS distribution. Unlike other distributions, mac configuration have some OS-specific properties. */
     @JvmOverloads

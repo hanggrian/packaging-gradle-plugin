@@ -8,7 +8,6 @@ buildscript {
         classpath(gitPublish())
         classpath(bintray())
         classpath(bintrayRelease())
-        classpath(junitPlatform("gradle-plugin"))
     }
 }
 

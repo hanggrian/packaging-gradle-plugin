@@ -4,7 +4,7 @@ buildscript {
         maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
     }
     dependencies {
-        classpath files('../packr-gradle-plugin-0.5.jar')
+        classpath files('../packr-gradle-plugin-0.6.jar')
         classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
         classpath 'com.badlogicgames.packr:packr:2.1-SNAPSHOT'
     }
