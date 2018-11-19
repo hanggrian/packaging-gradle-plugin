@@ -23,16 +23,15 @@ buildscript {
 }
 ```
 
-then apply it in your module:
+Usage
+-----
+Apply plugin in your module.
 
 ```gradle
 apply plugin: 'com.hendraanggrian.packr'
 ```
 
-Usage
------
 Configure `packr` task, below are available configurations.
-See documentation for description and default value of each property.
 
 ```gradle
 packr {
@@ -46,30 +45,54 @@ packr {
     outputDir 'packr-output'   
     verbose true
     openOnDone true
-}
-
-tasks.getByName('packAll') {
-    dependsOn 'otherTask'
+    
+    macOS {
+        it.name 'Example.app'
+        it.jdk 'path/to/mac_jdk'
+        it.icon 'path/to/mac_icon.icns'
+        it.bundleId 'com.example.app'
+        it.vmArgs '-Xmx512M'
+    }
+    windows32 {
+        it.name 'Example Windows 32-bit'
+        it.jdk 'path/to/windows_32_jdk'
+        it.vmArgs '-Xmx256M'
+    }
+    windows64 {
+        it.name 'Example Windows 64-bit'
+        it.jdk 'path/to/windows_64_jdk'
+        it.vmArgs '-Xmx512M'
+    }
+    linux32 {
+        it.name 'Example Windows 32-bit'
+        it.jdk 'path/to/windows_32_jdk'
+        it.vmArgs '-Xmx256M'
+    }
+    linux64 {
+        it.name 'Example Linux 64-bit'
+        it.jdk 'path/to/linux_64_jdk'
+        it.vmArgs '-Xmx512M'
+    }
 }
 ```
 
-You can then pack native distribution by providing platform and jdk property:
+Packr will then register task to each distribution (e.g.: `packMacOS`, `packWindows32`, etc.).
+Each of those task will only take effect if related distribution is configured.
+
+#### Default configuration
 
 ```gradle
 packr {
-    ...
-    macOS {
-        it.name 'App for Mac'
-        it.icon 'path/to/icon' // only supported in mac
-    }
-    windows64 {
-        it.jdk 'path/to/win/jdk' // default is java home
-        it.name 'App for Windows'
-    }
+    executable = project.name
+    classpath = []
+    resources = []
+    minimizeJre = PackrExtension.MINIMIZE_SOFT
+    outputDir = buildDir.resolve('release')
+    vmArgs = []
+    verbose = false
+    openOnDone = false
 }
 ```
-
-Available platforms are `macOS`, `windows32`, `windows64`, `linux32`, and `linux64`.
 
 License
 -------
