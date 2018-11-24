@@ -1,6 +1,8 @@
 include(RELEASE_ARTIFACT)
+include("website")
+includeDir("demo")
 
-File("demo")
-    .walk()
+fun includeDir(name: String) = file(name)
+    .listFiles()
     .filter { it.isDirectory }
-    .forEach { include("demo:${it.name}") }
+    .forEach { include("$name:${it.name}") }

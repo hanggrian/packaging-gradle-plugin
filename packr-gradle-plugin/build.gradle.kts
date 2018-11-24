@@ -2,7 +2,6 @@ plugins {
     `java-gradle-plugin`
     `kotlin-dsl`
     dokka
-    `git-publish`
     bintray
     `bintray-release`
 }
@@ -60,18 +59,12 @@ tasks {
         args("-F", "src/**/*.kt")
     }
 
-    val dokka by existing(org.jetbrains.dokka.gradle.DokkaTask::class) {
-        get("gitPublishCopy").dependsOn(this)
+    named<org.jetbrains.dokka.gradle.DokkaTask>("dokka") {
         outputDirectory = "$buildDir/docs"
         doFirst {
             file(outputDirectory).deleteRecursively()
             buildDir.resolve("gitPublish").deleteRecursively()
         }
-    }
-    gitPublish {
-        repoUri = RELEASE_WEBSITE
-        branch = "gh-pages"
-        contents.from(dokka.get().outputDirectory)
     }
 }
 

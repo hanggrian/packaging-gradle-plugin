@@ -10,22 +10,10 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/demo" />
-            <option value="$PROJECT_DIR$/demo/art" />
-            <option value="$PROJECT_DIR$/demo/build" />
-            <option value="$PROJECT_DIR$/demo/classes" />
-            <option value="$PROJECT_DIR$/demo/com" />
-            <option value="$PROJECT_DIR$/demo/compileJava" />
-            <option value="$PROJECT_DIR$/demo/demo" />
-            <option value="$PROJECT_DIR$/demo/example" />
-            <option value="$PROJECT_DIR$/demo/jar" />
-            <option value="$PROJECT_DIR$/demo/java" />
-            <option value="$PROJECT_DIR$/demo/libs" />
             <option value="$PROJECT_DIR$/demo/macos" />
-            <option value="$PROJECT_DIR$/demo/main" />
             <option value="$PROJECT_DIR$/demo/simple" />
-            <option value="$PROJECT_DIR$/demo/src" />
-            <option value="$PROJECT_DIR$/demo/tmp" />
             <option value="$PROJECT_DIR$/packr-gradle-plugin" />
+            <option value="$PROJECT_DIR$/website" />
           </set>
         </option>
       </GradleProjectSettings>
