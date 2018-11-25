@@ -6,6 +6,14 @@
       <module name="kotlin-dsl_test" target="1.8" />
       <module name="mac-icon_main" target="1.8" />
       <module name="mac-icon_test" target="1.8" />
+      <module name="macos_main" target="1.8" />
+      <module name="macos_test" target="1.8" />
+      <module name="packr-gradle-plugin-packr-gradle-plugin_main" target="1.8" />
+      <module name="packr-gradle-plugin-packr-gradle-plugin_test" target="1.8" />
+      <module name="packr-gradle-plugin_buildSrc_main" target="1.8" />
+      <module name="packr-gradle-plugin_buildSrc_test" target="1.8" />
+      <module name="simple_main" target="1.8" />
+      <module name="simple_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
