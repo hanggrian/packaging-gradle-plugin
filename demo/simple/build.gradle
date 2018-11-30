@@ -19,7 +19,8 @@ version '1.0'
 
 packr {
     mainClass 'com.example.App'
-    classpath 'build/release/simple-1.0.jar'
+    classpath 'build/releases/simple-1.0.jar'
+    resources 'src/main/resources'
     macOS {
         it.name 'Simple App.app'
     }
@@ -29,7 +30,7 @@ packr {
 }
 
 tasks.withType(com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {
-    destinationDir new File(buildDir, 'release')
+    destinationDir new File(buildDir, 'releases')
     baseName 'simple'
     classifier null
     version '1.0'

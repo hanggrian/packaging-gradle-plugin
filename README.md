@@ -36,10 +36,10 @@ Configure `packr` task, below are available configurations.
 ```gradle
 packr {
     executable 'example'
-    classpath 'my.jar', 'other.jar'
+    classpath 'my.jar', 'path/to/other.jar'
     mainClass 'com.example.App'
     vmArgs 'Xmx1G'
-    resources 'resources', 'image.jpg'
+    resources 'image.jpg', 'path/to/other.jpg'
     minimizeJre 'hard'
     outputName 'Example App'
     outputDirectory 'my/folder'   
