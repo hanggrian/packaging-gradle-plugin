@@ -1,7 +1,5 @@
 package com.hendraanggrian.packr
 
-import java.io.File
-
 /**
  * Delimits a distribution DSL in Gradle Kotlin DSL scripts.
  *
@@ -44,10 +42,10 @@ class MacOSDistribution : Distribution() {
      * Location of an AppBundle icon resource (.icns file) relative to project directory.
      * This is an optional property.
      */
-    var icon: File? = null
+    var icon: String? = null
 
     /** Groovy-specific method to change icon path. */
-    fun icon(icon: File) {
+    fun icon(icon: String) {
         this.icon = icon
     }
 

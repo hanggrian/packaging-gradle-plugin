@@ -19,10 +19,10 @@ version '1.0'
 
 packr {
     mainClass 'com.example.App'
-    classpath 'build/awesome/custom-directory-1.0.jar'
-    outputDirectory 'build/awesome'
+    classpath "$buildDir/awesome"
+    outputDirectory "$buildDir/awesome"
     macOS {
-        it.name 'Simple App.app'
+        it.name 'Custom Directory.app'
     }
 }
 

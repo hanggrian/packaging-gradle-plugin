@@ -36,17 +36,24 @@ open class PackTask : DefaultTask() {
         config.platform = platform
         config.jdk = checkNotNull(dist.jdk) { "JDK path has not yet been specified" }
         config.executable = checkNotNull(extension.executable) { "Undefined executable" }
-        config.classpath = extension.classpath
+        config.classpath = extension.classpath.flatMap { classpath ->
+            val file = File(classpath)
+            when {
+                file.isDirectory -> file.listFiles().filter { it.isJar() }.map { it.path }
+                file.isJar() -> listOf(file.path)
+                else -> emptyList()
+            }
+        }
         config.mainClass = checkNotNull(extension.mainClass) { "Undefined main class" }
 
-        val outDir = locate(extension.outputDirectory)
+        val outDir = File(extension.outputDirectory)
         config.outDir = outDir.resolve(dist.name ?: project.name)
 
         config.vmArgs = extension.vmArgs + dist.vmArgs
-        config.resources = extension.resources.map { locate(it) }
+        config.resources = extension.resources.map { File(it) }
         config.minimizeJre = extension.minimizeJre
         if (dist is MacOSDistribution) {
-            dist.icon?.let { config.iconResource = it }
+            dist.icon?.let { config.iconResource = File(it) }
             dist.bundleId?.let { config.bundleIdentifier = it }
         }
         config.verbose = extension.verbose
@@ -71,5 +78,5 @@ open class PackTask : DefaultTask() {
         }
     }
 
-    private fun locate(path: String): File = File(project.projectDir, path)
+    private fun File.isJar(): Boolean = extension == "jar"
 }

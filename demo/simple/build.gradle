@@ -19,8 +19,8 @@ version '1.0'
 
 packr {
     mainClass 'com.example.App'
-    classpath 'build/releases/simple-1.0.jar'
-    resources 'src/main/resources'
+    classpath "$buildDir/releases"
+    resources "$projectDir/src/main/resources"
     macOS {
         it.name 'Simple App.app'
     }
