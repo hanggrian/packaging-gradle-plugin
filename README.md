@@ -41,7 +41,6 @@ packr {
     vmArgs 'Xmx1G'
     resources 'image.jpg', 'path/to/other.jpg'
     minimizeJre 'hard'
-    outputName 'Example App'
     outputDirectory 'my/folder'   
     verbose true
     openOnDone true
@@ -87,7 +86,7 @@ packr {
     classpath = []
     resources = []
     minimizeJre = PackrExtension.MINIMIZE_SOFT
-    outputDir = 'build/releases'
+    outputDirectory = 'build/releases'
     vmArgs = []
     verbose = false
     openOnDone = false
