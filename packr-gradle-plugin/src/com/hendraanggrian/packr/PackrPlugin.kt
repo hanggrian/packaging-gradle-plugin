@@ -20,7 +20,7 @@ class PackrPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
         val ext = project.extensions.create<PackrExtension>(GROUP_NAME)
-        ext.outputDir = project.buildDir.resolve("release")
+        ext.outputDirectory = "${project.buildDir.name}/releases"
         project.tasks {
             val packWindows32 by registering(PackTask::class) {
                 group = GROUP_NAME

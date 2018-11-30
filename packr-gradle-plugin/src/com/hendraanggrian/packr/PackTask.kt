@@ -8,6 +8,7 @@ import org.gradle.api.logging.LogLevel.INFO
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
 import java.awt.Desktop
+import java.io.File
 import java.io.IOException
 
 /** Task that will generate native distribution on each platform. */
@@ -37,9 +38,12 @@ open class PackTask : DefaultTask() {
         config.executable = checkNotNull(extension.executable) { "Undefined executable" }
         config.classpath = extension.classpath
         config.mainClass = checkNotNull(extension.mainClass) { "Undefined main class" }
-        config.outDir = extension.outputDir.resolve(dist.name ?: project.name)
+
+        val outDir = locate(extension.outputDirectory)
+        config.outDir = outDir.resolve(dist.name ?: project.name)
+
         config.vmArgs = extension.vmArgs + dist.vmArgs
-        config.resources = extension.resources
+        config.resources = extension.resources.map { locate(it) }
         config.minimizeJre = extension.minimizeJre
         if (dist is MacOSDistribution) {
             dist.icon?.let { config.iconResource = it }
@@ -53,7 +57,7 @@ open class PackTask : DefaultTask() {
         }
 
         logger.log(LogLevel.INFO, "Preparing output")
-        extension.outputDir.mkdirs()
+        outDir.mkdirs()
 
         Packr().pack(config)
         logger.log(LogLevel.INFO, "Pack completed")
@@ -62,8 +66,10 @@ open class PackTask : DefaultTask() {
             require(Desktop.isDesktopSupported()) { "Desktop is not supported, disable `openOnDone`" }
             Desktop.getDesktop().run {
                 require(isSupported(Desktop.Action.OPEN)) { "Opening folder is not supported, disable `openOnDone`" }
-                open(extension.outputDir)
+                open(outDir)
             }
         }
     }
+
+    private fun locate(path: String): File = File(project.projectDir, path)
 }

@@ -26,7 +26,7 @@ class PackrExtensionTest {
         assert ext.minimizeJre == PackrExtension.MINIMIZE_HARD
 
         ext.outputDir new File('a')
-        assert ext.outputDir.name == 'a'
+        assert ext.getOutputDirectory.name == 'a'
 
         ext.verbose true
         assert ext.verbose

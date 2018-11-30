@@ -1,7 +1,6 @@
 package com.hendraanggrian.packr
 
 import com.badlogicgames.packr.PackrConfig
-import java.io.File
 
 open class PackrExtension : VmArged {
 
@@ -50,10 +49,10 @@ open class PackrExtension : VmArged {
      * List of files and directories to be packaged next to the native executable.
      * Default is empty.
      */
-    val resources: MutableList<File> = mutableListOf()
+    val resources: MutableList<String> = mutableListOf()
 
     /** Groovy-specific method to add resources. */
-    fun resources(vararg resources: File) {
+    fun resources(vararg resources: String) {
         this.resources += resources
     }
 
@@ -73,11 +72,11 @@ open class PackrExtension : VmArged {
      * The output directory.
      * Default is `release` directory in project's build directory.
      */
-    lateinit var outputDir: File
+    lateinit var outputDirectory: String
 
     /** Groovy-specific method to change output directory. */
-    fun outputDir(outputDir: File) {
-        this.outputDir = outputDir
+    fun outputDirectory(outputDirectory: String) {
+        this.outputDirectory = outputDirectory
     }
 
     override val vmArgs: MutableCollection<String> = mutableSetOf()
@@ -94,7 +93,7 @@ open class PackrExtension : VmArged {
     }
 
     /**
-     * Open [outputDir] upon packing completion.
+     * Open [outputDirectory] upon packing completion.
      * This is an optional property.
      */
     var openOnDone: Boolean = false

@@ -19,18 +19,16 @@ version '1.0'
 
 packr {
     mainClass 'com.example.App'
-    classpath 'build/release/simple-1.0.jar'
+    classpath 'build/awesome/custom-directory-1.0.jar'
+    outputDirectory 'build/awesome'
     macOS {
         it.name 'Simple App.app'
-    }
-    windows64 {
-        it.jdk '/Users/hendraanggrian/Desktop/jdk1.8.0_181'
     }
 }
 
 tasks.withType(com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {
-    destinationDir new File(buildDir, 'release')
-    baseName 'simple'
+    destinationDir new File(buildDir, 'awesome')
+    baseName 'custom-directory'
     classifier null
     version '1.0'
 }

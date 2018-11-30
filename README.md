@@ -42,7 +42,7 @@ packr {
     resources 'resources', 'image.jpg'
     minimizeJre 'hard'
     outputName 'Example App'
-    outputDir 'packr-output'   
+    outputDirectory 'my/folder'   
     verbose true
     openOnDone true
     
@@ -87,7 +87,7 @@ packr {
     classpath = []
     resources = []
     minimizeJre = PackrExtension.MINIMIZE_SOFT
-    outputDir = buildDir.resolve('release')
+    outputDir = 'build/releases'
     vmArgs = []
     verbose = false
     openOnDone = false
