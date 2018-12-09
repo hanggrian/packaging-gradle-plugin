@@ -47,9 +47,16 @@ class PackrPlugin : Plugin<Project> {
                 extension = ext
                 platform = PackrConfig.Platform.MacOS
             }
+            @Suppress("UnstableApiUsage")
             register("packAll") {
                 group = GROUP_NAME
-                dependsOn(packWindows32.get(), packWindows64.get(), packLinux32.get(), packLinux64.get(), packMacOS.get())
+                dependsOn(
+                    packWindows32.get(),
+                    packWindows64.get(),
+                    packLinux32.get(),
+                    packLinux64.get(),
+                    packMacOS.get()
+                )
             }
         }
         project.afterEvaluate {

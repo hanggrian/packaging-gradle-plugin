@@ -1,4 +1,6 @@
-package com.hendraanggrian.packr
+package com.hendraanggrian.packr.internal
+
+import com.hendraanggrian.packr.VmArged
 
 /**
  * Delimits a distribution DSL in Gradle Kotlin DSL scripts.

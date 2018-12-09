@@ -1,5 +1,7 @@
 package com.hendraanggrian.packr
 
+import com.hendraanggrian.packr.internal.MacOSDistribution
+import com.hendraanggrian.packr.internal.SimpleDistribution
 import org.junit.Test
 
 class DistributionTest {

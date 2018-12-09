@@ -2,6 +2,7 @@ package com.hendraanggrian.packr
 
 import com.badlogicgames.packr.Packr
 import com.badlogicgames.packr.PackrConfig
+import com.hendraanggrian.packr.internal.MacOSDistribution
 import org.gradle.api.DefaultTask
 import org.gradle.api.logging.LogLevel
 import org.gradle.api.logging.LogLevel.INFO
@@ -19,6 +20,7 @@ open class PackTask : DefaultTask() {
 
     @TaskAction
     @Throws(IOException::class)
+    @Suppress("unused")
     fun pack() {
         val names = extension.distributions.values.map { it.name }
         if (names.size != names.distinct().size) {
@@ -46,8 +48,8 @@ open class PackTask : DefaultTask() {
         }
         config.mainClass = checkNotNull(extension.mainClass) { "Undefined main class" }
 
-        val outDir = File(extension.outputDirectory)
-        config.outDir = outDir.resolve(dist.name ?: project.name)
+        val outputDirectory = File(extension.outputDirectory)
+        config.outDir = outputDirectory.resolve(dist.name ?: project.name)
 
         config.vmArgs = extension.vmArgs + dist.vmArgs
         config.resources = extension.resources.map { File(it) }
@@ -64,16 +66,22 @@ open class PackTask : DefaultTask() {
         }
 
         logger.log(LogLevel.INFO, "Preparing output")
-        outDir.mkdirs()
+        outputDirectory.mkdirs()
 
         Packr().pack(config)
         logger.log(LogLevel.INFO, "Pack completed")
 
         if (extension.openOnDone) {
-            require(Desktop.isDesktopSupported()) { "Desktop is not supported, disable `openOnDone`" }
-            Desktop.getDesktop().run {
-                require(isSupported(Desktop.Action.OPEN)) { "Opening folder is not supported, disable `openOnDone`" }
-                open(outDir)
+            when {
+                !Desktop.isDesktopSupported() ->
+                    logger.log(LogLevel.INFO, "Desktop is not supported, ignoring `openOnDone`")
+                else -> Desktop.getDesktop().run {
+                    when {
+                        !isSupported(Desktop.Action.OPEN) ->
+                            logger.log(LogLevel.INFO, "Opening folder is not supported, ignoring `openOnDone`")
+                        else -> open(outputDirectory)
+                    }
+                }
             }
         }
     }

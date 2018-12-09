@@ -1,6 +1,10 @@
 package com.hendraanggrian.packr
 
 import com.badlogicgames.packr.PackrConfig
+import com.hendraanggrian.packr.internal.Distribution
+import com.hendraanggrian.packr.internal.DistributionDsl
+import com.hendraanggrian.packr.internal.MacOSDistribution
+import com.hendraanggrian.packr.internal.SimpleDistribution
 
 open class PackrExtension : VmArged {
 
