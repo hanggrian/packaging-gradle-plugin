@@ -2,15 +2,11 @@ package com.hendraanggrian.packr.internal
 
 import com.hendraanggrian.packr.VmArged
 
-/**
- * Delimits a distribution DSL in Gradle Kotlin DSL scripts.
- *
- * @see [DslMarker]
- */
+/** Delimits a distribution DSL in Gradle Kotlin DSL scripts. */
 @DslMarker
-@Target(AnnotationTarget.TYPE)
-annotation class DistributionDsl
+annotation class DistributionMarker
 
+@DistributionMarker
 sealed class Distribution : VmArged {
 
     /** File name of this distribution that will be generated. */

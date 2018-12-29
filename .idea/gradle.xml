@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/website" />
           </set>
         </option>
+        <option name="useQualifiedModuleNames" value="true" />
       </GradleProjectSettings>
     </option>
   </component>

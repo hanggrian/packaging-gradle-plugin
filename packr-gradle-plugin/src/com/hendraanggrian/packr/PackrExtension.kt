@@ -2,7 +2,6 @@ package com.hendraanggrian.packr
 
 import com.badlogicgames.packr.PackrConfig
 import com.hendraanggrian.packr.internal.Distribution
-import com.hendraanggrian.packr.internal.DistributionDsl
 import com.hendraanggrian.packr.internal.MacOSDistribution
 import com.hendraanggrian.packr.internal.SimpleDistribution
 
@@ -109,31 +108,31 @@ open class PackrExtension : VmArged {
 
     /** Configure macOS distribution. Unlike other distributions, mac configuration have some OS-specific properties. */
     @JvmOverloads
-    fun macOS(init: ((@DistributionDsl MacOSDistribution).() -> Unit)? = null) {
+    fun macOS(init: (MacOSDistribution.() -> Unit)? = null) {
         distributions[PackrConfig.Platform.MacOS] = MacOSDistribution().also { init?.invoke(it) }
     }
 
     /** Configure Windows 32-bit distribution. */
     @JvmOverloads
-    fun windows32(init: ((@DistributionDsl Distribution).() -> Unit)? = null) {
+    fun windows32(init: (Distribution.() -> Unit)? = null) {
         distributions[PackrConfig.Platform.Windows32] = SimpleDistribution().also { init?.invoke(it) }
     }
 
     /** Configure Windows 64-bit distribution. */
     @JvmOverloads
-    fun windows64(init: ((@DistributionDsl Distribution).() -> Unit)? = null) {
+    fun windows64(init: (Distribution.() -> Unit)? = null) {
         distributions[PackrConfig.Platform.Windows64] = SimpleDistribution().also { init?.invoke(it) }
     }
 
     /** Configure Linux 32-bit distribution. */
     @JvmOverloads
-    fun linux32(init: ((@DistributionDsl Distribution).() -> Unit)? = null) {
+    fun linux32(init: (Distribution.() -> Unit)? = null) {
         distributions[PackrConfig.Platform.Linux32] = SimpleDistribution().also { init?.invoke(it) }
     }
 
     /** Configure Linux 64-bit distribution. */
     @JvmOverloads
-    fun linux64(init: ((@DistributionDsl Distribution).() -> Unit)? = null) {
+    fun linux64(init: (Distribution.() -> Unit)? = null) {
         distributions[PackrConfig.Platform.Linux64] = SimpleDistribution().also { init?.invoke(it) }
     }
 }
