@@ -2,7 +2,7 @@ package com.hendraanggrian.packr
 
 import com.badlogicgames.packr.Packr
 import com.badlogicgames.packr.PackrConfig
-import com.hendraanggrian.packr.internal.MacOSDistribution
+import com.hendraanggrian.packr.dist.MacOSDistribution
 import org.gradle.api.DefaultTask
 import org.gradle.api.logging.LogLevel
 import org.gradle.api.logging.LogLevel.INFO
@@ -22,13 +22,14 @@ open class PackTask : DefaultTask() {
     @Throws(IOException::class)
     @Suppress("unused")
     fun pack() {
-        val names = extension.distributions.values.map { it.name }
+        val distributions = extension.getDistributions()
+        val names = distributions.values.map { it.name }
         if (names.size != names.distinct().size) {
             error("Duplicate name found, rename distributions individually")
         }
 
-        val dist = extension.distributions[platform]
-        if (dist == null) {
+        val distribution = distributions[platform]
+        if (distribution == null) {
             logger.log(INFO, "No configuration found for $platform")
             return
         }
@@ -36,7 +37,7 @@ open class PackTask : DefaultTask() {
 
         val config = PackrConfig()
         config.platform = platform
-        config.jdk = checkNotNull(dist.jdk) { "JDK path has not yet been specified" }
+        config.jdk = checkNotNull(distribution.jdk) { "JDK path has not yet been specified" }
         config.executable = checkNotNull(extension.executable) { "Undefined executable" }
         config.classpath = extension.classpath.flatMap { classpath ->
             val file = File(classpath)
@@ -49,14 +50,14 @@ open class PackTask : DefaultTask() {
         config.mainClass = checkNotNull(extension.mainClass) { "Undefined main class" }
 
         val outputDirectory = File(extension.outputDirectory)
-        config.outDir = outputDirectory.resolve(dist.name ?: project.name)
+        config.outDir = outputDirectory.resolve(distribution.name ?: project.name)
 
-        config.vmArgs = extension.vmArgs + dist.vmArgs
+        config.vmArgs = extension.vmArgs + distribution.vmArgs
         config.resources = extension.resources.map { File(it) }
         config.minimizeJre = extension.minimizeJre
-        if (dist is MacOSDistribution) {
-            dist.icon?.let { config.iconResource = File(it) }
-            dist.bundleId?.let { config.bundleIdentifier = it }
+        if (distribution is MacOSDistribution) {
+            distribution.icon?.let { config.iconResource = File(it) }
+            distribution.bundleId?.let { config.bundleIdentifier = it }
         }
         config.verbose = extension.verbose
 

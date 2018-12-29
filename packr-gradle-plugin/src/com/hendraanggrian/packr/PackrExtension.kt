@@ -1,9 +1,10 @@
 package com.hendraanggrian.packr
 
 import com.badlogicgames.packr.PackrConfig
-import com.hendraanggrian.packr.internal.Distribution
-import com.hendraanggrian.packr.internal.MacOSDistribution
-import com.hendraanggrian.packr.internal.SimpleDistribution
+import com.hendraanggrian.packr.dist.Distribution
+import com.hendraanggrian.packr.dist.DistributionBuilder
+import com.hendraanggrian.packr.dist.MacOSDistribution
+import com.hendraanggrian.packr.dist.MacOSDistributionBuilder
 
 open class PackrExtension : VmArged {
 
@@ -13,7 +14,9 @@ open class PackrExtension : VmArged {
         const val MINIMIZE_ORACLEJRE8 = "oraclejre8"
     }
 
-    internal val distributions = mutableMapOf<PackrConfig.Platform, Distribution>()
+    private val distributions = mutableMapOf<PackrConfig.Platform, Distribution>()
+
+    internal fun getDistributions(): Map<PackrConfig.Platform, Distribution> = distributions
 
     /**
      * Name of the native executable, without extension such as `.exe`.
@@ -108,31 +111,31 @@ open class PackrExtension : VmArged {
 
     /** Configure macOS distribution. Unlike other distributions, mac configuration have some OS-specific properties. */
     @JvmOverloads
-    fun macOS(init: (MacOSDistribution.() -> Unit)? = null) {
+    fun macOS(init: (MacOSDistributionBuilder.() -> Unit)? = null) {
         distributions[PackrConfig.Platform.MacOS] = MacOSDistribution().also { init?.invoke(it) }
     }
 
     /** Configure Windows 32-bit distribution. */
     @JvmOverloads
-    fun windows32(init: (Distribution.() -> Unit)? = null) {
-        distributions[PackrConfig.Platform.Windows32] = SimpleDistribution().also { init?.invoke(it) }
+    fun windows32(init: (DistributionBuilder.() -> Unit)? = null) {
+        distributions[PackrConfig.Platform.Windows32] = Distribution().also { init?.invoke(it) }
     }
 
     /** Configure Windows 64-bit distribution. */
     @JvmOverloads
-    fun windows64(init: (Distribution.() -> Unit)? = null) {
-        distributions[PackrConfig.Platform.Windows64] = SimpleDistribution().also { init?.invoke(it) }
+    fun windows64(init: (DistributionBuilder.() -> Unit)? = null) {
+        distributions[PackrConfig.Platform.Windows64] = Distribution().also { init?.invoke(it) }
     }
 
     /** Configure Linux 32-bit distribution. */
     @JvmOverloads
-    fun linux32(init: (Distribution.() -> Unit)? = null) {
-        distributions[PackrConfig.Platform.Linux32] = SimpleDistribution().also { init?.invoke(it) }
+    fun linux32(init: (DistributionBuilder.() -> Unit)? = null) {
+        distributions[PackrConfig.Platform.Linux32] = Distribution().also { init?.invoke(it) }
     }
 
     /** Configure Linux 64-bit distribution. */
     @JvmOverloads
-    fun linux64(init: (Distribution.() -> Unit)? = null) {
-        distributions[PackrConfig.Platform.Linux64] = SimpleDistribution().also { init?.invoke(it) }
+    fun linux64(init: (DistributionBuilder.() -> Unit)? = null) {
+        distributions[PackrConfig.Platform.Linux64] = Distribution().also { init?.invoke(it) }
     }
 }
