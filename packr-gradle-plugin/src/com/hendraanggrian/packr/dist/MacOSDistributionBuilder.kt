@@ -9,9 +9,8 @@ interface MacOSDistributionBuilder : DistributionBuilder {
      */
     var icon: String?
 
-    /** Groovy-specific method to change icon path. */
-    fun icon(icon: String) {
-        this.icon = icon
+    fun icon(value: String) {
+        icon = value
     }
 
     /**
@@ -20,8 +19,7 @@ interface MacOSDistributionBuilder : DistributionBuilder {
      */
     var bundleId: String?
 
-    /** Groovy-specific method to change bundle identifier. */
-    fun bundleId(bundleId: String) {
-        this.bundleId = bundleId
+    fun bundleId(value: String) {
+        bundleId = value
     }
 }

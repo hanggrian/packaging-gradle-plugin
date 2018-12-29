@@ -16,18 +16,13 @@ open class PackrExtension : VmArged {
 
     private val distributions = mutableMapOf<PackrConfig.Platform, Distribution>()
 
-    internal fun getDistributions(): Map<PackrConfig.Platform, Distribution> = distributions
+    internal fun getDistributions() = distributions as Map<PackrConfig.Platform, Distribution>
 
     /**
      * Name of the native executable, without extension such as `.exe`.
      * Default is project's name.
      */
     var executable: String? = null
-
-    /** Groovy-specific method to set executable. */
-    fun executable(executable: String) {
-        this.executable = executable
-    }
 
     /**
      * File locations of the JAR files to package.
@@ -45,11 +40,6 @@ open class PackrExtension : VmArged {
      * Must be defined or will throw an exception.
      */
     var mainClass: String? = null
-
-    /** Groovy-specific method to set main class. */
-    fun mainClass(mainClass: String) {
-        this.mainClass = mainClass
-    }
 
     /**
      * List of files and directories to be packaged next to the native executable.
@@ -69,21 +59,11 @@ open class PackrExtension : VmArged {
      */
     var minimizeJre: String = MINIMIZE_SOFT
 
-    /** Groovy-specific method to minimize jre. */
-    fun minimizeJre(minimizeJre: String) {
-        this.minimizeJre = minimizeJre
-    }
-
     /**
      * The output directory.
      * Default is `release` directory in project's build directory.
      */
     lateinit var outputDirectory: String
-
-    /** Groovy-specific method to change output directory. */
-    fun outputDirectory(outputDirectory: String) {
-        this.outputDirectory = outputDirectory
-    }
 
     override val vmArgs: MutableCollection<String> = mutableSetOf()
 
@@ -93,49 +73,39 @@ open class PackrExtension : VmArged {
      */
     var verbose: Boolean = false
 
-    /** Groovy-specific method to change verbose. */
-    fun verbose(verbose: Boolean) {
-        this.verbose = verbose
-    }
-
     /**
      * Open [outputDirectory] upon packing completion.
      * This is an optional property.
      */
     var openOnDone: Boolean = false
 
-    /** Groovy-specific method to change open on done. */
-    fun openOnDone(openOnDone: Boolean) {
-        this.openOnDone = openOnDone
-    }
-
     /** Configure macOS distribution. Unlike other distributions, mac configuration have some OS-specific properties. */
     @JvmOverloads
-    fun macOS(init: (MacOSDistributionBuilder.() -> Unit)? = null) {
-        distributions[PackrConfig.Platform.MacOS] = MacOSDistribution().also { init?.invoke(it) }
+    fun macOS(builder: (MacOSDistributionBuilder.() -> Unit)? = null) {
+        distributions[PackrConfig.Platform.MacOS] = MacOSDistribution().also { builder?.invoke(it) }
     }
 
     /** Configure Windows 32-bit distribution. */
     @JvmOverloads
-    fun windows32(init: (DistributionBuilder.() -> Unit)? = null) {
-        distributions[PackrConfig.Platform.Windows32] = Distribution().also { init?.invoke(it) }
+    fun windows32(builder: (DistributionBuilder.() -> Unit)? = null) {
+        distributions[PackrConfig.Platform.Windows32] = Distribution().also { builder?.invoke(it) }
     }
 
     /** Configure Windows 64-bit distribution. */
     @JvmOverloads
-    fun windows64(init: (DistributionBuilder.() -> Unit)? = null) {
-        distributions[PackrConfig.Platform.Windows64] = Distribution().also { init?.invoke(it) }
+    fun windows64(builder: (DistributionBuilder.() -> Unit)? = null) {
+        distributions[PackrConfig.Platform.Windows64] = Distribution().also { builder?.invoke(it) }
     }
 
     /** Configure Linux 32-bit distribution. */
     @JvmOverloads
-    fun linux32(init: (DistributionBuilder.() -> Unit)? = null) {
-        distributions[PackrConfig.Platform.Linux32] = Distribution().also { init?.invoke(it) }
+    fun linux32(builder: (DistributionBuilder.() -> Unit)? = null) {
+        distributions[PackrConfig.Platform.Linux32] = Distribution().also { builder?.invoke(it) }
     }
 
     /** Configure Linux 64-bit distribution. */
     @JvmOverloads
-    fun linux64(init: (DistributionBuilder.() -> Unit)? = null) {
-        distributions[PackrConfig.Platform.Linux64] = Distribution().also { init?.invoke(it) }
+    fun linux64(builder: (DistributionBuilder.() -> Unit)? = null) {
+        distributions[PackrConfig.Platform.Linux64] = Distribution().also { builder?.invoke(it) }
     }
 }

@@ -22,13 +22,12 @@ open class PackTask : DefaultTask() {
     @Throws(IOException::class)
     @Suppress("unused")
     fun pack() {
-        val distributions = extension.getDistributions()
-        val names = distributions.values.map { it.name }
+        val names = extension.getDistributions().values.map { it.name }
         if (names.size != names.distinct().size) {
             error("Duplicate name found, rename distributions individually")
         }
 
-        val distribution = distributions[platform]
+        val distribution = extension.getDistributions()[platform]
         if (distribution == null) {
             logger.log(INFO, "No configuration found for $platform")
             return

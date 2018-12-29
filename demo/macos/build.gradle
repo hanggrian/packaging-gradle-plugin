@@ -22,7 +22,7 @@ packr {
     classpath "$buildDir/releases"
     macOS {
         it.name 'Mac Icon.app'
-        it.bundleId 'com.example.app'
+        it.bundleId 'com.example.app' 
         it.icon "$projectDir/art/example.icns"
     }
 }

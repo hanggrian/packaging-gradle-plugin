@@ -8,9 +8,8 @@ interface DistributionBuilder : VmArged {
     /** File name of this distribution that will be generated. */
     var name: String?
 
-    /** Groovy-specific method to change name. */
-    fun name(name: String) {
-        this.name = name
+    fun name(value: String) {
+        name = value
     }
 
     /**
@@ -20,8 +19,7 @@ interface DistributionBuilder : VmArged {
      */
     var jdk: String?
 
-    /** Groovy-specific method to change jdk path. */
-    fun jdk(jdk: String) {
-        this.jdk = jdk
+    fun jdk(value: String) {
+        jdk = value
     }
 }
