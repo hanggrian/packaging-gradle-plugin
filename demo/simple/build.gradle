@@ -4,7 +4,7 @@ buildscript {
         maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
     }
     dependencies {
-        classpath files('../packr-gradle-plugin-0.8.jar')
+        classpath files('../packr-gradle-plugin-0.9.jar')
         classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
         classpath 'com.badlogicgames.packr:packr:2.1-SNAPSHOT'
     }
@@ -22,10 +22,10 @@ packr {
     classpath "$buildDir/releases"
     resources "$projectDir/src/main/resources"
     macOS {
-        it.name 'Simple App.app'
+        name 'Simple App.app'
     }
     windows64 {
-        it.jdk '/Users/hendraanggrian/Desktop/jdk1.8.0_181'
+        jdk '/Users/hendraanggrian/Desktop/jdk1.8.0_181'
     }
 }
 

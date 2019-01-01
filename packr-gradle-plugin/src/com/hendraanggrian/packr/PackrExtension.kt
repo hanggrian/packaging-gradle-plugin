@@ -5,6 +5,8 @@ import com.hendraanggrian.packr.dist.Distribution
 import com.hendraanggrian.packr.dist.DistributionBuilder
 import com.hendraanggrian.packr.dist.MacOSDistribution
 import com.hendraanggrian.packr.dist.MacOSDistributionBuilder
+import org.gradle.api.Action
+import org.gradle.kotlin.dsl.invoke
 
 open class PackrExtension : VmArged {
 
@@ -81,31 +83,31 @@ open class PackrExtension : VmArged {
 
     /** Configure macOS distribution. Unlike other distributions, mac configuration have some OS-specific properties. */
     @JvmOverloads
-    fun macOS(builder: (MacOSDistributionBuilder.() -> Unit)? = null) {
-        distributions[PackrConfig.Platform.MacOS] = MacOSDistribution().also { builder?.invoke(it) }
+    fun macOS(action: Action<MacOSDistributionBuilder>? = null) {
+        distributions[PackrConfig.Platform.MacOS] = MacOSDistribution().also { action?.invoke(it) }
     }
 
     /** Configure Windows 32-bit distribution. */
     @JvmOverloads
-    fun windows32(builder: (DistributionBuilder.() -> Unit)? = null) {
-        distributions[PackrConfig.Platform.Windows32] = Distribution().also { builder?.invoke(it) }
+    fun windows32(action: Action<DistributionBuilder>? = null) {
+        distributions[PackrConfig.Platform.Windows32] = Distribution().also { action?.invoke(it) }
     }
 
     /** Configure Windows 64-bit distribution. */
     @JvmOverloads
-    fun windows64(builder: (DistributionBuilder.() -> Unit)? = null) {
-        distributions[PackrConfig.Platform.Windows64] = Distribution().also { builder?.invoke(it) }
+    fun windows64(action: Action<DistributionBuilder>? = null) {
+        distributions[PackrConfig.Platform.Windows64] = Distribution().also { action?.invoke(it) }
     }
 
     /** Configure Linux 32-bit distribution. */
     @JvmOverloads
-    fun linux32(builder: (DistributionBuilder.() -> Unit)? = null) {
-        distributions[PackrConfig.Platform.Linux32] = Distribution().also { builder?.invoke(it) }
+    fun linux32(action: Action<DistributionBuilder>? = null) {
+        distributions[PackrConfig.Platform.Linux32] = Distribution().also { action?.invoke(it) }
     }
 
     /** Configure Linux 64-bit distribution. */
     @JvmOverloads
-    fun linux64(builder: (DistributionBuilder.() -> Unit)? = null) {
-        distributions[PackrConfig.Platform.Linux64] = Distribution().also { builder?.invoke(it) }
+    fun linux64(action: Action<DistributionBuilder>? = null) {
+        distributions[PackrConfig.Platform.Linux64] = Distribution().also { action?.invoke(it) }
     }
 }

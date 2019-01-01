@@ -1,4 +1,4 @@
-@file:Suppress("UnusedImport")
+@file:Suppress("UnusedImport", "unused", "UNUSED_VARIABLE")
 
 package com.hendraanggrian.packr
 
@@ -11,7 +11,6 @@ import org.gradle.kotlin.dsl.registering
 import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.provideDelegate // ktlint-disable
 
-@Suppress("unused")
 class PackrPlugin : Plugin<Project> {
 
     companion object {
@@ -47,8 +46,7 @@ class PackrPlugin : Plugin<Project> {
                 extension = ext
                 platform = PackrConfig.Platform.MacOS
             }
-            @Suppress("UnstableApiUsage")
-            register("packAll") {
+            val packAll by registering {
                 group = GROUP_NAME
                 dependsOn(
                     packWindows32.get(),

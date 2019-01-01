@@ -4,7 +4,7 @@ buildscript {
         maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
     }
     dependencies {
-        classpath files('../packr-gradle-plugin-0.8.jar')
+        classpath files('../packr-gradle-plugin-0.9.jar')
         classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
         classpath 'com.badlogicgames.packr:packr:2.1-SNAPSHOT'
     }
@@ -21,9 +21,9 @@ packr {
     mainClass 'com.example.App'
     classpath "$buildDir/releases"
     macOS {
-        it.name 'Mac Icon.app'
-        it.bundleId 'com.example.app' 
-        it.icon "$projectDir/art/example.icns"
+        name 'Mac Icon.app'
+        bundleId 'com.example.app' 
+        icon "$projectDir/art/example.icns"
     }
 }
 
