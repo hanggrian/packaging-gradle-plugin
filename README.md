@@ -46,31 +46,31 @@ packr {
     openOnDone true
     
     macOS {
-        it.name 'Example.app'
-        it.jdk 'path/to/mac_jdk'
-        it.icon 'path/to/mac_icon.icns'
-        it.bundleId 'com.example.app'
-        it.vmArgs '-Xmx512M'
+        name 'Example.app'
+        jdk 'path/to/mac_jdk'
+        icon 'path/to/mac_icon.icns'
+        bundleId 'com.example.app'
+        vmArgs '-Xmx512M'
     }
     windows32 {
-        it.name 'Example Windows 32-bit'
-        it.jdk 'path/to/windows_32_jdk'
-        it.vmArgs '-Xmx256M'
+        name 'Example Windows 32-bit'
+        jdk 'path/to/windows_32_jdk'
+        vmArgs '-Xmx256M'
     }
     windows64 {
-        it.name 'Example Windows 64-bit'
-        it.jdk 'path/to/windows_64_jdk'
-        it.vmArgs '-Xmx512M'
+        name 'Example Windows 64-bit'
+        jdk 'path/to/windows_64_jdk'
+        vmArgs '-Xmx512M'
     }
     linux32 {
-        it.name 'Example Windows 32-bit'
-        it.jdk 'path/to/windows_32_jdk'
-        it.vmArgs '-Xmx256M'
+        name 'Example Windows 32-bit'
+        jdk 'path/to/windows_32_jdk'
+        vmArgs '-Xmx256M'
     }
     linux64 {
-        it.name 'Example Linux 64-bit'
-        it.jdk 'path/to/linux_64_jdk'
-        it.vmArgs '-Xmx512M'
+        name 'Example Linux 64-bit'
+        jdk 'path/to/linux_64_jdk'
+        vmArgs '-Xmx512M'
     }
 }
 ```
