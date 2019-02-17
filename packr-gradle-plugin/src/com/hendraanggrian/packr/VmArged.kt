@@ -6,10 +6,10 @@ interface VmArged {
      * List of arguments for the JVM, without leading dashes, e.g. `Xmx1G`.
      * Default is empty.
      */
-    val vmArgs: MutableCollection<String>
+    var vmArgs: Iterable<String>
 
     /** Groovy-specific method to add vm arguments. */
-    fun vmArgs(vararg vmArgs: String) {
-        this.vmArgs += vmArgs
+    fun vmArgs(vararg args: String) {
+        vmArgs = listOf(*args)
     }
 }

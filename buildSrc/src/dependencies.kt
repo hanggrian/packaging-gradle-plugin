@@ -1,8 +1,6 @@
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.plugin.use.PluginDependenciesSpec
 
-fun DependencyHandler.packr() = "com.badlogicgames.packr:packr:$VERSION_PACKR"
-
 fun DependencyHandler.dokka() = "org.jetbrains.dokka:dokka-gradle-plugin:$VERSION_DOKKA"
 inline val PluginDependenciesSpec.dokka get() = id("org.jetbrains.dokka")
 

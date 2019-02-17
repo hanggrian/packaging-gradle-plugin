@@ -38,11 +38,10 @@ open class PackTask : DefaultTask() {
         config.platform = platform
         config.jdk = checkNotNull(distribution.jdk) { "JDK path has not yet been specified" }
         config.executable = checkNotNull(extension.executable) { "Undefined executable" }
-        config.classpath = extension.classpath.flatMap { classpath ->
-            val file = File(classpath)
+        config.classpath = extension.classpath.flatMap { file ->
             when {
-                file.isDirectory -> file.listFiles().filter { it.isJar() }.map { it.path }
-                file.isJar() -> listOf(file.path)
+                file.isDirectory -> file.listFiles().filter { it.isJar() }.map { it.actualPath }
+                file.isJar() -> listOf(file.actualPath)
                 else -> emptyList()
             }
         }
@@ -52,7 +51,7 @@ open class PackTask : DefaultTask() {
         config.outDir = outputDirectory.resolve(distribution.name ?: project.name)
 
         config.vmArgs = extension.vmArgs + distribution.vmArgs
-        config.resources = extension.resources.map { File(it) }
+        config.resources = extension.resources.toList()
         config.minimizeJre = extension.minimizeJre
         if (distribution is MacOSDistribution) {
             distribution.icon?.let { config.iconResource = File(it) }
@@ -87,4 +86,6 @@ open class PackTask : DefaultTask() {
     }
 
     private fun File.isJar(): Boolean = extension == "jar"
+
+    private inline val File.actualPath get(): String = absolutePath.substringAfter(project.projectDir.absolutePath)
 }

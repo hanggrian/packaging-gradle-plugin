@@ -6,9 +6,12 @@ import com.hendraanggrian.packr.dist.DistributionBuilder
 import com.hendraanggrian.packr.dist.MacOSDistribution
 import com.hendraanggrian.packr.dist.MacOSDistributionBuilder
 import org.gradle.api.Action
+import org.gradle.api.Project
+import org.gradle.api.tasks.Input
 import org.gradle.kotlin.dsl.invoke
+import java.io.File
 
-open class PackrExtension : VmArged {
+open class PackrExtension(private val project: Project) : VmArged {
 
     companion object {
         const val MINIMIZE_SOFT = "soft"
@@ -30,11 +33,10 @@ open class PackrExtension : VmArged {
      * File locations of the JAR files to package.
      * Default is empty.
      */
-    val classpath: MutableList<String> = mutableListOf()
+    var classpath: Iterable<File> = emptyList()
 
-    /** Groovy-specific method to add classpath. */
     fun classpath(vararg classpath: String) {
-        this.classpath += classpath
+        this.classpath = classpath.map { project.projectDir.resolve(it) }
     }
 
     /**
@@ -47,11 +49,10 @@ open class PackrExtension : VmArged {
      * List of files and directories to be packaged next to the native executable.
      * Default is empty.
      */
-    val resources: MutableList<String> = mutableListOf()
+    var resources: Iterable<File> = emptyList()
 
-    /** Groovy-specific method to add resources. */
     fun resources(vararg resources: String) {
-        this.resources += resources
+        this.resources = resources.map { project.projectDir.resolve(it) }
     }
 
     /**
@@ -65,9 +66,15 @@ open class PackrExtension : VmArged {
      * The output directory.
      * Default is `release` directory in project's build directory.
      */
-    lateinit var outputDirectory: String
+    lateinit var outputDir: File
 
-    override val vmArgs: MutableCollection<String> = mutableSetOf()
+    var outputDirectory: String
+        @Input get() = outputDir.absolutePath
+        set(value) {
+            outputDir = project.projectDir.resolve(value)
+        }
+
+    override var vmArgs: Iterable<String> = emptyList()
 
     /**
      * Print extra messages about JRE minimizeJre when set to `true`.

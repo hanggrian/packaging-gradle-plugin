@@ -17,8 +17,8 @@ sourceSets {
 gradlePlugin {
     (plugins) {
         register(RELEASE_ARTIFACT) {
-            id = RELEASE_GROUP
-            implementationClass = "$RELEASE_GROUP.PackrPlugin"
+            id = "$RELEASE_GROUP.packr"
+            implementationClass = "$RELEASE_GROUP.packr.PackrPlugin"
         }
     }
 }
@@ -27,7 +27,7 @@ val ktlint by configurations.registering
 
 dependencies {
     implementation(kotlin("stdlib", VERSION_KOTLIN))
-    implementation(packr())
+    implementation(files("libs/packr.jar"))
 
     testImplementation(junit())
 
@@ -79,7 +79,6 @@ publish {
     bintrayUser = BINTRAY_USER
     bintrayKey = BINTRAY_KEY
     dryRun = false
-    repoName = RELEASE_REPO
 
     userOrg = RELEASE_USER
     groupId = RELEASE_GROUP

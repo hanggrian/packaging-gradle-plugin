@@ -6,5 +6,5 @@ internal open class Distribution : DistributionBuilder {
 
     override var jdk: String? = System.getenv("JAVA_HOME") ?: System.getProperty("java.home")
 
-    override val vmArgs: MutableCollection<String> = mutableSetOf()
+    override var vmArgs: Iterable<String> = emptyList()
 }

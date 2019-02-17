@@ -14,7 +14,6 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        maven("https://oss.sonatype.org/content/repositories/snapshots") // packr 2.1-SNAPSHOT
     }
     tasks.withType<Delete> {
         delete(projectDir.resolve("out"))

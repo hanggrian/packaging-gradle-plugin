@@ -1,6 +1,6 @@
 Packr Plugin
 ============
-[![bintray](https://img.shields.io/badge/bintray-packr-brightgreen.svg)](https://bintray.com/hendraanggrian/packr)
+[![bintray](https://img.shields.io/badge/bintray-maven-brightgreen.svg)](https://bintray.com/hendraanggrian/maven)
 [![download](https://api.bintray.com/packages/hendraanggrian/packr/packr-gradle-plugin/images/download.svg)](https://bintray.com/hendraanggrian/packr/packr-gradle-plugin/_latestVersion)
 [![build](https://travis-ci.com/hendraanggrian/packr-gradle-plugin.svg)](https://travis-ci.com/hendraanggrian/packr-gradle-plugin)
 [![license](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
@@ -15,7 +15,6 @@ Add plugin to buildscript:
 buildscript {
     repositories {
         jcenter()
-        maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
     }
     dependencies {
         classpath "com.hendraanggrian.packr:packr-gradle-plugin:$version"
