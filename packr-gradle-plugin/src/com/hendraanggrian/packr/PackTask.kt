@@ -40,8 +40,8 @@ open class PackTask : DefaultTask() {
         config.executable = checkNotNull(extension.executable) { "Undefined executable" }
         config.classpath = extension.classpath.flatMap { file ->
             when {
-                file.isDirectory -> file.listFiles().filter { it.isJar() }.map { it.actualPath }
-                file.isJar() -> listOf(file.actualPath)
+                file.isDirectory -> file.listFiles().filter { it.isJar() }.map { it.absolutePath }
+                file.isJar() -> listOf(file.absolutePath)
                 else -> emptyList()
             }
         }
@@ -86,6 +86,4 @@ open class PackTask : DefaultTask() {
     }
 
     private fun File.isJar(): Boolean = extension == "jar"
-
-    private inline val File.actualPath get(): String = absolutePath.substringAfter(project.projectDir.absolutePath)
 }

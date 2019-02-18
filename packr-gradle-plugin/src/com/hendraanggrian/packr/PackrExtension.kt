@@ -35,6 +35,7 @@ open class PackrExtension(private val project: Project) : VmArged {
      */
     var classpath: Iterable<File> = emptyList()
 
+    /** Convenient method to add classpath from file path, relative to project directory. */
     fun classpath(vararg classpath: String) {
         this.classpath = classpath.map { project.projectDir.resolve(it) }
     }
@@ -51,6 +52,7 @@ open class PackrExtension(private val project: Project) : VmArged {
      */
     var resources: Iterable<File> = emptyList()
 
+    /** Convenient method to add resources directory from file path, relative to project directory. */
     fun resources(vararg resources: String) {
         this.resources = resources.map { project.projectDir.resolve(it) }
     }
@@ -68,6 +70,7 @@ open class PackrExtension(private val project: Project) : VmArged {
      */
     lateinit var outputDir: File
 
+    /** Convenient method to set output directory from file path, relative to project directory. */
     var outputDirectory: String
         @Input get() = outputDir.absolutePath
         set(value) {
@@ -76,16 +79,10 @@ open class PackrExtension(private val project: Project) : VmArged {
 
     override var vmArgs: Iterable<String> = emptyList()
 
-    /**
-     * Print extra messages about JRE minimizeJre when set to `true`.
-     * This is an optional property.
-     */
+    /** An optional property which, when enabled, prints extra messages about JRE minimizeJre. */
     var verbose: Boolean = false
 
-    /**
-     * Open [outputDirectory] upon packing completion.
-     * This is an optional property.
-     */
+    /** An optional property which, when enabled, opens [outputDirectory] upon packing completion. */
     var openOnDone: Boolean = false
 
     /** Configure macOS distribution. Unlike other distributions, mac configuration have some OS-specific properties. */

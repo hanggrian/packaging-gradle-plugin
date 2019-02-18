@@ -18,7 +18,7 @@ version '1.0'
 
 packr {
     mainClass 'com.example.App'
-    classpath "$buildDir/releases"
+    classpath 'build/releases'
     macOS {
         name 'Mac Icon.app'
         bundleId 'com.example.app' 
@@ -27,12 +27,12 @@ packr {
 }
 
 tasks.withType(com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {
-    destinationDir file("build/releases")
+    destinationDir file('build/releases')
     baseName 'mac-icon'
     classifier null
     version '1.0'
 }
 
-tasks.getByName("packAll") {
+tasks.getByName('packAll') {
     dependsOn 'shadowJar'
 }

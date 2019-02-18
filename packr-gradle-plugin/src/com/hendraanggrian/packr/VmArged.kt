@@ -8,7 +8,7 @@ interface VmArged {
      */
     var vmArgs: Iterable<String>
 
-    /** Groovy-specific method to add vm arguments. */
+    /** Convenient method to add vm arguments. */
     fun vmArgs(vararg args: String) {
         vmArgs = listOf(*args)
     }
