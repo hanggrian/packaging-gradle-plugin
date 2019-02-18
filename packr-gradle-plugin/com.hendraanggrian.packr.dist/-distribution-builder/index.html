@@ -42,7 +42,7 @@ Default is Java Home path, if any.</p>
 <p><a href="../../com.hendraanggrian.packr/-vm-arged/vm-args.html">vmArgs</a></p>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">vmArgs</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-collection/index.html"><span class="identifier">MutableCollection</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
+<code><span class="keyword">abstract</span> <span class="keyword">var </span><span class="identifier">vmArgs</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html"><span class="identifier">Iterable</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
 <p>List of arguments for the JVM, without leading dashes, e.g. <code>Xmx1G</code>.
 Default is empty.</p>
 </td>
@@ -76,8 +76,8 @@ Default is empty.</p>
 <p><a href="../../com.hendraanggrian.packr/-vm-arged/vm-args.html">vmArgs</a></p>
 </td>
 <td>
-<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">vmArgs</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="com.hendraanggrian.packr.VmArged$vmArgs(kotlin.Array((kotlin.String)))/vmArgs">vmArgs</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Groovy-specific method to add vm arguments.</p>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">vmArgs</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="com.hendraanggrian.packr.VmArged$vmArgs(kotlin.Array((kotlin.String)))/args">args</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Convenient method to add vm arguments.</p>
 </td>
 </tr>
 </tbody>
