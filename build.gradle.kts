@@ -14,6 +14,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven("https://oss.sonatype.org/content/repositories/snapshots/")
     }
     tasks.withType<Delete> {
         delete(projectDir.resolve("out"))

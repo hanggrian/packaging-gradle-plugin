@@ -15,6 +15,7 @@ Add plugin to buildscript:
 buildscript {
     repositories {
         jcenter()
+        maven { url = 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
     dependencies {
         classpath "com.hendraanggrian:packr-gradle-plugin:$version"
