@@ -27,7 +27,7 @@ This is an optional property.</p>
 <p><a href="icon.html">icon</a></p>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">var </span><span class="identifier">icon</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code>
+<code><span class="keyword">abstract</span> <span class="keyword">var </span><span class="identifier">icon</span><span class="symbol">: </span><a href="http://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">?</span></code>
 <p>Location of an AppBundle icon resource (.icns file) relative to project directory.
 This is an optional property.</p>
 </td>
@@ -57,6 +57,13 @@ Default is Java Home path, if any.</p>
 <p>File name of this distribution that will be generated.</p>
 </td>
 </tr>
+<tr>
+<td>
+<p><a href="../-distribution-builder/project.html">project</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">project</span><span class="symbol">: </span><span class="identifier">Project</span></code></td>
+</tr>
 </tbody>
 </table>
 <h3>Functions</h3>
@@ -67,14 +74,18 @@ Default is Java Home path, if any.</p>
 <p><a href="bundle-id.html">bundleId</a></p>
 </td>
 <td>
-<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">bundleId</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.dist.MacOSDistributionBuilder$bundleId(kotlin.String)/value">value</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">bundleId</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.dist.MacOSDistributionBuilder$bundleId(kotlin.String)/value">value</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Groovy-friendly method.</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="icon.html">icon</a></p>
 </td>
 <td>
-<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">icon</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.dist.MacOSDistributionBuilder$icon(kotlin.String)/value">value</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">icon</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.dist.MacOSDistributionBuilder$icon(kotlin.String)/value">value</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Convenient method to set icon resource from file path, relative to project directory.</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -86,14 +97,18 @@ Default is Java Home path, if any.</p>
 <p><a href="../-distribution-builder/jdk.html">jdk</a></p>
 </td>
 <td>
-<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">jdk</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.dist.DistributionBuilder$jdk(kotlin.String)/value">value</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">jdk</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.dist.DistributionBuilder$jdk(kotlin.String)/value">value</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Groovy-friendly method.</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="../-distribution-builder/name.html">name</a></p>
 </td>
 <td>
-<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">name</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.dist.DistributionBuilder$name(kotlin.String)/value">value</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">name</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.dist.DistributionBuilder$name(kotlin.String)/value">value</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Groovy-friendly method.</p>
+</td>
 </tr>
 </tbody>
 </table>
