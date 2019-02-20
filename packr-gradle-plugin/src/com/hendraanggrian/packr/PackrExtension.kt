@@ -88,30 +88,30 @@ open class PackrExtension(private val project: Project) : VmArged {
     /** Configure macOS distribution. Unlike other distributions, mac configuration have some OS-specific properties. */
     @JvmOverloads
     fun macOS(action: Action<MacOSDistributionBuilder>? = null) {
-        distributions[PackrConfig.Platform.MacOS] = MacOSDistribution().also { action?.invoke(it) }
+        distributions[PackrConfig.Platform.MacOS] = MacOSDistribution(project).also { action?.invoke(it) }
     }
 
     /** Configure Windows 32-bit distribution. */
     @JvmOverloads
     fun windows32(action: Action<DistributionBuilder>? = null) {
-        distributions[PackrConfig.Platform.Windows32] = Distribution().also { action?.invoke(it) }
+        distributions[PackrConfig.Platform.Windows32] = Distribution(project).also { action?.invoke(it) }
     }
 
     /** Configure Windows 64-bit distribution. */
     @JvmOverloads
     fun windows64(action: Action<DistributionBuilder>? = null) {
-        distributions[PackrConfig.Platform.Windows64] = Distribution().also { action?.invoke(it) }
+        distributions[PackrConfig.Platform.Windows64] = Distribution(project).also { action?.invoke(it) }
     }
 
     /** Configure Linux 32-bit distribution. */
     @JvmOverloads
     fun linux32(action: Action<DistributionBuilder>? = null) {
-        distributions[PackrConfig.Platform.Linux32] = Distribution().also { action?.invoke(it) }
+        distributions[PackrConfig.Platform.Linux32] = Distribution(project).also { action?.invoke(it) }
     }
 
     /** Configure Linux 64-bit distribution. */
     @JvmOverloads
     fun linux64(action: Action<DistributionBuilder>? = null) {
-        distributions[PackrConfig.Platform.Linux64] = Distribution().also { action?.invoke(it) }
+        distributions[PackrConfig.Platform.Linux64] = Distribution(project).also { action?.invoke(it) }
     }
 }

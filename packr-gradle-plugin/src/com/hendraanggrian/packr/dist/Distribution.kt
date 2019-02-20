@@ -1,6 +1,8 @@
 package com.hendraanggrian.packr.dist
 
-internal open class Distribution : DistributionBuilder {
+import org.gradle.api.Project
+
+internal open class Distribution(override val project: Project) : DistributionBuilder {
 
     override var name: String? = null
 

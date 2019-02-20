@@ -54,7 +54,7 @@ open class PackTask : DefaultTask() {
         config.resources = extension.resources.toList()
         config.minimizeJre = extension.minimizeJre
         if (distribution is MacOSDistribution) {
-            distribution.icon?.let { config.iconResource = File(it) }
+            distribution.icon?.let { config.iconResource = it }
             distribution.bundleId?.let { config.bundleIdentifier = it }
         }
         config.verbose = extension.verbose

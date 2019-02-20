@@ -23,7 +23,7 @@ packr {
     macOS {
         name 'Mac Icon.app'
         bundleId 'com.example.app' 
-        icon "$projectDir/art/example.icns"
+        icon "art/example.icns"
     }
 }
 

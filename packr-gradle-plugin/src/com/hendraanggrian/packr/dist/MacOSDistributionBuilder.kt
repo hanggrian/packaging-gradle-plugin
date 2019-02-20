@@ -1,5 +1,7 @@
 package com.hendraanggrian.packr.dist
 
+import java.io.File
+
 @DistributionBuilderMarker
 interface MacOSDistributionBuilder : DistributionBuilder {
 
@@ -7,10 +9,11 @@ interface MacOSDistributionBuilder : DistributionBuilder {
      * Location of an AppBundle icon resource (.icns file) relative to project directory.
      * This is an optional property.
      */
-    var icon: String?
+    var icon: File?
 
+    /** Convenient method to set icon resource from file path, relative to project directory. */
     fun icon(value: String) {
-        icon = value
+        icon = project.projectDir.resolve(value)
     }
 
     /**
@@ -19,6 +22,7 @@ interface MacOSDistributionBuilder : DistributionBuilder {
      */
     var bundleId: String?
 
+    /** Groovy-friendly method. */
     fun bundleId(value: String) {
         bundleId = value
     }

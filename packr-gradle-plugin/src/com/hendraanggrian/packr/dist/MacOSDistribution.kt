@@ -1,8 +1,11 @@
 package com.hendraanggrian.packr.dist
 
-internal class MacOSDistribution : Distribution(), MacOSDistributionBuilder {
+import org.gradle.api.Project
+import java.io.File
 
-    override var icon: String? = null
+internal class MacOSDistribution(project: Project) : Distribution(project), MacOSDistributionBuilder {
+
+    override var icon: File? = null
 
     override var bundleId: String? = null
 }
