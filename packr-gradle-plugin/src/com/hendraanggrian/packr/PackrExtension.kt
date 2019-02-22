@@ -1,10 +1,6 @@
 package com.hendraanggrian.packr
 
 import com.badlogicgames.packr.PackrConfig
-import com.hendraanggrian.packr.dist.Distribution
-import com.hendraanggrian.packr.dist.DistributionBuilder
-import com.hendraanggrian.packr.dist.MacOSDistribution
-import com.hendraanggrian.packr.dist.MacOSDistributionBuilder
 import org.gradle.api.Action
 import org.gradle.api.Project
 import org.gradle.api.tasks.Input
@@ -19,9 +15,10 @@ open class PackrExtension(private val project: Project) : VmArged {
         const val MINIMIZE_ORACLEJRE8 = "oraclejre8"
     }
 
-    private val distributions = mutableMapOf<PackrConfig.Platform, Distribution>()
+    private val distributions = mutableSetOf<Distribution>()
 
-    internal fun getDistributions() = distributions as Map<PackrConfig.Platform, Distribution>
+    internal fun getDistribution(platform: PackrConfig.Platform) =
+        distributions.singleOrNull { it.platform == platform }
 
     /**
      * Name of the native executable, without extension such as `.exe`.
@@ -88,30 +85,30 @@ open class PackrExtension(private val project: Project) : VmArged {
     /** Configure macOS distribution. Unlike other distributions, mac configuration have some OS-specific properties. */
     @JvmOverloads
     fun macOS(action: Action<MacOSDistributionBuilder>? = null) {
-        distributions[PackrConfig.Platform.MacOS] = MacOSDistribution(project).also { action?.invoke(it) }
+        distributions += MacOSDistribution(project).also { action?.invoke(it) }
     }
 
     /** Configure Windows 32-bit distribution. */
     @JvmOverloads
     fun windows32(action: Action<DistributionBuilder>? = null) {
-        distributions[PackrConfig.Platform.Windows32] = Distribution(project).also { action?.invoke(it) }
+        distributions += Distribution(project, PackrConfig.Platform.Windows32).also { action?.invoke(it) }
     }
 
     /** Configure Windows 64-bit distribution. */
     @JvmOverloads
     fun windows64(action: Action<DistributionBuilder>? = null) {
-        distributions[PackrConfig.Platform.Windows64] = Distribution(project).also { action?.invoke(it) }
+        distributions += Distribution(project, PackrConfig.Platform.Windows64).also { action?.invoke(it) }
     }
 
     /** Configure Linux 32-bit distribution. */
     @JvmOverloads
     fun linux32(action: Action<DistributionBuilder>? = null) {
-        distributions[PackrConfig.Platform.Linux32] = Distribution(project).also { action?.invoke(it) }
+        distributions += Distribution(project, PackrConfig.Platform.Linux32).also { action?.invoke(it) }
     }
 
     /** Configure Linux 64-bit distribution. */
     @JvmOverloads
     fun linux64(action: Action<DistributionBuilder>? = null) {
-        distributions[PackrConfig.Platform.Linux64] = Distribution(project).also { action?.invoke(it) }
+        distributions += Distribution(project, PackrConfig.Platform.Linux64).also { action?.invoke(it) }
     }
 }

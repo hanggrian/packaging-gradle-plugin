@@ -2,7 +2,6 @@ package com.hendraanggrian.packr
 
 import com.badlogicgames.packr.Packr
 import com.badlogicgames.packr.PackrConfig
-import com.hendraanggrian.packr.dist.MacOSDistribution
 import org.gradle.api.DefaultTask
 import org.gradle.api.logging.LogLevel
 import org.gradle.api.logging.LogLevel.INFO
@@ -22,12 +21,7 @@ open class PackTask : DefaultTask() {
     @Throws(IOException::class)
     @Suppress("unused")
     fun pack() {
-        val names = extension.getDistributions().values.map { it.name }
-        if (names.size != names.distinct().size) {
-            error("Duplicate name found, rename distributions individually")
-        }
-
-        val distribution = extension.getDistributions()[platform]
+        val distribution = extension.getDistribution(platform)
         if (distribution == null) {
             logger.log(INFO, "No configuration found for $platform")
             return

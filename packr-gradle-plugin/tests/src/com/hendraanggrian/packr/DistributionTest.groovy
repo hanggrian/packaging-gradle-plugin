@@ -1,13 +1,13 @@
 package com.hendraanggrian.packr
 
-import com.hendraanggrian.packr.dist.MacOSDistribution
+
 import org.junit.Test
 
 class DistributionTest {
 
     @Test
     void dist() {
-        def dist = new SimpleDistribution()
+        def dist = new Distribution()
         dist.name 'an app'
         dist.jdk 'a jdk'
         assert dist.name == 'an app'
