@@ -23,7 +23,7 @@ class PackrExtensionTest {
         ext.minimizeJre PackrExtension.MINIMIZE_ORACLEJRE8
         assert ext.minimizeJre == PackrExtension.MINIMIZE_ORACLEJRE8
         ext.minimizeJre PackrExtension.MINIMIZE_HARD
-        assert ext.minimizeJre == PackrExtension.MINIMIZE_HARD
+        assert ext.minimizeJre == "hard"
 
         ext.outputDir new File('a')
         assert ext.getOutputDirectory.name == 'a'

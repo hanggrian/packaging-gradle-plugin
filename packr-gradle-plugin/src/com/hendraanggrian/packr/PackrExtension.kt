@@ -9,12 +9,6 @@ import java.io.File
 
 open class PackrExtension(private val project: Project) : VmArged {
 
-    companion object {
-        const val MINIMIZE_SOFT = "soft"
-        const val MINIMIZE_HARD = "hard"
-        const val MINIMIZE_ORACLEJRE8 = "oraclejre8"
-    }
-
     private val distributions = mutableSetOf<Distribution>()
 
     internal fun getDistribution(platform: PackrConfig.Platform) =
@@ -59,7 +53,7 @@ open class PackrExtension(private val project: Project) : VmArged {
      * Comes with a few config files out of the box.
      * Default is `soft`.
      */
-    var minimizeJre: String = MINIMIZE_SOFT
+    var minimizeJre: String = "soft"
 
     /**
      * The output directory.
