@@ -6,9 +6,9 @@ import org.gradle.api.Project
 
 /** Delimits a distribution DSL in Gradle Kotlin DSL scripts. */
 @DslMarker
-annotation class DistributionBuilderMarker
+annotation class PackrDslMarker
 
-@DistributionBuilderMarker
+@PackrDslMarker
 interface DistributionBuilder : VmArged {
 
     /** File name of this distribution that will be generated. */
@@ -32,7 +32,7 @@ interface DistributionBuilder : VmArged {
     }
 }
 
-@DistributionBuilderMarker
+@PackrDslMarker
 interface MacOSDistributionBuilder : DistributionBuilder {
 
     /**
@@ -69,8 +69,8 @@ internal open class Distribution(val project: Project, val platform: PackrConfig
     override fun equals(other: Any?): Boolean = other != null && other is Distribution && other.platform == platform
 }
 
-internal class MacOSDistribution(project: Project) :
-    Distribution(project, PackrConfig.Platform.MacOS), MacOSDistributionBuilder {
+internal class MacOSDistribution(project: Project) : Distribution(project, PackrConfig.Platform.MacOS),
+    MacOSDistributionBuilder {
 
     override var icon: File? = null
 

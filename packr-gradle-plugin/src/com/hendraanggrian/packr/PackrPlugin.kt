@@ -1,5 +1,3 @@
-@file:Suppress("UnusedImport", "unused", "UNUSED_VARIABLE")
-
 package com.hendraanggrian.packr
 
 import com.badlogicgames.packr.PackrConfig

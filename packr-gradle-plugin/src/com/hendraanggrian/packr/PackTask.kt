@@ -5,8 +5,6 @@ import com.badlogicgames.packr.PackrConfig
 import java.awt.Desktop
 import java.io.File
 import org.gradle.api.DefaultTask
-import org.gradle.api.logging.LogLevel
-import org.gradle.api.logging.LogLevel.INFO
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
 
@@ -25,10 +23,10 @@ open class PackTask : DefaultTask() {
     fun pack() {
         val distribution = extension.getDistribution(platform)
         if (distribution == null) {
-            logger.log(INFO, "No configuration found for $platform")
+            logger.info("No configuration found for $platform")
             return
         }
-        logger.log(INFO, "Creating configuration for $platform")
+        logger.info("Creating configuration for $platform")
 
         val config = PackrConfig()
         config.platform = platform
@@ -56,24 +54,24 @@ open class PackTask : DefaultTask() {
         config.verbose = extension.verbose
 
         if (config.outDir.exists()) {
-            logger.log(LogLevel.INFO, "Deleting old output")
+            logger.info("Deleting old output")
             config.outDir.deleteRecursively()
         }
 
-        logger.log(LogLevel.INFO, "Preparing output")
+        logger.info("Preparing output")
         outputDirectory.mkdirs()
 
         Packr().pack(config)
-        logger.log(LogLevel.INFO, "Pack completed")
+        logger.info("Pack completed")
 
         if (extension.openOnDone) {
             when {
                 !Desktop.isDesktopSupported() ->
-                    logger.log(LogLevel.INFO, "Desktop is not supported, ignoring `openOnDone`")
+                    logger.info("Desktop is not supported, ignoring `openOnDone`")
                 else -> Desktop.getDesktop().run {
                     when {
                         !isSupported(Desktop.Action.OPEN) ->
-                            logger.log(LogLevel.INFO, "Opening folder is not supported, ignoring `openOnDone`")
+                            logger.info("Opening folder is not supported, ignoring `openOnDone`")
                         else -> open(outputDirectory)
                     }
                 }
