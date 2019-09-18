@@ -2,7 +2,6 @@ plugins {
     `java-gradle-plugin`
     `kotlin-dsl`
     dokka
-    bintray
     `bintray-release`
 }
 
@@ -29,7 +28,7 @@ dependencies {
     implementation(kotlin("stdlib", VERSION_KOTLIN))
     implementation("com.badlogicgames.packr:packr:2.1-SNAPSHOT")
 
-    testImplementation(junit())
+    testImplementation(kotlin("test-junit", VERSION_KOTLIN))
 
     ktlint {
         invoke(ktlint())
@@ -39,8 +38,10 @@ dependencies {
 tasks {
     register("deploy") {
         dependsOn("build")
-        projectDir.resolve("build/libs")?.listFiles()?.forEach {
-            it.renameTo(File(rootDir.resolve("demo"), it.name))
+        projectDir.resolve("build/libs/$RELEASE_ARTIFACT-$RELEASE_VERSION.jar").let {
+            if (it.exists()) {
+                it.renameTo(rootDir.resolve("demo/${it.name}"))
+            }
         }
     }
 
@@ -50,7 +51,7 @@ tasks {
         outputs.dir("src")
         description = "Check Kotlin code style."
         classpath(configurations["ktlint"])
-        main = "com.github.shyiko.ktlint.Main"
+        main = "com.pinterest.ktlint.Main"
         args("src/**/*.kt")
     }
     "check" {
@@ -62,7 +63,7 @@ tasks {
         outputs.dir("src")
         description = "Fix Kotlin code style deviations."
         classpath(configurations["ktlint"])
-        main = "com.github.shyiko.ktlint.Main"
+        main = "com.pinterest.ktlint.Main"
         args("-F", "src/**/*.kt")
     }
 
@@ -75,6 +76,7 @@ tasks {
     }
 }
 
+publishKotlinFix()
 publish {
     bintrayUser = BINTRAY_USER
     bintrayKey = BINTRAY_KEY

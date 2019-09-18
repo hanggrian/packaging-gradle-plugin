@@ -21,7 +21,7 @@ packr {
     mainClass 'com.example.App'
     classpath 'build/releases'
     resources 'src/main/resources'
-    macOS()
+    configureMacOS()
 }
 
 tasks.withType(com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {

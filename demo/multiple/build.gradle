@@ -21,8 +21,8 @@ packr {
     mainClass 'com.example.App'
     classpath 'build/releases'
     resources 'src/main/resources'
-    macOS()
-    windows32 {
+    configureMacOS()
+    configureWindows32 {
         jdk '/Users/hendraanggrian/Desktop/Windows JDK/jdk1.8.0_202-x64'
     }
 }

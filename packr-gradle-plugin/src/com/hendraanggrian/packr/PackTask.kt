@@ -2,14 +2,13 @@ package com.hendraanggrian.packr
 
 import com.badlogicgames.packr.Packr
 import com.badlogicgames.packr.PackrConfig
+import java.awt.Desktop
+import java.io.File
 import org.gradle.api.DefaultTask
 import org.gradle.api.logging.LogLevel
 import org.gradle.api.logging.LogLevel.INFO
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
-import java.awt.Desktop
-import java.io.File
-import java.io.IOException
 
 /** Task that will generate native distribution on each platform. */
 open class PackTask : DefaultTask() {
@@ -17,9 +16,12 @@ open class PackTask : DefaultTask() {
     @Input lateinit var extension: PackrExtension
     @Input lateinit var platform: PackrConfig.Platform
 
+    init {
+        // always consider this task out of date
+        outputs.upToDateWhen { false }
+    }
+
     @TaskAction
-    @Throws(IOException::class)
-    @Suppress("unused")
     fun pack() {
         val distribution = extension.getDistribution(platform)
         if (distribution == null) {

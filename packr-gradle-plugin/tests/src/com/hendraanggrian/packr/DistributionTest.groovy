@@ -1,6 +1,5 @@
 package com.hendraanggrian.packr
 
-
 import org.junit.Test
 
 class DistributionTest {

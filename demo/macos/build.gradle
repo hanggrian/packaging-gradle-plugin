@@ -20,7 +20,7 @@ version '1.0'
 packr {
     mainClass 'com.example.App'
     classpath 'build/releases'
-    macOS {
+    configureMacOS {
         name 'Mac Icon.app'
         bundleId 'com.example.app' 
         icon "art/example.icns"

@@ -1,8 +1,8 @@
 package com.hendraanggrian.packr
 
 import com.badlogicgames.packr.PackrConfig
-import org.gradle.api.Project
 import java.io.File
+import org.gradle.api.Project
 
 /** Delimits a distribution DSL in Gradle Kotlin DSL scripts. */
 @DslMarker

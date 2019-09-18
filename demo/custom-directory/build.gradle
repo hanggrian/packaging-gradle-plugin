@@ -21,7 +21,7 @@ packr {
     mainClass 'com.example.App'
     classpath 'build/awesome'
     outputDirectory 'build/awesome'
-    macOS {
+    configureMacOS {
         name 'Custom Directory.app'
     }
 }

@@ -6,10 +6,10 @@ import com.badlogicgames.packr.PackrConfig
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.create
-import org.gradle.kotlin.dsl.invoke
-import org.gradle.kotlin.dsl.registering
 import org.gradle.kotlin.dsl.getValue
+import org.gradle.kotlin.dsl.invoke
 import org.gradle.kotlin.dsl.provideDelegate // ktlint-disable
+import org.gradle.kotlin.dsl.registering
 
 class PackrPlugin : Plugin<Project> {
 
