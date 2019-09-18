@@ -3,7 +3,7 @@ Packr Plugin
 [![bintray](https://img.shields.io/badge/bintray-maven-brightgreen.svg)](https://bintray.com/hendraanggrian/maven)
 [![download](https://api.bintray.com/packages/hendraanggrian/maven/packr-gradle-plugin/images/download.svg)](https://bintray.com/hendraanggrian/maven/packr-gradle-plugin/_latestVersion)
 [![build](https://travis-ci.com/hendraanggrian/packr-gradle-plugin.svg)](https://travis-ci.com/hendraanggrian/packr-gradle-plugin)
-[![license](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
+[![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
 
 Gradle plugin of [packr], a library that wraps JARs into native bundle for Windows, macOS, and Linux.
 
@@ -45,29 +45,29 @@ packr {
     verbose true
     openOnDone true
     
-    macOS {
+    configureMacOS {
         name 'Example.app'
         jdk 'path/to/mac_jdk'
         icon 'path/to/mac_icon.icns'
         bundleId 'com.example.app'
         vmArgs '-Xmx512M'
     }
-    windows32 {
+    configureWindows32 {
         name 'Example Windows 32-bit'
         jdk 'path/to/windows_32_jdk'
         vmArgs '-Xmx256M'
     }
-    windows64 {
+    configureWindows64 {
         name 'Example Windows 64-bit'
         jdk 'path/to/windows_64_jdk'
         vmArgs '-Xmx512M'
     }
-    linux32 {
+    configureLinux32 {
         name 'Example Windows 32-bit'
         jdk 'path/to/windows_32_jdk'
         vmArgs '-Xmx256M'
     }
-    linux64 {
+    configureLinux64 {
         name 'Example Linux 64-bit'
         jdk 'path/to/linux_64_jdk'
         vmArgs '-Xmx512M'

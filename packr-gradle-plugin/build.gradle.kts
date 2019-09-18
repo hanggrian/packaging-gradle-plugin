@@ -26,7 +26,7 @@ val ktlint by configurations.registering
 
 dependencies {
     implementation(kotlin("stdlib", VERSION_KOTLIN))
-    implementation("com.badlogicgames.packr:packr:2.1-SNAPSHOT")
+    implementation("com.badlogicgames.packr:packr:$VERSION_PACKR")
 
     testImplementation(kotlin("test-junit", VERSION_KOTLIN))
 
