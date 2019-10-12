@@ -1,7 +1,7 @@
 plugins {
     `java-gradle-plugin`
     `kotlin-dsl`
-    dokka
+    dokka()
     `bintray-release`
 }
 
@@ -26,7 +26,7 @@ val ktlint by configurations.registering
 
 dependencies {
     implementation(kotlin("stdlib", VERSION_KOTLIN))
-    implementation("com.badlogicgames.packr:packr:$VERSION_PACKR")
+    implementation(packr())
 
     testImplementation(kotlin("test-junit", VERSION_KOTLIN))
 
