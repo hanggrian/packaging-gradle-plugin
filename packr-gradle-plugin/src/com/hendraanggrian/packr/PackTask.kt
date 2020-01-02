@@ -19,9 +19,8 @@ open class PackTask : DefaultTask() {
         outputs.upToDateWhen { false }
     }
 
-    @TaskAction
-    fun pack() {
-        val distribution = extension.getDistribution(platform)
+    @TaskAction fun pack() {
+        val distribution = extension[platform]
         if (distribution == null) {
             logger.info("No configuration found for $platform")
             return
@@ -30,28 +29,22 @@ open class PackTask : DefaultTask() {
 
         val config = PackrConfig()
         config.platform = platform
-        config.jdk = checkNotNull(distribution.jdk) { "JDK path has not yet been specified" }
+        config.jdk = checkNotNull(distribution.jdk) { "Undefined JDK path" }
         config.executable = checkNotNull(extension.executable) { "Undefined executable" }
-        config.classpath = extension.classpath.flatMap { file ->
-            when {
-                file.isDirectory -> file.listFiles().filter { it.isJar() }.map { it.absolutePath }
-                file.isJar() -> listOf(file.absolutePath)
-                else -> emptyList()
-            }
-        }
+        config.classpath = extension.classpath.flatMapJar()
+        config.removePlatformLibs = extension.removePlatformLibs.flatMapJar()
         config.mainClass = checkNotNull(extension.mainClass) { "Undefined main class" }
-
-        val outputDirectory = File(extension.outputDirectory)
-        config.outDir = outputDirectory.resolve(distribution.name ?: project.name)
-
         config.vmArgs = extension.vmArgs + distribution.vmArgs
         config.resources = extension.resources.toList()
         config.minimizeJre = extension.minimizeJre
+        config.outDir = extension.outputDir.resolve(distribution.name ?: project.name)
+        extension.cacheJreDirectory?.let { config.cacheJre = File(it) }
+        config.verbose = extension.isVerbose
+
         if (distribution is MacOSDistribution) {
             distribution.icon?.let { config.iconResource = it }
             distribution.bundleId?.let { config.bundleIdentifier = it }
         }
-        config.verbose = extension.verbose
 
         if (config.outDir.exists()) {
             logger.info("Deleting old output")
@@ -59,23 +52,32 @@ open class PackTask : DefaultTask() {
         }
 
         logger.info("Preparing output")
-        outputDirectory.mkdirs()
+        extension.outputDir.mkdirs()
 
         Packr().pack(config)
         logger.info("Pack completed")
 
-        if (extension.openOnDone) {
+        if (extension.isAutoOpen) {
             when {
-                !Desktop.isDesktopSupported() ->
-                    logger.info("Desktop is not supported, ignoring `openOnDone`")
+                !Desktop.isDesktopSupported() -> logger.info("Desktop is not supported, ignoring `isAutoOpen`")
                 else -> Desktop.getDesktop().run {
                     when {
                         !isSupported(Desktop.Action.OPEN) ->
-                            logger.info("Opening folder is not supported, ignoring `openOnDone`")
-                        else -> open(outputDirectory)
+                            logger.info("Opening folder is not supported, ignoring `isAutoOpen`")
+                        else -> open(extension.outputDir)
                     }
                 }
             }
+        }
+    }
+
+    private fun Iterable<File>.flatMapJar() = flatMap { file ->
+        when {
+            file.isDirectory -> checkNotNull(file.listFiles()) { "Unable to list files in directory: ${file.absolutePath}" }
+                .filter { it.isJar() }
+                .map { it.absolutePath }
+            file.isJar() -> listOf(file.absolutePath)
+            else -> emptyList()
         }
     }
 

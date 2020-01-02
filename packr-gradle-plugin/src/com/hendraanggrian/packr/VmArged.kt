@@ -8,7 +8,7 @@ interface VmArged {
      */
     var vmArgs: Iterable<String>
 
-    /** Convenient method to add vm arguments. */
+    /** Convenient method to set vm arguments. */
     fun vmArgs(vararg args: String) {
         vmArgs = listOf(*args)
     }

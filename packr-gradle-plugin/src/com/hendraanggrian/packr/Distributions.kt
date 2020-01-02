@@ -6,6 +6,7 @@ import org.gradle.api.Project
 
 /** Delimits a distribution DSL in Gradle Kotlin DSL scripts. */
 @DslMarker
+@Target(AnnotationTarget.CLASS)
 annotation class PackrDslMarker
 
 @PackrDslMarker

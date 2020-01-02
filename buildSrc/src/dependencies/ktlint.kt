@@ -1,4 +1,3 @@
-private const val VERSION_KTLINT = "0.34.2"
+private const val VERSION_KTLINT = "0.35.0"
 
-fun Dependencies.ktlint() =
-    "com.pinterest:ktlint:$VERSION_KTLINT"
+fun Dependencies.ktlint() = "com.pinterest:ktlint:$VERSION_KTLINT"

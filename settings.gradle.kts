@@ -1,8 +1,8 @@
-include(RELEASE_ARTIFACT)
+include("packr-gradle-plugin")
 include("website")
 includeDir("demo")
 
 fun includeDir(name: String) = file(name)
-    .listFiles()
+    .listFiles()!!
     .filter { it.isDirectory }
     .forEach { include("$name:${it.name}") }

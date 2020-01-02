@@ -1,5 +1,5 @@
-Packr Plugin
-============
+Packr Gradle Plugin
+===================
 [![bintray](https://img.shields.io/badge/bintray-maven-brightgreen.svg)](https://bintray.com/hendraanggrian/maven)
 [![download](https://api.bintray.com/packages/hendraanggrian/maven/packr-gradle-plugin/images/download.svg)](https://bintray.com/hendraanggrian/maven/packr-gradle-plugin/_latestVersion)
 [![build](https://travis-ci.com/hendraanggrian/packr-gradle-plugin.svg)](https://travis-ci.com/hendraanggrian/packr-gradle-plugin)
