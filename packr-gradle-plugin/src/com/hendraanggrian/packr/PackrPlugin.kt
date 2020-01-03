@@ -1,6 +1,5 @@
 package com.hendraanggrian.packr
 
-import com.badlogicgames.packr.PackrConfig
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.create
@@ -24,31 +23,31 @@ class PackrPlugin : Plugin<Project> {
                 group = GROUP_NAME
                 description = "Pack JARs in Windows 32-bit executable."
                 extension = ext
-                platform = PackrConfig.Platform.Windows32
+                platform = Platform.Windows32
             }
             val packWindows64 by registering(PackTask::class) {
                 group = GROUP_NAME
                 description = "Pack JARs in Windows 64-bit executable."
                 extension = ext
-                platform = PackrConfig.Platform.Windows64
+                platform = Platform.Windows64
             }
             val packLinux32 by registering(PackTask::class) {
                 group = GROUP_NAME
                 description = "Pack JARs in Linux 32-bit executable."
                 extension = ext
-                platform = PackrConfig.Platform.Linux32
+                platform = Platform.Linux32
             }
             val packLinux64 by registering(PackTask::class) {
                 group = GROUP_NAME
                 description = "Pack JARs in Linux 64-bit executable."
                 extension = ext
-                platform = PackrConfig.Platform.Linux64
+                platform = Platform.Linux64
             }
             val packMacOS by registering(PackTask::class) {
                 group = GROUP_NAME
                 description = "Pack JARs in macOS executable."
                 extension = ext
-                platform = PackrConfig.Platform.MacOS
+                platform = Platform.MacOS
             }
             register<PackTask>("packAll") {
                 description = "Pack JARs for all supported platforms."

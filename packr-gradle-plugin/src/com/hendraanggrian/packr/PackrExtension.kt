@@ -2,12 +2,13 @@
 
 package com.hendraanggrian.packr
 
-import com.badlogicgames.packr.PackrConfig
 import org.gradle.api.Action
 import org.gradle.kotlin.dsl.invoke
 import java.io.File
+import java.io.Serializable
 
-open class PackrExtension(private val projectName: String, private val projectDir: File) : VmArged {
+open class PackrExtension(private val projectName: String, private val projectDir: File) : VmArged, Serializable {
+
     companion object {
         const val MINIMIZATION_SOFT = "soft"
         const val MINIMIZATION_HARD = "hard"
@@ -16,7 +17,7 @@ open class PackrExtension(private val projectName: String, private val projectDi
 
     private val distributions: MutableSet<Distribution> = mutableSetOf()
 
-    internal operator fun get(platform: PackrConfig.Platform): Distribution? =
+    internal operator fun get(platform: Platform): Distribution? =
         distributions.singleOrNull { it.platform == platform }
 
     /**
@@ -107,7 +108,7 @@ open class PackrExtension(private val projectName: String, private val projectDi
 
     /** Enable macOS distribution with default configuration. */
     fun configureMacOS() {
-        distributions += MacOSDistribution(projectName, projectDir)
+        distributions += MacOSDistribution(projectDir, projectName)
     }
 
     /**
@@ -115,7 +116,7 @@ open class PackrExtension(private val projectName: String, private val projectDi
      * Unlike other distributions, macOS configuration have some OS-specific properties.
      */
     fun configureMacOS(configuration: Action<MacOSDistribution>) {
-        distributions += MacOSDistribution(projectName, projectDir).also { configuration(it) }
+        distributions += MacOSDistribution(projectDir, projectName).also { configuration(it) }
     }
 
     /**
@@ -126,12 +127,12 @@ open class PackrExtension(private val projectName: String, private val projectDi
 
     /** Enable Windows 32-bit distribution with default configuration. */
     fun configureWindows32() {
-        distributions += Distribution(projectName, PackrConfig.Platform.Windows32)
+        distributions += Distribution(Platform.Windows32, projectName)
     }
 
     /** Enable Windows 32-bit distribution with customized [configuration]. */
     fun configureWindows32(configuration: Action<Distribution>) {
-        distributions += Distribution(projectName, PackrConfig.Platform.Windows32).also { configuration(it) }
+        distributions += Distribution(Platform.Windows32, projectName).also { configuration(it) }
     }
 
     /** Enable Windows 32-bit distribution with customized [configuration] in Kotlin DSL. */
@@ -139,12 +140,12 @@ open class PackrExtension(private val projectName: String, private val projectDi
 
     /** Enable Windows 64-bit distribution with default configuration. */
     fun configureWindows64() {
-        distributions += Distribution(projectName, PackrConfig.Platform.Windows64)
+        distributions += Distribution(Platform.Windows64, projectName)
     }
 
     /** Enable Windows 64-bit distribution with customized [configuration]. */
     fun configureWindows64(configuration: Action<Distribution>) {
-        distributions += Distribution(projectName, PackrConfig.Platform.Windows64).also { configuration(it) }
+        distributions += Distribution(Platform.Windows64, projectName).also { configuration(it) }
     }
 
     /** Enable Windows 64-bit distribution with customized [configuration] in Kotlin DSL. */
@@ -152,12 +153,12 @@ open class PackrExtension(private val projectName: String, private val projectDi
 
     /** Enable Linux 32-bit distribution with default configuration. */
     fun configureLinux32() {
-        distributions += Distribution(projectName, PackrConfig.Platform.Linux32)
+        distributions += Distribution(Platform.Linux32, projectName)
     }
 
     /** Enable Linux 32-bit distribution with customized [configuration]. */
     fun configureLinux32(configuration: Action<Distribution>) {
-        distributions += Distribution(projectName, PackrConfig.Platform.Linux32).also { configuration(it) }
+        distributions += Distribution(Platform.Linux32, projectName).also { configuration(it) }
     }
 
     /** Enable Linux 32-bit distribution with customized [configuration] in Kotlin DSL. */
@@ -165,12 +166,12 @@ open class PackrExtension(private val projectName: String, private val projectDi
 
     /** Enable Linux 64-bit distribution with default configuration. */
     fun configureLinux64() {
-        distributions += Distribution(projectName, PackrConfig.Platform.Linux64)
+        distributions += Distribution(Platform.Linux64, projectName)
     }
 
     /** Enable Linux 64-bit distribution with customized [configuration]. */
     fun configureLinux64(configuration: Action<Distribution>) {
-        distributions += Distribution(projectName, PackrConfig.Platform.Linux64).also { configuration(it) }
+        distributions += Distribution(Platform.Linux64, projectName).also { configuration(it) }
     }
 
     /** Enable Linux 64-bit distribution with customized [configuration] in Kotlin DSL. */

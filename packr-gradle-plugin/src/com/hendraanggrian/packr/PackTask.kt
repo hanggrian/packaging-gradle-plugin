@@ -2,23 +2,24 @@ package com.hendraanggrian.packr
 
 import com.badlogicgames.packr.Packr
 import com.badlogicgames.packr.PackrConfig
+import java.awt.Desktop
+import java.io.File
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
-import java.awt.Desktop
-import java.io.File
 
 /** Task that will generate native distribution on each platform. */
 open class PackTask : DefaultTask() {
 
     @Input lateinit var extension: PackrExtension
-    @Input lateinit var platform: PackrConfig.Platform
+    @Input lateinit var platform: Platform
 
     init {
         // always consider this task out of date
         outputs.upToDateWhen { false }
     }
 
+    /** Start packing distribution if platform is configured. Otherwise, skip packing process. */
     @TaskAction fun pack() {
         val distribution = extension[platform]
         if (distribution == null) {
@@ -81,5 +82,5 @@ open class PackTask : DefaultTask() {
         }
     }
 
-    private fun File.isJar(): Boolean = extension == "jar"
+    private fun File.isJar(): Boolean = isFile && extension == "jar"
 }
