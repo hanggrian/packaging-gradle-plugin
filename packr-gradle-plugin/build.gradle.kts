@@ -29,6 +29,7 @@ dependencies {
     implementation(packr())
 
     testImplementation(kotlin("test-junit", VERSION_KOTLIN))
+    testImplementation(google("truth", VERSION_TRUTH))
 
     ktlint {
         invoke(ktlint())
@@ -37,7 +38,7 @@ dependencies {
 
 tasks {
     register("deploy") {
-        dependsOn("build")
+        mustRunAfter("build")
         projectDir.resolve("build/libs/$RELEASE_ARTIFACT-$RELEASE_VERSION.jar").let {
             if (it.exists()) {
                 it.renameTo(rootDir.resolve("demo/${it.name}"))

@@ -2,11 +2,11 @@ package com.hendraanggrian.packr
 
 import com.badlogicgames.packr.Packr
 import com.badlogicgames.packr.PackrConfig
-import java.awt.Desktop
-import java.io.File
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
+import java.awt.Desktop
+import java.io.File
 
 /** Task that will generate native distribution on each platform. */
 open class PackTask : DefaultTask() {
@@ -37,8 +37,8 @@ open class PackTask : DefaultTask() {
         config.vmArgs = extension.vmArgs + distribution.vmArgs
         config.resources = extension.resources.toList()
         config.minimizeJre = extension.minimizeJre
-        config.outDir = extension.outputDir.resolve(distribution.name ?: project.name)
-        extension.cacheJreDirectory?.let { config.cacheJre = File(it) }
+        config.outDir = extension.outputDir.resolve(distribution.name)
+        extension.cacheJreDir?.let { config.cacheJre = it }
         config.verbose = extension.isVerbose
 
         if (distribution is MacOSDistribution) {

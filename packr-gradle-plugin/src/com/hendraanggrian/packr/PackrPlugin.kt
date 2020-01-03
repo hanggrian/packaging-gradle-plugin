@@ -6,50 +6,51 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.invoke
-import org.gradle.kotlin.dsl.provideDelegate // ktlint-disable
+import org.gradle.kotlin.dsl.provideDelegate
+import org.gradle.kotlin.dsl.register
 import org.gradle.kotlin.dsl.registering
 
 class PackrPlugin : Plugin<Project> {
 
     companion object {
-        const val GROUP_NAME = "packaging"
+        const val GROUP_NAME = "packr"
     }
 
     override fun apply(project: Project) {
-        val ext = project.extensions.create<PackrExtension>(GROUP_NAME, project)
+        val ext = project.extensions.create<PackrExtension>(GROUP_NAME, project.name, project.projectDir)
         ext.outputDir = project.buildDir.resolve("releases")
         project.tasks {
             val packWindows32 by registering(PackTask::class) {
                 group = GROUP_NAME
-                description = "Pack JARs in Windows x86 executable."
+                description = "Pack JARs in Windows 32-bit executable."
                 extension = ext
                 platform = PackrConfig.Platform.Windows32
             }
             val packWindows64 by registering(PackTask::class) {
                 group = GROUP_NAME
-                description = "Pack JARs in Windows x64 executable."
+                description = "Pack JARs in Windows 64-bit executable."
                 extension = ext
                 platform = PackrConfig.Platform.Windows64
             }
             val packLinux32 by registering(PackTask::class) {
                 group = GROUP_NAME
-                description = "Pack JARs in Linux x86 executable."
+                description = "Pack JARs in Linux 32-bit executable."
                 extension = ext
                 platform = PackrConfig.Platform.Linux32
             }
             val packLinux64 by registering(PackTask::class) {
                 group = GROUP_NAME
-                description = "Pack JARs in Linux x64 executable."
+                description = "Pack JARs in Linux 64-bit executable."
                 extension = ext
                 platform = PackrConfig.Platform.Linux64
             }
             val packMacOS by registering(PackTask::class) {
                 group = GROUP_NAME
-                description = "Pack JARs in macOS x64 executable."
+                description = "Pack JARs in macOS executable."
                 extension = ext
                 platform = PackrConfig.Platform.MacOS
             }
-            val packAll by registering {
+            register<PackTask>("packAll") {
                 description = "Pack JARs for all supported platforms."
                 group = GROUP_NAME
                 dependsOn(

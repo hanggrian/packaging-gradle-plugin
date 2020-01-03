@@ -2,7 +2,7 @@ package com.hendraanggrian.packr
 
 import org.junit.Test
 
-class PackrExtensionTest {
+class PackrExtensionGroovyTest {
 
     @Test
     void extension() {

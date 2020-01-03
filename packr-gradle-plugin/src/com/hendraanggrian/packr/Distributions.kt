@@ -2,22 +2,25 @@ package com.hendraanggrian.packr
 
 import com.badlogicgames.packr.PackrConfig
 import java.io.File
-import org.gradle.api.Project
+import java.io.Serializable
 
 /** Delimits a distribution DSL in Gradle Kotlin DSL scripts. */
 @DslMarker
 @Target(AnnotationTarget.CLASS)
 annotation class PackrDslMarker
 
+/**
+ * Represents a platform-specific configuration.
+ *
+ * @param name file name of this distribution that will be generated.
+ * @param platform target platform
+ */
 @PackrDslMarker
-interface DistributionBuilder : VmArged {
+open class Distribution(var name: String, val platform: PackrConfig.Platform) : VmArged, Serializable {
 
-    /** File name of this distribution that will be generated. */
-    var name: String?
-
-    /** Groovy-friendly method. */
-    fun name(value: String) {
-        name = value
+    /** Groovy-friendly method to set distribution name. */
+    fun name(distributionName: String) {
+        name = distributionName
     }
 
     /**
@@ -25,59 +28,52 @@ interface DistributionBuilder : VmArged {
      * this distribution.
      * Default is Java Home path, if any.
      */
-    var jdk: String?
+    var jdk: String? = System.getenv("JAVA_HOME") ?: System.getProperty("java.home")
 
-    /** Groovy-friendly method. */
-    fun jdk(value: String) {
-        jdk = value
+    /** Groovy-friendly method to set JDK path. */
+    fun jdk(path: String) {
+        jdk = path
     }
+
+    /**
+     * To avoid overwriting distributions with the same name,
+     * the output name will have a platform suffix separated by dash.
+     */
+    val outputName: String = "$name-$platform"
+
+    override var vmArgs: Iterable<String> = emptyList()
+    override fun hashCode(): Int = platform.hashCode()
+    override fun equals(other: Any?): Boolean = other != null && other is Distribution && other.platform == platform
 }
 
+/**
+ * Represents a macOS distribution configuration, providing extra properties only relevant in macOS.
+ *
+ * @param name file name of this distribution that will be generated.
+ * @param projectDir working directory of [org.gradle.api.Project] needed to point relative paths.
+ */
 @PackrDslMarker
-interface MacOSDistributionBuilder : DistributionBuilder {
+class MacOSDistribution(name: String, private val projectDir: File) : Distribution(name, PackrConfig.Platform.MacOS) {
 
     /**
      * Location of an AppBundle icon resource (.icns file) relative to project directory.
      * This is an optional property.
      */
-    var icon: File?
+    var icon: File? = null
 
     /** Convenient method to set icon resource from file path, relative to project directory. */
-    fun icon(value: String)
+    fun icon(relativePath: String) {
+        icon = projectDir.resolve(relativePath)
+    }
 
     /**
      * The bundle identifier of your Java application, e.g. `com.my.app`.
      * This is an optional property.
      */
-    var bundleId: String?
+    var bundleId: String? = null
 
-    /** Groovy-friendly method. */
-    fun bundleId(value: String) {
-        bundleId = value
+    /** Groovy-friendly method to set bundle identifier. */
+    fun bundleId(id: String) {
+        bundleId = id
     }
-}
-
-internal open class Distribution(val project: Project, val platform: PackrConfig.Platform) : DistributionBuilder {
-
-    override var name: String? = "${project.name}-$platform"
-
-    override var jdk: String? = System.getenv("JAVA_HOME") ?: System.getProperty("java.home")
-
-    override var vmArgs: Iterable<String> = emptyList()
-
-    override fun hashCode(): Int = platform.hashCode()
-
-    override fun equals(other: Any?): Boolean = other != null && other is Distribution && other.platform == platform
-}
-
-internal class MacOSDistribution(project: Project) : Distribution(project, PackrConfig.Platform.MacOS),
-    MacOSDistributionBuilder {
-
-    override var icon: File? = null
-
-    override fun icon(value: String) {
-        icon = project.projectDir.resolve(value)
-    }
-
-    override var bundleId: String? = null
 }
