@@ -8,16 +8,16 @@
 <a href="../../index.html">packr-gradle-plugin</a>&nbsp;/&nbsp;<a href="../index.html">com.hendraanggrian.packr</a>&nbsp;/&nbsp;<a href="./index.html">PackrExtension</a><br/>
 <br/>
 <h1>PackrExtension</h1>
-<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">PackrExtension</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-vm-arged/index.html"><span class="identifier">VmArged</span></a></code>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">PackrExtension</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">PackrConfiguration</span></code>
 <h3>Constructors</h3>
 <table>
 <tbody>
 <tr>
 <td>
-<p><a href="-init-.html">&lt;init&gt;</a></p>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
 </td>
 <td>
-<code><span class="identifier">PackrExtension</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$<init>(org.gradle.api.Project)/project">project</span><span class="symbol">:</span>&nbsp;<span class="identifier">Project</span><span class="symbol">)</span></code></td>
+<code><span class="identifier">PackrExtension</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$<init>(kotlin.String, java.io.File)/projectName">projectName</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$<init>(kotlin.String, java.io.File)/projectDir">projectDir</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">)</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -26,101 +26,109 @@
 <tbody>
 <tr>
 <td>
-<p><a href="classpath.html">classpath</a></p>
+<h4><a href="cache-jre-dir.html">cacheJreDir</a></h4>
 </td>
 <td>
-<code><span class="keyword">var </span><span class="identifier">classpath</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html"><span class="identifier">Iterable</span></a><span class="symbol">&lt;</span><a href="https://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">&gt;</span></code>
+<p>An optional directory to cache the result of JRE extraction and minimization.
+Default is disabled.</p>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">cacheJreDir</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="classpath.html">classpath</a></h4>
+</td>
+<td>
 <p>File locations of the JAR files to package.
 Default is empty.</p>
-</td>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">classpath</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html"><span class="identifier">Iterable</span></a><span class="symbol">&lt;</span><a href="https://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="executable.html">executable</a></p>
+<h4><a href="executable.html">executable</a></h4>
 </td>
 <td>
-<code><span class="keyword">var </span><span class="identifier">executable</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code>
 <p>Name of the native executable, without extension such as <code>.exe</code>.
 Default is project's name.</p>
-</td>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">executable</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="main-class.html">mainClass</a></p>
+<h4><a href="is-auto-open.html">isAutoOpen</a></h4>
 </td>
 <td>
-<code><span class="keyword">var </span><span class="identifier">mainClass</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code>
+<p>An optional property which, when enabled, opens <a href="#">outputDir</a> upon packing completion.</p>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">isAutoOpen</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="is-verbose.html">isVerbose</a></h4>
+</td>
+<td>
+<p>An optional property which, when enabled, prints extra messages about JRE minimization.</p>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">isVerbose</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="main-class.html">mainClass</a></h4>
+</td>
+<td>
 <p>The fully qualified name of the main class, using dots to delimit package names.
 Must be defined or will throw an exception.</p>
-</td>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">mainClass</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="minimize-jre.html">minimizeJre</a></p>
+<h4><a href="minimize-jre.html">minimizeJre</a></h4>
 </td>
 <td>
-<code><span class="keyword">var </span><span class="identifier">minimizeJre</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
 <p>Minimize the JRE by removing directories and files as specified by an additional config file.
 Comes with a few config files out of the box.
-Default is <code>soft</code>.</p>
-</td>
+Default is <a href="-m-i-n-i-m-i-z-a-t-i-o-n_-s-o-f-t.html">PackrExtension.MINIMIZATION_SOFT</a>.</p>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">minimizeJre</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="open-on-done.html">openOnDone</a></p>
+<h4><a href="output-dir.html">outputDir</a></h4>
 </td>
 <td>
-<code><span class="keyword">var </span><span class="identifier">openOnDone</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
-<p>An optional property which, when enabled, opens <a href="output-directory.html">outputDirectory</a> upon packing completion.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="output-dir.html">outputDir</a></p>
-</td>
-<td>
-<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">outputDir</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a></code>
 <p>The output directory.
 Default is <code>release</code> directory in project's build directory.</p>
-</td>
+<code><span class="keyword">open</span> <span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">outputDir</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="output-directory.html">outputDirectory</a></p>
+<h4><a href="project-dir.html">projectDir</a></h4>
 </td>
 <td>
-<code><span class="keyword">var </span><span class="identifier">outputDirectory</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
-<p>Convenient method to set output directory from file path, relative to project directory.</p>
-</td>
+<p>Working directory of a <a href="#">org.gradle.api.Project</a>.</p>
+<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">projectDir</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="resources.html">resources</a></p>
+<h4><a href="remove-platform-libs.html">removePlatformLibs</a></h4>
 </td>
 <td>
-<code><span class="keyword">var </span><span class="identifier">resources</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html"><span class="identifier">Iterable</span></a><span class="symbol">&lt;</span><a href="https://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">&gt;</span></code>
+<p>File locations of JAR files to remove native libraries which do not match the target platform.
+Default is empty.</p>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">removePlatformLibs</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html"><span class="identifier">Iterable</span></a><span class="symbol">&lt;</span><a href="https://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="resources.html">resources</a></h4>
+</td>
+<td>
 <p>List of files and directories to be packaged next to the native executable.
 Default is empty.</p>
-</td>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">resources</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html"><span class="identifier">Iterable</span></a><span class="symbol">&lt;</span><a href="https://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="verbose.html">verbose</a></p>
+<h4><a href="vm-args.html">vmArgs</a></h4>
 </td>
 <td>
-<code><span class="keyword">var </span><span class="identifier">verbose</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
-<p>An optional property which, when enabled, prints extra messages about JRE minimizeJre.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="vm-args.html">vmArgs</a></p>
-</td>
-<td>
-<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">vmArgs</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html"><span class="identifier">Iterable</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
 <p>List of arguments for the JVM, without leading dashes, e.g. <code>Xmx1G</code>.
 Default is empty.</p>
-</td>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">vmArgs</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html"><span class="identifier">Iterable</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -129,136 +137,121 @@ Default is empty.</p>
 <tbody>
 <tr>
 <td>
-<p><a href="classpath.html">classpath</a></p>
+<h4><a href="configure-linux32.html">configureLinux32</a></h4>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">classpath</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="com.hendraanggrian.packr.PackrExtension$classpath(kotlin.Array((kotlin.String)))/classpath">classpath</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Convenient method to add classpath from file path, relative to project directory.</p>
-</td>
+<p>Enable Linux 32-bit distribution with default configuration.</p>
+<code><span class="keyword">fun </span><span class="identifier">configureLinux32</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Enable Linux 32-bit distribution with customized <a href="configure-linux32.html#com.hendraanggrian.packr.PackrExtension$configureLinux32(org.gradle.api.Action((com.hendraanggrian.packr.Distribution)))/configuration">configuration</a>.</p>
+<code><span class="keyword">fun </span><span class="identifier">configureLinux32</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$configureLinux32(org.gradle.api.Action((com.hendraanggrian.packr.Distribution)))/configuration">configuration</span><span class="symbol">:</span>&nbsp;<span class="identifier">Action</span><span class="symbol">&lt;</span><a href="../-distribution/index.html"><span class="identifier">Distribution</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="configure-linux32.html">configureLinux32</a></p>
+<h4><a href="configure-linux64.html">configureLinux64</a></h4>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">configureLinux32</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
-<code><span class="keyword">fun </span><span class="identifier">configureLinux32</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$configureLinux32(org.gradle.api.Action((com.hendraanggrian.packr.DistributionBuilder)))/action">action</span><span class="symbol">:</span>&nbsp;<span class="identifier">Action</span><span class="symbol">&lt;</span><a href="../-distribution-builder/index.html"><span class="identifier">DistributionBuilder</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Configure Linux 32-bit distribution with Groovy closure.</p>
-</td>
+<p>Enable Linux 64-bit distribution with default configuration.</p>
+<code><span class="keyword">fun </span><span class="identifier">configureLinux64</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Enable Linux 64-bit distribution with customized <a href="configure-linux64.html#com.hendraanggrian.packr.PackrExtension$configureLinux64(org.gradle.api.Action((com.hendraanggrian.packr.Distribution)))/configuration">configuration</a>.</p>
+<code><span class="keyword">fun </span><span class="identifier">configureLinux64</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$configureLinux64(org.gradle.api.Action((com.hendraanggrian.packr.Distribution)))/configuration">configuration</span><span class="symbol">:</span>&nbsp;<span class="identifier">Action</span><span class="symbol">&lt;</span><a href="../-distribution/index.html"><span class="identifier">Distribution</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="configure-linux64.html">configureLinux64</a></p>
+<h4><a href="configure-mac-o-s.html">configureMacOS</a></h4>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">configureLinux64</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
-<code><span class="keyword">fun </span><span class="identifier">configureLinux64</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$configureLinux64(org.gradle.api.Action((com.hendraanggrian.packr.DistributionBuilder)))/action">action</span><span class="symbol">:</span>&nbsp;<span class="identifier">Action</span><span class="symbol">&lt;</span><a href="../-distribution-builder/index.html"><span class="identifier">DistributionBuilder</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Configure Linux 64-bit distribution with Groovy closure.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="configure-mac-o-s.html">configureMacOS</a></p>
-</td>
-<td>
+<p>Enable macOS distribution with default configuration.</p>
 <code><span class="keyword">fun </span><span class="identifier">configureMacOS</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Configure macOS distribution.
-Unlike other distributions, mac configuration have some OS-specific properties.</p>
-<code><span class="keyword">fun </span><span class="identifier">configureMacOS</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$configureMacOS(org.gradle.api.Action((com.hendraanggrian.packr.MacOSDistributionBuilder)))/action">action</span><span class="symbol">:</span>&nbsp;<span class="identifier">Action</span><span class="symbol">&lt;</span><a href="../-mac-o-s-distribution-builder/index.html"><span class="identifier">MacOSDistributionBuilder</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Configure macOS distribution with Groovy closure.
-Unlike other distributions, mac configuration have some OS-specific properties.</p>
-</td>
+<p>Enable macOS distribution with customized <a href="configure-mac-o-s.html#com.hendraanggrian.packr.PackrExtension$configureMacOS(org.gradle.api.Action((com.hendraanggrian.packr.MacOSDistribution)))/configuration">configuration</a>.
+Unlike other distributions, macOS configuration have some OS-specific properties.</p>
+<code><span class="keyword">fun </span><span class="identifier">configureMacOS</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$configureMacOS(org.gradle.api.Action((com.hendraanggrian.packr.MacOSDistribution)))/configuration">configuration</span><span class="symbol">:</span>&nbsp;<span class="identifier">Action</span><span class="symbol">&lt;</span><a href="../-mac-o-s-distribution/index.html"><span class="identifier">MacOSDistribution</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="configure-windows32.html">configureWindows32</a></p>
+<h4><a href="configure-windows32.html">configureWindows32</a></h4>
 </td>
 <td>
+<p>Enable Windows 32-bit distribution with default configuration.</p>
 <code><span class="keyword">fun </span><span class="identifier">configureWindows32</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Configure Windows 32-bit distribution.</p>
-<code><span class="keyword">fun </span><span class="identifier">configureWindows32</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$configureWindows32(org.gradle.api.Action((com.hendraanggrian.packr.DistributionBuilder)))/action">action</span><span class="symbol">:</span>&nbsp;<span class="identifier">Action</span><span class="symbol">&lt;</span><a href="../-distribution-builder/index.html"><span class="identifier">DistributionBuilder</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Configure Windows 32-bit distribution with Groovy closure.</p>
-</td>
+<p>Enable Windows 32-bit distribution with customized <a href="configure-windows32.html#com.hendraanggrian.packr.PackrExtension$configureWindows32(org.gradle.api.Action((com.hendraanggrian.packr.Distribution)))/configuration">configuration</a>.</p>
+<code><span class="keyword">fun </span><span class="identifier">configureWindows32</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$configureWindows32(org.gradle.api.Action((com.hendraanggrian.packr.Distribution)))/configuration">configuration</span><span class="symbol">:</span>&nbsp;<span class="identifier">Action</span><span class="symbol">&lt;</span><a href="../-distribution/index.html"><span class="identifier">Distribution</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="configure-windows64.html">configureWindows64</a></p>
+<h4><a href="configure-windows64.html">configureWindows64</a></h4>
 </td>
 <td>
+<p>Enable Windows 64-bit distribution with default configuration.</p>
 <code><span class="keyword">fun </span><span class="identifier">configureWindows64</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Configure Windows 64-bit distribution.</p>
-<code><span class="keyword">fun </span><span class="identifier">configureWindows64</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$configureWindows64(org.gradle.api.Action((com.hendraanggrian.packr.DistributionBuilder)))/action">action</span><span class="symbol">:</span>&nbsp;<span class="identifier">Action</span><span class="symbol">&lt;</span><a href="../-distribution-builder/index.html"><span class="identifier">DistributionBuilder</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Configure Windows 64-bit distribution with Groovy closure.</p>
-</td>
+<p>Enable Windows 64-bit distribution with customized <a href="configure-windows64.html#com.hendraanggrian.packr.PackrExtension$configureWindows64(org.gradle.api.Action((com.hendraanggrian.packr.Distribution)))/configuration">configuration</a>.</p>
+<code><span class="keyword">fun </span><span class="identifier">configureWindows64</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$configureWindows64(org.gradle.api.Action((com.hendraanggrian.packr.Distribution)))/configuration">configuration</span><span class="symbol">:</span>&nbsp;<span class="identifier">Action</span><span class="symbol">&lt;</span><a href="../-distribution/index.html"><span class="identifier">Distribution</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="linux32.html">linux32</a></p>
+<h4><a href="linux32.html">linux32</a></h4>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">linux32</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$linux32(kotlin.Function1((com.hendraanggrian.packr.DistributionBuilder, kotlin.Unit)))/action">action</span><span class="symbol">:</span>&nbsp;<a href="../-distribution-builder/index.html"><span class="identifier">DistributionBuilder</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Configure Linux 32-bit distribution with Kotlin DSL.</p>
-</td>
+<p>Enable Linux 32-bit distribution with customized <a href="linux32.html#com.hendraanggrian.packr.PackrExtension$linux32(kotlin.Function1((com.hendraanggrian.packr.Distribution, kotlin.Unit)))/configuration">configuration</a> in Kotlin DSL.</p>
+<code><span class="keyword">fun </span><span class="identifier">linux32</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$linux32(kotlin.Function1((com.hendraanggrian.packr.Distribution, kotlin.Unit)))/configuration">configuration</span><span class="symbol">:</span>&nbsp;<a href="../-distribution/index.html"><span class="identifier">Distribution</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="linux64.html">linux64</a></p>
+<h4><a href="linux64.html">linux64</a></h4>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">linux64</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$linux64(org.gradle.api.Action((com.hendraanggrian.packr.DistributionBuilder)))/action">action</span><span class="symbol">:</span>&nbsp;<span class="identifier">Action</span><span class="symbol">&lt;</span><a href="../-distribution-builder/index.html"><span class="identifier">DistributionBuilder</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Configure Linux 64-bit distribution with Kotlin DSL.</p>
-</td>
+<p>Enable Linux 64-bit distribution with customized <a href="linux64.html#com.hendraanggrian.packr.PackrExtension$linux64(kotlin.Function1((com.hendraanggrian.packr.Distribution, kotlin.Unit)))/configuration">configuration</a> in Kotlin DSL.</p>
+<code><span class="keyword">fun </span><span class="identifier">linux64</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$linux64(kotlin.Function1((com.hendraanggrian.packr.Distribution, kotlin.Unit)))/configuration">configuration</span><span class="symbol">:</span>&nbsp;<a href="../-distribution/index.html"><span class="identifier">Distribution</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="mac-o-s.html">macOS</a></p>
+<h4><a href="mac-o-s.html">macOS</a></h4>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">macOS</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$macOS(kotlin.Function1((com.hendraanggrian.packr.MacOSDistributionBuilder, kotlin.Unit)))/action">action</span><span class="symbol">:</span>&nbsp;<a href="../-mac-o-s-distribution-builder/index.html"><span class="identifier">MacOSDistributionBuilder</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Configure macOS distribution with Kotlin DSL.
-Unlike other distributions, mac configuration have some OS-specific properties.</p>
-</td>
+<p>Enable macOS distribution with customized <a href="mac-o-s.html#com.hendraanggrian.packr.PackrExtension$macOS(kotlin.Function1((com.hendraanggrian.packr.MacOSDistribution, kotlin.Unit)))/configuration">configuration</a> in Kotlin DSL.
+Unlike other distributions, macOS configuration have some OS-specific properties.</p>
+<code><span class="keyword">fun </span><span class="identifier">macOS</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$macOS(kotlin.Function1((com.hendraanggrian.packr.MacOSDistribution, kotlin.Unit)))/configuration">configuration</span><span class="symbol">:</span>&nbsp;<a href="../-mac-o-s-distribution/index.html"><span class="identifier">MacOSDistribution</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="resources.html">resources</a></p>
+<h4><a href="windows32.html">windows32</a></h4>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">resources</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="com.hendraanggrian.packr.PackrExtension$resources(kotlin.Array((kotlin.String)))/resources">resources</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Convenient method to add resources directory from file path, relative to project directory.</p>
-</td>
+<p>Enable Windows 32-bit distribution with customized <a href="windows32.html#com.hendraanggrian.packr.PackrExtension$windows32(kotlin.Function1((com.hendraanggrian.packr.Distribution, kotlin.Unit)))/configuration">configuration</a> in Kotlin DSL.</p>
+<code><span class="keyword">fun </span><span class="identifier">windows32</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$windows32(kotlin.Function1((com.hendraanggrian.packr.Distribution, kotlin.Unit)))/configuration">configuration</span><span class="symbol">:</span>&nbsp;<a href="../-distribution/index.html"><span class="identifier">Distribution</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="windows32.html">windows32</a></p>
+<h4><a href="windows64.html">windows64</a></h4>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">windows32</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$windows32(kotlin.Function1((com.hendraanggrian.packr.DistributionBuilder, kotlin.Unit)))/action">action</span><span class="symbol">:</span>&nbsp;<a href="../-distribution-builder/index.html"><span class="identifier">DistributionBuilder</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Configure Windows 32-bit distribution with Kotlin DSL.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="windows64.html">windows64</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">windows64</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$windows64(kotlin.Function1((com.hendraanggrian.packr.DistributionBuilder, kotlin.Unit)))/action">action</span><span class="symbol">:</span>&nbsp;<a href="../-distribution-builder/index.html"><span class="identifier">DistributionBuilder</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Configure Windows 64-bit distribution with Kotlin DSL.</p>
-</td>
+<p>Enable Windows 64-bit distribution with customized <a href="windows64.html#com.hendraanggrian.packr.PackrExtension$windows64(kotlin.Function1((com.hendraanggrian.packr.Distribution, kotlin.Unit)))/configuration">configuration</a> in Kotlin DSL.</p>
+<code><span class="keyword">fun </span><span class="identifier">windows64</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.PackrExtension$windows64(kotlin.Function1((com.hendraanggrian.packr.Distribution, kotlin.Unit)))/configuration">configuration</span><span class="symbol">:</span>&nbsp;<a href="../-distribution/index.html"><span class="identifier">Distribution</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 </tbody>
 </table>
-<h3>Inherited Functions</h3>
+<h3>Companion Object Properties</h3>
 <table>
 <tbody>
 <tr>
 <td>
-<p><a href="../-vm-arged/vm-args.html">vmArgs</a></p>
+<h4><a href="-m-i-n-i-m-i-z-a-t-i-o-n_-h-a-r-d.html">MINIMIZATION_HARD</a></h4>
 </td>
 <td>
-<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">vmArgs</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="com.hendraanggrian.packr.VmArged$vmArgs(kotlin.Array((kotlin.String)))/args">args</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Convenient method to add vm arguments.</p>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">MINIMIZATION_HARD</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-m-i-n-i-m-i-z-a-t-i-o-n_-o-r-a-c-l-e-j-r-e8.html">MINIMIZATION_ORACLEJRE8</a></h4>
 </td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">MINIMIZATION_ORACLEJRE8</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-m-i-n-i-m-i-z-a-t-i-o-n_-s-o-f-t.html">MINIMIZATION_SOFT</a></h4>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">MINIMIZATION_SOFT</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 </tbody>
 </table>

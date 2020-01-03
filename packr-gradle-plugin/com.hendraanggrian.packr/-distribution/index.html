@@ -1,0 +1,120 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Distribution - packr-gradle-plugin</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">packr-gradle-plugin</a>&nbsp;/&nbsp;<a href="../index.html">com.hendraanggrian.packr</a>&nbsp;/&nbsp;<a href="./index.html">Distribution</a><br/>
+<br/>
+<h1>Distribution</h1>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Distribution</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">VmArged</span><span class="symbol">, </span><a href="https://docs.oracle.com/javase/6/docs/api/java/io/Serializable.html"><span class="identifier">Serializable</span></a></code>
+<p>Represents a platform-specific configuration.</p>
+<h3>Parameters</h3>
+<p><a name="platform"></a>
+<code>platform</code> - target platform of this distribution.</p>
+<p><a name="name"></a>
+<code>name</code> - file name of this distribution that will be generated. Default is project's name.</p>
+<p><a name="jdk"></a>
+<code>jdk</code> - directory, ZIP file, or URL to ZIP file of an OpenJDK or Oracle JDK build containing a JRE used to build this distribution. Default is Java Home environment variable, if any.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>Represents a platform-specific configuration.</p>
+<code><span class="identifier">Distribution</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.Distribution$<init>(com.badlogicgames.packr.PackrConfig.Platform, kotlin.String, kotlin.String)/platform">platform</span><span class="symbol">:</span>&nbsp;<a href="../-platform.html"><span class="identifier">Platform</span></a><span class="symbol">, </span><span class="identifier" id="com.hendraanggrian.packr.Distribution$<init>(com.badlogicgames.packr.PackrConfig.Platform, kotlin.String, kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.hendraanggrian.packr.Distribution$<init>(com.badlogicgames.packr.PackrConfig.Platform, kotlin.String, kotlin.String)/jdk">jdk</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;System.getenv("JAVA_HOME") ?: System.getProperty("java.home")<span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="jdk.html">jdk</a></h4>
+</td>
+<td>
+<p>directory, ZIP file, or URL to ZIP file of an OpenJDK or Oracle JDK build containing a JRE used to build this distribution. Default is Java Home environment variable, if any.</p>
+<code><span class="keyword">var </span><span class="identifier">jdk</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="name.html">name</a></h4>
+</td>
+<td>
+<p>file name of this distribution that will be generated. Default is project's name.</p>
+<code><span class="keyword">var </span><span class="identifier">name</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="platform.html">platform</a></h4>
+</td>
+<td>
+<p>target platform of this distribution.</p>
+<code><span class="keyword">val </span><span class="identifier">platform</span><span class="symbol">: </span><a href="../-platform.html"><span class="identifier">Platform</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="vm-args.html">vmArgs</a></h4>
+</td>
+<td>
+<p>List of arguments for the JVM, without leading dashes, e.g. <code>Xmx1G</code>.
+Default is empty.</p>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">vmArgs</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html"><span class="identifier">Iterable</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="equals.html">equals</a></h4>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">equals</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.Distribution$equals(kotlin.Any)/other">other</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="hash-code.html">hashCode</a></h4>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">hashCode</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="jdk.html">jdk</a></h4>
+</td>
+<td>
+<p>Groovy-friendly method to set JDK path.</p>
+<code><span class="keyword">fun </span><span class="identifier">jdk</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.Distribution$jdk(kotlin.String)/path">path</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="name.html">name</a></h4>
+</td>
+<td>
+<p>Groovy-friendly method to set distribution name.</p>
+<code><span class="keyword">fun </span><span class="identifier">name</span><span class="symbol">(</span><span class="identifier" id="com.hendraanggrian.packr.Distribution$name(kotlin.String)/distributionName">distributionName</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="../-mac-o-s-distribution/index.html">MacOSDistribution</a></h4>
+</td>
+<td>
+<p>Represents a macOS distribution configuration, providing extra properties only relevant in macOS.</p>
+<code><span class="keyword">class </span><span class="identifier">MacOSDistribution</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Distribution</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

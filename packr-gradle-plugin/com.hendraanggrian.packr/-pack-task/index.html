@@ -8,19 +8,18 @@
 <a href="../../index.html">packr-gradle-plugin</a>&nbsp;/&nbsp;<a href="../index.html">com.hendraanggrian.packr</a>&nbsp;/&nbsp;<a href="./index.html">PackTask</a><br/>
 <br/>
 <h1>PackTask</h1>
-<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">PackTask</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">DefaultTask</span></code>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">PackTask</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">DefaultTask</span><span class="symbol">, </span><span class="identifier">PackrConfiguration</span></code>
 <p>Task that will generate native distribution on each platform.</p>
 <h3>Constructors</h3>
 <table>
 <tbody>
 <tr>
 <td>
-<p><a href="-init-.html">&lt;init&gt;</a></p>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
 </td>
 <td>
-<code><span class="identifier">PackTask</span><span class="symbol">(</span><span class="symbol">)</span></code>
 <p>Task that will generate native distribution on each platform.</p>
-</td>
+<code><span class="identifier">PackTask</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -29,17 +28,139 @@
 <tbody>
 <tr>
 <td>
-<p><a href="extension.html">extension</a></p>
+<h4><a href="cache-jre-dir.html">cacheJreDir</a></h4>
 </td>
 <td>
-<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">extension</span><span class="symbol">: </span><a href="../-packr-extension/index.html"><span class="identifier">PackrExtension</span></a></code></td>
+<p>An optional directory to cache the result of JRE extraction and minimization.
+Default is disabled.</p>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">cacheJreDir</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">?</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="platform.html">platform</a></p>
+<h4><a href="cache-jre-directory.html">cacheJreDirectory</a></h4>
 </td>
 <td>
-<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">platform</span><span class="symbol">: </span><span class="identifier">Platform</span></code></td>
+<p>Convenient method to set JRE cache directory from file path, relative to project directory.</p>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">cacheJreDirectory</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="classpath.html">classpath</a></h4>
+</td>
+<td>
+<p>File locations of the JAR files to package.
+Default is empty.</p>
+<code><span class="keyword">open</span> <span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">classpath</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html"><span class="identifier">Iterable</span></a><span class="symbol">&lt;</span><a href="https://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="distribution.html">distribution</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">distribution</span><span class="symbol">: </span><a href="../-distribution/index.html"><span class="identifier">Distribution</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="executable.html">executable</a></h4>
+</td>
+<td>
+<p>Name of the native executable, without extension such as <code>.exe</code>.
+Default is project's name.</p>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">executable</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="is-auto-open.html">isAutoOpen</a></h4>
+</td>
+<td>
+<p>An optional property which, when enabled, opens <a href="#">outputDir</a> upon packing completion.</p>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">isAutoOpen</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="is-verbose.html">isVerbose</a></h4>
+</td>
+<td>
+<p>An optional property which, when enabled, prints extra messages about JRE minimization.</p>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">isVerbose</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="main-class.html">mainClass</a></h4>
+</td>
+<td>
+<p>The fully qualified name of the main class, using dots to delimit package names.
+Must be defined or will throw an exception.</p>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">mainClass</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="minimize-jre.html">minimizeJre</a></h4>
+</td>
+<td>
+<p>Minimize the JRE by removing directories and files as specified by an additional config file.
+Comes with a few config files out of the box.
+Default is <a href="../-packr-extension/-m-i-n-i-m-i-z-a-t-i-o-n_-s-o-f-t.html">PackrExtension.MINIMIZATION_SOFT</a>.</p>
+<code><span class="keyword">open</span> <span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">minimizeJre</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="output-dir.html">outputDir</a></h4>
+</td>
+<td>
+<p>The output directory.
+Default is <code>release</code> directory in project's build directory.</p>
+<code><span class="keyword">open</span> <span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">outputDir</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="output-directory.html">outputDirectory</a></h4>
+</td>
+<td>
+<p>Convenient method to set output directory from file path, relative to project directory.</p>
+<code><span class="keyword">open</span> <span class="keyword">var </span><span class="identifier">outputDirectory</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="platform.html">platform</a></h4>
+</td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">platform</span><span class="symbol">: </span><a href="../-platform.html"><span class="identifier">Platform</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="project-dir.html">projectDir</a></h4>
+</td>
+<td>
+<p>Working directory of a <a href="#">org.gradle.api.Project</a>.</p>
+<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">projectDir</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="remove-platform-libs.html">removePlatformLibs</a></h4>
+</td>
+<td>
+<p>File locations of JAR files to remove native libraries which do not match the target platform.
+Default is empty.</p>
+<code><span class="keyword">open</span> <span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">removePlatformLibs</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html"><span class="identifier">Iterable</span></a><span class="symbol">&lt;</span><a href="https://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="resources.html">resources</a></h4>
+</td>
+<td>
+<p>List of files and directories to be packaged next to the native executable.
+Default is empty.</p>
+<code><span class="keyword">open</span> <span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">resources</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html"><span class="identifier">Iterable</span></a><span class="symbol">&lt;</span><a href="https://docs.oracle.com/javase/6/docs/api/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="vm-args.html">vmArgs</a></h4>
+</td>
+<td>
+<p>List of arguments for the JVM, without leading dashes, e.g. <code>Xmx1G</code>.
+Default is empty.</p>
+<code><span class="keyword">open</span> <span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">vmArgs</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html"><span class="identifier">Iterable</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -48,9 +169,10 @@
 <tbody>
 <tr>
 <td>
-<p><a href="pack.html">pack</a></p>
+<h4><a href="pack.html">pack</a></h4>
 </td>
 <td>
+<p>Start packing distribution if platform is configured. Otherwise, skip packing process.</p>
 <code><span class="keyword">fun </span><span class="identifier">pack</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 </tbody>

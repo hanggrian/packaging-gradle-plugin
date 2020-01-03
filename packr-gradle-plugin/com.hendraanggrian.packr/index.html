@@ -13,47 +13,48 @@
 <tbody>
 <tr>
 <td>
-<p><a href="-distribution-builder/index.html">DistributionBuilder</a></p>
+<h4><a href="-distribution/index.html">Distribution</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">DistributionBuilder</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-vm-arged/index.html"><span class="identifier">VmArged</span></a></code></td>
+<p>Represents a platform-specific configuration.</p>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Distribution</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">VmArged</span><span class="symbol">, </span><a href="https://docs.oracle.com/javase/6/docs/api/java/io/Serializable.html"><span class="identifier">Serializable</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-mac-o-s-distribution-builder/index.html">MacOSDistributionBuilder</a></p>
+<h4><a href="-mac-o-s-distribution/index.html">MacOSDistribution</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">MacOSDistributionBuilder</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-distribution-builder/index.html"><span class="identifier">DistributionBuilder</span></a></code></td>
+<p>Represents a macOS distribution configuration, providing extra properties only relevant in macOS.</p>
+<code><span class="keyword">class </span><span class="identifier">MacOSDistribution</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-distribution/index.html"><span class="identifier">Distribution</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-packr-extension/index.html">PackrExtension</a></p>
+<h4><a href="-packr-extension/index.html">PackrExtension</a></h4>
 </td>
 <td>
-<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">PackrExtension</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-vm-arged/index.html"><span class="identifier">VmArged</span></a></code></td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">PackrExtension</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">PackrConfiguration</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-packr-plugin/index.html">PackrPlugin</a></p>
+<h4><a href="-packr-plugin/index.html">PackrPlugin</a></h4>
 </td>
 <td>
 <code><span class="keyword">class </span><span class="identifier">PackrPlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Plugin</span><span class="symbol">&lt;</span><span class="identifier">Project</span><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-pack-task/index.html">PackTask</a></p>
+<h4><a href="-pack-task/index.html">PackTask</a></h4>
 </td>
 <td>
-<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">PackTask</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">DefaultTask</span></code>
 <p>Task that will generate native distribution on each platform.</p>
-</td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">PackTask</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">DefaultTask</span><span class="symbol">, </span><span class="identifier">PackrConfiguration</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-vm-arged/index.html">VmArged</a></p>
+<h4><a href="-platform.html">Platform</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">VmArged</span></code></td>
+<code><span class="keyword">typealias </span><span class="identifier">Platform</span>&nbsp;<span class="symbol">=</span>&nbsp;<span class="identifier">Platform</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -62,12 +63,11 @@
 <tbody>
 <tr>
 <td>
-<p><a href="-distribution-builder-marker/index.html">DistributionBuilderMarker</a></p>
+<h4><a href="-packr-dsl-marker/index.html">PackrDslMarker</a></h4>
 </td>
 <td>
-<code><span class="keyword">annotation</span> <span class="keyword">class </span><span class="identifier">DistributionBuilderMarker</span></code>
-<p>Delimits a distribution DSL in Gradle Kotlin DSL scripts.</p>
-</td>
+<p>Delimits a distribution DSL scripts.</p>
+<code><span class="keyword">annotation</span> <span class="keyword">class </span><span class="identifier">PackrDslMarker</span></code></td>
 </tr>
 </tbody>
 </table>
