@@ -6,7 +6,7 @@ import java.io.Serializable
 
 typealias Platform = PackrConfig.Platform
 
-/** Delimits a distribution DSL in Gradle Kotlin DSL scripts. */
+/** Delimits a distribution DSL scripts. */
 @DslMarker
 @Target(AnnotationTarget.CLASS)
 annotation class PackrDslMarker
@@ -34,12 +34,6 @@ open class Distribution(
     fun jdk(path: String) {
         jdk = path
     }
-
-    /**
-     * To avoid overwriting distributions with the same name,
-     * the output name will have a platform suffix separated by dash.
-     */
-    val outputName: String = "$name-$platform"
 
     override var vmArgs: Iterable<String> = emptyList()
     override fun hashCode(): Int = platform.hashCode()

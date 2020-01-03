@@ -6,13 +6,44 @@ import java.awt.Desktop
 import java.io.File
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputFiles
+import org.gradle.api.tasks.Internal
+import org.gradle.api.tasks.Optional
+import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 
 /** Task that will generate native distribution on each platform. */
-open class PackTask : DefaultTask() {
+open class PackTask : DefaultTask(), PackrConfiguration {
 
-    @Input lateinit var extension: PackrExtension
+    @Optional @Input var distribution: Distribution? = null
     @Input lateinit var platform: Platform
+
+    override val projectDir: File @Internal get() = project.projectDir
+
+    @Optional @Input override var executable: String? = null
+    @InputFiles override lateinit var classpath: Iterable<File>
+    @InputFiles override lateinit var removePlatformLibs: Iterable<File>
+    @Optional @Input override var mainClass: String? = null
+    @Input override lateinit var vmArgs: Iterable<String>
+    @InputFiles override lateinit var resources: Iterable<File>
+    @Input override lateinit var minimizeJre: String
+
+    @OutputDirectory override lateinit var outputDir: File
+    override var outputDirectory: String
+        @OutputDirectory get() = super.outputDirectory
+        set(value) {
+            super.outputDirectory = value
+        }
+
+    @Optional @OutputDirectory override var cacheJreDir: File? = null
+    override var cacheJreDirectory: String?
+        @Optional @OutputDirectory get() = super.cacheJreDirectory
+        set(value) {
+            super.cacheJreDirectory = value
+        }
+
+    override var isVerbose: Boolean = false @Input get
+    override var isAutoOpen: Boolean = false @Input get
 
     init {
         // always consider this task out of date
@@ -21,7 +52,6 @@ open class PackTask : DefaultTask() {
 
     /** Start packing distribution if platform is configured. Otherwise, skip packing process. */
     @TaskAction fun pack() {
-        val distribution = extension[platform]
         if (distribution == null) {
             logger.info("No configuration found for $platform")
             return
@@ -30,21 +60,21 @@ open class PackTask : DefaultTask() {
 
         val config = PackrConfig()
         config.platform = platform
-        config.jdk = checkNotNull(distribution.jdk) { "Undefined JDK path" }
-        config.executable = checkNotNull(extension.executable) { "Undefined executable" }
-        config.classpath = extension.classpath.flatMapJar()
-        config.removePlatformLibs = extension.removePlatformLibs.flatMapJar()
-        config.mainClass = checkNotNull(extension.mainClass) { "Undefined main class" }
-        config.vmArgs = extension.vmArgs + distribution.vmArgs
-        config.resources = extension.resources.toList()
-        config.minimizeJre = extension.minimizeJre
-        config.outDir = extension.outputDir.resolve(distribution.name)
-        extension.cacheJreDir?.let { config.cacheJre = it }
-        config.verbose = extension.isVerbose
+        config.jdk = checkNotNull(distribution!!.jdk) { "Undefined JDK path" }
+        config.executable = checkNotNull(executable) { "Undefined executable" }
+        config.classpath = classpath.flatMapJar()
+        config.removePlatformLibs = removePlatformLibs.flatMapJar()
+        config.mainClass = checkNotNull(mainClass) { "Undefined main class" }
+        config.vmArgs = vmArgs + distribution!!.vmArgs
+        config.resources = resources.toList()
+        config.minimizeJre = minimizeJre
+        config.outDir = outputDir.resolve(distribution!!.name)
+        cacheJreDir?.let { config.cacheJre = it }
+        config.verbose = isVerbose
 
-        if (distribution is MacOSDistribution) {
-            distribution.icon?.let { config.iconResource = it }
-            distribution.bundleId?.let { config.bundleIdentifier = it }
+        (distribution as? MacOSDistribution)?.run {
+            icon?.let { config.iconResource = it }
+            bundleId?.let { config.bundleIdentifier = it }
         }
 
         if (config.outDir.exists()) {
@@ -53,19 +83,19 @@ open class PackTask : DefaultTask() {
         }
 
         logger.info("Preparing output")
-        extension.outputDir.mkdirs()
+        outputDir.mkdirs()
 
         Packr().pack(config)
         logger.info("Pack completed")
 
-        if (extension.isAutoOpen) {
+        if (isAutoOpen) {
             when {
                 !Desktop.isDesktopSupported() -> logger.info("Desktop is not supported, ignoring `isAutoOpen`")
                 else -> Desktop.getDesktop().run {
                     when {
                         !isSupported(Desktop.Action.OPEN) ->
                             logger.info("Opening folder is not supported, ignoring `isAutoOpen`")
-                        else -> open(extension.outputDir)
+                        else -> open(outputDir)
                     }
                 }
             }

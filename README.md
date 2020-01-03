@@ -42,8 +42,8 @@ packr {
     resources 'image.jpg', 'path/to/other.jpg'
     minimizeJre 'hard'
     outputDirectory 'my/folder'   
-    verbose true
-    openOnDone true
+    isVerbose true
+    isAutoOpen true
     
     configureMacOS {
         name 'Example.app'
@@ -88,8 +88,8 @@ packr {
     minimizeJre = PackrExtension.MINIMIZE_SOFT
     outputDirectory = 'build/releases'
     vmArgs = []
-    verbose = false
-    openOnDone = false
+    isVerbose = false
+    isAutoOpen = false
 }
 ```
 

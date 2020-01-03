@@ -1,6 +1,13 @@
 package com.hendraanggrian.packr
 
-interface VmArged {
+/**
+ * Marks a class with configurable VM arguments.
+ *
+ * @see Distribution
+ * @see PackrExtension
+ * @see PackTask
+ */
+internal interface VmArged {
 
     /**
      * List of arguments for the JVM, without leading dashes, e.g. `Xmx1G`.
