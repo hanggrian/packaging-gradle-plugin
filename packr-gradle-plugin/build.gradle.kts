@@ -1,7 +1,7 @@
 plugins {
     `java-gradle-plugin`
     `kotlin-dsl`
-    dokka()
+    dokka
     `bintray-release`
 }
 

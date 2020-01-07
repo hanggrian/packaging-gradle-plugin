@@ -6,7 +6,6 @@ import java.awt.Desktop
 import java.io.File
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input
-import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
@@ -21,23 +20,24 @@ open class PackTask : DefaultTask(), PackrConfiguration {
     override val projectDir: File @Internal get() = project.projectDir
 
     @Optional @Input override var executable: String? = null
-    @InputFiles override lateinit var classpath: Iterable<File>
-    @InputFiles override lateinit var removePlatformLibs: Iterable<File>
+    @Input override lateinit var classpath: Iterable<File>
+    @Input override lateinit var removePlatformLibs: Iterable<File>
     @Optional @Input override var mainClass: String? = null
     @Input override lateinit var vmArgs: Iterable<String>
-    @InputFiles override lateinit var resources: Iterable<File>
+    @Input override lateinit var resources: Iterable<File>
     @Input override lateinit var minimizeJre: String
 
     @OutputDirectory override lateinit var outputDir: File
     override var outputDirectory: String
-        @OutputDirectory get() = super.outputDirectory
+        @Input get() = super.outputDirectory
         set(value) {
             super.outputDirectory = value
         }
 
     @Optional @OutputDirectory override var cacheJreDir: File? = null
     override var cacheJreDirectory: String?
-        @Optional @OutputDirectory get() = super.cacheJreDirectory
+
+        @Optional @Input get() = super.cacheJreDirectory
         set(value) {
             super.cacheJreDirectory = value
         }
