@@ -6,11 +6,11 @@ Packr Gradle Plugin
 [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
 
 Gradle plugin of [packr], a library that wraps JARs into native bundle for Windows, macOS, and Linux.
+* Pack multiple bundles with single command.
+* For easier setup, also use `application` plugin to distribute classpath with `installDist` command.
 
 Download
 --------
-Add plugin to buildscript:
-
 ```gradle
 buildscript {
     repositories {
@@ -25,15 +25,11 @@ buildscript {
 
 Usage
 -----
-Apply plugin in your module.
-
-```gradle
-apply plugin: 'com.hendraanggrian.packr'
-```
-
 Configure `packr` task, below are available configurations.
 
 ```gradle
+apply plugin: 'com.hendraanggrian.packr'
+
 packr {
     executable 'example'
     classpath 'my.jar', 'path/to/other.jar'
@@ -78,14 +74,14 @@ packr {
 Packr will then register task to each distribution (e.g.: `packMacOS`, `packWindows32`, etc.).
 Each of those task will only take effect if related distribution is configured.
 
-#### Default configuration
+### Default configuration
 
 ```gradle
 packr {
     executable = project.name
     classpath = []
     resources = []
-    minimizeJre = PackrExtension.MINIMIZE_SOFT
+    minimizeJre = 'soft'
     outputDirectory = 'build/releases'
     vmArgs = []
     isVerbose = false
@@ -111,3 +107,6 @@ License
     
 [packr]: https://github.com/libgdx/packr
 [PackrTask]: https://hendraanggrian.github.io/packr-plugin/packr/com.hendraanggrian.packr/-packr-task/index.html
+
+packr-task/index.html
+ckr/-packr-task/index.html
