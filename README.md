@@ -1,10 +1,10 @@
-Packr Gradle Plugin
-===================
-[![bintray](https://img.shields.io/badge/bintray-maven-brightgreen.svg)](https://bintray.com/hendraanggrian/maven)
 [![download](https://api.bintray.com/packages/hendraanggrian/maven/packr-gradle-plugin/images/download.svg)](https://bintray.com/hendraanggrian/maven/packr-gradle-plugin/_latestVersion)
 [![build](https://travis-ci.com/hendraanggrian/packr-gradle-plugin.svg)](https://travis-ci.com/hendraanggrian/packr-gradle-plugin)
 [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
+[![license](https://img.shields.io/github/license/hendraanggrian/packr-gradle-plugin)](http://www.apache.org/licenses/LICENSE-2.0)
 
+Packr Gradle Plugin
+===================
 Gradle plugin of [packr], a library that wraps JARs into native bundle for Windows, macOS, and Linux.
 * Pack multiple bundles with single command.
 * For easier setup, also use `application` plugin to distribute classpath with `installDist` command.
@@ -88,22 +88,6 @@ packr {
     isAutoOpen = false
 }
 ```
-
-License
--------
-    Copyright 2018 Hendra Anggrian
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
     
 [packr]: https://github.com/libgdx/packr
 [PackrTask]: https://hendraanggrian.github.io/packr-plugin/packr/com.hendraanggrian.packr/-packr-task/index.html
