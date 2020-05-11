@@ -48,7 +48,8 @@ open class PackrExtension(private val projectName: String, override val projectD
      * Enable macOS distribution with customized [configuration] in Kotlin DSL.
      * Unlike other distributions, macOS configuration have some OS-specific properties.
      */
-    inline fun macOS(noinline configuration: MacOSDistribution.() -> Unit) = configureMacOS(configuration)
+    inline fun macOS(noinline configuration: MacOSDistribution.() -> Unit): Unit =
+        configureMacOS(configuration)
 
     /** Enable Windows 32-bit distribution with default configuration. */
     fun configureWindows32() {
@@ -61,7 +62,8 @@ open class PackrExtension(private val projectName: String, override val projectD
     }
 
     /** Enable Windows 32-bit distribution with customized [configuration] in Kotlin DSL. */
-    inline fun windows32(noinline configuration: Distribution.() -> Unit) = configureWindows32(configuration)
+    inline fun windows32(noinline configuration: Distribution.() -> Unit): Unit =
+        configureWindows32(configuration)
 
     /** Enable Windows 64-bit distribution with default configuration. */
     fun configureWindows64() {
@@ -74,7 +76,8 @@ open class PackrExtension(private val projectName: String, override val projectD
     }
 
     /** Enable Windows 64-bit distribution with customized [configuration] in Kotlin DSL. */
-    inline fun windows64(noinline configuration: Distribution.() -> Unit) = configureWindows64(configuration)
+    inline fun windows64(noinline configuration: Distribution.() -> Unit): Unit =
+        configureWindows64(configuration)
 
     /** Enable Linux 32-bit distribution with default configuration. */
     fun configureLinux32() {
@@ -87,7 +90,8 @@ open class PackrExtension(private val projectName: String, override val projectD
     }
 
     /** Enable Linux 32-bit distribution with customized [configuration] in Kotlin DSL. */
-    inline fun linux32(noinline configuration: Distribution.() -> Unit) = configureLinux32(configuration)
+    inline fun linux32(noinline configuration: Distribution.() -> Unit): Unit =
+        configureLinux32(configuration)
 
     /** Enable Linux 64-bit distribution with default configuration. */
     fun configureLinux64() {
@@ -100,5 +104,6 @@ open class PackrExtension(private val projectName: String, override val projectD
     }
 
     /** Enable Linux 64-bit distribution with customized [configuration] in Kotlin DSL. */
-    inline fun linux64(noinline configuration: Distribution.() -> Unit) = configureLinux64(configuration)
+    inline fun linux64(noinline configuration: Distribution.() -> Unit): Unit =
+        configureLinux64(configuration)
 }

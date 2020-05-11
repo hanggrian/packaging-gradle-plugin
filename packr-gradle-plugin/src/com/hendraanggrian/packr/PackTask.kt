@@ -36,7 +36,6 @@ open class PackTask : DefaultTask(), PackrConfiguration {
 
     @Optional @OutputDirectory override var cacheJreDir: File? = null
     override var cacheJreDirectory: String?
-
         @Optional @Input get() = super.cacheJreDirectory
         set(value) {
             super.cacheJreDirectory = value
