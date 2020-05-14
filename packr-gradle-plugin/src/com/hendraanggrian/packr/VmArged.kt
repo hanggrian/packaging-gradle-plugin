@@ -14,9 +14,4 @@ internal interface VmArged {
      * Default is empty.
      */
     var vmArgs: Iterable<String>
-
-    /** Groovy-friendly method to set vm arguments. */
-    fun vmArgs(vararg args: String) {
-        vmArgs = setOf(*args)
-    }
 }

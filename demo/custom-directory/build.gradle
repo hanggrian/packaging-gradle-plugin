@@ -22,7 +22,7 @@ packr {
     classpath 'build/awesome'
     outputDirectory 'build/awesome'
     configureMacOS {
-        name 'Custom Directory.app'
+        name = 'Custom Directory.app'
     }
 }
 

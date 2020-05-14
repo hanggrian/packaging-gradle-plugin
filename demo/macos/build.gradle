@@ -21,9 +21,9 @@ packr {
     mainClass 'com.example.App'
     classpath 'build/releases'
     configureMacOS {
-        name 'Mac Icon.app'
-        bundleId 'com.example.app' 
-        icon "art/example.icns"
+        name = 'Mac Icon.app'
+        bundleId = 'com.example.app'
+        icon 'art/example.icns'
     }
 }
 

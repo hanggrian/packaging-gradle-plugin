@@ -7,7 +7,7 @@ Packr Gradle Plugin
 ===================
 Gradle plugin of [packr], a library that wraps JARs into native bundle for Windows, macOS, and Linux.
 * Pack multiple bundles with single command.
-* For easier setup, also use `application` plugin to distribute classpath with `installDist` command.
+* For easier setup, also use `distribution` plugin to distribute classpath with `installDist` command.
 
 Download
 --------

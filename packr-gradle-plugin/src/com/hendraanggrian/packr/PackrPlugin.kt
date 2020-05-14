@@ -14,8 +14,8 @@ class PackrPlugin : Plugin<Project> {
     }
 
     override fun apply(project: Project) {
-        val extension = project.extensions.create<PackrExtension>(GROUP_NAME, project.name, project.projectDir)
-        extension.outputDir = project.buildDir.resolve("releases")
+        val ext = project.extensions.create<PackrExtension>(GROUP_NAME, project.name, project.projectDir)
+        ext.outputDir = project.buildDir.resolve("releases")
 
         lateinit var packTaskProviders: Iterable<TaskProvider<PackTask>>
         packTaskProviders = Platform.values().map {
@@ -32,23 +32,23 @@ class PackrPlugin : Plugin<Project> {
         }
 
         project.afterEvaluate {
-            if (extension.executable == null) {
-                extension.executable = project.name
+            if (ext.executable == null) {
+                ext.executable = project.name
             }
             packTaskProviders.forEach {
                 it {
-                    distribution = extension[platform]
-                    executable = extension.executable
-                    classpath = extension.classpath
-                    removePlatformLibs = extension.removePlatformLibs
-                    mainClass = extension.mainClass
-                    vmArgs = extension.vmArgs
-                    resources = extension.resources
-                    minimizeJre = extension.minimizeJre
-                    outputDir = extension.outputDir
-                    cacheJreDir = extension.cacheJreDir
-                    isVerbose = extension.isVerbose
-                    isAutoOpen = extension.isAutoOpen
+                    distribution = ext[platform]
+                    executable = ext.executable
+                    classpath = ext.classpath
+                    removePlatformLibs = ext.removePlatformLibs
+                    mainClass = ext.mainClass
+                    vmArgs = ext.vmArgs
+                    resources = ext.resources
+                    minimizeJre = ext.minimizeJre
+                    outputDir = ext.outputDir
+                    cacheJreDir = ext.cacheJreDir
+                    isVerbose = ext.isVerbose
+                    isAutoOpen = ext.isAutoOpen
                 }
             }
         }

@@ -6,6 +6,7 @@ import java.io.File
 import org.gradle.api.Action
 import org.gradle.kotlin.dsl.invoke
 
+/** Extension class to be invoked when `packr { ... }` is defined within Gradle project. */
 open class PackrExtension(private val projectName: String, override val projectDir: File) : PackrConfiguration {
 
     companion object {

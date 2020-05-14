@@ -23,7 +23,7 @@ packr {
     resources 'src/main/resources'
     configureMacOS()
     configureWindows32 {
-        jdk '/Volumes/Media/Windows JDK/jdk1.8.0_231-x86'
+        jdk = '/Volumes/Media/Windows JDK/jdk1.8.0_231-x86'
     }
 }
 

@@ -4,7 +4,7 @@ import com.badlogicgames.packr.PackrConfig
 import java.io.File
 import java.io.Serializable
 
-typealias Platform = PackrConfig.Platform
+internal typealias Platform = PackrConfig.Platform
 
 /** Delimits a distribution DSL scripts. */
 @DslMarker
@@ -24,16 +24,6 @@ open class Distribution(
     var name: String,
     var jdk: String? = System.getenv("JAVA_HOME") ?: System.getProperty("java.home")
 ) : VmArged, Serializable {
-
-    /** Groovy-friendly method to set distribution name. */
-    fun name(distributionName: String) {
-        name = distributionName
-    }
-
-    /** Groovy-friendly method to set JDK path. */
-    fun jdk(path: String) {
-        jdk = path
-    }
 
     override var vmArgs: Iterable<String> = emptyList()
     override fun hashCode(): Int = platform.hashCode()
@@ -58,13 +48,8 @@ class MacOSDistribution(
     var bundleId: String? = null
 ) : Distribution(Platform.MacOS, name, jdk) {
 
-    /** Groovy-friendly method to set icon resource from file path, relative to project directory. */
+    /** Convenient method to set icon resource from file path, relative to project directory. */
     fun icon(relativePath: String) {
         icon = projectDir.resolve(relativePath)
-    }
-
-    /** Groovy-friendly method to set bundle identifier. */
-    fun bundleId(id: String) {
-        bundleId = id
     }
 }
