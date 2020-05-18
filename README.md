@@ -41,32 +41,33 @@ packr {
     isVerbose true
     isAutoOpen true
     
+    // additional vmArgs below will be combined with vmArgs above
     configureMacOS {
-        name 'Example.app'
-        jdk 'path/to/mac_jdk'
-        icon 'path/to/mac_icon.icns'
-        bundleId 'com.example.app'
-        vmArgs '-Xmx512M'
+        name = 'Example.app'
+        jdk = 'path/to/mac_jdk'
+        icon = 'path/to/mac_icon.icns'
+        bundleId = 'com.example.app'
+        vmArgs.add('-Xmx512M')
     }
     configureWindows32 {
-        name 'Example Windows 32-bit'
-        jdk 'path/to/windows_32_jdk'
-        vmArgs '-Xmx256M'
+        name = 'Example Windows 32-bit'
+        jdk = 'path/to/windows_32_jdk'
+        vmArgs.add('-Xmx256M')
     }
     configureWindows64 {
-        name 'Example Windows 64-bit'
-        jdk 'path/to/windows_64_jdk'
-        vmArgs '-Xmx512M'
+        name = 'Example Windows 64-bit'
+        jdk = 'path/to/windows_64_jdk'
+        vmArgs.add('-Xmx512M')
     }
     configureLinux32 {
-        name 'Example Windows 32-bit'
-        jdk 'path/to/windows_32_jdk'
-        vmArgs '-Xmx256M'
+        name = 'Example Windows 32-bit'
+        jdk = 'path/to/windows_32_jdk'
+        vmArgs.add('-Xmx256M')
     }
     configureLinux64 {
-        name 'Example Linux 64-bit'
-        jdk 'path/to/linux_64_jdk'
-        vmArgs '-Xmx512M'
+        name = 'Example Linux 64-bit'
+        jdk = 'path/to/linux_64_jdk'
+        vmArgs.add('-Xmx512M')
     }
 }
 ```
@@ -91,6 +92,3 @@ packr {
     
 [packr]: https://github.com/libgdx/packr
 [PackrTask]: https://hendraanggrian.github.io/packr-plugin/packr/com.hendraanggrian.packr/-packr-task/index.html
-
-packr-task/index.html
-ckr/-packr-task/index.html
