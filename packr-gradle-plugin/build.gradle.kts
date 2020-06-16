@@ -42,11 +42,13 @@ tasks {
     register("deploy") {
         mustRunAfter("build")
         doLast {
-            val jar = projectDir.resolve("build/libs").listFiles()!!.first()
-            val from = jar.toPath()
-            val to = rootDir.resolve("demo/${jar.name}").toPath()
-            Files.delete(to)
-            Files.move(from, to)
+            val from = projectDir.resolve("build/libs").listFiles()!!.first()
+            val to = rootDir.resolve("integration-tests/${from.name}")
+            val toPath = to.toPath()
+            if (to.exists()) {
+                Files.delete(toPath)
+            }
+            Files.move(from.toPath(), toPath)
         }
     }
 
