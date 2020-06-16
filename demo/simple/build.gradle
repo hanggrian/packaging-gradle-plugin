@@ -4,14 +4,13 @@ buildscript {
         maven { url = 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
     dependencies {
-        classpath files('../packr-gradle-plugin-0.3-rc1.jar')
+        classpath files('../packr-gradle-plugin-0.3.jar')
         classpath 'com.badlogicgames.packr:packr:2.1-SNAPSHOT'
-        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
     }
 }
 
 apply plugin: 'java'
-apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'application'
 apply plugin: 'com.hendraanggrian.packr'
 
 group 'com.example'
@@ -19,21 +18,14 @@ version '1.0'
 
 packr {
     mainClass 'com.example.App'
-    classpath 'build/releases'
+    classpath 'build/install/simple/lib'
     resources 'src/main/resources'
     configureMacOS()
 }
 
-tasks.withType(com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {
-    destinationDir file('build/releases')
-    baseName 'simple'
-    classifier null
-    version '1.0'
-}
-
 afterEvaluate {
     tasks.getByName('packAll') {
-        dependsOn 'shadowJar'
-        mustRunAfter 'shadowJar'
+        dependsOn 'installDist'
+        mustRunAfter 'installDist'
     }
 }

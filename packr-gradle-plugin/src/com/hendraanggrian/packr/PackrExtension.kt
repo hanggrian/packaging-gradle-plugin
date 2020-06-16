@@ -2,9 +2,10 @@
 
 package com.hendraanggrian.packr
 
-import java.io.File
+import com.badlogicgames.packr.PackrConfig.Platform
 import org.gradle.api.Action
 import org.gradle.kotlin.dsl.invoke
+import java.io.File
 
 /** Extension class to be invoked when `packr { ... }` is defined within project. */
 open class PackrExtension(private val projectName: String, override val projectDir: File) : PackrConfiguration {
@@ -17,7 +18,7 @@ open class PackrExtension(private val projectName: String, override val projectD
 
     internal val distributions: MutableSet<Distribution> = mutableSetOf()
 
-    override var executable: String? = null
+    override var executable: String = projectName
     override var classpath: Iterable<File> = emptyList()
     override var removePlatformLibs: Iterable<File> = emptyList()
     override var mainClass: String? = null

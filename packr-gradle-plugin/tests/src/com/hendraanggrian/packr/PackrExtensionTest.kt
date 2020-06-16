@@ -1,5 +1,6 @@
 package com.hendraanggrian.packr
 
+import com.badlogicgames.packr.PackrConfig.Platform
 import com.google.common.truth.Truth.assertThat
 import java.io.File
 import kotlin.test.Test

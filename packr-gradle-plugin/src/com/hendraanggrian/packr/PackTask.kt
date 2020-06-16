@@ -2,23 +2,26 @@ package com.hendraanggrian.packr
 
 import com.badlogicgames.packr.Packr
 import com.badlogicgames.packr.PackrConfig
-import java.awt.Desktop
-import java.io.File
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
+import java.awt.Desktop
+import java.io.File
 
-/** Task that will generate native distribution on each platform. */
+/**
+ * Task that will generate native distribution on each platform.
+ * Logging is completely avoided here to since [Packr] is already printing information even if logger is deactivated.
+ */
 open class PackTask : DefaultTask(), PackrConfiguration {
 
     @Input lateinit var distribution: Distribution
 
     override val projectDir: File @Internal get() = project.projectDir
 
-    @Optional @Input override var executable: String? = null
+    @Input override lateinit var executable: String
     @Input override lateinit var classpath: Iterable<File>
     @Input override lateinit var removePlatformLibs: Iterable<File>
     @Optional @Input override var mainClass: String? = null
@@ -44,17 +47,14 @@ open class PackTask : DefaultTask(), PackrConfiguration {
     override var isAutoOpen: Boolean = false @Input get
 
     init {
-        // always consider this task out of date
-        outputs.upToDateWhen { false }
+        outputs.upToDateWhen { false } // always consider this task out of date
     }
 
     @TaskAction fun pack() {
-        logger.info("Creating configuration for $distribution")
-
         val config = PackrConfig()
         config.platform = distribution.platform
         config.jdk = checkNotNull(distribution.jdk) { "Undefined JDK path" }
-        config.executable = checkNotNull(executable) { "Undefined executable" }
+        config.executable = executable
         config.classpath = classpath.flatMapJar()
         config.removePlatformLibs = removePlatformLibs.flatMapJar()
         config.mainClass = checkNotNull(mainClass) { "Undefined main class" }
@@ -71,23 +71,19 @@ open class PackTask : DefaultTask(), PackrConfiguration {
         }
 
         if (config.outDir.exists()) {
-            logger.info("Deleting old output")
             config.outDir.deleteRecursively()
         }
-
-        logger.info("Preparing output")
         outputDir.mkdirs()
 
         Packr().pack(config)
-        logger.info("Pack completed")
 
         if (isAutoOpen) {
             when {
-                !Desktop.isDesktopSupported() -> logger.info("Desktop is not supported, ignoring `isAutoOpen`")
+                !Desktop.isDesktopSupported() -> logger.info("Desktop is not supported, ignoring auto open.")
                 else -> Desktop.getDesktop().run {
                     when {
                         !isSupported(Desktop.Action.OPEN) ->
-                            logger.info("Opening folder is not supported, ignoring `isAutoOpen`")
+                            logger.info("Opening folder is not supported, ignoring auto open.")
                         else -> open(outputDir)
                     }
                 }
@@ -97,9 +93,10 @@ open class PackTask : DefaultTask(), PackrConfiguration {
 
     private fun Iterable<File>.flatMapJar() = flatMap { file ->
         when {
-            file.isDirectory -> checkNotNull(file.listFiles()) { "Unable to list files in directory: ${file.absolutePath}" }
-                .filter { it.isJar() }
-                .map { it.absolutePath }
+            file.isDirectory ->
+                checkNotNull(file.listFiles()) { "Unable to list files in directory: ${file.absolutePath}" }
+                    .filter { it.isJar() }
+                    .map { it.absolutePath }
             file.isJar() -> listOf(file.absolutePath)
             else -> emptyList()
         }

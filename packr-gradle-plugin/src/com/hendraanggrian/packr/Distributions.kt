@@ -1,10 +1,8 @@
 package com.hendraanggrian.packr
 
-import com.badlogicgames.packr.PackrConfig
+import com.badlogicgames.packr.PackrConfig.Platform
 import java.io.File
 import java.io.Serializable
-
-internal typealias Platform = PackrConfig.Platform
 
 /** Delimits a distribution DSL scripts. */
 @DslMarker

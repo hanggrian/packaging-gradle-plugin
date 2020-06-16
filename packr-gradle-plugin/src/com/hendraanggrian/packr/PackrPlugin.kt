@@ -9,19 +9,16 @@ import org.gradle.kotlin.dsl.register
 class PackrPlugin : Plugin<Project> {
 
     companion object {
-        const val GROUP_NAME = "packr"
+        const val GROUP_NAME = "packaging"
     }
 
     override fun apply(project: Project) {
-        val ext = project.extensions.create<PackrExtension>(GROUP_NAME, project.name, project.projectDir)
+        val ext = project.extensions.create<PackrExtension>("packr", project.name, project.projectDir)
         ext.outputDir = project.buildDir.resolve("releases")
 
         project.afterEvaluate {
-            if (ext.executable == null) {
-                ext.executable = name
-            }
-
-            val packTaskProviders = ext.distributions.map {
+            val packTasks = ext.distributions.map {
+                logger.info("Packr configuration found for $it.")
                 tasks.register<PackTask>("pack${it.platform.name}") {
                     group = GROUP_NAME
                     description = "Pack JARs in $it executable."
@@ -43,7 +40,7 @@ class PackrPlugin : Plugin<Project> {
             tasks.register("packAll") {
                 description = "Pack JARs for all configured platforms."
                 group = GROUP_NAME
-                dependsOn(*packTaskProviders.map { it.get() }.toTypedArray())
+                setDependsOn(packTasks)
             }
         }
     }

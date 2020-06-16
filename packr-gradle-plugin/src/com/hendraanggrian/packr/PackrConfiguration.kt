@@ -17,7 +17,7 @@ internal interface PackrConfiguration : VmArged {
      * Name of the native executable, without extension such as `.exe`.
      * Default is project's name.
      */
-    var executable: String?
+    var executable: String
 
     /**
      * File locations of the JAR files to package.
