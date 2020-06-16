@@ -1,6 +1,5 @@
 package com.hendraanggrian.packr
 
-import com.badlogicgames.packr.PackrConfig
 import com.google.common.truth.Truth.assertThat
 import java.io.File
 import kotlin.test.Test
@@ -33,7 +32,7 @@ class PackrExtensionTest {
     @Test fun configureDistributions() {
         extension.windows32 { name = "Windows App" }
         extension.macOS { name = "Mac App" }
-        assertEquals("Windows App", extension[PackrConfig.Platform.Windows32]!!.name)
-        assertEquals("Mac App", extension[PackrConfig.Platform.MacOS]!!.name)
+        assertEquals("Windows App", extension.distributions.single { it.platform == Platform.Windows32 }.name)
+        assertEquals("Mac App", extension.distributions.single { it.platform == Platform.MacOS }.name)
     }
 }

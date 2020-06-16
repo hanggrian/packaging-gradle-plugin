@@ -28,6 +28,7 @@ open class Distribution(
     override var vmArgs: Iterable<String> = emptyList()
     override fun hashCode(): Int = platform.hashCode()
     override fun equals(other: Any?): Boolean = other != null && other is Distribution && other.platform == platform
+    override fun toString(): String = platform.toString()
 }
 
 /**

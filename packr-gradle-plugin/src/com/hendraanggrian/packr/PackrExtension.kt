@@ -6,7 +6,7 @@ import java.io.File
 import org.gradle.api.Action
 import org.gradle.kotlin.dsl.invoke
 
-/** Extension class to be invoked when `packr { ... }` is defined within Gradle project. */
+/** Extension class to be invoked when `packr { ... }` is defined within project. */
 open class PackrExtension(private val projectName: String, override val projectDir: File) : PackrConfiguration {
 
     companion object {
@@ -15,10 +15,7 @@ open class PackrExtension(private val projectName: String, override val projectD
         const val MINIMIZATION_ORACLEJRE8 = "oraclejre8"
     }
 
-    private val distributions: MutableSet<Distribution> = mutableSetOf()
-
-    internal operator fun get(platform: Platform): Distribution? =
-        distributions.singleOrNull { it.platform == platform }
+    internal val distributions: MutableSet<Distribution> = mutableSetOf()
 
     override var executable: String? = null
     override var classpath: Iterable<File> = emptyList()
@@ -42,7 +39,7 @@ open class PackrExtension(private val projectName: String, override val projectD
      * Unlike other distributions, macOS configuration have some OS-specific properties.
      */
     fun configureMacOS(configuration: Action<MacOSDistribution>) {
-        distributions += MacOSDistribution(projectDir, projectName).also { configuration(it) }
+        distributions.plusAssign(MacOSDistribution(projectDir, projectName).also { configuration(it) })
     }
 
     /**

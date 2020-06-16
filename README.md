@@ -72,8 +72,8 @@ packr {
 }
 ```
 
-Packr will then register task to each distribution (e.g.: `packMacOS`, `packWindows32`, etc.).
-Each of those task will only take effect if related distribution is configured.
+After project evaluation, packr will then register task to each distribution (e.g.: `packMacOS`, `packWindows32`, etc.).
+Each of those task will only exist if related distribution is configured.
 
 ### Default configuration
 

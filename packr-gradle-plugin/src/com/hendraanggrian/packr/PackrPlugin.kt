@@ -2,11 +2,10 @@ package com.hendraanggrian.packr
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.tasks.TaskProvider
 import org.gradle.kotlin.dsl.create
-import org.gradle.kotlin.dsl.invoke
 import org.gradle.kotlin.dsl.register
 
+/** Plugin that creates native distributions for your JAR. */
 class PackrPlugin : Plugin<Project> {
 
     companion object {
@@ -17,27 +16,16 @@ class PackrPlugin : Plugin<Project> {
         val ext = project.extensions.create<PackrExtension>(GROUP_NAME, project.name, project.projectDir)
         ext.outputDir = project.buildDir.resolve("releases")
 
-        lateinit var packTaskProviders: Iterable<TaskProvider<PackTask>>
-        packTaskProviders = Platform.values().map {
-            project.tasks.register<PackTask>("pack$it") {
-                group = GROUP_NAME
-                description = "Pack JARs in $it executable."
-                platform = it
-            }
-        }
-        project.tasks.register("packAll") {
-            description = "Pack JARs for all configured platforms."
-            group = GROUP_NAME
-            dependsOn(*packTaskProviders.map { it.get() }.toTypedArray())
-        }
-
         project.afterEvaluate {
             if (ext.executable == null) {
-                ext.executable = project.name
+                ext.executable = name
             }
-            packTaskProviders.forEach {
-                it {
-                    distribution = ext[platform]
+
+            val packTaskProviders = ext.distributions.map {
+                tasks.register<PackTask>("pack${it.platform.name}") {
+                    group = GROUP_NAME
+                    description = "Pack JARs in $it executable."
+                    distribution = it
                     executable = ext.executable
                     classpath = ext.classpath
                     removePlatformLibs = ext.removePlatformLibs
@@ -50,6 +38,12 @@ class PackrPlugin : Plugin<Project> {
                     isVerbose = ext.isVerbose
                     isAutoOpen = ext.isAutoOpen
                 }
+            }
+
+            tasks.register("packAll") {
+                description = "Pack JARs for all configured platforms."
+                group = GROUP_NAME
+                dependsOn(*packTaskProviders.map { it.get() }.toTypedArray())
             }
         }
     }

@@ -35,4 +35,5 @@ tasks.withType(com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {
 
 tasks.getByName('packAll') {
     dependsOn 'shadowJar'
+    mustRunAfter 'shadowJar'
 }

@@ -14,8 +14,7 @@ import org.gradle.api.tasks.TaskAction
 /** Task that will generate native distribution on each platform. */
 open class PackTask : DefaultTask(), PackrConfiguration {
 
-    @Optional @Input var distribution: Distribution? = null
-    @Input lateinit var platform: Platform
+    @Input lateinit var distribution: Distribution
 
     override val projectDir: File @Internal get() = project.projectDir
 
@@ -49,25 +48,20 @@ open class PackTask : DefaultTask(), PackrConfiguration {
         outputs.upToDateWhen { false }
     }
 
-    /** Start packing distribution if platform is configured. Otherwise, skip packing process. */
     @TaskAction fun pack() {
-        if (distribution == null) {
-            logger.info("No configuration found for $platform")
-            return
-        }
-        logger.info("Creating configuration for $platform")
+        logger.info("Creating configuration for $distribution")
 
         val config = PackrConfig()
-        config.platform = platform
-        config.jdk = checkNotNull(distribution!!.jdk) { "Undefined JDK path" }
+        config.platform = distribution.platform
+        config.jdk = checkNotNull(distribution.jdk) { "Undefined JDK path" }
         config.executable = checkNotNull(executable) { "Undefined executable" }
         config.classpath = classpath.flatMapJar()
         config.removePlatformLibs = removePlatformLibs.flatMapJar()
         config.mainClass = checkNotNull(mainClass) { "Undefined main class" }
-        config.vmArgs = vmArgs + distribution!!.vmArgs
+        config.vmArgs = vmArgs + distribution.vmArgs
         config.resources = resources.toList()
         config.minimizeJre = minimizeJre
-        config.outDir = outputDir.resolve(distribution!!.name)
+        config.outDir = outputDir.resolve(distribution.name)
         cacheJreDir?.let { config.cacheJre = it }
         config.verbose = isVerbose
 
