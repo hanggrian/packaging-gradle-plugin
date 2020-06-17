@@ -1,12 +1,13 @@
 package com.hendraanggrian.packr
 
+
 import org.junit.Test
 
 class DistributionGroovyTest {
 
     @Test
     void dist() {
-        def dist = new Distribution()
+        def dist = new MacOSDistribution()
         dist.name 'an app'
         dist.jdk 'a jdk'
         assert dist.name == 'an app'

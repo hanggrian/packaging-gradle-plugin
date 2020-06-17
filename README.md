@@ -6,8 +6,8 @@
 Packr Gradle Plugin
 ===================
 Gradle plugin of [packr], a library that wraps JARs into native bundle for Windows, macOS, and Linux.
-* Pack multiple bundles with single command.
-* For easier setup, also use `distribution` plugin to distribute classpath with `installDist` command.
+* Complete customization for each distribution.
+* Pack multiple distributions with a single task.
 
 Download
 --------
@@ -18,14 +18,15 @@ buildscript {
         maven { url = 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
     dependencies {
-        classpath "com.hendraanggrian:packr-gradle-plugin:$version"
+        classpath 'com.hendraanggrian:packr-gradle-plugin:$version'
     }
 }
 ```
 
 Usage
 -----
-Configure `packr` task, below are available configurations.
+Below are example configuration for `Windows64` and `MacOS` distributions.
+Note that properties of distribution configuration may override extension configuration.
 
 ```gradle
 apply plugin: 'com.hendraanggrian.packr'
@@ -34,48 +35,38 @@ packr {
     executable 'example'
     classpath 'my.jar', 'path/to/other.jar'
     mainClass 'com.example.App'
-    vmArgs 'Xmx1G'
+    vmArgs '-Xmx1G'
     resources 'image.jpg', 'path/to/other.jpg'
     minimizeJre 'hard'
     outputDirectory 'my/folder'   
     isVerbose true
     isAutoOpen true
     
-    // additional vmArgs below will be combined with vmArgs above
-    configureMacOS {
-        name = 'Example.app'
-        jdk = 'path/to/mac_jdk'
-        icon = 'path/to/mac_icon.icns'
-        bundleId = 'com.example.app'
-        vmArgs.add('-Xmx512M')
-    }
-    configureWindows32 {
-        name = 'Example Windows 32-bit'
-        jdk = 'path/to/windows_32_jdk'
-        vmArgs.add('-Xmx256M')
-    }
     configureWindows64 {
+        executable 'example64' // overriding `example`
+        vmArgs.add('-Xdebug') // arguments added after `-Xmx1G`
+        
+        // distribution-specific properties
         name = 'Example Windows 64-bit'
         jdk = 'path/to/windows_64_jdk'
-        vmArgs.add('-Xmx512M')
     }
-    configureLinux32 {
-        name = 'Example Windows 32-bit'
-        jdk = 'path/to/windows_32_jdk'
-        vmArgs.add('-Xmx256M')
-    }
-    configureLinux64 {
-        name = 'Example Linux 64-bit'
-        jdk = 'path/to/linux_64_jdk'
-        vmArgs.add('-Xmx512M')
+    
+    configureMacOS {
+        // distribution-specific properties
+        name = 'Example.app'
+        jdk = 'path/to/mac_jdk'
+        
+        // mac-only properties
+        icon = 'path/to/mac_icon.icns'
+        bundleId = 'com.example.app'
     }
 }
 ```
 
-After project evaluation, packr will then register task to each distribution (e.g.: `packMacOS`, `packWindows32`, etc.).
-Each of those task will only exist if related distribution is configured.
+After project evaluation, packr will then register task `packMacOS`, `packWindows64`, and also `packAll`.
 
 ### Default configuration
+Packr extension and distributions' default configuration can be illustrated as below.
 
 ```gradle
 packr {
@@ -87,8 +78,33 @@ packr {
     vmArgs = []
     isVerbose = false
     isAutoOpen = false
+    
+    configureWindows32, configureWindows64, configureLinux32, configureLinux64 {
+        name = project.name
+        jdk = JDK_HOME
+    }
+    configureOS {
+        name = project.name
+        jdk = JDK_HOME
+        icon = null
+        bundleId = project.group
+    }
+}
+```
+
+### Using [Distribution Plugin]
+For easier setup, also use `distribution` plugin to distribute classpath with `installDist` command.
+
+```gradle
+apply plugin: 'distributions'
+
+afterEvaluate {
+    tasks.getByName('packAll') {
+        dependsOn 'installDist'
+        mustRunAfter 'installDist'
+    }
 }
 ```
     
 [packr]: https://github.com/libgdx/packr
-[PackrTask]: https://hendraanggrian.github.io/packr-plugin/packr/com.hendraanggrian.packr/-packr-task/index.html
+[Distribution Plugin]: https://docs.gradle.org/current/userguide/distribution_plugin.html

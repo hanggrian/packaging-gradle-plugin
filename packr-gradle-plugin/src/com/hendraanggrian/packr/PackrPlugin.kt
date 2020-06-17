@@ -5,7 +5,7 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.register
 
-/** Plugin that creates native distributions for your JAR. */
+/** Plugin that creates native bundles for your JAR. */
 class PackrPlugin : Plugin<Project> {
 
     companion object {
@@ -13,7 +13,7 @@ class PackrPlugin : Plugin<Project> {
     }
 
     override fun apply(project: Project) {
-        val ext = project.extensions.create<PackrExtension>("packr", project.name, project.projectDir)
+        val ext = project.extensions.create<PackrExtension>("packr", project.name, project.group, project.projectDir)
         ext.outputDir = project.buildDir.resolve("releases")
 
         project.afterEvaluate {
@@ -21,7 +21,7 @@ class PackrPlugin : Plugin<Project> {
                 logger.info("Packr configuration found for $it.")
                 tasks.register<PackTask>("pack${it.platform.name}") {
                     group = GROUP_NAME
-                    description = "Pack JARs in $it executable."
+                    description = "Pack native bundles for $it."
                     distribution = it
                     executable = ext.executable
                     classpath = ext.classpath
@@ -37,10 +37,12 @@ class PackrPlugin : Plugin<Project> {
                 }
             }
 
-            tasks.register("packAll") {
-                description = "Pack JARs for all configured platforms."
-                group = GROUP_NAME
-                setDependsOn(packTasks)
+            if (packTasks.isNotEmpty()) {
+                tasks.register("packAll") {
+                    description = "Pack native bundles for all configured distributions."
+                    group = GROUP_NAME
+                    setDependsOn(packTasks)
+                }
             }
         }
     }

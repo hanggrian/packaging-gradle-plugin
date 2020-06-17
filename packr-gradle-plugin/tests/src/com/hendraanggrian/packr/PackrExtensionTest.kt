@@ -1,6 +1,6 @@
 package com.hendraanggrian.packr
 
-import com.badlogicgames.packr.PackrConfig.Platform
+import com.badlogicgames.packr.PackrConfig
 import com.google.common.truth.Truth.assertThat
 import java.io.File
 import kotlin.test.Test
@@ -8,7 +8,7 @@ import kotlin.test.assertEquals
 
 class PackrExtensionTest {
     private val fakeDir = File("/my/path")
-    private val extension = PackrExtension("awesome", fakeDir)
+    private val extension = PackrExtension("awesome", "so.awesome", fakeDir)
 
     @Test fun relativePaths() {
         val assertIterable: (Iterable<File>) -> Unit = {
@@ -33,7 +33,13 @@ class PackrExtensionTest {
     @Test fun configureDistributions() {
         extension.windows32 { name = "Windows App" }
         extension.macOS { name = "Mac App" }
-        assertEquals("Windows App", extension.distributions.single { it.platform == Platform.Windows32 }.name)
-        assertEquals("Mac App", extension.distributions.single { it.platform == Platform.MacOS }.name)
+        assertEquals(
+            "Windows App",
+            extension.distributions.single { it.platform == PackrConfig.Platform.Windows32 }.name
+        )
+        assertEquals(
+            "Mac App",
+            extension.distributions.single { it.platform == PackrConfig.Platform.MacOS }.name
+        )
     }
 }
