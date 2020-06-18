@@ -10,7 +10,6 @@ import java.io.File
 /** Extension class to be invoked when `packr { ... }` is defined within project. */
 open class PackrExtension(
     private val projectName: String,
-    private val projectGroup: String,
     override val projectDir: File
 ) : PackrConfiguration {
 
@@ -36,7 +35,7 @@ open class PackrExtension(
 
     /** Enable macOS distribution with default configuration. */
     fun configureMacOS() {
-        distributions += MacOSDistribution(projectName, projectGroup, projectDir)
+        distributions += MacOSDistribution(projectDir, projectName)
     }
 
     /**
@@ -44,8 +43,7 @@ open class PackrExtension(
      * Unlike other distributions, macOS configuration have some OS-specific properties.
      */
     fun configureMacOS(configuration: Action<MacOSDistribution>) {
-        distributions += MacOSDistribution(projectName, projectGroup, projectDir)
-            .also { configuration(it) }
+        distributions += MacOSDistribution(projectDir, projectName).also { configuration(it) }
     }
 
     /**
@@ -62,8 +60,7 @@ open class PackrExtension(
 
     /** Enable Windows 32-bit distribution with customized [configuration]. */
     fun configureWindows32(configuration: Action<Distribution>) {
-        distributions += Distribution(PackrConfig.Platform.Windows32, projectName)
-            .also { configuration(it) }
+        distributions += Distribution(PackrConfig.Platform.Windows32, projectName).also { configuration(it) }
     }
 
     /** Enable Windows 32-bit distribution with customized [configuration] in Kotlin DSL. */
@@ -77,8 +74,7 @@ open class PackrExtension(
 
     /** Enable Windows 64-bit distribution with customized [configuration]. */
     fun configureWindows64(configuration: Action<Distribution>) {
-        distributions += Distribution(PackrConfig.Platform.Windows64, projectName)
-            .also { configuration(it) }
+        distributions += Distribution(PackrConfig.Platform.Windows64, projectName).also { configuration(it) }
     }
 
     /** Enable Windows 64-bit distribution with customized [configuration] in Kotlin DSL. */
@@ -92,8 +88,7 @@ open class PackrExtension(
 
     /** Enable Linux 32-bit distribution with customized [configuration]. */
     fun configureLinux32(configuration: Action<Distribution>) {
-        distributions += Distribution(PackrConfig.Platform.Linux32, projectName)
-            .also { configuration(it) }
+        distributions += Distribution(PackrConfig.Platform.Linux32, projectName).also { configuration(it) }
     }
 
     /** Enable Linux 32-bit distribution with customized [configuration] in Kotlin DSL. */
@@ -107,8 +102,7 @@ open class PackrExtension(
 
     /** Enable Linux 64-bit distribution with customized [configuration]. */
     fun configureLinux64(configuration: Action<Distribution>) {
-        distributions += Distribution(PackrConfig.Platform.Linux64, projectName)
-            .also { configuration(it) }
+        distributions += Distribution(PackrConfig.Platform.Linux64, projectName).also { configuration(it) }
     }
 
     /** Enable Linux 64-bit distribution with customized [configuration] in Kotlin DSL. */

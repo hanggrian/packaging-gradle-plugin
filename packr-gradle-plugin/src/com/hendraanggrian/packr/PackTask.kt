@@ -11,10 +11,7 @@ import org.gradle.api.tasks.TaskAction
 import java.awt.Desktop
 import java.io.File
 
-/**
- * Task that will generate native distribution on each platform.
- * Logging is completely avoided here to since [Packr] is already printing information even if logger is deactivated.
- */
+/** Task that will generate native distribution on each platform. */
 open class PackTask : DefaultTask(), PackrConfiguration {
 
     @Input lateinit var distribution: Distribution
@@ -51,40 +48,64 @@ open class PackTask : DefaultTask(), PackrConfiguration {
     }
 
     @TaskAction fun pack() {
+        logger.info("Packing for $distribution:")
+
+        require(executable.isNotBlank()) { "Executable cannot be empty." }
+        checkNotNull(distribution.jdk) { "Undefined JDK." }
+        checkNotNull(mainClass) { "Undefined main class." }
+
         val config = PackrConfig()
         config.platform = distribution.platform
-        config.jdk = checkNotNull(distribution.jdk) { "Undefined JDK path" }
+        config.jdk = distribution.jdk!!
+        logger.debug("jdk = ${distribution.jdk}")
         config.executable = executable
+        logger.debug("executable = $executable")
         config.classpath = classpath.flatMapJar()
+        logger.debug("classpath = $classpath")
         config.removePlatformLibs = removePlatformLibs.flatMapJar()
-        config.mainClass = checkNotNull(mainClass) { "Undefined main class" }
+        logger.debug("removePlatformLibs = $removePlatformLibs")
+        config.mainClass = mainClass!!
+        logger.debug("mainClass = $mainClass")
         config.vmArgs = vmArgs + distribution.vmArgs
+        logger.debug("vmArgs = ${config.vmArgs}")
         config.resources = resources.toList()
+        logger.debug("resources = $resources")
         config.minimizeJre = minimizeJre
+        logger.debug("minimizeJre = $minimizeJre")
         config.outDir = outputDir.resolve(distribution.name)
-        cacheJreDir?.let { config.cacheJre = it }
+        logger.debug("outDir = ${config.outDir}")
+        if (cacheJreDir != null) config.cacheJre = cacheJreDir
+        logger.debug("cacheJre = $cacheJreDir")
         config.verbose = isVerbose
+        logger.debug("verbose = $isVerbose")
 
         (distribution as? MacOSDistribution)?.run {
-            icon?.let { config.iconResource = it }
-            bundleId?.let { config.bundleIdentifier = it }
+            if (icon != null) config.iconResource = icon
+            logger.debug("iconResource = $icon")
+            if (bundleId != null) config.bundleIdentifier = bundleId
+            logger.debug("bundleIdentifier = $bundleId")
         }
 
         if (config.outDir.exists()) {
+            logger.info("  Existing distribution '${config.outDir}' deleted")
             config.outDir.deleteRecursively()
         }
         outputDir.mkdirs()
 
         Packr().pack(config)
+        logger.info("  Build finished")
 
         if (isAutoOpen) {
             when {
-                !Desktop.isDesktopSupported() -> logger.info("Desktop is not supported, ignoring auto open.")
+                !Desktop.isDesktopSupported() -> logger.info("  Desktop is not supported, ignoring auto open")
                 else -> Desktop.getDesktop().run {
                     when {
                         !isSupported(Desktop.Action.OPEN) ->
-                            logger.info("Opening folder is not supported, ignoring auto open.")
-                        else -> open(outputDir)
+                            logger.info("  Opening folder is not supported, ignoring auto open")
+                        else -> {
+                            logger.info("  Auto opening directory")
+                            open(outputDir)
+                        }
                     }
                 }
             }

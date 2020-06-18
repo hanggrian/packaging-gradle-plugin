@@ -13,13 +13,14 @@ class PackrPlugin : Plugin<Project> {
     }
 
     override fun apply(project: Project) {
-        val ext = project.extensions.create<PackrExtension>("packr", project.name, project.group, project.projectDir)
+        val ext = project.extensions.create<PackrExtension>("packr", project.name, project.projectDir)
         ext.outputDir = project.buildDir.resolve("releases")
 
         project.afterEvaluate {
+            val platformNames = mutableListOf<String>()
             val packTasks = ext.distributions.map {
-                logger.info("Packr configuration found for $it.")
-                tasks.register<PackTask>("pack${it.platform.name}") {
+                platformNames += "'$it'"
+                tasks.register<PackTask>("pack$it") {
                     group = GROUP_NAME
                     description = "Pack native bundles for $it."
                     distribution = it
@@ -36,12 +37,15 @@ class PackrPlugin : Plugin<Project> {
                     isAutoOpen = ext.isAutoOpen
                 }
             }
-
-            if (packTasks.isNotEmpty()) {
-                tasks.register("packAll") {
-                    description = "Pack native bundles for all configured distributions."
-                    group = GROUP_NAME
-                    setDependsOn(packTasks)
+            when {
+                packTasks.isEmpty() -> logger.info("Packr configuration not found.")
+                else -> {
+                    logger.info("Packr configuration found for ${platformNames.joinToString()}.")
+                    tasks.register("packAll") {
+                        description = "Pack native bundles for all configured distributions."
+                        group = GROUP_NAME
+                        setDependsOn(packTasks)
+                    }
                 }
             }
         }

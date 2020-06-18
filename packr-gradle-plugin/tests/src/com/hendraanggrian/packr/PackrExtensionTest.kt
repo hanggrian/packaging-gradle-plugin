@@ -8,7 +8,7 @@ import kotlin.test.assertEquals
 
 class PackrExtensionTest {
     private val fakeDir = File("/my/path")
-    private val extension = PackrExtension("awesome", "so.awesome", fakeDir)
+    private val extension = PackrExtension("awesome", fakeDir)
 
     @Test fun relativePaths() {
         val assertIterable: (Iterable<File>) -> Unit = {

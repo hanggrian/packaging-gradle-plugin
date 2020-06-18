@@ -16,9 +16,8 @@ class DistributionTest {
 
     @Test fun macOSDistribution() {
         val distribution = MacOSDistribution(
-            "MyApp.app",
-            "my.app",
             File("/path/to/project"),
+            "MyApp.app",
             "/my/path/to/jdk"
         )
         distribution.icon("my/icon")
