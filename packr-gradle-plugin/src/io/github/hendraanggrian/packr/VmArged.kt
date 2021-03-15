@@ -1,4 +1,4 @@
-package com.hendraanggrian.packr
+package io.github.hendraanggrian.packr
 
 /**
  * Marks a class with configurable VM arguments.

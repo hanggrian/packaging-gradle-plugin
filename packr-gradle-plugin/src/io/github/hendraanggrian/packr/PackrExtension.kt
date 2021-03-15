@@ -1,6 +1,6 @@
 @file:Suppress("NOTHING_TO_INLINE")
 
-package com.hendraanggrian.packr
+package io.github.hendraanggrian.packr
 
 import com.badlogicgames.packr.PackrConfig
 import org.gradle.api.Action

@@ -18,7 +18,7 @@ buildscript {
         maven { url = 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
     dependencies {
-        classpath 'com.hendraanggrian:packr-gradle-plugin:$version'
+        classpath 'io.github.hendraanggrian:packr-gradle-plugin:$version'
     }
 }
 ```
@@ -29,7 +29,7 @@ Below are example configuration for `Windows64` and `MacOS` distributions.
 Note that properties of distribution configuration may override extension configuration.
 
 ```gradle
-apply plugin: 'com.hendraanggrian.packr'
+apply plugin: 'io.github.hendraanggrian.packr'
 
 packr {
     executable 'example'

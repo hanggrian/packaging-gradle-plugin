@@ -1,4 +1,4 @@
-package com.hendraanggrian.packr
+package io.github.hendraanggrian.packr
 
 import com.badlogicgames.packr.Packr
 import com.badlogicgames.packr.PackrConfig

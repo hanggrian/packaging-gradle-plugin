@@ -3,9 +3,14 @@ plugins {
 }
 
 gitPublish {
-    repoUri.set(RELEASE_WEB)
+    repoUri.set(RELEASE_URL)
     branch.set("gh-pages")
-    contents.from("../$RELEASE_ARTIFACT/build/docs")
+    contents.from(
+        "src",
+        "../$RELEASE_ARTIFACT/build/dokka/html"
+    )
 }
 
-tasks["gitPublishCopy"].dependsOn(":$RELEASE_ARTIFACT:dokka")
+tasks.gitPublishCopy {
+    dependsOn(":$RELEASE_ARTIFACT:dokkaHtml")
+}

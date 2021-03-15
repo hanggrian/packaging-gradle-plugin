@@ -11,7 +11,7 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'application'
-apply plugin: 'com.hendraanggrian.packr'
+apply plugin: 'io.github.hendraanggrian.packr'
 
 group 'com.example'
 version '1.0'

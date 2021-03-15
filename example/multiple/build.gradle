@@ -11,17 +11,18 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'application'
-apply plugin: 'com.hendraanggrian.packr'
+apply plugin: 'io.github.hendraanggrian.packr'
 
 group 'com.example'
 version '1.0'
 
 packr {
     mainClass 'com.example.App'
-    classpath 'build/install/custom-dir/lib'
-    outputDirectory 'build/awesome'
-    configureMacOS {
-        name = 'Custom Directory.app'
+    classpath 'build/install/multiple/lib'
+    resources 'src/main/resources'
+    configureMacOS()
+    configureWindows32 {
+        jdk = '/Volumes/Media/Windows JDK/jdk1.8.251-x86'
     }
 }
 
