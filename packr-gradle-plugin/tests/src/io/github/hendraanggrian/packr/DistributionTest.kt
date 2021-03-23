@@ -1,11 +1,6 @@
 package io.github.hendraanggrian.packr
 
-import com.badlogicgames.packr.PackrConfig
-import java.io.File
-import kotlin.test.Test
-import kotlin.test.assertEquals
-
-class DistributionTest {
+/*class DistributionTest {
 
     @Test fun distribution() {
         val distribution = Distribution(PackrConfig.Platform.Linux32, "MyApp", "/my/path/to/jdk")
@@ -28,4 +23,4 @@ class DistributionTest {
         assertEquals(File("/path/to/project/my/icon"), distribution.icon)
         assertEquals("my.app", distribution.bundleId)
     }
-}
+}*/

@@ -1,6 +1,6 @@
 include("packr-gradle-plugin")
 include("website")
-// includeDir("example")
+includeDir("example")
 
 fun includeDir(name: String) = file(name)
     .listFiles()!!

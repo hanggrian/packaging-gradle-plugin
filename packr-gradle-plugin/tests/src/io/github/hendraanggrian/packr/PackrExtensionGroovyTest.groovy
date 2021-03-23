@@ -2,7 +2,7 @@ package io.github.hendraanggrian.packr
 
 import org.junit.Test
 
-class PackrExtensionGroovyTest {
+/*class PackrExtensionGroovyTest {
 
     @Test
     void extension() {
@@ -25,7 +25,7 @@ class PackrExtensionGroovyTest {
         ext.minimizeJre PackrExtension.MINIMIZE_HARD
         assert ext.minimizeJre == "hard"
 
-        ext.outputDir new File('a')
+        ext.outputDirectory new File('a')
         assert ext.getOutputDirectory.name == 'a'
 
         ext.verbose true
@@ -41,4 +41,4 @@ class PackrExtensionGroovyTest {
         ext.linux64()
         assert ext.distributions.size() == 5
     }
-}
+}*/

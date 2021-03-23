@@ -1,17 +1,21 @@
-@file:Suppress("NOTHING_TO_INLINE")
+@file:Suppress("NOTHING_TO_INLINE", "UnstableApiUsage")
 
 package io.github.hendraanggrian.packr
 
 import com.badlogicgames.packr.PackrConfig
 import org.gradle.api.Action
+import org.gradle.api.Project
+import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.provider.ListProperty
+import org.gradle.api.provider.Property
 import org.gradle.kotlin.dsl.invoke
+import org.gradle.kotlin.dsl.listProperty
+import org.gradle.kotlin.dsl.property
 import java.io.File
 
 /** Extension class to be invoked when `packr { ... }` is defined within project. */
-open class PackrExtension(
-    private val projectName: String,
-    override val projectDir: File
-) : PackrConfiguration {
+open class PackrExtension(private val project: Project) : PackrGlobalConfiguration {
 
     companion object {
         const val MINIMIZATION_SOFT = "soft"
@@ -19,93 +23,140 @@ open class PackrExtension(
         const val MINIMIZATION_ORACLEJRE8 = "oraclejre8"
     }
 
-    internal val distributions: MutableSet<Distribution> = mutableSetOf()
+    internal class PlatformConfiguration(project: Project, val platform: PackrConfig.Platform) :
+        PackrPlatformConfiguration {
 
-    override var executable: String = projectName
-    override var classpath: Iterable<File> = emptyList()
-    override var removePlatformLibs: Iterable<File> = emptyList()
-    override var mainClass: String? = null
-    override var vmArgs: Iterable<String> = emptyList()
-    override var resources: Iterable<File> = emptyList()
-    override var minimizeJre: String = MINIMIZATION_SOFT
-    override lateinit var outputDir: File
-    override var cacheJreDir: File? = null
-    override var isVerbose: Boolean = false
-    override var isAutoOpen: Boolean = false
+        override val releaseName: Property<String> = project.objects.property<String>()
+            .convention("${project.name}-${platform.name}")
+
+        override val jdk: Property<String> = project.objects.property<String>()
+            .convention(System.getenv("JAVA_HOME") ?: System.getProperty("java.home"))
+
+        override val icon: RegularFileProperty = project.objects.fileProperty()
+
+        override val bundleId: Property<String> = project.objects.property()
+
+        override val vmArgs: ListProperty<String> = project.objects.listProperty<String>()
+            .convention(mutableListOf())
+
+        override fun toString(): String = platform.name
+        override fun hashCode(): Int = platform.hashCode()
+        override fun equals(other: Any?): Boolean = other != null &&
+            other is PlatformConfiguration &&
+            other.platform == platform
+    }
+
+    internal val platformConfigurations: MutableSet<PlatformConfiguration> = mutableSetOf()
+
+    override val executable: Property<String> = project.objects.property<String>()
+        .convention(project.name)
+
+    override val classpath: ListProperty<File> = project.objects.listProperty<File>()
+        .convention(mutableListOf())
+
+    override val removePlatformLibraries: ListProperty<File> = project.objects.listProperty<File>()
+        .convention(mutableListOf())
+
+    override val mainClass: Property<String> = project.objects.property()
+
+    override val vmArgs: ListProperty<String> = project.objects.listProperty<String>()
+        .convention(mutableListOf())
+
+    override val resources: ListProperty<File> = project.objects.listProperty<File>()
+        .convention(mutableListOf())
+
+    override val minimizeJre: Property<String> = project.objects.property<String>()
+        .convention(MINIMIZATION_SOFT)
+
+    override val outputDirectory: DirectoryProperty = project.objects.directoryProperty()
+        .convention(project.layout.buildDirectory.dir("releases"))
+
+    override val cacheJreDirectory: DirectoryProperty = project.objects.directoryProperty()
+
+    override val verbose: Property<Boolean> = project.objects.property<Boolean>()
+        .convention(false)
+
+    override val autoOpen: Property<Boolean> = project.objects.property<Boolean>()
+        .convention(false)
 
     /** Enable macOS distribution with default configuration. */
     fun configureMacOS() {
-        distributions += MacOSDistribution(projectDir, projectName)
+        platformConfigurations += PlatformConfiguration(project, PackrConfig.Platform.MacOS)
     }
 
     /**
      * Enable macOS distribution with customized [configuration].
      * Unlike other distributions, macOS configuration have some OS-specific properties.
      */
-    fun configureMacOS(configuration: Action<MacOSDistribution>) {
-        distributions += MacOSDistribution(projectDir, projectName).also { configuration(it) }
+    fun configureMacOS(configuration: Action<PackrPlatformConfiguration>) {
+        platformConfigurations += PlatformConfiguration(project, PackrConfig.Platform.MacOS)
+            .also { configuration(it) }
     }
 
     /**
      * Enable macOS distribution with customized [configuration] in Kotlin DSL.
      * Unlike other distributions, macOS configuration have some OS-specific properties.
      */
-    inline fun macOS(noinline configuration: (@DistributionDslMarker MacOSDistribution).() -> Unit): Unit =
+    inline fun macOS(noinline configuration: (@PackrDslMarker PackrPlatformConfiguration).() -> Unit): Unit =
         configureMacOS(configuration)
 
     /** Enable Windows 32-bit distribution with default configuration. */
     fun configureWindows32() {
-        distributions += Distribution(PackrConfig.Platform.Windows32, projectName)
+        platformConfigurations += PlatformConfiguration(project, PackrConfig.Platform.Windows32)
     }
 
     /** Enable Windows 32-bit distribution with customized [configuration]. */
-    fun configureWindows32(configuration: Action<Distribution>) {
-        distributions += Distribution(PackrConfig.Platform.Windows32, projectName).also { configuration(it) }
+    fun configureWindows32(configuration: Action<PackrPlatformConfiguration>) {
+        platformConfigurations += PlatformConfiguration(project, PackrConfig.Platform.Windows32)
+            .also { configuration(it) }
     }
 
     /** Enable Windows 32-bit distribution with customized [configuration] in Kotlin DSL. */
-    inline fun windows32(noinline configuration: (@DistributionDslMarker Distribution).() -> Unit): Unit =
+    inline fun windows32(noinline configuration: (@PackrDslMarker PackrPlatformConfiguration).() -> Unit): Unit =
         configureWindows32(configuration)
 
     /** Enable Windows 64-bit distribution with default configuration. */
     fun configureWindows64() {
-        distributions += Distribution(PackrConfig.Platform.Windows64, projectName)
+        platformConfigurations += PlatformConfiguration(project, PackrConfig.Platform.Windows64)
     }
 
     /** Enable Windows 64-bit distribution with customized [configuration]. */
-    fun configureWindows64(configuration: Action<Distribution>) {
-        distributions += Distribution(PackrConfig.Platform.Windows64, projectName).also { configuration(it) }
+    fun configureWindows64(configuration: Action<PackrPlatformConfiguration>) {
+        platformConfigurations += PlatformConfiguration(project, PackrConfig.Platform.Windows64)
+            .also { configuration(it) }
     }
 
     /** Enable Windows 64-bit distribution with customized [configuration] in Kotlin DSL. */
-    inline fun windows64(noinline configuration: (@DistributionDslMarker Distribution).() -> Unit): Unit =
+    inline fun windows64(noinline configuration: (@PackrDslMarker PackrPlatformConfiguration).() -> Unit): Unit =
         configureWindows64(configuration)
 
     /** Enable Linux 32-bit distribution with default configuration. */
     fun configureLinux32() {
-        distributions += Distribution(PackrConfig.Platform.Linux32, projectName)
+        platformConfigurations += PlatformConfiguration(project, PackrConfig.Platform.Linux32)
     }
 
     /** Enable Linux 32-bit distribution with customized [configuration]. */
-    fun configureLinux32(configuration: Action<Distribution>) {
-        distributions += Distribution(PackrConfig.Platform.Linux32, projectName).also { configuration(it) }
+    fun configureLinux32(configuration: Action<PackrPlatformConfiguration>) {
+        platformConfigurations += PlatformConfiguration(project, PackrConfig.Platform.Linux32)
+            .also { configuration(it) }
     }
 
     /** Enable Linux 32-bit distribution with customized [configuration] in Kotlin DSL. */
-    inline fun linux32(noinline configuration: (@DistributionDslMarker Distribution).() -> Unit): Unit =
+    inline fun linux32(noinline configuration: (@PackrDslMarker PackrPlatformConfiguration).() -> Unit): Unit =
         configureLinux32(configuration)
 
     /** Enable Linux 64-bit distribution with default configuration. */
     fun configureLinux64() {
-        distributions += Distribution(PackrConfig.Platform.Linux64, projectName)
+        platformConfigurations += PlatformConfiguration(project, PackrConfig.Platform.Linux64)
     }
 
     /** Enable Linux 64-bit distribution with customized [configuration]. */
-    fun configureLinux64(configuration: Action<Distribution>) {
-        distributions += Distribution(PackrConfig.Platform.Linux64, projectName).also { configuration(it) }
+    fun configureLinux64(configuration: Action<PackrPlatformConfiguration>) {
+        platformConfigurations += PlatformConfiguration(project, PackrConfig.Platform.Linux64)
+            .also { configuration(it) }
     }
 
     /** Enable Linux 64-bit distribution with customized [configuration] in Kotlin DSL. */
-    inline fun linux64(noinline configuration: (@DistributionDslMarker Distribution).() -> Unit): Unit =
+    inline fun linux64(noinline configuration: (@PackrDslMarker PackrPlatformConfiguration).() -> Unit): Unit =
         configureLinux64(configuration)
 }

@@ -3,7 +3,7 @@ package io.github.hendraanggrian.packr
 
 import org.junit.Test
 
-class DistributionGroovyTest {
+/*class DistributionGroovyTest {
 
     @Test
     void dist() {
@@ -22,4 +22,4 @@ class DistributionGroovyTest {
         assert mac.icon.name == 'awesome icon'
         assert mac.bundleId == 'awesome id'
     }
-}
+}*/

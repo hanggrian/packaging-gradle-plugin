@@ -9,38 +9,42 @@ import org.gradle.kotlin.dsl.register
 class PackrPlugin : Plugin<Project> {
 
     companion object {
-        const val GROUP_NAME = "packaging"
+        // Also a group name of Gradle Distribution Plugin.
+        const val GROUP_NAME = "distribution"
     }
 
     override fun apply(project: Project) {
-        val ext = project.extensions.create<PackrExtension>("packr", project.name, project.projectDir)
-        ext.outputDir = project.buildDir.resolve("releases")
+        val ext = project.extensions.create<PackrExtension>("packr", project)
 
         project.afterEvaluate {
-            val platformNames = mutableListOf<String>()
-            val packTasks = ext.distributions.map {
-                platformNames += "'$it'"
-                tasks.register<PackTask>("pack$it") {
+            val packTasks = ext.platformConfigurations.map { platformConfiguration ->
+                tasks.register<PackTask>("pack$platformConfiguration") {
                     group = GROUP_NAME
-                    description = "Pack native bundles for $it."
-                    distribution = it
-                    executable = ext.executable
-                    classpath = ext.classpath
-                    removePlatformLibs = ext.removePlatformLibs
-                    mainClass = ext.mainClass
-                    vmArgs = ext.vmArgs
-                    resources = ext.resources
-                    minimizeJre = ext.minimizeJre
-                    outputDir = ext.outputDir
-                    cacheJreDir = ext.cacheJreDir
-                    isVerbose = ext.isVerbose
-                    isAutoOpen = ext.isAutoOpen
+                    description = "Pack native bundles for $platformConfiguration."
+                    platform.set(platformConfiguration.platform)
+
+                    releaseName.set(platformConfiguration.releaseName)
+                    jdk.set(platformConfiguration.jdk)
+                    icon.set(platformConfiguration.icon)
+                    bundleId.set(platformConfiguration.bundleId)
+
+                    executable.set(ext.executable)
+                    classpath.set(ext.classpath)
+                    removePlatformLibraries.set(ext.removePlatformLibraries)
+                    mainClass.set(ext.mainClass)
+                    vmArgs.addAll(ext.vmArgs)
+                    resources.set(ext.resources)
+                    minimizeJre.set(ext.minimizeJre)
+                    outputDirectory.set(ext.outputDirectory)
+                    cacheJreDirectory.set(ext.cacheJreDirectory)
+                    verbose.set(ext.verbose)
+                    autoOpen.set(ext.autoOpen)
                 }
             }
             when {
-                packTasks.isEmpty() -> logger.info("Packr configuration not found.")
+                ext.platformConfigurations.isEmpty() -> logger.info("Packr configuration not found.")
                 else -> {
-                    logger.info("Packr configuration found for ${platformNames.joinToString()}.")
+                    logger.info("Packr configuration found for ${ext.platformConfigurations.joinToString()}.")
                     tasks.register("packAll") {
                         description = "Pack native bundles for all configured distributions."
                         group = GROUP_NAME
