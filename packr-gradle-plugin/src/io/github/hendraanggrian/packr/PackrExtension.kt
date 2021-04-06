@@ -6,7 +6,6 @@ import com.badlogicgames.packr.PackrConfig
 import org.gradle.api.Action
 import org.gradle.api.Project
 import org.gradle.api.file.DirectoryProperty
-import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import org.gradle.kotlin.dsl.invoke
@@ -32,7 +31,7 @@ open class PackrExtension(private val project: Project) : PackrGlobalConfigurati
         override val jdk: Property<String> = project.objects.property<String>()
             .convention(System.getenv("JAVA_HOME") ?: System.getProperty("java.home"))
 
-        override val icon: RegularFileProperty = project.objects.fileProperty()
+        override val icon: Property<File> = project.objects.property()
 
         override val bundleId: Property<String> = project.objects.property()
 

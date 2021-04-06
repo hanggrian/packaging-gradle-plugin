@@ -6,7 +6,6 @@ import com.badlogicgames.packr.Packr
 import com.badlogicgames.packr.PackrConfig
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
-import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
@@ -47,7 +46,7 @@ open class PackTask : DefaultTask(), PackrGlobalConfiguration, PackrPlatformConf
      */
     @Optional
     @Input
-    override val icon: RegularFileProperty = project.objects.fileProperty()
+    override val icon: Property<File> = project.objects.property()
 
     /**
      * The bundle identifier of your Java application, e.g. `com.my.app`.
@@ -150,7 +149,7 @@ open class PackTask : DefaultTask(), PackrGlobalConfiguration, PackrPlatformConf
             config.verbose = it
             logger.debug("verbose = $it")
         }
-        icon.orNull?.asFile.let {
+        icon.orNull?.let {
             config.iconResource = it
             logger.debug("iconResource = $it")
         }

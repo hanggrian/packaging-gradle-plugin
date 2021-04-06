@@ -20,6 +20,7 @@ packr {
     mainClass.set('com.example.App')
     classpath.add(new File(buildDir, 'install/custom-dir/lib'))
     outputDirectory.set(new File(buildDir, 'awesome'))
+    autoOpen.set(true)
     configureMacOS {
         releaseName.set('Custom Directory.app')
     }

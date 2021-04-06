@@ -1,7 +1,6 @@
 package io.github.hendraanggrian.packr
 
 import org.gradle.api.file.DirectoryProperty
-import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import java.io.File
@@ -25,7 +24,7 @@ interface PackrPlatformConfiguration : VmArged {
      * Location of an AppBundle icon resource (.icns file) relative to project directory.
      * This is an optional property that is relevant only on macOS.
      */
-    val icon: RegularFileProperty
+    val icon: Property<File>
 
     /**
      * The bundle identifier of your Java application, e.g. `com.my.app`.
@@ -99,7 +98,6 @@ interface PackrGlobalConfiguration : VmArged {
 
 /**
  * Marks a class with configurable VM arguments.
- *
  * @see Distribution
  * @see PackrExtension
  * @see PackTask

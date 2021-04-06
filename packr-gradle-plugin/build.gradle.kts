@@ -5,33 +5,31 @@ plugins {
     `java-gradle-plugin`
     `kotlin-dsl`
     dokka
-    `maven-publish`
-    signing
+    `gradle-publish`
 }
 
 sourceSets {
-    getByName("main") {
+    main {
         java.srcDir("src")
     }
-    getByName("test") {
-        java.srcDir("tests/src")
+    register("functionalTest") {
+        java.srcDir("functional-tests/src")
+        resources.srcDir("functional-tests/res")
+        compileClasspath += sourceSets.main.get().output + configurations.testRuntimeClasspath
+        runtimeClasspath += output + compileClasspath
     }
 }
 
 gradlePlugin {
-    plugins {
-        register(RELEASE_ARTIFACT) {
-            id = "$RELEASE_GROUP.packr"
-            implementationClass = "$id.PackrPlugin"
-        }
-    }
+    testSourceSets(sourceSets["functionalTest"])
 }
 
 dependencies {
     implementation(kotlin("stdlib", VERSION_KOTLIN))
     implementation(packr())
     testImplementation(kotlin("test-junit", VERSION_KOTLIN))
-    testImplementation(google("truth", VERSION_TRUTH))
+    "functionalTestImplementation"(gradleTestKit())
+    "functionalTestImplementation"(kotlin("test-junit", VERSION_KOTLIN))
 }
 
 ktlint()
@@ -43,26 +41,18 @@ tasks {
             it.renameTo(File(rootDir.resolve("example"), it.name))
         }
     }
-    dokkaJavadoc {
-        dokkaSourceSets {
-            "main" {
-                sourceLink {
-                    localDirectory.set(projectDir.resolve("src"))
-                    remoteUrl.set(getReleaseSourceUrl())
-                    remoteLineSuffix.set("#L")
-                }
-            }
-        }
+
+    val functionalTest by registering(Test::class) {
+        description = "Runs the functional tests."
+        group = LifecycleBasePlugin.VERIFICATION_GROUP
+        testClassesDirs = sourceSets["functionalTest"].output.classesDirs
+        classpath = sourceSets["functionalTest"].runtimeClasspath
+        mustRunAfter(test)
     }
-    val dokkaJar by registering(Jar::class) {
-        archiveClassifier.set("javadoc")
-        from(dokkaJavadoc)
-        dependsOn(dokkaJavadoc)
-    }
-    val sourcesJar by registering(Jar::class) {
-        archiveClassifier.set("sources")
-        from(sourceSets.main.get().allSource)
-    }
+    check { dependsOn(functionalTest) }
 }
 
-publishJvm()
+publishPlugin(
+    "Packr Gradle Plugin",
+    "$RELEASE_GROUP.$RELEASE_ARTIFACT.PackrPlugin"
+)
