@@ -1,6 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
-package io.github.hendraanggrian.packr
+package com.hendraanggrian.packr
 
 import com.badlogicgames.packr.Packr
 import com.badlogicgames.packr.PackrConfig

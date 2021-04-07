@@ -1,4 +1,4 @@
-package io.github.hendraanggrian.packr
+package com.hendraanggrian.packr
 
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
@@ -43,7 +43,7 @@ class PackrExtensionTaskTest {
             plugins {
                 java
                 idea
-                id("io.github.hendraanggrian.packr")
+                id("com.hendraanggrian.packr")
             }
             packr {
                 mainClass.set("com.example.App")
@@ -71,7 +71,7 @@ class PackrExtensionTaskTest {
             plugins {
                 java
                 idea
-                id("io.github.hendraanggrian.packr")
+                id("com.hendraanggrian.packr")
             }
             packr {
                 mainClass.set("com.example.App")

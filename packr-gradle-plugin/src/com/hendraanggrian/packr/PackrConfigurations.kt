@@ -1,4 +1,4 @@
-package io.github.hendraanggrian.packr
+package com.hendraanggrian.packr
 
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.provider.ListProperty

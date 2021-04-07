@@ -1,5 +1,5 @@
 const val RELEASE_USER = "hendraanggrian"
-const val RELEASE_GROUP = "io.github.$RELEASE_USER"
+const val RELEASE_GROUP = "com.$RELEASE_USER"
 const val RELEASE_ARTIFACT = "packr"
 const val RELEASE_VERSION = "0.1-SNAPSHOT"
 const val RELEASE_DESCRIPTION = "Start making native distributions for your JAR"

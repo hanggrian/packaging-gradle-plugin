@@ -14,7 +14,7 @@ version '1.0'
 
 apply plugin: 'java'
 apply plugin: 'application'
-apply plugin: 'io.github.hendraanggrian.packr'
+apply plugin: 'com.hendraanggrian.packr'
 
 packr {
     mainClass.set('com.example.App')

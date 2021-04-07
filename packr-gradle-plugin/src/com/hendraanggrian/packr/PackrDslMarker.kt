@@ -1,4 +1,4 @@
-package io.github.hendraanggrian.packr
+package com.hendraanggrian.packr
 
 /** Delimits a distribution DSL scripts. */
 @DslMarker

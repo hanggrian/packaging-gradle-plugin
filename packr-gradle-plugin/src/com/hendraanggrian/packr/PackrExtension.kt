@@ -1,6 +1,6 @@
 @file:Suppress("NOTHING_TO_INLINE", "UnstableApiUsage")
 
-package io.github.hendraanggrian.packr
+package com.hendraanggrian.packr
 
 import com.badlogicgames.packr.PackrConfig
 import org.gradle.api.Action
