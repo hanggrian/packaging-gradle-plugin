@@ -1,4 +1,4 @@
-include("packr-gradle-plugin")
+include("packr")
 include("website")
 //includeDir("example")
 
