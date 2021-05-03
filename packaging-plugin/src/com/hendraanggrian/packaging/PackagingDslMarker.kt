@@ -1,6 +1,6 @@
-package com.hendraanggrian.packr
+package com.hendraanggrian.packaging
 
 /** Delimits a distribution DSL scripts. */
 @DslMarker
 @Target(AnnotationTarget.TYPE)
-annotation class PackrDslMarker
+annotation class PackagingDslMarker

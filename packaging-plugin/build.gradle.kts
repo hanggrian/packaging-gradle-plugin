@@ -14,7 +14,6 @@ sourceSets {
     }
     register("functionalTest") {
         java.srcDir("functional-tests/src")
-        resources.srcDir("functional-tests/res")
         compileClasspath += sourceSets.main.get().output + configurations.testRuntimeClasspath
         runtimeClasspath += output + compileClasspath
     }
@@ -24,8 +23,8 @@ gradlePlugin {
     plugins {
         val packagingPlugin by plugins.registering {
             id = "$RELEASE_GROUP.packaging"
-            implementationClass = "$RELEASE_GROUP.packaging.PackrPlugin"
-            displayName = "Packr Gradle Plugin"
+            implementationClass = "$RELEASE_GROUP.packaging.PackagingPlugin"
+            displayName = "Packaging Plugin"
             description = RELEASE_DESCRIPTION
         }
     }

@@ -1,11 +1,11 @@
-package com.hendraanggrian.packr
+package com.hendraanggrian.packaging
 
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import java.io.File
 
-interface PackrPlatformConfiguration : VmArged {
+interface PackagingPlatformConfiguration : VmArged {
 
     /**
      * File name of this distribution that will be generated.
@@ -35,10 +35,10 @@ interface PackrPlatformConfiguration : VmArged {
 
 /**
  * Marks a class with configurable packr commands.
- * @see PackrExtension
+ * @see PackagingExtension
  * @see PackTask
  */
-interface PackrGlobalConfiguration : VmArged {
+interface PackagingGlobalConfiguration : VmArged {
 
     /**
      * Name of the native executable, without extension such as `.exe`.
@@ -50,7 +50,7 @@ interface PackrGlobalConfiguration : VmArged {
      * File locations of the JAR files to package.
      * Default is empty.
      */
-    val classpath: ListProperty<File>
+    val classpath: DirectoryProperty
 
     /**
      * File locations of JAR files to remove native libraries which do not match the target platform.
@@ -73,7 +73,7 @@ interface PackrGlobalConfiguration : VmArged {
     /**
      * Minimize the JRE by removing directories and files as specified by an additional config file.
      * Comes with a few config files out of the box.
-     * Default is [PackrExtension.MINIMIZATION_SOFT].
+     * Default is [PackagingExtension.MINIMIZATION_SOFT].
      */
     val minimizeJre: Property<String>
 
@@ -99,7 +99,7 @@ interface PackrGlobalConfiguration : VmArged {
 /**
  * Marks a class with configurable VM arguments.
  * @see Distribution
- * @see PackrExtension
+ * @see PackagingExtension
  * @see PackTask
  */
 interface VmArged {

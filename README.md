@@ -29,7 +29,7 @@ Below are example configuration for `Windows64` and `MacOS` distributions.
 Note that properties of distribution configuration may override extension configuration.
 
 ```gradle
-apply plugin: 'com.hendraanggrian.packr'
+apply plugin: 'com.hendraanggrian.packaging'
 
 packr {
     executable 'example'

@@ -1,6 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
-package com.hendraanggrian.packr
+package com.hendraanggrian.packaging
 
 import com.badlogicgames.packr.Packr
 import com.badlogicgames.packr.PackrConfig
@@ -9,6 +9,7 @@ import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Optional
@@ -20,7 +21,7 @@ import java.awt.Desktop
 import java.io.File
 
 /** Task that will generate native distribution on each platform. */
-open class PackTask : DefaultTask(), PackrGlobalConfiguration, PackrPlatformConfiguration {
+open class PackTask : DefaultTask(), PackagingGlobalConfiguration, PackagingPlatformConfiguration {
 
     @get:Internal
     internal val platform: Property<PackrConfig.Platform> = project.objects.property()
@@ -59,8 +60,8 @@ open class PackTask : DefaultTask(), PackrGlobalConfiguration, PackrPlatformConf
     @Input
     override val executable: Property<String> = project.objects.property()
 
-    @InputFiles
-    override val classpath: ListProperty<File> = project.objects.listProperty()
+    @InputDirectory
+    override val classpath: DirectoryProperty = project.objects.directoryProperty()
 
     @InputFiles
     override val removePlatformLibraries: ListProperty<File> = project.objects.listProperty()
@@ -113,7 +114,7 @@ open class PackTask : DefaultTask(), PackrGlobalConfiguration, PackrPlatformConf
             config.executable = it
             logger.debug("executable = $it")
         }
-        classpath.get().flatMapJar().let {
+        classpath.get().asFile.listFiles()!!.asIterable().flatMapJar().let {
             config.classpath = it
             logger.debug("classpath = ${it.joinToString()}")
         }

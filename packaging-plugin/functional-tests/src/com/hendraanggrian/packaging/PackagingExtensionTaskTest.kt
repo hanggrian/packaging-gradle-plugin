@@ -1,4 +1,4 @@
-package com.hendraanggrian.packr
+package com.hendraanggrian.packaging
 
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
@@ -11,7 +11,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-class PackrExtensionTaskTest {
+class PackagingExtensionTaskTest {
 
     @Rule @JvmField val testProjectDir = TemporaryFolder()
     private lateinit var settingsFile: File
@@ -36,18 +36,16 @@ class PackrExtensionTaskTest {
 
     @Test
     fun noConfiguration() {
-        File(javaClass.getResource("${File.separator}sample.jar").toURI())
-            .copyTo(testProjectDir.newFolder("lib").resolve("sample.jar"))
         buildFile.writeText(
             """
             plugins {
-                java
-                idea
-                id("com.hendraanggrian.packr")
+                application
+                id("com.hendraanggrian.packaging")
             }
-            packr {
+            application {
                 mainClass.set("com.example.App")
-                classpath.add(projectDir.resolve("lib"))
+            }
+            packaging {
                 configureMacOS()
             }
             """.trimIndent()
@@ -55,7 +53,7 @@ class PackrExtensionTaskTest {
         runner.withArguments("packMacOS").build().let {
             assertEquals(TaskOutcome.SUCCESS, it.task(":packMacOS")!!.outcome)
             assertTrue(
-                testProjectDir.root.resolve("build${File.separator}releases")
+                testProjectDir.root.resolve("build/install")
                     .resolve("functional-test-MacOS")
                     .exists()
             )
@@ -64,18 +62,16 @@ class PackrExtensionTaskTest {
 
     @Test
     fun configureSome() {
-        File(javaClass.getResource("${File.separator}sample.jar").toURI())
-            .copyTo(testProjectDir.newFolder("lib").resolve("sample.jar"))
         buildFile.writeText(
             """
             plugins {
-                java
-                idea
-                id("com.hendraanggrian.packr")
+                application
+                id("com.hendraanggrian.packaging")
             }
-            packr {
+            application {
                 mainClass.set("com.example.App")
-                classpath.add(projectDir.resolve("lib"))
+            }
+            packaging {
                 outputDirectory.set(buildDir)
                 macOS {
                     releaseName.set("MyApp")
