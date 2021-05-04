@@ -20,9 +20,10 @@ application {
 }
 
 packaging {
-    configureMacOS {
-        releaseName.set('Mac Icon.app')
-        bundleId.set('com.example.app')
-        icon.set(new File(projectDir, 'art/example.icns'))
-    }
+    outputDirectory.set(new File(buildDir, 'awesome'))
+    autoOpen.set(true)
+}
+
+tasks.packMacOS {
+    appName.set('Custom Directory.app')
 }

@@ -12,14 +12,11 @@ buildscript {
 group 'com.example'
 version '1.0'
 
-apply plugin: 'application'
+apply plugin: 'java'
 apply plugin: 'com.hendraanggrian.packaging'
 
-application {
-    mainClass.set('com.example.App')
-}
-
 packaging {
+    mainClass.set('com.example.App')
     resources.add(new File(projectDir, 'src/main/resources'))
-    configureMacOS()
+    classpath.set(new File(buildDir, 'libs'))
 }

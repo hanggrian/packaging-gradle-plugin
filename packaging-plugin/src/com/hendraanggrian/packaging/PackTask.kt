@@ -1,5 +1,3 @@
-@file:Suppress("UnstableApiUsage")
-
 package com.hendraanggrian.packaging
 
 import com.badlogicgames.packr.Packr
@@ -21,17 +19,16 @@ import java.awt.Desktop
 import java.io.File
 
 /** Task that will generate native distribution on each platform. */
-open class PackTask : DefaultTask(), PackagingGlobalConfiguration, PackagingPlatformConfiguration {
+open class PackTask : DefaultTask(), PackSpec {
 
     @get:Internal
     internal val platform: Property<PackrConfig.Platform> = project.objects.property()
 
-    /**
-     * File name of this distribution that will be generated.
-     * Default is project's name.
-     */
-    @Input
-    override val releaseName: Property<String> = project.objects.property()
+    @get:Internal
+    internal val verbose: Property<Boolean> = project.objects.property()
+
+    @get:Internal
+    internal val autoOpen: Property<Boolean> = project.objects.property()
 
     /**
      * Directory, ZIP file, or URL to ZIP file of an OpenJDK or Oracle JDK build
@@ -39,7 +36,7 @@ open class PackTask : DefaultTask(), PackagingGlobalConfiguration, PackagingPlat
      * Default is Java Home environment variable, if any.
      */
     @Input
-    override val jdk: Property<String> = project.objects.property()
+    val jdk: Property<String> = project.objects.property()
 
     /**
      * Location of an AppBundle icon resource (.icns file) relative to project directory.
@@ -47,7 +44,7 @@ open class PackTask : DefaultTask(), PackagingGlobalConfiguration, PackagingPlat
      */
     @Optional
     @Input
-    override val icon: Property<File> = project.objects.property()
+    val icon: Property<File> = project.objects.property()
 
     /**
      * The bundle identifier of your Java application, e.g. `com.my.app`.
@@ -55,7 +52,10 @@ open class PackTask : DefaultTask(), PackagingGlobalConfiguration, PackagingPlat
      */
     @Optional
     @Input
-    override val bundleId: Property<String> = project.objects.property()
+    val bundleId: Property<String> = project.objects.property()
+
+    @Input
+    override val appName: Property<String> = project.objects.property()
 
     @Input
     override val executable: Property<String> = project.objects.property()
@@ -87,23 +87,17 @@ open class PackTask : DefaultTask(), PackagingGlobalConfiguration, PackagingPlat
     @OutputDirectory
     override val cacheJreDirectory: DirectoryProperty = project.objects.directoryProperty()
 
-    @Input
-    override val verbose: Property<Boolean> = project.objects.property()
-
-    @Input
-    override val autoOpen: Property<Boolean> = project.objects.property()
-
     init {
         outputs.upToDateWhen { false } // always consider this task out of date
     }
 
     @TaskAction
     fun pack() {
+        requireNotNull(jdk.isPresent) { "No JDK supplied for ${platform.get().name}" }
+        require(executable.get().isNotBlank()) { "Executable cannot be empty" }
+        require(mainClass.isPresent) { "Undefined main class" }
+
         logger.info("Packing for ${platform.get().name}:")
-
-        require(executable.get().isNotBlank()) { "Executable cannot be empty." }
-        require(mainClass.isPresent) { "Undefined main class." }
-
         val config = PackrConfig()
         config.platform = platform.get()
         jdk.get().let {
@@ -138,7 +132,7 @@ open class PackTask : DefaultTask(), PackagingGlobalConfiguration, PackagingPlat
             config.minimizeJre = it
             logger.debug("minimizeJre = $it")
         }
-        outputDirectory.dir(releaseName).get().asFile.let {
+        outputDirectory.dir("${platform.get()}/${appName.get()}").get().asFile.let {
             config.outDir = it
             logger.debug("outDir = $it")
         }
@@ -177,7 +171,7 @@ open class PackTask : DefaultTask(), PackagingGlobalConfiguration, PackagingPlat
                             logger.info("  Opening folder is not supported, ignoring auto open")
                         else -> {
                             logger.info("  Auto opening directory")
-                            open(config.outDir)
+                            open(outputDirectory.get().asFile)
                         }
                     }
                 }

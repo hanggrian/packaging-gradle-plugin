@@ -11,8 +11,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-class PackagingExtensionTaskTest {
-
+class PackagingFunctionalTest {
     @Rule @JvmField val testProjectDir = TemporaryFolder()
     private lateinit var settingsFile: File
     private lateinit var buildFile: File
@@ -35,47 +34,42 @@ class PackagingExtensionTaskTest {
     }
 
     @Test
-    fun noConfiguration() {
+    fun minimalConfiguration() {
+        testProjectDir.newFolder("lib").resolve("sample.jar").createNewFile()
         buildFile.writeText(
             """
             plugins {
-                application
                 id("com.hendraanggrian.packaging")
             }
-            application {
-                mainClass.set("com.example.App")
-            }
             packaging {
-                configureMacOS()
+                mainClass.set("com.example.App")
+                classpath.set(projectDir.resolve("lib"))
             }
             """.trimIndent()
         )
         runner.withArguments("packMacOS").build().let {
             assertEquals(TaskOutcome.SUCCESS, it.task(":packMacOS")!!.outcome)
             assertTrue(
-                testProjectDir.root.resolve("build/install")
-                    .resolve("functional-test-MacOS")
+                testProjectDir.root.resolve("build/install/MacOS")
+                    .resolve("functional-test")
                     .exists()
             )
         }
     }
 
-    @Test
+    // @Test
     fun configureSome() {
         buildFile.writeText(
             """
             plugins {
-                application
                 id("com.hendraanggrian.packaging")
             }
             application {
                 mainClass.set("com.example.App")
             }
             packaging {
-                outputDirectory.set(buildDir)
-                macOS {
-                    releaseName.set("MyApp")
-                }
+                mainClass.set("com.example.App")
+                releaseName.set("MyApp")
             }
             """.trimIndent()
         )

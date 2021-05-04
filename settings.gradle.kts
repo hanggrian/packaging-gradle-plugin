@@ -1,6 +1,6 @@
 include("packaging-plugin")
 include("website")
-includeDir("example")
+includeDir("samples")
 
 fun includeDir(name: String) = file(name)
     .listFiles()!!

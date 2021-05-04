@@ -21,8 +21,10 @@ application {
 
 packaging {
     resources.add(new File(projectDir, 'src/main/resources'))
-    configureMacOS()
-    configureWindows32 {
+}
+
+tasks {
+    packWindows32 {
         jdk.set('/Volumes/Media/Windows JDK/jdk1.8.251-x86')
     }
 }
