@@ -17,4 +17,4 @@ val Plugins.`git-publish` get() = id("org.ajoberstar.git-publish")
 const val VERSION_TRUTH = "1.0.1"
 fun Dependencies.google(module: String, version: String) = "com.google.$module:$module:$version"
 
-fun Dependencies.packr() = "com.badlogicgames.packr:packr:2.1-SNAPSHOT"
+fun Dependencies.packr() = "com.badlogicgames.packr:packr:2.2-SNAPSHOT"

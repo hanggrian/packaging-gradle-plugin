@@ -7,7 +7,9 @@ import org.gradle.api.Project
 import org.gradle.api.distribution.plugins.DistributionPlugin
 import org.gradle.api.plugins.ApplicationPlugin
 import org.gradle.api.plugins.JavaApplication
+import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.kotlin.dsl.create
+import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.register
 
@@ -23,13 +25,18 @@ class PackagingPlugin : Plugin<Project> {
     }
 
     override fun apply(project: Project) {
+        val hasJavaPlugin = project.pluginManager.hasPlugin("java")
         val hasApplicationPlugin = project.pluginManager.hasPlugin(ApplicationPlugin.APPLICATION_PLUGIN_NAME)
         val extension = project.extensions.create(
             PackagingExtension::class, "packaging",
             DefaultPackagingExtension::class, project
         )
-        if (hasApplicationPlugin) {
-            project.afterEvaluate {
+        project.afterEvaluate {
+            if (hasJavaPlugin) {
+                val sourceSets = project.extensions.getByType<SourceSetContainer>()
+                extension.resources.set(sourceSets["main"].resources.srcDirs.filter { it.exists() })
+            }
+            if (hasApplicationPlugin) {
                 val application = project.extensions.getByType<JavaApplication>()
                 extension.appName.set(application.applicationName)
                 extension.classpath.set(project.layout.buildDirectory.dir("install/${application.applicationName}/lib"))

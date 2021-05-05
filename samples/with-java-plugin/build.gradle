@@ -17,6 +17,5 @@ apply plugin: 'com.hendraanggrian.packaging'
 
 packaging {
     mainClass.set('com.example.App')
-    resources.add(new File(projectDir, 'src/main/resources'))
     classpath.set(new File(buildDir, 'libs'))
 }

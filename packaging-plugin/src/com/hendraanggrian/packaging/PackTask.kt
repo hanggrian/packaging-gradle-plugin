@@ -100,58 +100,32 @@ open class PackTask : DefaultTask(), PackSpec {
         logger.info("Packing for ${platform.get().name}:")
         val config = PackrConfig()
         config.platform = platform.get()
-        jdk.get().let {
-            config.jdk = it
-            logger.debug("jdk = $it")
-        }
-        executable.get().let {
-            config.executable = it
-            logger.debug("executable = $it")
-        }
-        classpath.get().asFile.listFiles()!!.asIterable().flatMapJar().let {
-            config.classpath = it
-            logger.debug("classpath = ${it.joinToString()}")
-        }
-        removePlatformLibraries.get().flatMapJar().let {
-            config.removePlatformLibs = it
-            logger.debug("removePlatformLibs = ${it.joinToString()}")
-        }
-        mainClass.get().let {
-            config.mainClass = it
-            logger.debug("mainClass = $it")
-        }
-        vmArgs.get().let {
-            config.vmArgs = it
-            logger.debug("vmArgs = $it")
-        }
-        resources.get().let {
-            config.resources = it
-            logger.debug("resources = ${it.joinToString { file -> file.name }}")
-        }
-        minimizeJre.get().let {
-            config.minimizeJre = it
-            logger.debug("minimizeJre = $it")
-        }
-        outputDirectory.dir("${platform.get()}/${appName.get()}").get().asFile.let {
-            config.outDir = it
-            logger.debug("outDir = $it")
-        }
-        cacheJreDirectory.orNull?.asFile.let {
-            config.cacheJre = it
-            logger.debug("cacheJre = $it")
-        }
-        verbose.get().let {
-            config.verbose = it
-            logger.debug("verbose = $it")
-        }
-        icon.orNull?.let {
-            config.iconResource = it
-            logger.debug("iconResource = $it")
-        }
-        bundleId.orNull?.let {
-            config.bundleIdentifier = it
-            logger.debug("bundleIdentifier = $it")
-        }
+        config.jdk = jdk.get()
+        logger.debug("jdk = ${config.jdk}")
+        config.executable = executable.get()
+        logger.debug("executable = ${config.executable}")
+        config.classpath = classpath.get().asFile.listFiles()!!.asIterable().flatMapJar()
+        logger.debug("classpath = ${config.classpath.joinToString()}")
+        config.removePlatformLibs = removePlatformLibraries.get().flatMapJar()
+        logger.debug("removePlatformLibs = ${config.removePlatformLibs.joinToString()}")
+        config.mainClass = mainClass.get()
+        logger.debug("mainClass = ${config.mainClass}")
+        config.vmArgs = vmArgs.get()
+        logger.debug("vmArgs = ${config.vmArgs}")
+        config.resources = resources.get()
+        logger.debug("resources = ${config.resources.joinToString { file -> file.name }}")
+        config.minimizeJre = minimizeJre.get()
+        logger.debug("minimizeJre = ${config.minimizeJre}")
+        config.outDir = outputDirectory.dir("${platform.get()}/${appName.get()}").get().asFile
+        logger.debug("outDir = ${config.outDir}")
+        config.cacheJre = cacheJreDirectory.orNull?.asFile
+        logger.debug("cacheJre = ${config.cacheJre}")
+        config.verbose = verbose.get()
+        logger.debug("verbose = ${config.verbose}")
+        config.iconResource = icon.orNull
+        logger.debug("iconResource = ${config.iconResource}")
+        config.bundleIdentifier = bundleId.orNull
+        logger.debug("bundleIdentifier = ${config.bundleIdentifier}")
 
         if (config.outDir.exists()) {
             logger.info("  Existing distribution '${config.outDir}' deleted")
