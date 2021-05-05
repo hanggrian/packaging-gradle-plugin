@@ -5,6 +5,7 @@ import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import java.io.File
 
+/** A convention used by [PackagingExtension] and [PackTask]. */
 interface PackSpec {
 
     /**

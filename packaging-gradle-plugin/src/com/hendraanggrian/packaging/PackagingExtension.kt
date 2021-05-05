@@ -3,9 +3,8 @@ package com.hendraanggrian.packaging
 import org.gradle.api.provider.Property
 
 /**
- * Marks a class with configurable packr commands.
- * @see PackagingExtension
- * @see PackTask
+ * Extension class to be invoked when `packr { ... }` is defined within project.
+ * It contains global packaging configuration, any changes made here will be applied to all [PackTask].
  */
 interface PackagingExtension : PackSpec {
 

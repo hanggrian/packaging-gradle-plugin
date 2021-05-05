@@ -66,7 +66,6 @@ open class PackTask : DefaultTask(), PackSpec {
     @InputFiles
     override val removePlatformLibraries: ListProperty<File> = project.objects.listProperty()
 
-    @Optional
     @Input
     override val mainClass: Property<String> = project.objects.property()
 
@@ -93,10 +92,6 @@ open class PackTask : DefaultTask(), PackSpec {
 
     @TaskAction
     fun pack() {
-        requireNotNull(jdk.isPresent) { "No JDK supplied for ${platform.get().name}" }
-        require(executable.get().isNotBlank()) { "Executable cannot be empty" }
-        require(mainClass.isPresent) { "Undefined main class" }
-
         logger.info("Packing for ${platform.get().name}:")
         val config = PackrConfig()
         config.platform = platform.get()
@@ -145,7 +140,7 @@ open class PackTask : DefaultTask(), PackSpec {
                             logger.info("  Opening folder is not supported, ignoring auto open")
                         else -> {
                             logger.info("  Auto opening directory")
-                            open(outputDirectory.get().asFile)
+                            open(config.outDir)
                         }
                     }
                 }

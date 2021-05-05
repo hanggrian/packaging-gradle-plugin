@@ -1,5 +1,3 @@
-@file:Suppress("NOTHING_TO_INLINE", "UnstableApiUsage")
-
 package com.hendraanggrian.packaging.internal
 
 import com.hendraanggrian.packaging.PackagingExtension
@@ -12,7 +10,6 @@ import org.gradle.kotlin.dsl.listProperty
 import org.gradle.kotlin.dsl.property
 import java.io.File
 
-/** Extension class to be invoked when `packr { ... }` is defined within project. */
 open class DefaultPackagingExtension(project: Project) : PackagingExtension {
 
     override val appName: Property<String> = project.objects.property<String>()

@@ -1,4 +1,4 @@
-include("packaging-plugin")
+include("packaging-gradle-plugin")
 include("website")
 includeDir("samples")
 

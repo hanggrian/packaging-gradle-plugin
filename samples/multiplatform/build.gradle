@@ -1,11 +1,12 @@
 buildscript {
     repositories {
-        jcenter()
+        mavenCentral()
         maven { url = 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
     dependencies {
-        classpath files('../packaging-plugin-0.1-SNAPSHOT.jar')
-        classpath 'com.badlogicgames.packr:packr:2.1-SNAPSHOT'
+        classpath files('../packaging-gradle-plugin-0.1-SNAPSHOT.jar')
+        classpath 'com.badlogicgames.packr:packr:2.2-SNAPSHOT'
+        classpath 'com.google.gradle:osdetector-gradle-plugin:1.7.0'
     }
 }
 
@@ -20,11 +21,12 @@ application {
 }
 
 packaging {
-    resources.add(new File(projectDir, 'src/main/resources'))
+    autoOpen.set(true)
+    verbose.set(true)
 }
 
 tasks {
     packWindows32 {
-        jdk.set('/Volumes/Media/Windows JDK/jdk1.8.251-x86')
+        jdk.set('/Volumes/Media/Windows JDK/jdk1.8.0_261-x86')
     }
 }
