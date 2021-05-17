@@ -13,7 +13,7 @@ import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.get
-import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.getByName
 import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.invoke
 import org.gradle.kotlin.dsl.provideDelegate
@@ -36,7 +36,7 @@ class PackagingPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
         project.pluginManager.apply(OsDetectorPlugin::class)
-        hasJavaPlugin = project.pluginManager.hasPlugin("java")
+        hasJavaPlugin = project.pluginManager.hasPlugin("java") || project.pluginManager.hasPlugin("java-library")
         hasApplicationPlugin = project.pluginManager.hasPlugin(ApplicationPlugin.APPLICATION_PLUGIN_NAME)
         extension = project.extensions.create(
             PackagingExtension::class, "packaging",
@@ -54,24 +54,26 @@ class PackagingPlugin : Plugin<Project> {
         }
 
         project.afterEvaluate {
-            val detector = project.extensions.getByType(OsDetector::class)
-            when (detector.os) {
-                "windows" -> when {
-                    detector.arch.endsWith("32") -> packWindows32(::useJavaHome)
-                    detector.arch.endsWith("64") -> packWindows64(::useJavaHome)
+            project.extensions.getByName<OsDetector>("osdetector").let { detector ->
+                when (detector.os) {
+                    "windows" -> when {
+                        detector.arch.endsWith("32") -> packWindows32(::useJavaHome)
+                        detector.arch.endsWith("64") -> packWindows64(::useJavaHome)
+                    }
+                    "linux" -> when {
+                        detector.arch.endsWith("32") -> packLinux32(::useJavaHome)
+                        detector.arch.endsWith("64") -> packLinux64(::useJavaHome)
+                    }
+                    "osx" -> packMacOS(::useJavaHome)
                 }
-                "linux" -> when {
-                    detector.arch.endsWith("32") -> packLinux32(::useJavaHome)
-                    detector.arch.endsWith("64") -> packLinux64(::useJavaHome)
-                }
-                "osx" -> packMacOS(::useJavaHome)
             }
             if (hasJavaPlugin) {
-                val sourceSets = project.extensions.getByType<SourceSetContainer>()
+                val sourceSets = project.extensions.getByName<SourceSetContainer>("sourceSets")
                 extension.resources.set(sourceSets["main"].resources.srcDirs.filter { it.exists() })
             }
             if (hasApplicationPlugin) {
-                val application = project.extensions.getByType<JavaApplication>()
+                val application = project.extensions
+                    .getByName<JavaApplication>(ApplicationPlugin.APPLICATION_PLUGIN_NAME)
                 extension.appName.set(application.applicationName)
                 extension.classpath.set(project.layout.buildDirectory.dir("install/${application.applicationName}/lib"))
                 extension.mainClass.set(application.mainClass)
