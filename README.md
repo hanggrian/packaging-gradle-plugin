@@ -1,7 +1,7 @@
-[![download](https://api.bintray.com/packages/hendraanggrian/maven/packr-gradle-plugin/images/download.svg)](https://bintray.com/hendraanggrian/maven/packr-gradle-plugin/_latestVersion)
-[![build](https://travis-ci.com/hendraanggrian/packr-gradle-plugin.svg)](https://travis-ci.com/hendraanggrian/packr-gradle-plugin)
-[![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
-[![license](https://img.shields.io/github/license/hendraanggrian/packr-gradle-plugin)](http://www.apache.org/licenses/LICENSE-2.0)
+[![version](https://img.shields.io/maven-metadata/v?label=plugin-portal&metadataUrl=https%3A%2F%2Fplugins.gradle.org%2Fm2%2Forg%2Fjetbrains%2Fkotlin%2Fjvm%2Forg.jetbrains.kotlin.jvm.gradle.plugin%2Fmaven-metadata.xml)](https://plugins.gradle.org/plugin/org.jetbrains.kotlin.jvm)
+[![build](https://travis-ci.com/hendraanggrian/packaging-gradle-plugin.svg)](https://travis-ci.com/hendraanggrian/packaging-gradle-plugin)
+[![analysis](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
+[![license](https://img.shields.io/github/license/hendraanggrian/buildconfig-gradle-plugin)](https://www.apache.org/licenses/LICENSE-2.0)
 
 Packr Gradle Plugin
 ===================

@@ -12,11 +12,9 @@ import java.io.File
 
 open class DefaultPackagingExtension(project: Project) : PackagingExtension {
 
-    override val appName: Property<String> = project.objects.property<String>()
-        .convention(project.name)
+    override val appName: Property<String> = project.objects.property()
 
-    override val executable: Property<String> = project.objects.property<String>()
-        .convention(project.name)
+    override val executable: Property<String> = project.objects.property()
 
     override val classpath: DirectoryProperty = project.objects.directoryProperty()
 

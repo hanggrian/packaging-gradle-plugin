@@ -54,29 +54,31 @@ class PackagingPlugin : Plugin<Project> {
         }
 
         project.afterEvaluate {
-            project.extensions.getByName<OsDetector>("osdetector").let { detector ->
-                when (detector.os) {
+            project.extensions.getByName<OsDetector>("osdetector").run {
+                when (os) {
                     "windows" -> when {
-                        detector.arch.endsWith("32") -> packWindows32(::useJavaHome)
-                        detector.arch.endsWith("64") -> packWindows64(::useJavaHome)
+                        arch.endsWith("32") -> packWindows32(::useJavaHome)
+                        arch.endsWith("64") -> packWindows64(::useJavaHome)
                     }
                     "linux" -> when {
-                        detector.arch.endsWith("32") -> packLinux32(::useJavaHome)
-                        detector.arch.endsWith("64") -> packLinux64(::useJavaHome)
+                        arch.endsWith("32") -> packLinux32(::useJavaHome)
+                        arch.endsWith("64") -> packLinux64(::useJavaHome)
                     }
                     "osx" -> packMacOS(::useJavaHome)
                 }
             }
+            extension.appName.convention(project.name)
+            extension.executable.convention(project.name)
             if (hasJavaPlugin) {
                 val sourceSets = project.extensions.getByName<SourceSetContainer>("sourceSets")
-                extension.resources.set(sourceSets["main"].resources.srcDirs.filter { it.exists() })
+                extension.resources.convention(sourceSets["main"].resources.srcDirs.filter { it.exists() })
             }
             if (hasApplicationPlugin) {
                 val application = project.extensions
                     .getByName<JavaApplication>(ApplicationPlugin.APPLICATION_PLUGIN_NAME)
-                extension.appName.set(application.applicationName)
-                extension.classpath.set(project.layout.buildDirectory.dir("install/${application.applicationName}/lib"))
-                extension.mainClass.set(application.mainClass)
+                extension.appName.convention(application.applicationName)
+                extension.classpath.convention(project.layout.buildDirectory.dir("install/${application.applicationName}/lib"))
+                extension.mainClass.convention(application.mainClass)
             }
             val availableTasks = listOf(packWindows32, packWindows64, packLinux32, packLinux64, packMacOS)
                 .filter { it.get().jdk.isPresent }
