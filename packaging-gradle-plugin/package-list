@@ -1,0 +1,60 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:com.hendraanggrian.packaging.internal////PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging.internal/index.html
+$dokka.location:com.hendraanggrian.packaging.internal/DefaultPackagingExtension///PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging.internal/-default-packaging-extension/index.html
+$dokka.location:com.hendraanggrian.packaging.internal/DefaultPackagingExtension/DefaultPackagingExtension/#org.gradle.api.Project/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging.internal/-default-packaging-extension/-default-packaging-extension.html
+$dokka.location:com.hendraanggrian.packaging.internal/DefaultPackagingExtension/appName/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging.internal/-default-packaging-extension/app-name.html
+$dokka.location:com.hendraanggrian.packaging.internal/DefaultPackagingExtension/autoOpen/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging.internal/-default-packaging-extension/auto-open.html
+$dokka.location:com.hendraanggrian.packaging.internal/DefaultPackagingExtension/cacheJreDirectory/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging.internal/-default-packaging-extension/cache-jre-directory.html
+$dokka.location:com.hendraanggrian.packaging.internal/DefaultPackagingExtension/classpath/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging.internal/-default-packaging-extension/classpath.html
+$dokka.location:com.hendraanggrian.packaging.internal/DefaultPackagingExtension/executable/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging.internal/-default-packaging-extension/executable.html
+$dokka.location:com.hendraanggrian.packaging.internal/DefaultPackagingExtension/mainClass/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging.internal/-default-packaging-extension/main-class.html
+$dokka.location:com.hendraanggrian.packaging.internal/DefaultPackagingExtension/minimizeJre/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging.internal/-default-packaging-extension/minimize-jre.html
+$dokka.location:com.hendraanggrian.packaging.internal/DefaultPackagingExtension/outputDirectory/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging.internal/-default-packaging-extension/output-directory.html
+$dokka.location:com.hendraanggrian.packaging.internal/DefaultPackagingExtension/removePlatformLibraries/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging.internal/-default-packaging-extension/remove-platform-libraries.html
+$dokka.location:com.hendraanggrian.packaging.internal/DefaultPackagingExtension/resources/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging.internal/-default-packaging-extension/resources.html
+$dokka.location:com.hendraanggrian.packaging.internal/DefaultPackagingExtension/verbose/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging.internal/-default-packaging-extension/verbose.html
+$dokka.location:com.hendraanggrian.packaging.internal/DefaultPackagingExtension/vmArgs/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging.internal/-default-packaging-extension/vm-args.html
+$dokka.location:com.hendraanggrian.packaging////PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/index.html
+$dokka.location:com.hendraanggrian.packaging/PackSpec///PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-spec/index.html
+$dokka.location:com.hendraanggrian.packaging/PackSpec/appName/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-spec/app-name.html
+$dokka.location:com.hendraanggrian.packaging/PackSpec/cacheJreDirectory/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-spec/cache-jre-directory.html
+$dokka.location:com.hendraanggrian.packaging/PackSpec/classpath/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-spec/classpath.html
+$dokka.location:com.hendraanggrian.packaging/PackSpec/executable/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-spec/executable.html
+$dokka.location:com.hendraanggrian.packaging/PackSpec/mainClass/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-spec/main-class.html
+$dokka.location:com.hendraanggrian.packaging/PackSpec/minimizeJre/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-spec/minimize-jre.html
+$dokka.location:com.hendraanggrian.packaging/PackSpec/outputDirectory/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-spec/output-directory.html
+$dokka.location:com.hendraanggrian.packaging/PackSpec/removePlatformLibraries/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-spec/remove-platform-libraries.html
+$dokka.location:com.hendraanggrian.packaging/PackSpec/resources/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-spec/resources.html
+$dokka.location:com.hendraanggrian.packaging/PackSpec/vmArgs/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-spec/vm-args.html
+$dokka.location:com.hendraanggrian.packaging/PackTask///PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-task/index.html
+$dokka.location:com.hendraanggrian.packaging/PackTask/PackTask/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-task/-pack-task.html
+$dokka.location:com.hendraanggrian.packaging/PackTask/appName/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-task/app-name.html
+$dokka.location:com.hendraanggrian.packaging/PackTask/bundleId/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-task/bundle-id.html
+$dokka.location:com.hendraanggrian.packaging/PackTask/cacheJreDirectory/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-task/cache-jre-directory.html
+$dokka.location:com.hendraanggrian.packaging/PackTask/classpath/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-task/classpath.html
+$dokka.location:com.hendraanggrian.packaging/PackTask/executable/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-task/executable.html
+$dokka.location:com.hendraanggrian.packaging/PackTask/icon/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-task/icon.html
+$dokka.location:com.hendraanggrian.packaging/PackTask/jdk/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-task/jdk.html
+$dokka.location:com.hendraanggrian.packaging/PackTask/mainClass/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-task/main-class.html
+$dokka.location:com.hendraanggrian.packaging/PackTask/minimizeJre/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-task/minimize-jre.html
+$dokka.location:com.hendraanggrian.packaging/PackTask/outputDirectory/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-task/output-directory.html
+$dokka.location:com.hendraanggrian.packaging/PackTask/pack/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-task/pack.html
+$dokka.location:com.hendraanggrian.packaging/PackTask/removePlatformLibraries/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-task/remove-platform-libraries.html
+$dokka.location:com.hendraanggrian.packaging/PackTask/resources/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-task/resources.html
+$dokka.location:com.hendraanggrian.packaging/PackTask/vmArgs/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-pack-task/vm-args.html
+$dokka.location:com.hendraanggrian.packaging/PackagingExtension///PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-packaging-extension/index.html
+$dokka.location:com.hendraanggrian.packaging/PackagingExtension/autoOpen/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-packaging-extension/auto-open.html
+$dokka.location:com.hendraanggrian.packaging/PackagingExtension/verbose/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-packaging-extension/verbose.html
+$dokka.location:com.hendraanggrian.packaging/PackagingPlugin.Companion///PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-packaging-plugin/-companion/index.html
+$dokka.location:com.hendraanggrian.packaging/PackagingPlugin.Companion/GROUP_NAME/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-packaging-plugin/-companion/-g-r-o-u-p_-n-a-m-e.html
+$dokka.location:com.hendraanggrian.packaging/PackagingPlugin.Companion/MINIMIZATION_HARD/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-packaging-plugin/-companion/-m-i-n-i-m-i-z-a-t-i-o-n_-h-a-r-d.html
+$dokka.location:com.hendraanggrian.packaging/PackagingPlugin.Companion/MINIMIZATION_ORACLEJRE8/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-packaging-plugin/-companion/-m-i-n-i-m-i-z-a-t-i-o-n_-o-r-a-c-l-e-j-r-e8.html
+$dokka.location:com.hendraanggrian.packaging/PackagingPlugin.Companion/MINIMIZATION_SOFT/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-packaging-plugin/-companion/-m-i-n-i-m-i-z-a-t-i-o-n_-s-o-f-t.html
+$dokka.location:com.hendraanggrian.packaging/PackagingPlugin.Companion/PLUGIN_NAME/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-packaging-plugin/-companion/-p-l-u-g-i-n_-n-a-m-e.html
+$dokka.location:com.hendraanggrian.packaging/PackagingPlugin///PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-packaging-plugin/index.html
+$dokka.location:com.hendraanggrian.packaging/PackagingPlugin/PackagingPlugin/#/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-packaging-plugin/-packaging-plugin.html
+$dokka.location:com.hendraanggrian.packaging/PackagingPlugin/apply/#org.gradle.api.Project/PointingToDeclaration/packaging-gradle-plugin/com.hendraanggrian.packaging/-packaging-plugin/apply.html
+com.hendraanggrian.packaging
+com.hendraanggrian.packaging.internal
+
