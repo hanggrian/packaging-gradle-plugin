@@ -7,7 +7,7 @@ import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
-import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Optional
@@ -43,7 +43,7 @@ open class PackTask : DefaultTask(), PackSpec {
      * This is an optional property that is relevant only on macOS.
      */
     @Optional
-    @Input
+    @InputFile
     val icon: Property<File> = project.objects.property()
 
     /**
@@ -60,8 +60,8 @@ open class PackTask : DefaultTask(), PackSpec {
     @Input
     override val executable: Property<String> = project.objects.property()
 
-    @InputDirectory
-    override val classpath: DirectoryProperty = project.objects.directoryProperty()
+    @InputFiles
+    override val classpath: ListProperty<File> = project.objects.listProperty()
 
     @InputFiles
     override val removePlatformLibraries: ListProperty<File> = project.objects.listProperty()
@@ -99,7 +99,7 @@ open class PackTask : DefaultTask(), PackSpec {
         logger.debug("jdk = ${config.jdk}")
         config.executable = executable.get()
         logger.debug("executable = ${config.executable}")
-        config.classpath = classpath.get().asFile.listFiles()!!.asIterable().flatMapJar()
+        config.classpath = classpath.get().flatMapJar()
         logger.debug("classpath = ${config.classpath.joinToString()}")
         config.removePlatformLibs = removePlatformLibraries.get().flatMapJar()
         logger.debug("removePlatformLibs = ${config.removePlatformLibs.joinToString()}")

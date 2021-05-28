@@ -4,7 +4,7 @@ buildscript {
         maven { url = 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
     dependencies {
-        classpath files('../packaging-gradle-plugin-0.1-SNAPSHOT.jar')
+        classpath files('../packaging-gradle-plugin-0.1.jar')
         classpath 'com.badlogicgames.packr:packr:2.2-SNAPSHOT'
         classpath 'com.google.gradle:osdetector-gradle-plugin:1.7.0'
     }
@@ -18,5 +18,5 @@ apply plugin: 'com.hendraanggrian.packaging'
 
 packaging {
     mainClass.set('com.example.App')
-    classpath.set(new File(buildDir, 'libs'))
+    classpath.add(new File(buildDir, 'libs'))
 }

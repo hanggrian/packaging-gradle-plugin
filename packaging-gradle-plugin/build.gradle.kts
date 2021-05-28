@@ -24,7 +24,7 @@ gradlePlugin {
         val packagingPlugin by plugins.registering {
             id = "$RELEASE_GROUP.packaging"
             implementationClass = "$RELEASE_GROUP.packaging.PackagingPlugin"
-            displayName = "Packaging Plugin"
+            displayName = "Packaging plugin"
             description = RELEASE_DESCRIPTION
         }
     }
@@ -58,4 +58,8 @@ pluginBundle {
     vcsUrl = "$RELEASE_GITHUB.git"
     description = RELEASE_DESCRIPTION
     tags = listOf("packaging", "packr", "jar")
+    mavenCoordinates {
+        groupId = RELEASE_GROUP
+        artifactId = RELEASE_ARTIFACT
+    }
 }

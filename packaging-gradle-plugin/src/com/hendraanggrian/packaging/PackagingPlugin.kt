@@ -77,7 +77,9 @@ class PackagingPlugin : Plugin<Project> {
                 val application = project.extensions
                     .getByName<JavaApplication>(ApplicationPlugin.APPLICATION_PLUGIN_NAME)
                 extension.appName.convention(application.applicationName)
-                extension.classpath.convention(project.layout.buildDirectory.dir("install/${application.applicationName}/lib"))
+                extension.classpath.convention(
+                    listOf(project.buildDir.resolve("install/${application.applicationName}/lib"))
+                )
                 extension.mainClass.convention(application.mainClass)
             }
             val availableTasks = listOf(packWindows32, packWindows64, packLinux32, packLinux64, packMacOS)

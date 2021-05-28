@@ -24,7 +24,7 @@ interface PackSpec {
      * File locations of the JAR files to package.
      * Default is empty.
      */
-    val classpath: DirectoryProperty
+    val classpath: ListProperty<File>
 
     /**
      * File locations of JAR files to remove native libraries which do not match the target platform.

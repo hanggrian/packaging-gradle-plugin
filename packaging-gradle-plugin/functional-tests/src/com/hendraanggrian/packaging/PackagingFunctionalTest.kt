@@ -43,7 +43,7 @@ class PackagingFunctionalTest {
             }
             packaging {
                 mainClass.set("com.example.App")
-                classpath.set(projectDir.resolve("lib"))
+                classpath.add(projectDir.resolve("lib"))
             }
             """.trimIndent()
         )

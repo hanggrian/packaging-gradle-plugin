@@ -16,7 +16,8 @@ open class DefaultPackagingExtension(project: Project) : PackagingExtension {
 
     override val executable: Property<String> = project.objects.property()
 
-    override val classpath: DirectoryProperty = project.objects.directoryProperty()
+    override val classpath: ListProperty<File> = project.objects.listProperty<File>()
+        .convention(mutableListOf())
 
     override val removePlatformLibraries: ListProperty<File> = project.objects.listProperty<File>()
         .convention(mutableListOf())
