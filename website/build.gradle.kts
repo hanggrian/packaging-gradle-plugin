@@ -5,7 +5,7 @@ plugins {
 gitPublish {
     repoUri.set(RELEASE_GITHUB)
     branch.set("gh-pages")
-    contents.from("src", "../$RELEASE_ARTIFACT/build/dokka/html")
+    contents.from("../$RELEASE_ARTIFACT/build/dokka/html")
 }
 
 tasks {

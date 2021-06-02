@@ -1,9 +1,9 @@
 language: java
+install: skip
+
+os: linux
 dist: trusty
-sudo: required
+jdk: oraclejdk8
 
-jdk:
-  - oraclejdk8
-
-os:
-  - linux
+script:
+  - ./gradlew build

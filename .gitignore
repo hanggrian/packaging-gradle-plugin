@@ -1,11 +1,11 @@
-*.iml
-.gradle
-/local.properties
-/.idea
 .DS_Store
-build
-/captures
-.externalNativeBuild
 
-out
-release
+# IntelliJ
+*.iml
+.idea/
+out/
+
+# Gradle
+.gradle/
+build/
+local.properties
