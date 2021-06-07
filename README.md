@@ -1,10 +1,11 @@
 [![version](https://img.shields.io/maven-metadata/v?label=plugin-portal&metadataUrl=https%3A%2F%2Fplugins.gradle.org%2Fm2%2Fcom%2Fhendraanggrian%2Fpackaging%2Fcom.hendraanggrian.packaging.gradle.plugin%2Fmaven-metadata.xml)](https://plugins.gradle.org/plugin/com.hendraanggrian.packaging)
-[![build](https://travis-ci.com/hendraanggrian/packaging-gradle-plugin.svg)](https://travis-ci.com/hendraanggrian/packaging-gradle-plugin)
-[![analysis](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
-[![license](https://img.shields.io/github/license/hendraanggrian/packaging-gradle-plugin)](https://www.apache.org/licenses/LICENSE-2.0)
+[![build](https://img.shields.io/travis/com/hendraanggrian/packaging-gradle-plugin)](https://travis-ci.com/hendraanggrian/packaging-gradle-plugin)
+[![analysis](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081)](https://ktlint.github.io)
+[![license](https://img.shields.io/github/license/hendraanggrian/packaging-gradle-plugin)](https://github.com/hendraanggrian/packaging-gradle-plugin/blob/main/LICENSE)
 
 Packaging Gradle Plugin
 =======================
+
 Gradle plugin of [packr](https://github.com/libgdx/packr),
 a library that wraps JARs into native bundle for Windows, macOS, and Linux.
 * Complete customization for each distribution.
@@ -12,6 +13,7 @@ a library that wraps JARs into native bundle for Windows, macOS, and Linux.
 
 Download
 --------
+
 Using plugins DSL:
 
 ```gradle
@@ -37,6 +39,7 @@ apply plugin: 'com.hendraanggrian.packaging'
 
 Usage
 -----
+
 Below are example configuration for `Windows64` and `MacOS` distributions.
 Note that properties of distribution configuration may override extension configuration.
 
