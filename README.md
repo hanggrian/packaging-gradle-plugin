@@ -73,6 +73,7 @@ tasks {
 ```
 
 ### Using [Application Plugin](https://docs.gradle.org/current/userguide/application_plugin.html)
+
 For easier setup, also use `application` plugin to distribute classpath with `installDist` command.
 
 ```gradle
