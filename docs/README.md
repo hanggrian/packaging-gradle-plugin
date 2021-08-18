@@ -29,7 +29,7 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        classpath("com.hendraanggrian:packaging-gradle-plugin:${version}")
+        classpath("com.hendraanggrian:packaging-gradle-plugin:$version")
     }
 }
 
