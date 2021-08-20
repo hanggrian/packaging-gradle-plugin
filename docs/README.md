@@ -17,7 +17,7 @@ Using plugins DSL:
 
 ```gradle
 plugins {
-    id('com.hendraanggrian.packaging') version "${version}"
+    id('com.hendraanggrian.packaging') version "$version"
 }
 ```
 
