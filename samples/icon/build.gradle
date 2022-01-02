@@ -12,7 +12,6 @@ buildscript {
 group 'com.example'
 version '1.0'
 
-apply plugin: 'application'
 apply plugin: 'org.openjfx.javafxplugin'
 apply plugin: 'com.hendraanggrian.packaging'
 
@@ -21,19 +20,15 @@ javafx {
     modules = ['javafx.controls']
 }
 
-application {
-    applicationName = "My App"
-    mainClass.set('com.example.App')
-    applicationDefaultJvmArgs = [
-        "--module-path=${System.getenv('JAVAFX_HOME')}/lib",
-        '--add-modules=javafx.controls'
-    ]
-}
-
 packaging {
     verbose.set(true)
 
-    mainJar.set('with-application-plugin-1.0.jar')
+    appName.set('Icon')
+    icon.set(new File(projectDir, 'art/example.icns'))
+
+    inputDirectory.set(new File(buildDir, "libs"))
+    mainJar.set('icon-1.0.jar')
+    mainClass.set('com.example.App')
     modulePath = [new File(System.getenv('JAVAFX_MODS'))]
     addModules = ['javafx.controls']
 }

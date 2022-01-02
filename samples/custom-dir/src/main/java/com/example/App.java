@@ -12,7 +12,7 @@ public class App extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         primaryStage.setScene(new Scene(new Label("Hello world!")));
         primaryStage.show();
     }

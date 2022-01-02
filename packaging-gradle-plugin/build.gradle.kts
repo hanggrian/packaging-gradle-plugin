@@ -35,22 +35,20 @@ ktlint()
 
 dependencies {
     implementation(kotlin("stdlib", VERSION_KOTLIN))
-    implementation(packr())
-    implementation(osdetector())
     testImplementation(kotlin("test-junit", VERSION_KOTLIN))
     "functionalTestImplementation"(gradleTestKit())
     "functionalTestImplementation"(kotlin("test-junit", VERSION_KOTLIN))
 }
 
 tasks {
-    val functionalTest by registering(Test::class) {
+    /*val functionalTest by registering(Test::class) {
         description = "Runs the functional tests."
         group = LifecycleBasePlugin.VERIFICATION_GROUP
         testClassesDirs = sourceSets["functionalTest"].output.classesDirs
         classpath = sourceSets["functionalTest"].runtimeClasspath
         mustRunAfter(test)
     }
-    check { dependsOn(functionalTest) }
+    check { dependsOn(functionalTest) }*/
 
     dokkaHtml {
         outputDirectory.set(buildDir.resolve("dokka/$RELEASE_ARTIFACT"))

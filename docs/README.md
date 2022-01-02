@@ -1,14 +1,18 @@
 [![version](https://img.shields.io/maven-metadata/v?label=plugin-portal&metadataUrl=https%3A%2F%2Fplugins.gradle.org%2Fm2%2Fcom%2Fhendraanggrian%2Fpackaging%2Fcom.hendraanggrian.packaging.gradle.plugin%2Fmaven-metadata.xml)](https://plugins.gradle.org/plugin/com.hendraanggrian.packaging)
-[![build](https://img.shields.io/travis/com/hendraanggrian/packaging-gradle-plugin)](https://travis-ci.com/hendraanggrian/packaging-gradle-plugin)
+[![build](https://img.shields.io/travis/com/hendraanggrian/packaging-gradle-plugin)](https://app.travis-ci.com/github/hendraanggrian/packaging-gradle-plugin)
 [![analysis](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081)](https://ktlint.github.io)
 
 Packaging Gradle Plugin
 =======================
 
-Gradle plugin of [packr](https://github.com/libgdx/packr),
-a library that wraps JARs into native bundle for Windows, macOS, and Linux.
+Gradle plugin that wraps JARs into native bundle for Windows, macOS, and Linux.
 * Complete customization for each distribution.
 * Pack multiple distributions with a single task.
+
+| Version | Method                                                                                 |
+|---------|----------------------------------------------------------------------------------------|
+| 0.1     | [packr](https://github.com/libgdx/packr)                                               |
+| 0.2+    | [jpackage](https://docs.oracle.com/en/java/javase/14/jpackage/packaging-overview.html) |
 
 Download
 --------

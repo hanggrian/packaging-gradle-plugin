@@ -1,21 +1,15 @@
 package com.hendraanggrian.packaging
 
-import com.badlogicgames.packr.PackrConfig
-import com.google.gradle.osdetector.OsDetector
-import com.google.gradle.osdetector.OsDetectorPlugin
+import com.hendraanggrian.packaging.internal.AbstractPackTask
 import com.hendraanggrian.packaging.internal.DefaultPackagingExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.distribution.plugins.DistributionPlugin
 import org.gradle.api.plugins.ApplicationPlugin
 import org.gradle.api.plugins.JavaApplication
-import org.gradle.api.tasks.SourceSetContainer
-import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.create
-import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByName
 import org.gradle.kotlin.dsl.getValue
-import org.gradle.kotlin.dsl.invoke
 import org.gradle.kotlin.dsl.provideDelegate
 import org.gradle.kotlin.dsl.registering
 
@@ -24,10 +18,6 @@ class PackagingPlugin : Plugin<Project> {
     companion object {
         const val PLUGIN_NAME = "packaging"
         const val GROUP_NAME = PLUGIN_NAME
-
-        const val MINIMIZATION_SOFT = "soft"
-        const val MINIMIZATION_HARD = "hard"
-        const val MINIMIZATION_ORACLEJRE8 = "oraclejre8"
     }
 
     private var hasJavaPlugin: Boolean = false
@@ -35,7 +25,6 @@ class PackagingPlugin : Plugin<Project> {
     private lateinit var extension: PackagingExtension
 
     override fun apply(project: Project) {
-        project.pluginManager.apply(OsDetectorPlugin::class)
         hasJavaPlugin = project.pluginManager.hasPlugin("java") || project.pluginManager.hasPlugin("java-library")
         hasApplicationPlugin = project.pluginManager.hasPlugin(ApplicationPlugin.APPLICATION_PLUGIN_NAME)
         extension = project.extensions.create(
@@ -43,85 +32,58 @@ class PackagingPlugin : Plugin<Project> {
             DefaultPackagingExtension::class, project
         )
 
-        val packWindows32 by project.tasks.registering(PackTask::class) { setup(PackrConfig.Platform.Windows32) }
-        val packWindows64 by project.tasks.registering(PackTask::class) { setup(PackrConfig.Platform.Windows64) }
-        val packLinux32 by project.tasks.registering(PackTask::class) { setup(PackrConfig.Platform.Linux32) }
-        val packLinux64 by project.tasks.registering(PackTask::class) { setup(PackrConfig.Platform.Linux64) }
-        val packMacOS by project.tasks.registering(PackTask::class) { setup(PackrConfig.Platform.MacOS) }
-        val packAll by project.tasks.registering {
-            group = GROUP_NAME
-            description = "Pack native bundles for all platforms with configured JDK."
-        }
+        val packWindows by project.tasks.registering(PackWindowsTask::class) { setup("Windows") }
+        val packLinux by project.tasks.registering(PackLinuxTask::class) { setup("Linux") }
+        val packMacOS by project.tasks.registering(PackMacOSTask::class) { setup("macOS") }
 
         project.afterEvaluate {
-            project.extensions.getByName<OsDetector>("osdetector").run {
-                when (os) {
-                    "windows" -> when {
-                        arch.endsWith("32") -> packWindows32(::useJavaHome)
-                        arch.endsWith("64") -> packWindows64(::useJavaHome)
-                    }
-                    "linux" -> when {
-                        arch.endsWith("32") -> packLinux32(::useJavaHome)
-                        arch.endsWith("64") -> packLinux64(::useJavaHome)
-                    }
-                    "osx" -> packMacOS(::useJavaHome)
-                }
-            }
+            extension.appVersion.convention(project.version.toString())
             extension.appName.convention(project.name)
-            extension.executable.convention(project.name)
-            if (hasJavaPlugin) {
+            /*if (hasJavaPlugin) {
                 val sourceSets = project.extensions.getByName<SourceSetContainer>("sourceSets")
-                extension.resources.convention(sourceSets["main"].resources.srcDirs.filter { it.exists() })
-            }
+                extension.resourcesDirectory.convention(sourceSets["main"].resources.srcDirs.filter { it.exists() })
+            }*/
             if (hasApplicationPlugin) {
                 val application = project.extensions
                     .getByName<JavaApplication>(ApplicationPlugin.APPLICATION_PLUGIN_NAME)
                 extension.appName.convention(application.applicationName)
-                extension.classpath.convention(
-                    listOf(project.buildDir.resolve("install/${application.applicationName}/lib"))
+                extension.inputDirectory.convention(
+                    project.layout.buildDirectory.dir("install/${application.applicationName}/lib")
                 )
                 extension.mainClass.convention(application.mainClass)
             }
-            val availableTasks = listOf(packWindows32, packWindows64, packLinux32, packLinux64, packMacOS)
-                .filter { it.get().jdk.isPresent }
-            when {
-                availableTasks.isNotEmpty() -> packAll { dependsOn(availableTasks) }
-                else -> packAll { doFirst { error("No platforms with configured JDK") } }
-            }
         }
     }
 
-    private fun useJavaHome(task: PackTask) {
-        if (!task.jdk.isPresent) {
-            task.jdk.set(
-                checkNotNull(System.getenv("JAVA_HOME") ?: System.getProperty("java.home")) {
-                    "`JAVA_HOME` system environment not found"
-                }
-            )
-        }
-    }
-
-    private fun PackTask.setup(target: PackrConfig.Platform) {
+    private fun AbstractPackTask.setup(desc: String) {
         if (hasApplicationPlugin) {
             dependsOn(DistributionPlugin.TASK_INSTALL_NAME)
         }
         group = GROUP_NAME
-        description = "Pack native bundles for $target."
+        description = "Pack native bundles for $desc."
 
-        platform.set(target)
         verbose.set(extension.verbose)
-        autoOpen.set(extension.autoOpen)
-
+        appVersion.set(extension.appVersion)
+        copyright.set(extension.copyright)
+        appDescription.set(extension.appDescription)
         appName.set(extension.appName)
-        executable.set(extension.executable)
-        classpath.set(extension.classpath)
-        removePlatformLibraries.set(extension.removePlatformLibraries)
-        mainClass.set(extension.mainClass)
-        vmArgs.set(extension.vmArgs)
-        resources.set(extension.resources)
-        minimizeJre.set(extension.minimizeJre)
         outputDirectory.set(extension.outputDirectory)
-        cacheJreDirectory.set(extension.cacheJreDirectory)
-        verbose.set(extension.verbose)
+        addModules.set(extension.addModules)
+        modulePath.set(extension.modulePath)
+        bindServices.set(extension.bindServices)
+        runtimeImage.set(extension.runtimeImage)
+        icon.set(extension.icon)
+        inputDirectory.set(extension.inputDirectory)
+        addLauncher.set(extension.addLauncher)
+        arguments.set(extension.arguments)
+        javaOptions.set(extension.javaOptions)
+        mainClass.set(extension.mainClass)
+        mainJar.set(extension.mainJar)
+        module.set(extension.module)
+        appImage.set(extension.appImage)
+        fileAssociations.set(extension.fileAssociations)
+        installDirectory.set(extension.installDirectory)
+        licenseFile.set(extension.licenseFile)
+        resourcesDirectory.set(extension.resourcesDirectory)
     }
 }

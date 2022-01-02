@@ -1,6 +1,7 @@
 package com.hendraanggrian.packaging
 
 import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import java.io.File
@@ -8,64 +9,91 @@ import java.io.File
 /** A convention used by [PackagingExtension] and [PackTask]. */
 interface PackSpec {
 
+    //region Generic Options
     /**
-     * File name of this distribution that will be generated.
+     * Version of the application and/or package`.
+     * Default is project's version.
+     */
+    val appVersion: Property<String>
+
+    /** Copyright for the application. */
+    val copyright: Property<String>
+
+    /** Description of the application. */
+    val appDescription: Property<String>
+
+    /**
+     * Name of the application and/or package.
      * Default is project's name.
      */
     val appName: Property<String>
 
     /**
-     * Name of the native executable, without extension such as `.exe`.
-     * Default is project's name.
-     */
-    val executable: Property<String>
-
-    /**
-     * File locations of the JAR files to package.
-     * Default is empty.
-     */
-    val classpath: ListProperty<File>
-
-    /**
-     * File locations of JAR files to remove native libraries which do not match the target platform.
-     * Default is empty.
-     */
-    val removePlatformLibraries: ListProperty<File>
-
-    /**
-     * The fully qualified name of the main class, using dots to delimit package names.
-     * Must be defined or will throw an exception.
-     */
-    val mainClass: Property<String>
-
-    /**
-     * List of files and directories to be packaged next to the native executable.
-     * Default is empty.
-     */
-    val resources: ListProperty<File>
-
-    /**
-     * Minimize the JRE by removing directories and files as specified by an additional config file.
-     * Comes with a few config files out of the box.
-     * Default is [PackagingExtension.MINIMIZATION_SOFT].
-     */
-    val minimizeJre: Property<String>
-
-    /**
-     * The output directory.
-     * Default is `release` directory in project's build directory.
+     * Path where generated output file is placed.
+     * Default is `build/install` in project directory.
      */
     val outputDirectory: DirectoryProperty
 
-    /**
-     * An optional directory to cache the result of JRE extraction and minimization.
-     * Default is disabled.
-     */
-    val cacheJreDirectory: DirectoryProperty
+    /** Vendor of the application. */
+    val vendor: Property<String>
+    //endregion
 
-    /**
-     * List of arguments for the JVM, without leading dashes, e.g. `Xmx1G`.
-     * Default is empty.
-     */
-    val vmArgs: ListProperty<String>
+    //region Options for creating the runtime image
+    /** This module list, along with the main module (if specified) will be passed to jlink as the --add-module argument. */
+    val addModules: ListProperty<String>
+
+    /** Each path is either a directory of modules or the path to a modular jar. */
+    val modulePath: ListProperty<File>
+
+    /** Pass on --bind-services option to jlink (which will link in service provider modules and their dependences). */
+    val bindServices: Property<String>
+
+    /** Path of the predefined runtime image that will be copied into the application image. */
+    val runtimeImage: RegularFileProperty
+    //endregion
+
+    //region Options for creating the application image
+    /** Path of the icon of the application bundle. */
+    val icon: RegularFileProperty
+
+    /** Path of the input directory that contains the files to be packaged. */
+    val inputDirectory: DirectoryProperty
+    //endregion
+
+    //region Options for creating the application launcher(s)
+    /** Name of launcher, and a path to a Properties file that contains a list of key, value pairs. */
+    val addLauncher: RegularFileProperty
+
+    /** Command line arguments to pass to the main class if no command line arguments are given to the launcher. */
+    val arguments: ListProperty<String>
+
+    /** Options to pass to the Java runtime. */
+    val javaOptions: ListProperty<String>
+
+    /** Qualified name of the application main class to execute. */
+    val mainClass: Property<String>
+
+    /** The main JAR of the application; containing the main class (specified as a path relative to the input path). */
+    val mainJar: Property<String>
+
+    /** The main module (and optionally main class) of the application This module must be located on the module path. */
+    val module: Property<String>
+    //endregion
+
+    //region Options for creating the application package
+    /** Location of the predefined application image that is used to build an installable package. */
+    val appImage: RegularFileProperty
+
+    /** Path to a Properties file that contains list of key, value pairs. */
+    val fileAssociations: RegularFileProperty
+
+    /** Absolute path of the installation directory of the application on OS X or Linux. */
+    val installDirectory: DirectoryProperty
+
+    /** Path to the license file. */
+    val licenseFile: RegularFileProperty
+
+    /** Path to override jpackage resources. */
+    val resourcesDirectory: DirectoryProperty
+    //endregion
 }
