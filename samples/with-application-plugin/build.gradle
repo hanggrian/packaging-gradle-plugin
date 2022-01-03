@@ -31,9 +31,7 @@ application {
 }
 
 packaging {
-    verbose.set(true)
-
-    mainJar.set('with-application-plugin-1.0.jar')
     modulePath = [new File(System.getenv('JAVAFX_MODS'))]
     addModules = ['javafx.controls']
+    verbose.set(true)
 }

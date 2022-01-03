@@ -21,14 +21,12 @@ javafx {
 }
 
 packaging {
-    verbose.set(true)
-
     appName.set('Custom Directory')
     outputDirectory.set(new File(buildDir, 'awesome'))
-
     inputDirectory.set(new File(buildDir, "libs"))
-    mainJar.set('custom-dir-1.0.jar')
     mainClass.set('com.example.App')
+
     modulePath = [new File(System.getenv('JAVAFX_MODS'))]
     addModules = ['javafx.controls']
+    verbose.set(true)
 }
