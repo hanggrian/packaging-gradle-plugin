@@ -3,8 +3,8 @@ package com.hendraanggrian.packaging
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
 
-/** Platform-specific options than can be configured using `mac { ... }` within [PackagingExtension]. */
-interface MacOptions {
+/** Platform-specific options than can be configured using `mac { ... }` within [Packaging]. */
+interface MacPackaging : Packaging {
 
     //region Platform dependent option for creating the application launcher
     /** An identifier that uniquely identifies the application for macOSX. */

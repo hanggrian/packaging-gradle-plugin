@@ -14,3 +14,5 @@ fun Dependencies.kotlinx(module: String, version: String? = null) =
 
 val Dependencies.`git-publish` get() = "org.ajoberstar:gradle-git-publish:3.0.0"
 val Plugins.`git-publish` get() = id("org.ajoberstar.git-publish")
+
+fun Dependencies.osdetector() = "com.google.gradle:osdetector-gradle-plugin:1.7.0"

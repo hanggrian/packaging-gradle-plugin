@@ -5,6 +5,7 @@ buildscript {
     }
     dependencies {
         classpath files('../packaging-gradle-plugin-0.2.jar')
+        classpath 'com.google.gradle:osdetector-gradle-plugin:1.7.0'
         classpath 'org.openjfx:javafx-plugin:0.0.10'
     }
 }

@@ -35,6 +35,7 @@ ktlint()
 
 dependencies {
     implementation(kotlin("stdlib", VERSION_KOTLIN))
+    implementation(osdetector())
     testImplementation(kotlin("test-junit", VERSION_KOTLIN))
     "functionalTestImplementation"(gradleTestKit())
     "functionalTestImplementation"(kotlin("test-junit", VERSION_KOTLIN))

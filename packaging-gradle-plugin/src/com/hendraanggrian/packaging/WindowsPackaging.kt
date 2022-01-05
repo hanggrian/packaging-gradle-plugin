@@ -2,8 +2,8 @@ package com.hendraanggrian.packaging
 
 import org.gradle.api.provider.Property
 
-/** Platform-specific options than can be configured using `windows { ... }` within [PackagingExtension]. */
-interface WindowsOptions {
+/** Platform-specific options than can be configured using `windows { ... }` within [Packaging]. */
+interface WindowsPackaging : Packaging {
 
     //region Platform dependent option for creating the application launcher
     /** Creates a console launcher for the application, should be specified for application which requires console interactions. */

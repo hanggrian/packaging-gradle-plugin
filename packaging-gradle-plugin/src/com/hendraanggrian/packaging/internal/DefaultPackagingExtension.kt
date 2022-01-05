@@ -1,9 +1,9 @@
 package com.hendraanggrian.packaging.internal
 
-import com.hendraanggrian.packaging.LinuxOptions
-import com.hendraanggrian.packaging.MacOptions
+import com.hendraanggrian.packaging.LinuxPackaging
+import com.hendraanggrian.packaging.MacPackaging
 import com.hendraanggrian.packaging.PackagingExtension
-import com.hendraanggrian.packaging.WindowsOptions
+import com.hendraanggrian.packaging.WindowsPackaging
 import org.gradle.api.Project
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.RegularFileProperty
@@ -75,59 +75,12 @@ open class DefaultPackagingExtension(project: Project) : PackagingExtension {
     override val resourcesDirectory: DirectoryProperty = project.objects.directoryProperty()
     //endregion
 
-    override val windowsOptions: WindowsOptions = object : WindowsOptions {
-        //region Platform dependent option for creating the application launcher
-        override val console: Property<Boolean> = project.objects.property()
-        //endregion
+    @Suppress("LeakingThis")
+    override val windowsOptions: WindowsPackaging = DefaultWindowsPackaging(project, this)
 
-        //region Platform dependent options for creating the application package
-        override val directoryChooser: Property<Boolean> = project.objects.property()
+    @Suppress("LeakingThis")
+    override val macOptions: MacPackaging = DefaultMacPackaging(project, this)
 
-        override val menu: Property<Boolean> = project.objects.property()
-
-        override val menuGroup: Property<String> = project.objects.property()
-
-        override val perUserInstall: Property<Boolean> = project.objects.property()
-
-        override val shortcut: Property<Boolean> = project.objects.property()
-
-        override val upgradeUUID: Property<String> = project.objects.property()
-        //endregion
-    }
-
-    override val macOptions: MacOptions = object : MacOptions {
-        //region Platform dependent option for creating the application launcher
-        override val packageIdentifier: Property<String> = project.objects.property()
-
-        override val packageName: Property<String> = project.objects.property()
-
-        override val bundleSigningPrefix: Property<String> = project.objects.property()
-
-        override val sign: Property<Boolean> = project.objects.property()
-
-        override val signingKeychain: RegularFileProperty = project.objects.fileProperty()
-
-        override val signingKeyUserName: Property<String> = project.objects.property()
-        //endregion
-    }
-
-    override val linuxOptions: LinuxOptions = object : LinuxOptions {
-        //region Platform dependent options for creating the application package
-        override val packageName: Property<String> = project.objects.property()
-
-        override val debMaintainer: Property<String> = project.objects.property()
-
-        override val menuGroup: Property<String> = project.objects.property()
-
-        override val packageDependencies: Property<String> = project.objects.property()
-
-        override val rpmLicenseType: Property<String> = project.objects.property()
-
-        override val appRelease: Property<String> = project.objects.property()
-
-        override val appCategory: Property<String> = project.objects.property()
-
-        override val shortcut: Property<Boolean> = project.objects.property()
-        //endregion
-    }
+    @Suppress("LeakingThis")
+    override val linuxOptions: LinuxPackaging = DefaultLinuxPackaging(project, this)
 }

@@ -4,6 +4,12 @@ dist: trusty
 jdk: oraclejdk11
 
 script:
+  - curl -OL "https://download2.gluonhq.com/openjfx/17.0.1/openjfx-17.0.1_linux-x64_bin-sdk.zip"
+  - curl -OL "https://download2.gluonhq.com/openjfx/17.0.1/openjfx-17.0.1_linux-x64_bin-jmods.zip"
+  - unzip "openjfx-17.0.1_linux-x64_bin-sdk.zip" -d "openjfx-17.0.1_linux-x64_bin-sdk"
+  - unzip "openjfx-17.0.1_linux-x64_bin-jmods.zip" -d "openjfx-17.0.1_linux-x64_bin-jmods"
+  - JAVAFX_HOME="$TRAVIS_BUILD_DIR/openjfx-17.0.1_linux-x64_bin-sdk"
+  - JAVAFX_MODS="$TRAVIS_BUILD_DIR/openjfx-17.0.1_linux-x64_bin-jmods"
   - ./gradlew build
 
 before_cache:

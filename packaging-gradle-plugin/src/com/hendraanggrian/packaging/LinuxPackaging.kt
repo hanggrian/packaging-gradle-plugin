@@ -2,8 +2,8 @@ package com.hendraanggrian.packaging
 
 import org.gradle.api.provider.Property
 
-/** Platform-specific options than can be configured using `linux { ... }` within [PackagingExtension]. */
-interface LinuxOptions {
+/** Platform-specific options than can be configured using `linux { ... }` within [Packaging]. */
+interface LinuxPackaging : Packaging {
 
     //region Platform dependent options for creating the application package
     /** Name for Linux package, defaults to the application name. */
