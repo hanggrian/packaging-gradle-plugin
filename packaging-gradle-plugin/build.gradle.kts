@@ -42,14 +42,14 @@ dependencies {
 }
 
 tasks {
-    /*val functionalTest by registering(Test::class) {
+    val functionalTest by registering(Test::class) {
         description = "Runs the functional tests."
         group = LifecycleBasePlugin.VERIFICATION_GROUP
         testClassesDirs = sourceSets["functionalTest"].output.classesDirs
         classpath = sourceSets["functionalTest"].runtimeClasspath
         mustRunAfter(test)
     }
-    check { dependsOn(functionalTest) }*/
+    check { dependsOn(functionalTest) }
 
     dokkaHtml {
         outputDirectory.set(buildDir.resolve("dokka/$RELEASE_ARTIFACT"))

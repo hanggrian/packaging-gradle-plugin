@@ -9,7 +9,6 @@ import java.io.IOException
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 /**
  * Integration test are migrated here until this is fixed:
@@ -51,13 +50,8 @@ class PackagingIntegrationTest {
             }
             """.trimIndent()
         )
-        runner.withArguments("packMacOS").build().let {
-            assertEquals(TaskOutcome.SUCCESS, it.task(":packMacOS")!!.outcome)
-            assertTrue(
-                testProjectDir.root.resolve("build/install/MacOS")
-                    .resolve("MyApp")
-                    .exists()
-            )
+        runner.withArguments("build").build().let {
+            assertEquals(TaskOutcome.SUCCESS, it.task(":build")!!.outcome)
         }
     }
 }

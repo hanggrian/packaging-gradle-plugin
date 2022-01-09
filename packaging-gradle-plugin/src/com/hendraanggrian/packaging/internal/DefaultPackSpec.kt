@@ -1,6 +1,6 @@
 package com.hendraanggrian.packaging.internal
 
-import com.hendraanggrian.packaging.Packaging
+import com.hendraanggrian.packaging.PackSpec
 import org.gradle.api.Project
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.RegularFileProperty
@@ -10,8 +10,7 @@ import org.gradle.kotlin.dsl.listProperty
 import org.gradle.kotlin.dsl.property
 import java.io.File
 
-abstract class DefaultPlatformPackaging(project: Project, defaultPackagingExtension: DefaultPackagingExtension) :
-    Packaging {
+abstract class DefaultPackSpec(project: Project, defaultPackagingExtension: DefaultPackaging) : PackSpec {
 
     //region Generic Options
     override val appVersion: Property<String> = project.objects.property<String>()

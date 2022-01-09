@@ -1,12 +1,12 @@
 package com.hendraanggrian.packaging.internal
 
-import com.hendraanggrian.packaging.WindowsPackaging
+import com.hendraanggrian.packaging.WindowsPackSpec
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
 import org.gradle.kotlin.dsl.property
 
-class DefaultWindowsPackaging(project: Project, defaultPackagingExtension: DefaultPackagingExtension) :
-    DefaultPlatformPackaging(project, defaultPackagingExtension), WindowsPackaging {
+class DefaultWindowsPackSpec(project: Project, defaultPackagingExtension: DefaultPackaging) :
+    DefaultPackSpec(project, defaultPackagingExtension), WindowsPackSpec {
 
     //region Platform dependent option for creating the application launcher
     override val console: Property<Boolean> = project.objects.property()

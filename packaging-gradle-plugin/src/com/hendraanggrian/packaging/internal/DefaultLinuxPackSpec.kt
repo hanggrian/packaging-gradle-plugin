@@ -1,12 +1,12 @@
 package com.hendraanggrian.packaging.internal
 
-import com.hendraanggrian.packaging.LinuxPackaging
+import com.hendraanggrian.packaging.LinuxPackSpec
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
 import org.gradle.kotlin.dsl.property
 
-class DefaultLinuxPackaging(project: Project, defaultPackagingExtension: DefaultPackagingExtension) :
-    DefaultPlatformPackaging(project, defaultPackagingExtension), LinuxPackaging {
+class DefaultLinuxPackSpec(project: Project, defaultPackagingExtension: DefaultPackaging) :
+    DefaultPackSpec(project, defaultPackagingExtension), LinuxPackSpec {
 
     //region Platform dependent options for creating the application package
     override val packageName: Property<String> = project.objects.property()

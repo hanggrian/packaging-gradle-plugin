@@ -1,9 +1,9 @@
 package com.hendraanggrian.packaging.internal
 
-import com.hendraanggrian.packaging.LinuxPackaging
-import com.hendraanggrian.packaging.MacPackaging
-import com.hendraanggrian.packaging.PackagingExtension
-import com.hendraanggrian.packaging.WindowsPackaging
+import com.hendraanggrian.packaging.LinuxPackSpec
+import com.hendraanggrian.packaging.MacPackSpec
+import com.hendraanggrian.packaging.Packaging
+import com.hendraanggrian.packaging.WindowsPackSpec
 import org.gradle.api.Project
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.RegularFileProperty
@@ -13,7 +13,7 @@ import org.gradle.kotlin.dsl.listProperty
 import org.gradle.kotlin.dsl.property
 import java.io.File
 
-open class DefaultPackagingExtension(project: Project) : PackagingExtension {
+open class DefaultPackaging(project: Project) : Packaging {
 
     //region Generic Options
     override val appVersion: Property<String> = project.objects.property()
@@ -76,11 +76,14 @@ open class DefaultPackagingExtension(project: Project) : PackagingExtension {
     //endregion
 
     @Suppress("LeakingThis")
-    override val windowsOptions: WindowsPackaging = DefaultWindowsPackaging(project, this)
+    override val windowsSpec: Property<WindowsPackSpec> = project.objects.property<WindowsPackSpec>()
+        .value(DefaultWindowsPackSpec(project, this))
 
     @Suppress("LeakingThis")
-    override val macOptions: MacPackaging = DefaultMacPackaging(project, this)
+    override val macSpec: Property<MacPackSpec> = project.objects.property<MacPackSpec>()
+        .value(DefaultMacPackSpec(project, this))
 
     @Suppress("LeakingThis")
-    override val linuxOptions: LinuxPackaging = DefaultLinuxPackaging(project, this)
+    override val linuxSpec: Property<LinuxPackSpec> = project.objects.property<LinuxPackSpec>()
+        .value(DefaultLinuxPackSpec(project, this))
 }

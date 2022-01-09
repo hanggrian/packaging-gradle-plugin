@@ -6,8 +6,8 @@ Packaging Gradle Plugin
 =======================
 
 Gradle plugin that wraps JARs into native bundle for Windows, macOS, and Linux.
-* Complete customization for each distribution.
-* Pack multiple distributions with a single task.
+- Complete customization for each distribution.
+- Pack multiple distributions with a single task.
 
 | Version | Method                                                                                 |
 |---------|----------------------------------------------------------------------------------------|

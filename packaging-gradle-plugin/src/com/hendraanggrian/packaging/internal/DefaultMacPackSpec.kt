@@ -1,13 +1,13 @@
 package com.hendraanggrian.packaging.internal
 
-import com.hendraanggrian.packaging.MacPackaging
+import com.hendraanggrian.packaging.MacPackSpec
 import org.gradle.api.Project
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
 import org.gradle.kotlin.dsl.property
 
-class DefaultMacPackaging(project: Project, defaultPackagingExtension: DefaultPackagingExtension) :
-    DefaultPlatformPackaging(project, defaultPackagingExtension), MacPackaging {
+class DefaultMacPackSpec(project: Project, defaultPackagingExtension: DefaultPackaging) :
+    DefaultPackSpec(project, defaultPackagingExtension), MacPackSpec {
 
     //region Platform dependent option for creating the application launcher
     override val packageIdentifier: Property<String> = project.objects.property()
