@@ -24,10 +24,10 @@ javafx {
 packaging {
     appName.set('Icon')
     icon.set(new File(projectDir, 'art/example.icns'))
-    inputDirectory.set(new File(buildDir, 'libs'))
     mainClass.set('com.example.App')
+    inputDirectory.set(new File(buildDir, 'libs'))
 
-    modulePath = [new File(System.getenv('JAVAFX_JMODS'))]
-    addModules = ['javafx.controls']
+    modulePaths = [new File(System.getenv('JAVAFX_JMODS'))]
+    modules = ['javafx.controls']
     verbose.set(true)
 }

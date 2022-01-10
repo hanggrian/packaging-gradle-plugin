@@ -1,5 +1,8 @@
 package com.hendraanggrian.packaging.internal
 
+import com.hendraanggrian.packaging.DefaultLinuxPackSpec
+import com.hendraanggrian.packaging.DefaultMacPackSpec
+import com.hendraanggrian.packaging.DefaultWindowsPackSpec
 import com.hendraanggrian.packaging.LinuxPackSpec
 import com.hendraanggrian.packaging.MacPackSpec
 import com.hendraanggrian.packaging.Packaging
@@ -9,8 +12,10 @@ import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
+import org.gradle.api.provider.SetProperty
 import org.gradle.kotlin.dsl.listProperty
 import org.gradle.kotlin.dsl.property
+import org.gradle.kotlin.dsl.setProperty
 import java.io.File
 
 open class DefaultPackaging(project: Project) : Packaging {
@@ -34,9 +39,9 @@ open class DefaultPackaging(project: Project) : Packaging {
     //endregion
 
     //region Options for creating the runtime image
-    override val addModules: ListProperty<String> = project.objects.listProperty()
+    override val modules: SetProperty<String> = project.objects.setProperty()
 
-    override val modulePath: ListProperty<File> = project.objects.listProperty()
+    override val modulePaths: SetProperty<File> = project.objects.setProperty()
 
     override val bindServices: Property<String> = project.objects.property()
 
@@ -50,17 +55,17 @@ open class DefaultPackaging(project: Project) : Packaging {
     //endregion
 
     //region Options for creating the application launcher(s)
-    override val addLauncher: RegularFileProperty = project.objects.fileProperty()
+    override val launcher: RegularFileProperty = project.objects.fileProperty()
 
-    override val arguments: ListProperty<String> = project.objects.listProperty()
+    override val args: ListProperty<String> = project.objects.listProperty()
 
-    override val javaOptions: ListProperty<String> = project.objects.listProperty()
+    override val javaArgs: ListProperty<String> = project.objects.listProperty()
 
     override val mainClass: Property<String> = project.objects.property()
 
     override val mainJar: Property<String> = project.objects.property()
 
-    override val module: Property<String> = project.objects.property()
+    override val mainModule: Property<String> = project.objects.property()
     //endregion
 
     //region Options for creating the application package
@@ -70,20 +75,17 @@ open class DefaultPackaging(project: Project) : Packaging {
 
     override val installDirectory: DirectoryProperty = project.objects.directoryProperty()
 
-    override val licenseFile: RegularFileProperty = project.objects.fileProperty()
+    override val license: RegularFileProperty = project.objects.fileProperty()
 
     override val resourcesDirectory: DirectoryProperty = project.objects.directoryProperty()
     //endregion
 
-    @Suppress("LeakingThis")
     override val windowsSpec: Property<WindowsPackSpec> = project.objects.property<WindowsPackSpec>()
-        .value(DefaultWindowsPackSpec(project, this))
+        .value(DefaultWindowsPackSpec(project, @Suppress("LeakingThis") this))
 
-    @Suppress("LeakingThis")
     override val macSpec: Property<MacPackSpec> = project.objects.property<MacPackSpec>()
-        .value(DefaultMacPackSpec(project, this))
+        .value(DefaultMacPackSpec(project, @Suppress("LeakingThis") this))
 
-    @Suppress("LeakingThis")
     override val linuxSpec: Property<LinuxPackSpec> = project.objects.property<LinuxPackSpec>()
-        .value(DefaultLinuxPackSpec(project, this))
+        .value(DefaultLinuxPackSpec(project, @Suppress("LeakingThis") this))
 }

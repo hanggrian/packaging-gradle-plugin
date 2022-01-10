@@ -44,6 +44,7 @@ fun Project.ktlint(vararg rulesets: Any, src: String = "src") {
             classpath(configuration)
             mainClass.set("com.pinterest.ktlint.Main")
             args("-F", "$src/**/*.kt")
+            jvmArgs("--add-opens", "java.base/java.lang=ALL-UNNAMED")
         }
     }
 }

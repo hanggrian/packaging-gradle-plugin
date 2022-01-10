@@ -20,12 +20,12 @@ import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 class PackagingPlugin : Plugin<Project> {
     companion object {
         const val PACKAGING_GROUP = "packaging"
-        const val TASK_PACK_EXE_NAME = "packExe"
-        const val TASK_PACK_MSI_NAME = "packMsi"
-        const val TASK_PACK_DMG_NAME = "packDmg"
-        const val TASK_PACK_PKG_NAME = "packPkg"
-        const val TASK_PACK_DEB_NAME = "packDeb"
-        const val TASK_PACK_RPM_NAME = "packRpm"
+        const val PACK_EXE_TASK_NAME = "packExe"
+        const val PACK_MSI_TASK_NAME = "packMsi"
+        const val PACK_DMG_TASK_NAME = "packDmg"
+        const val PACK_PKG_TASK_NAME = "packPkg"
+        const val PACK_DEB_TASK_NAME = "packDeb"
+        const val PACK_RPM_TASK_NAME = "packRpm"
     }
 
     override fun apply(project: Project) {
@@ -37,16 +37,16 @@ class PackagingPlugin : Plugin<Project> {
         val os = DefaultNativePlatform.getCurrentOperatingSystem()
         when {
             os.isWindows -> {
-                createPackTask(project, TASK_PACK_EXE_NAME, hasApplicationPlugin)
-                createPackTask(project, TASK_PACK_MSI_NAME, hasApplicationPlugin)
+                createPackTask(project, PACK_EXE_TASK_NAME, hasApplicationPlugin)
+                createPackTask(project, PACK_MSI_TASK_NAME, hasApplicationPlugin)
             }
             os.isMacOsX -> {
-                createPackTask(project, TASK_PACK_DMG_NAME, hasApplicationPlugin)
-                createPackTask(project, TASK_PACK_PKG_NAME, hasApplicationPlugin)
+                createPackTask(project, PACK_DMG_TASK_NAME, hasApplicationPlugin)
+                createPackTask(project, PACK_PKG_TASK_NAME, hasApplicationPlugin)
             }
             os.isLinux -> {
-                createPackTask(project, TASK_PACK_DEB_NAME, hasApplicationPlugin)
-                createPackTask(project, TASK_PACK_RPM_NAME, hasApplicationPlugin)
+                createPackTask(project, PACK_DEB_TASK_NAME, hasApplicationPlugin)
+                createPackTask(project, PACK_RPM_TASK_NAME, hasApplicationPlugin)
             }
         }
 
@@ -68,18 +68,18 @@ class PackagingPlugin : Plugin<Project> {
             when {
                 os.isWindows -> {
                     commandLines.append(packaging.windowsSpec.get())
-                    modifyPackTask(project, TASK_PACK_EXE_NAME, commandLines, packaging, osDetector)
-                    modifyPackTask(project, TASK_PACK_MSI_NAME, commandLines, packaging, osDetector)
+                    modifyPackTask(project, PACK_EXE_TASK_NAME, commandLines, packaging, osDetector)
+                    modifyPackTask(project, PACK_MSI_TASK_NAME, commandLines, packaging, osDetector)
                 }
                 os.isMacOsX -> {
                     commandLines.append(packaging.macSpec.get())
-                    modifyPackTask(project, TASK_PACK_DMG_NAME, commandLines, packaging, osDetector)
-                    modifyPackTask(project, TASK_PACK_PKG_NAME, commandLines, packaging, osDetector)
+                    modifyPackTask(project, PACK_DMG_TASK_NAME, commandLines, packaging, osDetector)
+                    modifyPackTask(project, PACK_PKG_TASK_NAME, commandLines, packaging, osDetector)
                 }
                 os.isLinux -> {
                     commandLines.append(packaging.linuxSpec.get())
-                    modifyPackTask(project, TASK_PACK_DEB_NAME, commandLines, packaging, osDetector)
-                    modifyPackTask(project, TASK_PACK_RPM_NAME, commandLines, packaging, osDetector)
+                    modifyPackTask(project, PACK_DEB_TASK_NAME, commandLines, packaging, osDetector)
+                    modifyPackTask(project, PACK_RPM_TASK_NAME, commandLines, packaging, osDetector)
                 }
             }
         }
@@ -112,7 +112,7 @@ class PackagingPlugin : Plugin<Project> {
                     outputFile.parentFile.resolve(
                         packaging.appName.get().replace(" ", "") +
                             "-${packaging.appVersion.get()}" +
-                            "-${detector.arch.replace("_", "").replace("8664", "64")}" +
+                            "-${denormalizeArch(detector.arch)}" +
                             ".$jpackageType"
                     )
                 )
@@ -133,19 +133,19 @@ class PackagingPlugin : Plugin<Project> {
         if (packSpec.verbose.get()) {
             add("--verbose")
         }
-        packSpec.addModules.orNull?.forEach { add("--add-modules"); add(it) }
-        packSpec.modulePath.orNull?.forEach { add("--module-path"); add(it.absolutePath) }
+        packSpec.modules.orNull?.forEach { add("--add-modules"); add(it) }
+        packSpec.modulePaths.orNull?.forEach { add("--module-path"); add(it.absolutePath) }
         packSpec.bindServices.orNull?.let { add("--bind-services"); add(it) }
         packSpec.runtimeImage.orNull?.let { add("--runtime-image"); add(it.asFile.absolutePath) }
         packSpec.icon.orNull?.let { add("--icon"); add(it.asFile.absolutePath) }
-        packSpec.addLauncher.orNull?.let { add("--add-launcher"); add(it.asFile.absolutePath) }
-        packSpec.arguments.orNull?.forEach { add("--arguments"); add("'$it'") }
-        packSpec.javaOptions.orNull?.forEach { add("--java-options"); add(it) }
-        packSpec.module.orNull?.let { add("--module"); add(it) }
+        packSpec.launcher.orNull?.let { add("--add-launcher"); add(it.asFile.absolutePath) }
+        packSpec.args.orNull?.forEach { add("--arguments"); add("'$it'") }
+        packSpec.javaArgs.orNull?.forEach { add("--java-options"); add(it) }
+        packSpec.mainModule.orNull?.let { add("--module"); add(it) }
         packSpec.appImage.orNull?.let { add("--app-image"); add(it.asFile.absolutePath) }
         packSpec.fileAssociations.orNull?.let { add("--file-associations"); add(it.asFile.absolutePath) }
         packSpec.installDirectory.orNull?.let { add("--install-dir"); add(it.asFile.absolutePath) }
-        packSpec.licenseFile.orNull?.let { add("--license-file"); add(it.asFile.absolutePath) }
+        packSpec.license.orNull?.let { add("--license-file"); add(it.asFile.absolutePath) }
         packSpec.resourcesDirectory.orNull?.let { add("--resource-dir"); add(it.asFile.absolutePath) }
 
         when (packSpec) {

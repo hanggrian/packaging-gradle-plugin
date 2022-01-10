@@ -12,10 +12,9 @@ sourceSets {
     main {
         java.srcDir("src")
     }
-    register("functionalTest") {
-        java.srcDir("functional-tests/src")
-        compileClasspath += sourceSets.main.get().output + configurations.testRuntimeClasspath
-        runtimeClasspath += output + compileClasspath
+    test {
+        java.srcDir("tests/src")
+        resources.srcDir("tests/res")
     }
 }
 
@@ -28,7 +27,7 @@ gradlePlugin {
             description = RELEASE_DESCRIPTION
         }
     }
-    testSourceSets(sourceSets["functionalTest"])
+    testSourceSets(sourceSets.test.get())
 }
 
 ktlint()
@@ -36,21 +35,11 @@ ktlint()
 dependencies {
     implementation(kotlin("stdlib", VERSION_KOTLIN))
     implementation(osdetector())
+    testImplementation(gradleTestKit())
     testImplementation(kotlin("test-junit", VERSION_KOTLIN))
-    "functionalTestImplementation"(gradleTestKit())
-    "functionalTestImplementation"(kotlin("test-junit", VERSION_KOTLIN))
 }
 
 tasks {
-    val functionalTest by registering(Test::class) {
-        description = "Runs the functional tests."
-        group = LifecycleBasePlugin.VERIFICATION_GROUP
-        testClassesDirs = sourceSets["functionalTest"].output.classesDirs
-        classpath = sourceSets["functionalTest"].runtimeClasspath
-        mustRunAfter(test)
-    }
-    check { dependsOn(functionalTest) }
-
     dokkaHtml {
         outputDirectory.set(buildDir.resolve("dokka/$RELEASE_ARTIFACT"))
     }
@@ -60,7 +49,7 @@ pluginBundle {
     website = RELEASE_GITHUB
     vcsUrl = "$RELEASE_GITHUB.git"
     description = RELEASE_DESCRIPTION
-    tags = listOf("packaging", "packr", "jar")
+    tags = listOf("packaging", "jpackage", "native", "installer", "bundle")
     mavenCoordinates {
         groupId = RELEASE_GROUP
         artifactId = RELEASE_ARTIFACT

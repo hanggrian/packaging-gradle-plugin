@@ -4,8 +4,14 @@ import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
+import org.gradle.api.provider.SetProperty
 import java.io.File
 
+/**
+ * Starting point of packaging configuration.
+ * @see Packaging
+ * @see WindowsPackSpec
+ */
 interface PackSpec {
 
     //region Generic Options
@@ -33,6 +39,9 @@ interface PackSpec {
      */
     val outputDirectory: DirectoryProperty
 
+    /** Returns [outputDirectory] represented as [File]. */
+    val outputDir: File get() = outputDirectory.asFile.get()
+
     /** Vendor of the application. */
     val vendor: Property<String>
 
@@ -45,10 +54,10 @@ interface PackSpec {
 
     //region Options for creating the runtime image
     /** This module list, along with the main module (if specified) will be passed to jlink as the --add-module argument. */
-    val addModules: ListProperty<String>
+    val modules: SetProperty<String>
 
     /** Each path is either a directory of modules or the path to a modular jar. */
-    val modulePath: ListProperty<File>
+    val modulePaths: SetProperty<File>
 
     /** Pass on --bind-services option to jlink (which will link in service provider modules and their dependences). */
     val bindServices: Property<String>
@@ -63,17 +72,20 @@ interface PackSpec {
 
     /** Path of the input directory that contains the files to be packaged. */
     val inputDirectory: DirectoryProperty
+
+    /** Returns [inputDirectory] represented as [File]. */
+    val inputDir: File get() = inputDirectory.asFile.get()
     //endregion
 
     //region Options for creating the application launcher(s)
     /** Name of launcher, and a path to a Properties file that contains a list of key, value pairs. */
-    val addLauncher: RegularFileProperty
+    val launcher: RegularFileProperty
 
     /** Command line arguments to pass to the main class if no command line arguments are given to the launcher. */
-    val arguments: ListProperty<String>
+    val args: ListProperty<String>
 
     /** Options to pass to the Java runtime. */
-    val javaOptions: ListProperty<String>
+    val javaArgs: ListProperty<String>
 
     /** Qualified name of the application main class to execute. */
     val mainClass: Property<String>
@@ -85,7 +97,7 @@ interface PackSpec {
     val mainJar: Property<String>
 
     /** The main module (and optionally main class) of the application This module must be located on the module path. */
-    val module: Property<String>
+    val mainModule: Property<String>
     //endregion
 
     //region Options for creating the application package
@@ -98,10 +110,16 @@ interface PackSpec {
     /** Absolute path of the installation directory of the application on OS X or Linux. */
     val installDirectory: DirectoryProperty
 
-    /** Path to the license file. */
-    val licenseFile: RegularFileProperty
+    /** Returns [installDirectory] represented as [File]. */
+    val installDir: File get() = installDirectory.asFile.get()
 
-    /** Path to override jpackage resources. */
+    /** Path to the license file. */
+    val license: RegularFileProperty
+
+    /** Path to override jpackage resources, *not application resources*. */
     val resourcesDirectory: DirectoryProperty
+
+    /** Returns [resourcesDirectory] represented as [File]. */
+    val resourcesDir: File get() = resourcesDirectory.asFile.get()
     //endregion
 }

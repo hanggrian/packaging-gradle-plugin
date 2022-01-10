@@ -1,5 +1,5 @@
 [![version](https://img.shields.io/maven-metadata/v?label=plugin-portal&metadataUrl=https%3A%2F%2Fplugins.gradle.org%2Fm2%2Fcom%2Fhendraanggrian%2Fpackaging%2Fcom.hendraanggrian.packaging.gradle.plugin%2Fmaven-metadata.xml)](https://plugins.gradle.org/plugin/com.hendraanggrian.packaging)
-[![build](https://img.shields.io/travis/com/hendraanggrian/packaging-gradle-plugin)](https://www.travis-ci.com/github/hendraanggrian/packaging-gradle-plugin)
+[![build](https://img.shields.io/travis/com/hendraanggrian/packaging-gradle-plugin)](https://travis-ci.com/github/hendraanggrian/packaging-gradle-plugin)
 [![analysis](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081)](https://ktlint.github.io)
 
 Packaging Gradle Plugin
