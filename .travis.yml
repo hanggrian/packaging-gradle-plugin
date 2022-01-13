@@ -8,16 +8,11 @@ env:
 
 before_install:
   - sudo apt-get -y install unzip
-  - curl -Ls https://entrust.com/root-certificates/entrust_l1k.cer -o ~/entrust_l1k.crt || exit 1
-  - curl -LS https://curl.haxx.se/ca/cacert.pem -o ~/cacert.pem || exit 1
-  - cat ~/entrust_l1k.crt >> ~/cacert.pem || exit 1
-  - echo "cacert=\"$HOME/cacert.pem\"" > ~/.curlrc || exit 1
-  - echo "ca_certificate=$HOME/cacert.pem" > ~/.wgetrc || exit 1
 
 script:
-  - curl -OL "https://download2.gluonhq.com/openjfx/17.0.1/openjfx-17.0.1_linux-x64_bin-sdk.zip"
+  - curl -k -OL "https://download2.gluonhq.com/openjfx/17.0.1/openjfx-17.0.1_linux-x64_bin-sdk.zip"
   - unzip "openjfx-17.0.1_linux-x64_bin-sdk.zip" -d "JavaFX"
-  - ./gradlew build
+  - ./gradlew build --info
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock

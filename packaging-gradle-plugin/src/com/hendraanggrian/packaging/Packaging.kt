@@ -4,6 +4,7 @@ import org.gradle.api.Action
 import org.gradle.api.provider.Property
 
 /** Extension class to be invoked when `packaging { ... }` is defined within project. */
+@PackSpecMarker
 interface Packaging : PackSpec {
 
     /** Windows platform options. */

@@ -3,6 +3,7 @@ package com.hendraanggrian.packaging
 import org.gradle.api.provider.Property
 
 /** Platform-specific options than can be configured using `linux { ... }` within [PackSpec]. */
+@PackSpecMarker
 interface LinuxPackSpec : PackSpec {
 
     //region Platform dependent options for creating the application package

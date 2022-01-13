@@ -1,5 +1,5 @@
-internal typealias Plugins = org.gradle.plugin.use.PluginDependenciesSpec
 internal typealias Dependencies = org.gradle.api.artifacts.dsl.DependencyHandler
+internal typealias Plugins = org.gradle.plugin.use.PluginDependenciesSpec
 
 val Dependencies.`gradle-publish` get() = "com.gradle.publish:plugin-publish-plugin:0.18.0"
 val Plugins.`gradle-publish` get() = id("com.gradle.plugin-publish")

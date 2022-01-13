@@ -3,6 +3,7 @@ package com.hendraanggrian.packaging
 import org.gradle.api.provider.Property
 
 /** Platform-specific options than can be configured using `windows { ... }` within [PackSpec]. */
+@PackSpecMarker
 interface WindowsPackSpec : PackSpec {
 
     //region Platform dependent option for creating the application launcher

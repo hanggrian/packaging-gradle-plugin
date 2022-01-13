@@ -17,15 +17,13 @@ import kotlin.test.assertEquals
 class PackagingIntegrationTest {
 
     @Rule @JvmField val testProjectDir = TemporaryFolder()
-    private lateinit var settingsFile: File
     private lateinit var buildFile: File
     private lateinit var runner: GradleRunner
 
     @BeforeTest
     @Throws(IOException::class)
     fun setup() {
-        settingsFile = testProjectDir.newFile("settings.gradle.kts")
-        settingsFile.writeText(
+        testProjectDir.newFile("settings.gradle.kts").writeText(
             """
             rootProject.name = "integration-test"
             """.trimIndent()
