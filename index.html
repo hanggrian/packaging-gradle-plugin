@@ -1,38 +1,167 @@
-<!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Packaging Gradle Plugin</title>
+    <head>
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta content="chrome=1" http-equiv="X-UA-Compatible">
+        <title>packaging-gradle-plugin by Hendra Anggrian</title>
+        <link href="styles/main.css" rel="stylesheet">
+        <link href="styles/pygment_trac.css" rel="stylesheet">
+        <meta content="width=device-width" name="viewport">
+        <script src="scripts/theme.js"></script>
+    </head>
+    <body>
+        <div class="wrapper">
+            <header>
+                <h1>packaging-gradle-plugin</h1>
+                <p>Start making native distributions for your JAR</p>
+                <p class="view">
+                    <a href="https://github.com/hendraanggrian/packaging-gradle-plugin">View the Project on GitHub <small>hendraanggrian/packaging-gradle-plugin</small></a>
+                </p>
+                <ul>
+                    <li>
+                        <a href="dokka">View<strong>Documentation</strong></a>
+                    </li>
+                </ul>
+            </header>
+            <section>
+                <p>
+                    <a href="https://plugins.gradle.org/plugin/com.hendraanggrian.packaging"><img alt="Maven Central" src="https://img.shields.io/maven-metadata/v?label=plugin-portal&amp;metadataUrl=https%3A%2F%2Fplugins.gradle.org%2Fm2%2Fcom%2Fhendraanggrian%2Fpackaging%2Fcom.hendraanggrian.packaging.gradle.plugin%2Fmaven-metadata.xml"></a>
+<a href="https://travis-ci.com/github/hendraanggrian/packaging-gradle-plugin"><img alt="Travis CI" src="https://img.shields.io/travis/com/hendraanggrian/packaging-gradle-plugin"></a>
+<a href="https://openjdk.java.net/projects/jdk/17"><img alt="OpenJDK" src="https://img.shields.io/badge/JDK-17+-orange"></a>
+<a href="https://ktlint.github.io"><img alt="ktlint" src="https://img.shields.io/badge/code%20style-%E2%9D%A4-ff4081"></a>
+                </p>
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Packaging Gradle Plugin</h1>
-        <p>Start making native distributions for your JAR</p>
-        <p class="view"><a href="http://github.com/hendraanggrian/packaging-gradle-plugin">View the Project on GitHub <small>hendraanggrian/packaging-gradle-plugin</small></a></p>
-        <ul>
-          <li><a href="https://github.com/hendraanggrian/packaging-gradle-plugin/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/hendraanggrian/packaging-gradle-plugin/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="http://github.com/hendraanggrian/packaging-gradle-plugin/releases">View <strong>Releases</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h1>Documentation</h1>
-        <h2><a href="packaging-gradle-plugin/index.html">packaging-gradle-plugin</a></h2>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="http://github.com/hendraanggrian">Hendra Anggrian</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-  </body>
+                <h1>Packaging Gradle Plugin</h1>
+
+                <p>Gradle plugin that wraps JARs into native bundle for Windows, macOS, and Linux.</p>
+
+                <ul>
+
+                    <li>Complete customization for each distribution.</li>
+
+                    <li>Pack multiple distributions with a single task.</li>
+
+                </ul>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Version</th>
+<th>Method</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>0.1</td>
+<td><a href="https://github.com/libgdx/packr">packr</a></td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>0.2+</td>
+<td><a href="https://docs.oracle.com/en/java/javase/14/jpackage/packaging-overview.html">jpackage</a></td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+                <h2>Download</h2>
+
+                <p>Using plugins DSL:</p>
+
+                <pre><code class="language-gradle">plugins {
+    id('com.hendraanggrian.packaging') version "$version"
+}
+</code></pre>
+
+                <p>Using legacy plugin application:</p>
+
+                <pre><code class="language-gradle">buildscript {
+    repositories {
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath("com.hendraanggrian:packaging-gradle-plugin:$version")
+    }
+}
+
+apply plugin: 'com.hendraanggrian.packaging'
+</code></pre>
+
+                <h2>Usage</h2>
+
+                <p>
+                    Below are example configuration for <code>Windows64</code> and <code>MacOS</code> distributions.
+Note that properties of distribution configuration may override extension configuration.
+                </p>
+
+                <pre><code class="language-gradle">packaging {
+    executable.set('example')
+    classpath.set(new File('path/to/jar'))
+    mainClass.set('com.example.App')
+    vmArgs.addAll('-Xmx1G')
+    resources.addAll(new File('image.jpg'), new File('path/to/other.jpg'))
+    minimizeJre.set('hard')
+    outputDirectory.set(new File('my/folder'))
+    verbose.set(true)
+    autoOpen.set(true)
+}
+
+tasks {
+    packWindows64 {
+        executable.set('example64')
+        vmArgs.add('-Xdebug')
+        appName.set('Example Windows 64-bit')
+        jdk.set('path/to/windows_64_jdk')
+    }
+    packMacOS {
+        name.set('Example.app')
+        jdk.set('path/to/mac_jdk')
+        icon.set(new File('path/to/mac_icon.icns'))
+        bundleId.set('com.example.app')
+    }
+}
+</code></pre>
+
+                <h3>
+                    Using <a href="https://docs.gradle.org/current/userguide/application_plugin.html">Application Plugin</a>
+                </h3>
+
+                <p>
+                    For easier setup, also use <code>application</code> plugin to distribute classpath with <code>installDist</code> command.
+                </p>
+
+                <pre><code class="language-gradle">apply plugin: 'application'
+apply plugin: 'com.hendraanggrian.packaging'
+
+application {
+    applicationName = 'My App'
+    mainClass.set('com.example.App')
+}
+</code></pre>
+
+            </section>
+            <footer>
+                <p>
+                    <button onclick="toggleDarkMode()" title="Toggle dark mode"><span id="theme-toggle"></span></button>
+                </p>
+                <p>
+                    This project is maintained by <a href="https://github.com/hendraanggrian">Hendra Anggrian</a>
+                </p>
+                <small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/hendraanggrian/minimal-theme">minimal</a></small>
+            </footer>
+        </div>
+        <script src="scripts/scale.fix.js"></script>
+    </body>
 </html>
