@@ -2,7 +2,7 @@ package com.hendraanggrian.packaging
 
 import com.google.gradle.osdetector.OsDetector
 import com.google.gradle.osdetector.OsDetectorPlugin
-import com.hendraanggrian.packaging.internal.DefaultPackaging
+import com.hendraanggrian.packaging.internal.DefaultPackagingExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.distribution.plugins.DistributionPlugin
@@ -16,37 +16,41 @@ import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.register
 import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 
-/** Plugin that creates native bundles for your JAR. */
+/**
+ * Plugin that creates native bundles for your JAR.
+ *
+ * @see <a href="https://github.com/hendraanggrian/packaging-gradle-plugin">packaging-gradle-plugin</a>
+ */
 class PackagingPlugin : Plugin<Project> {
     companion object {
-        const val PACKAGING_GROUP = "packaging"
-        const val PACK_EXE_TASK_NAME = "packExe"
-        const val PACK_MSI_TASK_NAME = "packMsi"
-        const val PACK_DMG_TASK_NAME = "packDmg"
-        const val PACK_PKG_TASK_NAME = "packPkg"
-        const val PACK_DEB_TASK_NAME = "packDeb"
-        const val PACK_RPM_TASK_NAME = "packRpm"
+        const val GROUP = "packaging"
+        const val TASK_PACK_EXE = "packExe"
+        const val TASK_PACK_MSI = "packMsi"
+        const val TASK_PACK_DMG = "packDmg"
+        const val TASK_PACK_PKG = "packPkg"
+        const val TASK_PACK_DEB = "packDeb"
+        const val TASK_PACK_RPM = "packRpm"
     }
 
     override fun apply(project: Project) {
         project.pluginManager.apply(OsDetectorPlugin::class)
         val hasApplicationPlugin = project.pluginManager.hasPlugin(ApplicationPlugin.APPLICATION_PLUGIN_NAME)
 
-        val packaging = project.extensions.create(Packaging::class, "packaging", DefaultPackaging::class, project)
+        val packaging = project.extensions.create(PackagingExtension::class, "packaging", DefaultPackagingExtension::class, project)
         val osDetector = project.extensions.getByType<OsDetector>()
         val os = DefaultNativePlatform.getCurrentOperatingSystem()
         when {
             os.isWindows -> {
-                createPackTask(project, PACK_EXE_TASK_NAME, hasApplicationPlugin)
-                createPackTask(project, PACK_MSI_TASK_NAME, hasApplicationPlugin)
+                createPackTask(project, TASK_PACK_EXE, hasApplicationPlugin)
+                createPackTask(project, TASK_PACK_MSI, hasApplicationPlugin)
             }
             os.isMacOsX -> {
-                createPackTask(project, PACK_DMG_TASK_NAME, hasApplicationPlugin)
-                createPackTask(project, PACK_PKG_TASK_NAME, hasApplicationPlugin)
+                createPackTask(project, TASK_PACK_DMG, hasApplicationPlugin)
+                createPackTask(project, TASK_PACK_PKG, hasApplicationPlugin)
             }
             os.isLinux -> {
-                createPackTask(project, PACK_DEB_TASK_NAME, hasApplicationPlugin)
-                createPackTask(project, PACK_RPM_TASK_NAME, hasApplicationPlugin)
+                createPackTask(project, TASK_PACK_DEB, hasApplicationPlugin)
+                createPackTask(project, TASK_PACK_RPM, hasApplicationPlugin)
             }
         }
 
@@ -68,18 +72,18 @@ class PackagingPlugin : Plugin<Project> {
             when {
                 os.isWindows -> {
                     commandLines.append(packaging.windowsSpec.get())
-                    modifyPackTask(project, PACK_EXE_TASK_NAME, commandLines, packaging, osDetector)
-                    modifyPackTask(project, PACK_MSI_TASK_NAME, commandLines, packaging, osDetector)
+                    modifyPackTask(project, TASK_PACK_EXE, commandLines, packaging, osDetector)
+                    modifyPackTask(project, TASK_PACK_MSI, commandLines, packaging, osDetector)
                 }
                 os.isMacOsX -> {
                     commandLines.append(packaging.macSpec.get())
-                    modifyPackTask(project, PACK_DMG_TASK_NAME, commandLines, packaging, osDetector)
-                    modifyPackTask(project, PACK_PKG_TASK_NAME, commandLines, packaging, osDetector)
+                    modifyPackTask(project, TASK_PACK_DMG, commandLines, packaging, osDetector)
+                    modifyPackTask(project, TASK_PACK_PKG, commandLines, packaging, osDetector)
                 }
                 os.isLinux -> {
                     commandLines.append(packaging.linuxSpec.get())
-                    modifyPackTask(project, PACK_DEB_TASK_NAME, commandLines, packaging, osDetector)
-                    modifyPackTask(project, PACK_RPM_TASK_NAME, commandLines, packaging, osDetector)
+                    modifyPackTask(project, TASK_PACK_DEB, commandLines, packaging, osDetector)
+                    modifyPackTask(project, TASK_PACK_RPM, commandLines, packaging, osDetector)
                 }
             }
         }
@@ -90,7 +94,7 @@ class PackagingPlugin : Plugin<Project> {
             if (hasApplicationPlugin) {
                 dependsOn(DistributionPlugin.TASK_INSTALL_NAME)
             }
-            group = PACKAGING_GROUP
+            group = GROUP
             description = "Bundles the project as a native package in platform-specific format."
         }
     }
@@ -99,7 +103,7 @@ class PackagingPlugin : Plugin<Project> {
         project: Project,
         taskName: String,
         commandLines: List<String>,
-        packaging: Packaging,
+        packaging: PackagingExtension,
         detector: OsDetector
     ) {
         val jpackageType = taskName.takeLast(3).toLowerCase()

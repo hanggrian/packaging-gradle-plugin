@@ -1,18 +1,13 @@
 language: java
-install: skip
 dist: trusty
 jdk: oraclejdk11
 
-env:
-  - JAVAFX_HOME="$TRAVIS_BUILD_DIR/JavaFX/javafx-sdk-17.0.1"
-
-before_install:
-  - sudo apt-get -y install unzip
-
 script:
-  - curl -k -OL "https://download2.gluonhq.com/openjfx/17.0.1/openjfx-17.0.1_linux-x64_bin-sdk.zip"
-  - unzip "openjfx-17.0.1_linux-x64_bin-sdk.zip" -d "JavaFX"
-  - ./gradlew build --info
+  - ./gradlew check --info
+  - ./gradlew koverXmlReport
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock

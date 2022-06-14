@@ -4,9 +4,8 @@ import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
 
 /** Platform-specific options than can be configured using `mac { ... }` within [PackSpec]. */
-@PackSpecMarker
+@PackSpecDsl
 interface MacPackSpec : PackSpec {
-
     //region Platform dependent option for creating the application launcher
     /** An identifier that uniquely identifies the application for macOSX. */
     val packageIdentifier: Property<String>

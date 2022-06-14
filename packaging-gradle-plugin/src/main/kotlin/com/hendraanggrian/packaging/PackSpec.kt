@@ -8,9 +8,8 @@ import org.gradle.api.provider.SetProperty
 import java.io.File
 
 /**
- * Starting point of packaging configuration.
- * @see Packaging
- * @see WindowsPackSpec
+ * A specification for packaging native bundler.
+ * Sub-interface of this interface should target a specific platform.
  */
 interface PackSpec {
 

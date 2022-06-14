@@ -3,10 +3,9 @@ package com.hendraanggrian.packaging
 import org.gradle.api.Action
 import org.gradle.api.provider.Property
 
-/** Extension class to be invoked when `packaging { ... }` is defined within project. */
-@PackSpecMarker
-interface Packaging : PackSpec {
-
+/** Extension instance when configuring `packaging` in Gradle scripts. */
+@PackSpecDsl
+interface PackagingExtension : PackSpec {
     /** Windows platform options. */
     val windowsSpec: Property<WindowsPackSpec>
 

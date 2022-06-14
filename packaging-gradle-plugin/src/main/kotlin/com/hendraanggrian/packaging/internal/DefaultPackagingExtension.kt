@@ -5,7 +5,7 @@ import com.hendraanggrian.packaging.DefaultMacPackSpec
 import com.hendraanggrian.packaging.DefaultWindowsPackSpec
 import com.hendraanggrian.packaging.LinuxPackSpec
 import com.hendraanggrian.packaging.MacPackSpec
-import com.hendraanggrian.packaging.Packaging
+import com.hendraanggrian.packaging.PackagingExtension
 import com.hendraanggrian.packaging.WindowsPackSpec
 import org.gradle.api.Project
 import org.gradle.api.file.DirectoryProperty
@@ -18,7 +18,7 @@ import org.gradle.kotlin.dsl.property
 import org.gradle.kotlin.dsl.setProperty
 import java.io.File
 
-open class DefaultPackaging(project: Project) : Packaging {
+open class DefaultPackagingExtension(project: Project) : PackagingExtension {
 
     //region Generic Options
     override val appVersion: Property<String> = project.objects.property()

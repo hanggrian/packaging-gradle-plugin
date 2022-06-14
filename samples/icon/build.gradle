@@ -1,7 +1,7 @@
 buildscript {
     repositories {
-        mavenCentral()
         gradlePluginPortal()
+        mavenCentral()
     }
     dependencies {
         classpath files('../packaging-gradle-plugin-0.2.jar')
@@ -13,13 +13,13 @@ buildscript {
 group 'com.example'
 version '1.0'
 
-apply plugin: 'org.openjfx.javafxplugin'
+//apply plugin: 'org.openjfx.javafxplugin'
 apply plugin: 'com.hendraanggrian.packaging'
 
-javafx {
-    sdk = System.getenv('JAVAFX_HOME')
-    modules = ['javafx.controls']
-}
+//javafx {
+//    sdk = System.getenv('JAVAFX_HOME')
+//    modules = ['javafx.controls']
+//}
 
 packaging {
     appName.set('Icon')
@@ -27,7 +27,7 @@ packaging {
     mainClass.set('com.example.App')
     inputDirectory.set(new File(buildDir, 'libs'))
 
-    modulePaths = [new File(System.getenv('JAVAFX_JMODS'))]
+//    modulePaths = [new File(System.getenv('JAVAFX_JMODS'))]
     modules = ['javafx.controls']
     verbose.set(true)
 }
