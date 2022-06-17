@@ -4,7 +4,7 @@ import org.gradle.api.Action
 import org.gradle.api.provider.Property
 
 /** Extension instance when configuring `packaging` in Gradle scripts. */
-@PackSpecDsl
+@PackConfigurationDsl
 interface PackagingExtension : PackSpec {
     /** Windows platform options. */
     val windowsSpec: Property<WindowsPackSpec>

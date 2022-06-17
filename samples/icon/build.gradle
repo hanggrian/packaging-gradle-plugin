@@ -13,13 +13,13 @@ buildscript {
 group 'com.example'
 version '1.0'
 
-//apply plugin: 'org.openjfx.javafxplugin'
+apply plugin: 'org.openjfx.javafxplugin'
 apply plugin: 'com.hendraanggrian.packaging'
 
-//javafx {
-//    sdk = System.getenv('JAVAFX_HOME')
-//    modules = ['javafx.controls']
-//}
+javafx {
+    sdk = System.getenv('JAVAFX_HOME')
+    modules = ['javafx.controls']
+}
 
 packaging {
     appName.set('Icon')

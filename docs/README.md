@@ -1,7 +1,6 @@
-[![Maven Central](https://img.shields.io/maven-metadata/v?label=plugin-portal&metadataUrl=https%3A%2F%2Fplugins.gradle.org%2Fm2%2Fcom%2Fhendraanggrian%2Fpackaging%2Fcom.hendraanggrian.packaging.gradle.plugin%2Fmaven-metadata.xml)](https://plugins.gradle.org/plugin/com.hendraanggrian.packaging)
-[![Travis CI](https://img.shields.io/travis/com/hendraanggrian/packaging-gradle-plugin)](https://travis-ci.com/github/hendraanggrian/packaging-gradle-plugin)
-[![Codecov](https://img.shields.io/codecov/c/github/hendraanggrian/packaging-gradle-plugin)](https://app.codecov.io/gh/hendraanggrian/packaging-gradle-plugin)
-[![OpenJDK](https://img.shields.io/badge/jdk-17+-informational)](https://openjdk.java.net/projects/jdk/17)
+[![Travis CI](https://img.shields.io/travis/com/hendraanggrian/packaging-gradle-plugin)](https://travis-ci.com/github/hendraanggrian/packaging-gradle-plugin/)
+[![Maven Central](https://img.shields.io/maven-metadata/v?label=plugin-portal&metadataUrl=https%3A%2F%2Fplugins.gradle.org%2Fm2%2Fcom%2Fhendraanggrian%2Fpackaging%2Fcom.hendraanggrian.packaging.gradle.plugin%2Fmaven-metadata.xml)](https://plugins.gradle.org/plugin/com.hendraanggrian.packaging/)
+[![OpenJDK](https://img.shields.io/badge/jdk-17+-informational)](https://openjdk.java.net/projects/jdk/17/)
 
 # Packaging Gradle Plugin
 
@@ -12,7 +11,7 @@ Gradle plugin that wraps JARs into native bundle for Windows, macOS, and Linux.
 
 | Version | Method                                                                                 |
 |---------|----------------------------------------------------------------------------------------|
-| 0.1     | [packr](https://github.com/libgdx/packr)                                               |
+| 0.1     | [packr](https://github.com/libgdx/packr/)                                               |
 | 0.2+    | [jpackage](https://docs.oracle.com/en/java/javase/14/jpackage/packaging-overview.html) |
 
 ## Download

@@ -17,10 +17,10 @@ apply plugin: 'application'
 apply plugin: 'org.openjfx.javafxplugin'
 apply plugin: 'com.hendraanggrian.packaging'
 
-//javafx {
-//    sdk = System.getenv('JAVAFX_HOME')
-//    modules = ['javafx.controls']
-//}
+javafx {
+    sdk = System.getenv('JAVAFX_HOME')
+    modules = ['javafx.controls']
+}
 
 application {
     applicationName = 'My App'

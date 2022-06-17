@@ -1,5 +1,6 @@
 include("packaging-gradle-plugin")
 include("website")
+// Enabling sample modules will break Travis CI because JavaFX SDK is no longer free to download
 includeDir("samples")
 
 fun includeDir(dir: String) = file(dir)
@@ -14,13 +15,11 @@ dependencyResolutionManagement {
             version("jdk", "17")
         }
         register("plugs") {
-            val koverVersion = "0.5.1"
-            val spotlessVersion = "6.7.0"
+            val spotlessVersion = "6.7.2"
             val pluginPublishVersion = "1.0.0-rc-2"
             val pagesVersion = "0.1"
             val gitPublishVersion = "3.0.1"
             library("kotlin", "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
-            library("kotlin.kover", "org.jetbrains.kotlinx:kover:$koverVersion")
             library("dokka", "org.jetbrains.dokka:dokka-gradle-plugin:$kotlinVersion")
             library("spotless", "com.diffplug.spotless:spotless-plugin-gradle:$spotlessVersion")
             library("plugin-publish", "com.gradle.publish:plugin-publish-plugin:$pluginPublishVersion")

@@ -1,7 +1,6 @@
 plugins {
     `java-gradle-plugin`
     `kotlin-dsl`
-    id("kover")
     id("org.jetbrains.dokka")
     id("com.diffplug.spotless")
     id("com.gradle.plugin-publish")

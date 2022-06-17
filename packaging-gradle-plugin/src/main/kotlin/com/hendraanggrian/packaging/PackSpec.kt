@@ -11,6 +11,7 @@ import java.io.File
  * A specification for packaging native bundler.
  * Sub-interface of this interface should target a specific platform.
  */
+@PackConfigurationDsl
 interface PackSpec {
 
     //region Generic Options

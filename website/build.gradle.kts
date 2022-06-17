@@ -26,6 +26,6 @@ tasks {
         delete(buildDir)
     }
     gitPublishCopy {
-        dependsOn(":$RELEASE_ARTIFACT:dokkaHtml")
+        dependsOn(deployPages, ":$RELEASE_ARTIFACT:dokkaHtml")
     }
 }

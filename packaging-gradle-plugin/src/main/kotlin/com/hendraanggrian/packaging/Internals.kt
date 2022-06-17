@@ -80,64 +80,64 @@ internal class DefaultMacPackSpec(project: Project, defaultPackagingExtension: D
 internal abstract class DefaultPackSpec(project: Project, defaultPackagingExtension: DefaultPackagingExtension) :
     PackSpec {
     //region Generic Options
-    override val appVersion: Property<String> =
-        project.objects.property<String>().convention(defaultPackagingExtension.appVersion)
-    override val copyright: Property<String> =
-        project.objects.property<String>().convention(defaultPackagingExtension.copyright)
-    override val appDescription: Property<String> =
-        project.objects.property<String>().convention(defaultPackagingExtension.appDescription)
-    override val appName: Property<String> =
-        project.objects.property<String>().convention(defaultPackagingExtension.appName)
-    override val outputDirectory: DirectoryProperty =
-        project.objects.directoryProperty().convention(defaultPackagingExtension.outputDirectory)
-    override val vendor: Property<String> =
-        project.objects.property<String>().convention(defaultPackagingExtension.vendor)
-    override val verbose: Property<Boolean> =
-        project.objects.property<Boolean>().convention(defaultPackagingExtension.verbose)
+    override val appVersion: Property<String> = project.objects.property<String>()
+        .convention(defaultPackagingExtension.appVersion)
+    override val copyright: Property<String> = project.objects.property<String>()
+        .convention(defaultPackagingExtension.copyright)
+    override val appDescription: Property<String> = project.objects.property<String>()
+        .convention(defaultPackagingExtension.appDescription)
+    override val appName: Property<String> = project.objects.property<String>()
+        .convention(defaultPackagingExtension.appName)
+    override val outputDirectory: DirectoryProperty = project.objects.directoryProperty()
+        .convention(defaultPackagingExtension.outputDirectory)
+    override val vendor: Property<String> = project.objects.property<String>()
+        .convention(defaultPackagingExtension.vendor)
+    override val verbose: Property<Boolean> = project.objects.property<Boolean>()
+        .convention(defaultPackagingExtension.verbose)
     //endregion
 
     //region Options for creating the runtime image
-    override val modules: SetProperty<String> =
-        project.objects.setProperty<String>().convention(defaultPackagingExtension.modules)
-    override val modulePaths: SetProperty<File> =
-        project.objects.setProperty<File>().convention(defaultPackagingExtension.modulePaths)
-    override val bindServices: Property<String> =
-        project.objects.property<String>().convention(defaultPackagingExtension.bindServices)
-    override val runtimeImage: RegularFileProperty =
-        project.objects.fileProperty().convention(defaultPackagingExtension.runtimeImage)
+    override val modules: SetProperty<String> = project.objects.setProperty<String>()
+        .convention(defaultPackagingExtension.modules)
+    override val modulePaths: SetProperty<File> = project.objects.setProperty<File>()
+        .convention(defaultPackagingExtension.modulePaths)
+    override val bindServices: Property<String> = project.objects.property<String>()
+        .convention(defaultPackagingExtension.bindServices)
+    override val runtimeImage: RegularFileProperty = project.objects.fileProperty()
+        .convention(defaultPackagingExtension.runtimeImage)
     //endregion
 
     //region Options for creating the application image
     override val icon: RegularFileProperty = project.objects.fileProperty().convention(defaultPackagingExtension.icon)
-    override val inputDirectory: DirectoryProperty =
-        project.objects.directoryProperty().convention(defaultPackagingExtension.inputDirectory)
+    override val inputDirectory: DirectoryProperty = project.objects.directoryProperty()
+        .convention(defaultPackagingExtension.inputDirectory)
     //endregion
 
     //region Options for creating the application launcher(s)
-    override val launcher: RegularFileProperty =
-        project.objects.fileProperty().convention(defaultPackagingExtension.launcher)
-    override val args: ListProperty<String> =
-        project.objects.listProperty<String>().convention(defaultPackagingExtension.args)
-    override val javaArgs: ListProperty<String> =
-        project.objects.listProperty<String>().convention(defaultPackagingExtension.javaArgs)
-    override val mainClass: Property<String> =
-        project.objects.property<String>().convention(defaultPackagingExtension.mainClass)
-    override val mainJar: Property<String> =
-        project.objects.property<String>().convention(defaultPackagingExtension.mainJar)
-    override val mainModule: Property<String> =
-        project.objects.property<String>().convention(defaultPackagingExtension.mainModule)
+    override val launcher: RegularFileProperty = project.objects.fileProperty()
+        .convention(defaultPackagingExtension.launcher)
+    override val args: ListProperty<String> = project.objects.listProperty<String>()
+        .convention(defaultPackagingExtension.args)
+    override val javaArgs: ListProperty<String> = project.objects.listProperty<String>()
+        .convention(defaultPackagingExtension.javaArgs)
+    override val mainClass: Property<String> = project.objects.property<String>()
+        .convention(defaultPackagingExtension.mainClass)
+    override val mainJar: Property<String> = project.objects.property<String>()
+        .convention(defaultPackagingExtension.mainJar)
+    override val mainModule: Property<String> = project.objects.property<String>()
+        .convention(defaultPackagingExtension.mainModule)
     //endregion
 
     //region Options for creating the application package
-    override val appImage: RegularFileProperty =
-        project.objects.fileProperty().convention(defaultPackagingExtension.appImage)
-    override val fileAssociations: RegularFileProperty =
-        project.objects.fileProperty().convention(defaultPackagingExtension.fileAssociations)
-    override val installDirectory: DirectoryProperty =
-        project.objects.directoryProperty().convention(defaultPackagingExtension.installDirectory)
-    override val license: RegularFileProperty =
-        project.objects.fileProperty().convention(defaultPackagingExtension.license)
-    override val resourcesDirectory: DirectoryProperty =
-        project.objects.directoryProperty().convention(defaultPackagingExtension.resourcesDirectory)
+    override val appImage: RegularFileProperty = project.objects.fileProperty()
+        .convention(defaultPackagingExtension.appImage)
+    override val fileAssociations: RegularFileProperty = project.objects.fileProperty()
+        .convention(defaultPackagingExtension.fileAssociations)
+    override val installDirectory: DirectoryProperty = project.objects.directoryProperty()
+        .convention(defaultPackagingExtension.installDirectory)
+    override val license: RegularFileProperty = project.objects.fileProperty()
+        .convention(defaultPackagingExtension.license)
+    override val resourcesDirectory: DirectoryProperty = project.objects.directoryProperty()
+        .convention(defaultPackagingExtension.resourcesDirectory)
     //endregion
 }

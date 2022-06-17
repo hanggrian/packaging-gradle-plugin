@@ -13,4 +13,4 @@ package com.hendraanggrian.packaging
  */
 @DslMarker
 @Target(AnnotationTarget.CLASS)
-annotation class PackSpecDsl
+annotation class PackConfigurationDsl
