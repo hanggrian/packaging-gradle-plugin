@@ -181,6 +181,10 @@ header li {
   height: 40px;
 }
 
+header li:last-child {
+  border-right: 0px;
+}
+
 header li:first-child a {
   border-radius: 5px 0 0 5px;
 }
@@ -253,7 +257,7 @@ footer button {
   padding: 0;
   background: var(--button-background);
   border-radius: 5px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--button-border);
   width: 40px;
   color: var(--button-text2);
   justify-content: center;
@@ -343,7 +347,7 @@ footer button:active {
   }
 
   header li, header ul li + li + li {
-    width: 33%;
+    width: 99%;
   }
 
   footer button {

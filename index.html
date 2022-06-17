@@ -25,68 +25,67 @@
             </header>
             <section>
                 <p>
-                    <a href="https://plugins.gradle.org/plugin/com.hendraanggrian.packaging"><img alt="Maven Central" src="https://img.shields.io/maven-metadata/v?label=plugin-portal&amp;metadataUrl=https%3A%2F%2Fplugins.gradle.org%2Fm2%2Fcom%2Fhendraanggrian%2Fpackaging%2Fcom.hendraanggrian.packaging.gradle.plugin%2Fmaven-metadata.xml"></a>
-<a href="https://travis-ci.com/github/hendraanggrian/packaging-gradle-plugin"><img alt="Travis CI" src="https://img.shields.io/travis/com/hendraanggrian/packaging-gradle-plugin"></a>
-<a href="https://app.codecov.io/gh/hendraanggrian/packaging-gradle-plugin"><img alt="Codecov" src="https://img.shields.io/codecov/c/github/hendraanggrian/packaging-gradle-plugin"></a>
-<a href="https://openjdk.java.net/projects/jdk/17"><img alt="OpenJDK" src="https://img.shields.io/badge/jdk-17+-informational"></a>
+                    <a href="https://travis-ci.com/github/hendraanggrian/packaging-gradle-plugin/"><img alt="Travis CI" src="https://img.shields.io/travis/com/hendraanggrian/packaging-gradle-plugin"></a>
+<a href="https://plugins.gradle.org/plugin/com.hendraanggrian.packaging/"><img alt="Maven Central" src="https://img.shields.io/maven-metadata/v?label=plugin-portal&amp;metadataUrl=https%3A%2F%2Fplugins.gradle.org%2Fm2%2Fcom%2Fhendraanggrian%2Fpackaging%2Fcom.hendraanggrian.packaging.gradle.plugin%2Fmaven-metadata.xml"></a>
+<a href="https://openjdk.java.net/projects/jdk/17/"><img alt="OpenJDK" src="https://img.shields.io/badge/jdk-17+-informational"></a>
                 </p>
-
+                
                 <h1>Packaging Gradle Plugin</h1>
-
+                
                 <p>Gradle plugin that wraps JARs into native bundle for Windows, macOS, and Linux.</p>
-
+                
                 <ul>
-
+                    
                     <li>Complete customization for each distribution.</li>
-
+                    
                     <li>Pack multiple distributions with a single task.</li>
-
+                    
                 </ul>
-
+                
                 <table>
-
+                    
                     <thead>
-
+                        
                         <tr>
-
+                            
                             <th>Version</th>
 <th>Method</th>
 
                         </tr>
-
+                        
                     </thead>
-
+                    
                     <tbody>
-
+                        
                         <tr>
-
+                            
                             <td>0.1</td>
-<td><a href="https://github.com/libgdx/packr">packr</a></td>
+<td><a href="https://github.com/libgdx/packr/">packr</a></td>
 
                         </tr>
-
+                        
                         <tr>
-
+                            
                             <td>0.2+</td>
 <td><a href="https://docs.oracle.com/en/java/javase/14/jpackage/packaging-overview.html">jpackage</a></td>
 
                         </tr>
-
+                        
                     </tbody>
-
+                    
                 </table>
-
+                
                 <h2>Download</h2>
-
+                
                 <p>Using plugins DSL:</p>
-
+                
                 <pre><code class="language-gradle">plugins {
     id('com.hendraanggrian.packaging') version "$version"
 }
 </code></pre>
-
+                
                 <p>Using legacy plugin application:</p>
-
+                
                 <pre><code class="language-gradle">buildscript {
     repositories {
         gradlePluginPortal()
@@ -98,14 +97,14 @@
 
 apply plugin: 'com.hendraanggrian.packaging'
 </code></pre>
-
+                
                 <h2>Usage</h2>
-
+                
                 <p>
                     Below are example configuration for <code>Windows64</code> and <code>MacOS</code> distributions.
 Note that properties of distribution configuration may override extension configuration.
                 </p>
-
+                
                 <pre><code class="language-gradle">packaging {
     executable.set('example')
     classpath.set(new File('path/to/jar'))
@@ -133,15 +132,15 @@ tasks {
     }
 }
 </code></pre>
-
+                
                 <h3>
                     Using <a href="https://docs.gradle.org/current/userguide/application_plugin.html">Application Plugin</a>
                 </h3>
-
+                
                 <p>
                     For easier setup, also use <code>application</code> plugin to distribute classpath with <code>installDist</code> command.
                 </p>
-
+                
                 <pre><code class="language-gradle">apply plugin: 'application'
 apply plugin: 'com.hendraanggrian.packaging'
 
@@ -150,7 +149,7 @@ application {
     mainClass.set('com.example.App')
 }
 </code></pre>
-
+                
             </section>
             <footer>
                 <p>
