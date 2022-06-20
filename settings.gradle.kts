@@ -1,7 +1,7 @@
 include("packaging-gradle-plugin")
 include("website")
 // Enabling sample modules will break Travis CI because JavaFX SDK is no longer free to download
-includeDir("samples")
+//includeDir("samples")
 
 fun includeDir(dir: String) = file(dir)
     .listFiles()
