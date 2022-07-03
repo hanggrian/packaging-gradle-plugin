@@ -1,6 +1,6 @@
 plugins {
     id("com.hendraanggrian.pages")
-    id("org.ajoberstar.git-publish")
+    alias(plugs.plugins.git.publish)
 }
 
 pages.minimal {
@@ -22,7 +22,7 @@ gitPublish {
 }
 
 tasks {
-    register("clean") {
+    register(LifecycleBasePlugin.CLEAN_TASK_NAME) {
         delete(buildDir)
     }
     gitPublishCopy {

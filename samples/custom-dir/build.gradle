@@ -26,8 +26,6 @@ packaging {
     mainClass.set('com.example.App')
     outputDirectory.set(new File(buildDir, 'awesome'))
     inputDirectory.set(new File(buildDir, 'libs'))
-
-//    modulePaths = [new File(System.getenv('JAVAFX_JMODS'))]
     modules = ['javafx.controls']
     verbose.set(true)
 }

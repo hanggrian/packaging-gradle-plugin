@@ -1,17 +1,10 @@
-import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
-
 buildscript {
     repositories {
         gradlePluginPortal()
         mavenCentral()
     }
-    dependencies {
-        classpath(plugs.kotlin)
-        classpath(plugs.dokka)
-        classpath(plugs.spotless)
-        classpath(plugs.plugin.publish)
-        classpath(plugs.pages) { features("pages-minimal") }
-        classpath(plugs.git.publish)
+    dependencies.classpath(plugs.pages) {
+        capability("pages-minimal")
     }
 }
 
@@ -20,14 +13,6 @@ allprojects {
     version = RELEASE_VERSION
     repositories {
         mavenCentral()
-        maven("https://s01.oss.sonatype.org/content/repositories/snapshots")
-    }
-}
-
-subprojects {
-    afterEvaluate {
-        extensions.find<KotlinProjectExtension>()?.jvmToolchain {
-            (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of(sdk.versions.jdk.get()))
-        }
+        maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
     }
 }

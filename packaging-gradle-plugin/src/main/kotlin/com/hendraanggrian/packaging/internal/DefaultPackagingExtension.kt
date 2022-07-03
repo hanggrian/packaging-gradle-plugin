@@ -1,15 +1,17 @@
 package com.hendraanggrian.packaging.internal
 
-import com.hendraanggrian.packaging.DefaultLinuxPackSpec
-import com.hendraanggrian.packaging.DefaultMacPackSpec
-import com.hendraanggrian.packaging.DefaultWindowsPackSpec
-import com.hendraanggrian.packaging.LinuxPackSpec
-import com.hendraanggrian.packaging.MacPackSpec
+import com.hendraanggrian.packaging.LinuxOptions
+import com.hendraanggrian.packaging.LinuxOptionsImpl
+import com.hendraanggrian.packaging.MacOptions
+import com.hendraanggrian.packaging.MacOptionsImpl
 import com.hendraanggrian.packaging.PackagingExtension
-import com.hendraanggrian.packaging.WindowsPackSpec
-import org.gradle.api.Project
+import com.hendraanggrian.packaging.WindowsOptions
+import com.hendraanggrian.packaging.WindowsOptionsImpl
+import org.gradle.api.Action
 import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.file.ProjectLayout
 import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.SetProperty
@@ -18,74 +20,99 @@ import org.gradle.kotlin.dsl.property
 import org.gradle.kotlin.dsl.setProperty
 import java.io.File
 
-open class DefaultPackagingExtension(project: Project) : PackagingExtension {
+open class DefaultPackagingExtension(private val objects: ObjectFactory, layout: ProjectLayout) : PackagingExtension {
+
+    var windowsOptions: WindowsOptions? = null
+    var macOptions: MacOptions? = null
+    var linuxOptions: LinuxOptions? = null
+
+    override val windows: WindowsOptions
+        get() {
+            if (windowsOptions == null) {
+                windowsOptions = WindowsOptionsImpl(objects, this)
+            }
+            return windowsOptions!!
+        }
+
+    override fun windows(action: Action<in WindowsOptions>) = action.execute(windows)
+
+    override val mac: MacOptions
+        get() {
+            if (macOptions == null) {
+                macOptions = MacOptionsImpl(objects, this)
+            }
+            return macOptions!!
+        }
+
+    override fun mac(action: Action<in MacOptions>) = action.execute(mac)
+
+    override val linux: LinuxOptions
+        get() {
+            if (linuxOptions == null) {
+                linuxOptions = LinuxOptionsImpl(objects, this)
+            }
+            return linuxOptions!!
+        }
+
+    override fun linux(action: Action<in LinuxOptions>) = action.execute(linux)
 
     //region Generic Options
-    override val appVersion: Property<String> = project.objects.property()
+    final override val appVersion: Property<String> = objects.property()
 
-    override val copyright: Property<String> = project.objects.property()
+    final override val copyright: Property<String> = objects.property()
 
-    override val appDescription: Property<String> = project.objects.property()
+    final override val appDescription: Property<String> = objects.property()
 
-    override val appName: Property<String> = project.objects.property()
+    final override val appName: Property<String> = objects.property()
 
-    override val outputDirectory: DirectoryProperty = project.objects.directoryProperty()
-        .convention(project.layout.buildDirectory.dir("install"))
+    final override val outputDirectory: DirectoryProperty = objects.directoryProperty()
+        .convention(layout.buildDirectory.dir("install"))
 
-    override val vendor: Property<String> = project.objects.property()
+    final override val vendor: Property<String> = objects.property()
 
-    override val verbose: Property<Boolean> = project.objects.property<Boolean>()
+    final override val verbose: Property<Boolean> = objects.property<Boolean>()
         .convention(false)
     //endregion
 
     //region Options for creating the runtime image
-    override val modules: SetProperty<String> = project.objects.setProperty()
+    final override val modules: SetProperty<String> = objects.setProperty()
 
-    override val modulePaths: SetProperty<File> = project.objects.setProperty()
+    final override val modulePaths: SetProperty<File> = objects.setProperty()
 
-    override val bindServices: Property<String> = project.objects.property()
+    final override val bindServices: Property<String> = objects.property()
 
-    override val runtimeImage: RegularFileProperty = project.objects.fileProperty()
+    final override val runtimeImage: RegularFileProperty = objects.fileProperty()
     //endregion
 
     //region Options for creating the application image
-    override val icon: RegularFileProperty = project.objects.fileProperty()
+    final override val icon: RegularFileProperty = objects.fileProperty()
 
-    override val inputDirectory: DirectoryProperty = project.objects.directoryProperty()
+    final override val inputDirectory: DirectoryProperty = objects.directoryProperty()
     //endregion
 
     //region Options for creating the application launcher(s)
-    override val launcher: RegularFileProperty = project.objects.fileProperty()
+    final override val launcher: RegularFileProperty = objects.fileProperty()
 
-    override val args: ListProperty<String> = project.objects.listProperty()
+    final override val args: ListProperty<String> = objects.listProperty()
 
-    override val javaArgs: ListProperty<String> = project.objects.listProperty()
+    final override val javaArgs: ListProperty<String> = objects.listProperty()
 
-    override val mainClass: Property<String> = project.objects.property()
+    final override val mainClass: Property<String> = objects.property()
 
-    override val mainJar: Property<String> = project.objects.property()
+    final override val mainJar: Property<String> = objects.property()
 
-    override val mainModule: Property<String> = project.objects.property()
+    final override val mainModule: Property<String> = objects.property()
     //endregion
 
     //region Options for creating the application package
-    override val appImage: RegularFileProperty = project.objects.fileProperty()
+    final override val appImage: RegularFileProperty = objects.fileProperty()
 
-    override val fileAssociations: RegularFileProperty = project.objects.fileProperty()
+    final override val fileAssociations: RegularFileProperty = objects.fileProperty()
 
-    override val installDirectory: DirectoryProperty = project.objects.directoryProperty()
+    final override val installDirectory: DirectoryProperty = objects.directoryProperty()
 
-    override val license: RegularFileProperty = project.objects.fileProperty()
+    final override val license: RegularFileProperty = objects.fileProperty()
 
-    override val resourcesDirectory: DirectoryProperty = project.objects.directoryProperty()
+    final override val resourcesDirectory: DirectoryProperty = objects.directoryProperty()
     //endregion
-
-    override val windowsSpec: Property<WindowsPackSpec> = project.objects.property<WindowsPackSpec>()
-        .value(DefaultWindowsPackSpec(project, @Suppress("LeakingThis") this))
-
-    override val macSpec: Property<MacPackSpec> = project.objects.property<MacPackSpec>()
-        .value(DefaultMacPackSpec(project, @Suppress("LeakingThis") this))
-
-    override val linuxSpec: Property<LinuxPackSpec> = project.objects.property<LinuxPackSpec>()
-        .value(DefaultLinuxPackSpec(project, @Suppress("LeakingThis") this))
 }

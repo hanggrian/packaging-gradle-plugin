@@ -1,7 +1,7 @@
 include("packaging-gradle-plugin")
 include("website")
 // Enabling sample modules will break Travis CI because JavaFX SDK is no longer free to download
-//includeDir("samples")
+// includeDir("samples")
 
 fun includeDir(dir: String) = file(dir)
     .listFiles()
@@ -15,27 +15,21 @@ dependencyResolutionManagement {
             version("jdk", "17")
         }
         register("plugs") {
-            val spotlessVersion = "6.7.2"
-            val pluginPublishVersion = "1.0.0-rc-2"
-            val pagesVersion = "0.1"
-            val gitPublishVersion = "3.0.1"
-            library("kotlin", "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
-            library("dokka", "org.jetbrains.dokka:dokka-gradle-plugin:$kotlinVersion")
-            library("spotless", "com.diffplug.spotless:spotless-plugin-gradle:$spotlessVersion")
-            library("plugin-publish", "com.gradle.publish:plugin-publish-plugin:$pluginPublishVersion")
-            library("pages", "com.hendraanggrian:pages-gradle-plugin:$pagesVersion")
-            library("git-publish", "org.ajoberstar.git-publish:gradle-git-publish:$gitPublishVersion")
+            plugin("kotlin-jvm", "org.jetbrains.kotlin.jvm").version(kotlinVersion)
+            plugin("kotlin-kapt", "org.jetbrains.kotlin.kapt").version(kotlinVersion)
+            plugin("dokka", "org.jetbrains.dokka").version(kotlinVersion)
+            plugin("spotless", "com.diffplug.spotless").version("6.7.2")
+            plugin("gradle-publish", "com.gradle.plugin-publish").version("1.0.0-rc-3")
+            plugin("git-publish", "org.ajoberstar.git-publish").version("3.0.1")
+            library("pages", "com.hendraanggrian:pages-gradle-plugin:0.1")
         }
         register("libs") {
-            val coroutinesVersion = "1.6.2"
-            val osdetectorVersion = "1.7.0"
-            library("kotlinx-coroutines", "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
-            library("osdetector", "com.google.gradle:osdetector-gradle-plugin:$osdetectorVersion")
+            library("kotlinx-coroutines", "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.3")
+            library("osdetector", "com.google.gradle:osdetector-gradle-plugin:1.7.0")
         }
         register("testLibs") {
-            val truthVersion = "1.1.3"
             library("kotlin-junit", "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
-            library("truth", "com.google.truth:truth:$truthVersion")
+            library("truth", "com.google.truth:truth:1.1.3")
         }
     }
 }

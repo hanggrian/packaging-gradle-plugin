@@ -23,35 +23,37 @@ import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
  */
 class PackagingPlugin : Plugin<Project> {
     companion object {
-        const val GROUP = "packaging"
-        const val TASK_PACK_EXE = "packExe"
-        const val TASK_PACK_MSI = "packMsi"
-        const val TASK_PACK_DMG = "packDmg"
-        const val TASK_PACK_PKG = "packPkg"
-        const val TASK_PACK_DEB = "packDeb"
-        const val TASK_PACK_RPM = "packRpm"
+        const val GROUP = "distribution" // the same as DistributionPlugin.DISTRIBUTION_GROUP
+        const val TASK_DIST_WINDOWS_EXE = "distWindowsExe"
+        const val TASK_DIST_WINDOWS_MSI = "distWindowsMsi"
+        const val TASK_DIST_MAC_DMG = "distMacDmg"
+        const val TASK_DIST_MAC_PKG = "distMacPkg"
+        const val TASK_DIST_LINUX_DEB = "distLinuxDeb"
+        const val TASK_DIST_LINUX_RPM = "distLinuxRpm"
     }
 
     override fun apply(project: Project) {
         project.pluginManager.apply(OsDetectorPlugin::class)
         val hasApplicationPlugin = project.pluginManager.hasPlugin(ApplicationPlugin.APPLICATION_PLUGIN_NAME)
 
-        val packaging = project.extensions
-            .create(PackagingExtension::class, "packaging", DefaultPackagingExtension::class, project)
+        val packaging = project.extensions.create(
+            PackagingExtension::class, "packaging",
+            DefaultPackagingExtension::class, project.objects, project.layout
+        )
         val osDetector = project.extensions.getByType<OsDetector>()
         val os = DefaultNativePlatform.getCurrentOperatingSystem()
         when {
             os.isWindows -> {
-                createPackTask(project, TASK_PACK_EXE, hasApplicationPlugin)
-                createPackTask(project, TASK_PACK_MSI, hasApplicationPlugin)
+                createPackTask(project, TASK_DIST_WINDOWS_EXE, hasApplicationPlugin)
+                createPackTask(project, TASK_DIST_WINDOWS_MSI, hasApplicationPlugin)
             }
             os.isMacOsX -> {
-                createPackTask(project, TASK_PACK_DMG, hasApplicationPlugin)
-                createPackTask(project, TASK_PACK_PKG, hasApplicationPlugin)
+                createPackTask(project, TASK_DIST_MAC_DMG, hasApplicationPlugin)
+                createPackTask(project, TASK_DIST_MAC_PKG, hasApplicationPlugin)
             }
             os.isLinux -> {
-                createPackTask(project, TASK_PACK_DEB, hasApplicationPlugin)
-                createPackTask(project, TASK_PACK_RPM, hasApplicationPlugin)
+                createPackTask(project, TASK_DIST_LINUX_DEB, hasApplicationPlugin)
+                createPackTask(project, TASK_DIST_LINUX_RPM, hasApplicationPlugin)
             }
         }
 
@@ -70,21 +72,22 @@ class PackagingPlugin : Plugin<Project> {
             }
 
             val commandLines = mutableListOf<String>()
+            packaging as DefaultPackagingExtension
             when {
                 os.isWindows -> {
-                    commandLines.append(packaging.windowsSpec.get())
-                    modifyPackTask(project, TASK_PACK_EXE, commandLines, packaging, osDetector)
-                    modifyPackTask(project, TASK_PACK_MSI, commandLines, packaging, osDetector)
+                    commandLines.append(packaging.windowsOptions ?: packaging)
+                    modifyPackTask(project, TASK_DIST_WINDOWS_EXE, commandLines, packaging, osDetector)
+                    modifyPackTask(project, TASK_DIST_WINDOWS_MSI, commandLines, packaging, osDetector)
                 }
                 os.isMacOsX -> {
-                    commandLines.append(packaging.macSpec.get())
-                    modifyPackTask(project, TASK_PACK_DMG, commandLines, packaging, osDetector)
-                    modifyPackTask(project, TASK_PACK_PKG, commandLines, packaging, osDetector)
+                    commandLines.append(packaging.macOptions ?: packaging)
+                    modifyPackTask(project, TASK_DIST_MAC_DMG, commandLines, packaging, osDetector)
+                    modifyPackTask(project, TASK_DIST_MAC_PKG, commandLines, packaging, osDetector)
                 }
                 os.isLinux -> {
-                    commandLines.append(packaging.linuxSpec.get())
-                    modifyPackTask(project, TASK_PACK_DEB, commandLines, packaging, osDetector)
-                    modifyPackTask(project, TASK_PACK_RPM, commandLines, packaging, osDetector)
+                    commandLines.append(packaging.linuxOptions ?: packaging)
+                    modifyPackTask(project, TASK_DIST_LINUX_DEB, commandLines, packaging, osDetector)
+                    modifyPackTask(project, TASK_DIST_LINUX_RPM, commandLines, packaging, osDetector)
                 }
             }
         }
@@ -125,75 +128,61 @@ class PackagingPlugin : Plugin<Project> {
         }
     }
 
-    private fun MutableList<String>.append(packSpec: PackSpec) {
-        add("--app-version"); add(packSpec.appVersion.get())
-        add("--name"); add(packSpec.appName.get())
-        add("--dest"); add(packSpec.outputDirectory.asFile.get().absolutePath)
-        add("--input"); add(packSpec.inputDirectory.asFile.get().absolutePath)
-        add("--main-class"); add(packSpec.mainClass.get())
-        add("--main-jar"); add(packSpec.mainJar.get())
-        packSpec.copyright.orNull?.let { add("--copyright"); add(it) }
-        packSpec.appDescription.orNull?.let { add("--description"); add(it) }
-        packSpec.vendor.orNull?.let { add("--vendor"); add(it) }
-        if (packSpec.verbose.get()) {
+    private fun MutableList<String>.append(spec: PackSpec) {
+        add("--app-version"); add(spec.appVersion.get())
+        add("--name"); add(spec.appName.get())
+        add("--dest"); add(spec.outputDirectory.asFile.get().absolutePath)
+        add("--input"); add(spec.inputDirectory.asFile.get().absolutePath)
+        add("--main-class"); add(spec.mainClass.get())
+        add("--main-jar"); add(spec.mainJar.get())
+        spec.copyright.orNull?.let { add("--copyright"); add(it) }
+        spec.appDescription.orNull?.let { add("--description"); add(it) }
+        spec.vendor.orNull?.let { add("--vendor"); add(it) }
+        if (spec.verbose.get()) {
             add("--verbose")
         }
-        packSpec.modules.orNull?.forEach { add("--add-modules"); add(it) }
-        packSpec.modulePaths.orNull?.forEach { add("--module-path"); add(it.absolutePath) }
-        packSpec.bindServices.orNull?.let { add("--bind-services"); add(it) }
-        packSpec.runtimeImage.orNull?.let { add("--runtime-image"); add(it.asFile.absolutePath) }
-        packSpec.icon.orNull?.let { add("--icon"); add(it.asFile.absolutePath) }
-        packSpec.launcher.orNull?.let { add("--add-launcher"); add(it.asFile.absolutePath) }
-        packSpec.args.orNull?.forEach { add("--arguments"); add("'$it'") }
-        packSpec.javaArgs.orNull?.forEach { add("--java-options"); add(it) }
-        packSpec.mainModule.orNull?.let { add("--module"); add(it) }
-        packSpec.appImage.orNull?.let { add("--app-image"); add(it.asFile.absolutePath) }
-        packSpec.fileAssociations.orNull?.let { add("--file-associations"); add(it.asFile.absolutePath) }
-        packSpec.installDirectory.orNull?.let { add("--install-dir"); add(it.asFile.absolutePath) }
-        packSpec.license.orNull?.let { add("--license-file"); add(it.asFile.absolutePath) }
-        packSpec.resourcesDirectory.orNull?.let { add("--resource-dir"); add(it.asFile.absolutePath) }
+        spec.modules.orNull?.forEach { add("--add-modules"); add(it) }
+        spec.modulePaths.orNull?.forEach { add("--module-path"); add(it.absolutePath) }
+        spec.bindServices.orNull?.let { add("--bind-services"); add(it) }
+        spec.runtimeImage.orNull?.let { add("--runtime-image"); add(it.asFile.absolutePath) }
+        spec.icon.orNull?.let { add("--icon"); add(it.asFile.absolutePath) }
+        spec.launcher.orNull?.let { add("--add-launcher"); add(it.asFile.absolutePath) }
+        spec.args.orNull?.forEach { add("--arguments"); add("'$it'") }
+        spec.javaArgs.orNull?.forEach { add("--java-options"); add(it) }
+        spec.mainModule.orNull?.let { add("--module"); add(it) }
+        spec.appImage.orNull?.let { add("--app-image"); add(it.asFile.absolutePath) }
+        spec.fileAssociations.orNull?.let { add("--file-associations"); add(it.asFile.absolutePath) }
+        spec.installDirectory.orNull?.let { add("--install-dir"); add(it.asFile.absolutePath) }
+        spec.license.orNull?.let { add("--license-file"); add(it.asFile.absolutePath) }
+        spec.resourcesDirectory.orNull?.let { add("--resource-dir"); add(it.asFile.absolutePath) }
 
-        when (packSpec) {
-            is WindowsPackSpec -> {
-                if (packSpec.console.isPresent && packSpec.console.get()) {
-                    add("--win-console")
-                }
-                if (packSpec.directoryChooser.isPresent && packSpec.directoryChooser.get()) {
-                    add("--win-dir-chooser")
-                }
-                if (packSpec.menu.isPresent && packSpec.menu.get()) {
-                    add("--win-menu")
-                }
-                packSpec.menuGroup.orNull?.let { add("--win-menu-group"); add(it) }
-                if (packSpec.perUserInstall.isPresent && packSpec.perUserInstall.get()) {
-                    add("--win-per-user-install")
-                }
-                if (packSpec.shortcut.isPresent && packSpec.shortcut.get()) {
-                    add("--win-shortcut")
-                }
-                packSpec.upgradeUUID.orNull?.let { add("--win-upgrade-uuid"); add(it) }
+        when (spec) {
+            is WindowsOptions -> {
+                if (spec.console) add("--win-console")
+                if (spec.directoryChooser) add("--win-dir-chooser")
+                if (spec.menu) add("--win-menu")
+                spec.menuGroup?.let { add("--win-menu-group"); add(it) }
+                if (spec.perUserInstall) add("--win-per-user-install")
+                if (spec.shortcut) add("--win-shortcut")
+                spec.upgradeUUID?.let { add("--win-upgrade-uuid"); add(it) }
             }
-            is MacPackSpec -> {
-                packSpec.packageIdentifier.orNull?.let { add("--mac-package-identifier"); add(it) }
-                packSpec.packageName.orNull?.let { add("--mac-package-name"); add(it) }
-                packSpec.bundleSigningPrefix.orNull?.let { add("--mac-bundle-signing-prefix"); add(it) }
-                if (packSpec.sign.isPresent && packSpec.sign.get()) {
-                    add("--mac-sign")
-                }
-                packSpec.signingKeychain.orNull?.let { add("--mac-signing-keychain"); add(it.asFile.absolutePath) }
-                packSpec.signingKeyUserName.orNull?.let { add("--mac-signing-key-user-name"); add(it) }
+            is MacOptions -> {
+                spec.packageIdentifier?.let { add("--mac-package-identifier"); add(it) }
+                spec.packageName?.let { add("--mac-package-name"); add(it) }
+                spec.bundleSigningPrefix?.let { add("--mac-bundle-signing-prefix"); add(it) }
+                if (spec.sign) add("--mac-sign")
+                spec.signingKeychain?.let { add("--mac-signing-keychain"); add(it.absolutePath) }
+                spec.signingKeyUserName?.let { add("--mac-signing-key-user-name"); add(it) }
             }
-            is LinuxPackSpec -> {
-                packSpec.packageName.orNull?.let { add("--linux-package-name"); add(it) }
-                packSpec.debMaintainer.orNull?.let { add("--linux-deb-maintainer"); add(it) }
-                packSpec.menuGroup.orNull?.let { add("--linux-menu-group"); add(it) }
-                packSpec.packageDependencies.orNull?.let { add("--linux-package-deps"); add(it) }
-                packSpec.rpmLicenseType.orNull?.let { add("--linux-rpm-license-type"); add(it) }
-                packSpec.appRelease.orNull?.let { add("--linux-app-release"); add(it) }
-                packSpec.appCategory.orNull?.let { add("--linux-app-category"); add(it) }
-                if (packSpec.shortcut.isPresent && packSpec.shortcut.get()) {
-                    add("--linux-shortcut")
-                }
+            is LinuxOptions -> {
+                spec.packageName?.let { add("--linux-package-name"); add(it) }
+                spec.debMaintainer?.let { add("--linux-deb-maintainer"); add(it) }
+                spec.menuGroup?.let { add("--linux-menu-group"); add(it) }
+                spec.packageDependencies?.let { add("--linux-package-deps"); add(it) }
+                spec.rpmLicenseType?.let { add("--linux-rpm-license-type"); add(it) }
+                spec.appRelease?.let { add("--linux-app-release"); add(it) }
+                spec.appCategory?.let { add("--linux-app-category"); add(it) }
+                if (spec.shortcut) add("--linux-shortcut")
             }
         }
     }

@@ -1,32 +1,29 @@
 package com.hendraanggrian.packaging
 
 import org.gradle.api.Action
-import org.gradle.api.provider.Property
 
-/** Extension instance when configuring `packaging` in Gradle scripts. */
+/**
+ * Extension instance when configuring `packaging` in Gradle scripts.
+ * Configuration of this [PackSpec] will be passed into platform-specific specs.
+ */
 @PackConfigurationDsl
 interface PackagingExtension : PackSpec {
-    /** Windows platform options. */
-    val windowsSpec: Property<WindowsPackSpec>
 
-    /** macOS platform options. */
-    val macSpec: Property<MacPackSpec>
+    /** Windows options that will be packaged. */
+    val windows: WindowsOptions
 
-    /** Linux platform options. */
-    val linuxSpec: Property<LinuxPackSpec>
+    /** Configures the windows options that will be packaged. */
+    fun windows(action: Action<in WindowsOptions>)
 
-    /** Invoke a configurator block to modify [WindowsPackSpec]. */
-    fun windows(action: Action<WindowsPackSpec>) {
-        action.execute(windowsSpec.get())
-    }
+    /** Mac options that will be packaged. */
+    val mac: MacOptions
 
-    /** Invoke a configurator block to modify [MacPackSpec]. */
-    fun mac(action: Action<MacPackSpec>) {
-        action.execute(macSpec.get())
-    }
+    /** Configures the Mac options that will be packaged. */
+    fun mac(action: Action<in MacOptions>)
 
-    /** Invoke a configurator block to modify [LinuxPackSpec]. */
-    fun linux(action: Action<LinuxPackSpec>) {
-        action.execute(linuxSpec.get())
-    }
+    /** Linux options that will be packaged. */
+    val linux: LinuxOptions
+
+    /** Configures the linux options that will be packaged. */
+    fun linux(action: Action<in LinuxOptions>)
 }

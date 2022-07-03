@@ -26,13 +26,11 @@ application {
     applicationName = 'My App'
     mainClass.set('com.example.App')
     applicationDefaultJvmArgs = [
-//        "--module-path=${System.getenv('JAVAFX_HOME')}/lib",
         '--add-modules=javafx.controls'
     ]
 }
 
 packaging {
-//    modulePaths = [new File(System.getenv('JAVAFX_JMODS'))]
     modules = ['javafx.controls']
     verbose.set(true)
 }
