@@ -23,13 +23,13 @@ import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
  */
 class PackagingPlugin : Plugin<Project> {
     companion object {
-        const val GROUP = "distribution" // the same as DistributionPlugin.DISTRIBUTION_GROUP
-        const val TASK_DIST_WINDOWS_EXE = "distWindowsExe"
-        const val TASK_DIST_WINDOWS_MSI = "distWindowsMsi"
-        const val TASK_DIST_MAC_DMG = "distMacDmg"
-        const val TASK_DIST_MAC_PKG = "distMacPkg"
-        const val TASK_DIST_LINUX_DEB = "distLinuxDeb"
-        const val TASK_DIST_LINUX_RPM = "distLinuxRpm"
+        const val GROUP: String = "distribution" // the same as DistributionPlugin.DISTRIBUTION_GROUP
+        const val TASK_DIST_WINDOWS_EXE: String = "distWindowsExe"
+        const val TASK_DIST_WINDOWS_MSI: String = "distWindowsMsi"
+        const val TASK_DIST_MAC_DMG: String = "distMacDmg"
+        const val TASK_DIST_MAC_PKG: String = "distMacPkg"
+        const val TASK_DIST_LINUX_DEB: String = "distLinuxDeb"
+        const val TASK_DIST_LINUX_RPM: String = "distLinuxRpm"
     }
 
     override fun apply(project: Project) {

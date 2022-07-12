@@ -10,7 +10,7 @@ fun includeDir(dir: String) = file(dir)
 
 dependencyResolutionManagement {
     versionCatalogs {
-        val kotlinVersion = "1.6.21"
+        val kotlinVersion = "1.7.0"
         register("sdk") {
             version("jdk", "17")
         }
@@ -21,7 +21,7 @@ dependencyResolutionManagement {
             plugin("spotless", "com.diffplug.spotless").version("6.7.2")
             plugin("gradle-publish", "com.gradle.plugin-publish").version("1.0.0-rc-3")
             plugin("git-publish", "org.ajoberstar.git-publish").version("3.0.1")
-            library("pages", "com.hendraanggrian:pages-gradle-plugin:0.1")
+            plugin("pages", "com.hendraanggrian.pages").version("0.1")
         }
         register("libs") {
             library("kotlinx-coroutines", "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.3")

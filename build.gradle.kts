@@ -3,9 +3,6 @@ buildscript {
         gradlePluginPortal()
         mavenCentral()
     }
-    dependencies.classpath(plugs.pages) {
-        capability("pages-minimal")
-    }
 }
 
 allprojects {
