@@ -20,7 +20,7 @@
                 <h1>packaging-gradle-plugin</h1>
                 <p>Start making native distributions for your JAR</p>
                 <p class="view">
-                    <a href="https://github.com/hendraanggrian/packaging-gradle-plugin/">View the Project on GitHub <small>hendraanggrian/packaging-gradle-plugi</small></a>
+                    <a href="https://github.com/hendraanggrian/packaging-gradle-plugin/">View the Project on GitHub <small>hendraanggrian/packaging-gradle-plugin</small></a>
                 </p>
                 <ul>
                     <li>
@@ -84,14 +84,14 @@
 
                 <p>Using plugins DSL:</p>
 
-                <pre><code class="language-groovy">plugins {
+                <pre><code class="language-gradle">plugins {
     id('com.hendraanggrian.packaging') version "$version"
 }
 </code></pre>
 
                 <p>Using legacy plugin application:</p>
 
-                <pre><code class="language-groovy">buildscript {
+                <pre><code class="language-gradle">buildscript {
     repositories {
         gradlePluginPortal()
     }
@@ -110,7 +110,7 @@ apply plugin: 'com.hendraanggrian.packaging'
 Note that properties of distribution configuration may override extension configuration.
                 </p>
 
-                <pre><code class="language-groovy">packaging {
+                <pre><code class="language-gradle">packaging {
     executable.set('example')
     classpath.set(new File('path/to/jar'))
     mainClass.set('com.example.App')
@@ -146,7 +146,7 @@ tasks {
                     For easier setup, also use <code>application</code> plugin to distribute classpath with <code>installDist</code> command.
                 </p>
 
-                <pre><code class="language-groovy">apply plugin: 'application'
+                <pre><code class="language-gradle">apply plugin: 'application'
 apply plugin: 'com.hendraanggrian.packaging'
 
 application {
