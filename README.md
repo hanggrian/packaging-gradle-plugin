@@ -9,10 +9,10 @@ Gradle plugin that wraps JARs into native bundle for Windows, macOS, and Linux.
 - Complete customization for each distribution.
 - Pack multiple distributions with a single task.
 
-| Version | Method                                                                                 |
-|---------|----------------------------------------------------------------------------------------|
-| 0.1     | [packr](https://github.com/libgdx/packr/)                                               |
-| 0.2+    | [jpackage](https://docs.oracle.com/en/java/javase/14/jpackage/packaging-overview.html) |
+| Version | Method |
+| --- | --- |
+| 0.1 | [packr](https://github.com/libgdx/packr/) |
+| 0.2+ | [jpackage](https://docs.oracle.com/en/java/javase/14/jpackage/packaging-overview.html) |
 
 ## Download
 
@@ -41,8 +41,8 @@ apply plugin: 'com.hendraanggrian.packaging'
 
 ## Usage
 
-Below are example configuration for `Windows64` and `MacOS` distributions.
-Note that properties of distribution configuration may override extension configuration.
+Below are example configuration for `Windows64` and `MacOS` distributions. Note that properties of
+distribution configuration may override extension configuration.
 
 ```gradle
 packaging {

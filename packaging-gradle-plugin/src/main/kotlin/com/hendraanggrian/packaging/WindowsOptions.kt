@@ -3,8 +3,8 @@ package com.hendraanggrian.packaging
 import org.gradle.api.model.ObjectFactory
 
 /**
- * Platform-specific options than can be configured using [PackagingExtension.windows].
- * This [PackSpec] will also inherit configuration from extension.
+ * Platform-specific options than can be configured using [PackagingExtension.windows]. This [PackSpec] will also
+ * inherit configuration from extension.
  */
 interface WindowsOptions : PackSpec {
     //region Platform dependent option for creating the application launcher

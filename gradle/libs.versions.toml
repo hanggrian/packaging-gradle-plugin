@@ -1,0 +1,22 @@
+[versions]
+jdk = "17"
+kotlin = "1.7.20"
+ktor = "1.6.7"
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+kotlinx-kover = "org.jetbrains.kotlinx.kover:0.6.1"
+dokka = { id = "org.jetbrains.dokka", version.ref = "kotlin" }
+spotless = "com.diffplug.spotless:6.11.0"
+gradle-publish = "com.gradle.plugin-publish:1.0.0"
+git-publish = "org.ajoberstar.git-publish:3.0.1"
+pages = "com.hendraanggrian.pages:0.1"
+
+[libraries]
+# main
+kotlinx-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+osdetector = "com.google.gradle:osdetector-gradle-plugin:1.7.0"
+# test
+kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
+truth = "com.google.truth:truth:1.1.3"

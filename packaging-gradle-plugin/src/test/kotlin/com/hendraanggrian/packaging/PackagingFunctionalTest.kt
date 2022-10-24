@@ -10,7 +10,8 @@ import kotlin.test.BeforeTest
 import kotlin.test.assertEquals
 
 class PackagingFunctionalTest {
-    @Rule @JvmField val testProjectDir = TemporaryFolder()
+    @Rule @JvmField
+    val testProjectDir = TemporaryFolder()
     private lateinit var buildFile: File
     private lateinit var runner: GradleRunner
 

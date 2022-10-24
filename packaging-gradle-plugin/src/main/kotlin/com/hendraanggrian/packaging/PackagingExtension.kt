@@ -3,12 +3,11 @@ package com.hendraanggrian.packaging
 import org.gradle.api.Action
 
 /**
- * Extension instance when configuring `packaging` in Gradle scripts.
- * Configuration of this [PackSpec] will be passed into platform-specific specs.
+ * Extension instance when configuring `packaging` in Gradle scripts. Configuration of this [PackSpec] will be passed
+ * into platform-specific specs.
  */
 @PackConfigurationDsl
 interface PackagingExtension : PackSpec {
-
     /** Windows options that will be packaged. */
     val windows: WindowsOptions
 

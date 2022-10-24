@@ -37,8 +37,11 @@ class PackagingPlugin : Plugin<Project> {
         val hasApplicationPlugin = project.pluginManager.hasPlugin(ApplicationPlugin.APPLICATION_PLUGIN_NAME)
 
         val packaging = project.extensions.create(
-            PackagingExtension::class, "packaging",
-            DefaultPackagingExtension::class, project.objects, project.layout
+            PackagingExtension::class,
+            "packaging",
+            DefaultPackagingExtension::class,
+            project.objects,
+            project.layout
         )
         val osDetector = project.extensions.getByType<OsDetector>()
         val os = DefaultNativePlatform.getCurrentOperatingSystem()

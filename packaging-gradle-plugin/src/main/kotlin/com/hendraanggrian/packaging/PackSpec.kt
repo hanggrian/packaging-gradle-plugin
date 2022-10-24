@@ -7,18 +7,12 @@ import org.gradle.api.provider.Property
 import org.gradle.api.provider.SetProperty
 import java.io.File
 
-/**
- * A specification for packaging native bundler.
- * Sub-interface of this interface should target a specific platform.
- */
+/** A specification for packaging native bundler. Sub-interface of this interface should target a specific platform. */
 @PackConfigurationDsl
 interface PackSpec {
 
     //region Generic Options
-    /**
-     * Version of the application and/or package`.
-     * Default is project's version.
-     */
+    /** Version of the application and/or package`. Default is project's version. */
     val appVersion: Property<String>
 
     /** Copyright for the application. */
@@ -27,16 +21,10 @@ interface PackSpec {
     /** Description of the application. */
     val appDescription: Property<String>
 
-    /**
-     * Name of the application and/or package.
-     * Default is project's name.
-     */
+    /** Name of the application and/or package. Default is project's name. */
     val appName: Property<String>
 
-    /**
-     * Path where generated output file is placed.
-     * Default is `build/install` in project directory.
-     */
+    /** Path where generated output file is placed. Default is `build/install` in project directory. */
     val outputDirectory: DirectoryProperty
 
     /** Returns [outputDirectory] represented as [File]. */
@@ -45,15 +33,15 @@ interface PackSpec {
     /** Vendor of the application. */
     val vendor: Property<String>
 
-    /**
-     * Enables verbose output.
-     * Default is false.
-     */
+    /** Enables verbose output. Default is false. */
     val verbose: Property<Boolean>
     //endregion
 
     //region Options for creating the runtime image
-    /** This module list, along with the main module (if specified) will be passed to jlink as the --add-module argument. */
+    /**
+     * This module list, along with the main module (if specified) will be passed to jlink as the --add-module
+     * argument.
+     */
     val modules: SetProperty<String>
 
     /** Each path is either a directory of modules or the path to a modular jar. */
@@ -96,7 +84,10 @@ interface PackSpec {
      */
     val mainJar: Property<String>
 
-    /** The main module (and optionally main class) of the application This module must be located on the module path. */
+    /**
+     * The main module (and optionally main class) of the application This module must be located on the module
+     * path.
+     */
     val mainModule: Property<String>
     //endregion
 
