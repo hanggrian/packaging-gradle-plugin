@@ -1,4 +1,12 @@
-include("packaging-gradle-plugin")
+pluginManagement.repositories {
+    gradlePluginPortal()
+    mavenCentral()
+}
+dependencyResolutionManagement.repositories.mavenCentral()
+
+rootProject.name = "packaging-gradle-plugin"
+
+include("packaging")
 include("website")
 // Enabling sample modules will break Travis CI because JavaFX SDK is no longer free to download
 // includeDir("samples")

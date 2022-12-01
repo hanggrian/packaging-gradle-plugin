@@ -2,21 +2,21 @@
 jdk = "17"
 kotlin = "1.7.20"
 ktor = "1.6.7"
+gradle-kotlin-dsl = "3.2.1" # hotfix: Gradle API mismatch
 
 [plugins]
-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
-kotlinx-kover = "org.jetbrains.kotlinx.kover:0.6.1"
 dokka = { id = "org.jetbrains.dokka", version.ref = "kotlin" }
-spotless = "com.diffplug.spotless:6.11.0"
+kotlinx-kover = "org.jetbrains.kotlinx.kover:0.6.1"
 gradle-publish = "com.gradle.plugin-publish:1.0.0"
 git-publish = "org.ajoberstar.git-publish:3.0.1"
 pages = "com.hendraanggrian.pages:0.1"
 
 [libraries]
+# lint
+ktlint = "com.pinterest:ktlint:0.47.1"
+rulebook-ktlint = "com.hendraanggrian.rulebook:rulebook-ktlint:0.1"
 # main
 kotlinx-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
 osdetector = "com.google.gradle:osdetector-gradle-plugin:1.7.0"
 # test
-kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 truth = "com.google.truth:truth:1.1.3"
