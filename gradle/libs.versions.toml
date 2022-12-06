@@ -2,12 +2,12 @@
 jdk = "17"
 kotlin = "1.7.20"
 ktor = "1.6.7"
-gradle-kotlin-dsl = "3.2.1" # hotfix: Gradle API mismatch
+gradle-kotlin-dsl = "3.2.3" # hotfix: Gradle API mismatch
 
 [plugins]
 dokka = { id = "org.jetbrains.dokka", version.ref = "kotlin" }
 kotlinx-kover = "org.jetbrains.kotlinx.kover:0.6.1"
-gradle-publish = "com.gradle.plugin-publish:1.0.0"
+gradle-publish = "com.gradle.plugin-publish:1.1.0"
 git-publish = "org.ajoberstar.git-publish:3.0.1"
 pages = "com.hendraanggrian.pages:0.1"
 

@@ -41,8 +41,9 @@ apply plugin: 'com.hendraanggrian.packaging'
 
 ## Usage
 
-Below are example configuration for `Windows64` and `MacOS` distributions. Note that properties of
-distribution configuration may override extension configuration.
+Below are example configuration for `Windows64` and `MacOS` distributions. Note
+that properties of distribution configuration may override extension
+configuration.
 
 ```gradle
 packaging {
@@ -75,7 +76,8 @@ tasks {
 
 ### Using [Application Plugin](https://docs.gradle.org/current/userguide/application_plugin.html)
 
-For easier setup, also use `application` plugin to distribute classpath with `installDist` command.
+For easier setup, also use `application` plugin to distribute classpath
+with `installDist` command.
 
 ```gradle
 apply plugin: 'application'

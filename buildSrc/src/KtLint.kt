@@ -45,8 +45,8 @@ val Project.ktlint: Configuration
         return ktlint
     }
 
-fun Project.ktlintAttributes(moduleDependency: ModuleDependency) {
-    moduleDependency.attributes {
+fun Project.ktlintConfig(dependency: ModuleDependency) {
+    dependency.attributes {
         attribute(Bundling.BUNDLING_ATTRIBUTE, project.objects.named(Bundling.EXTERNAL))
     }
 }
