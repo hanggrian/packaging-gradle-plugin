@@ -26,7 +26,7 @@ pluginBundle {
 }
 
 dependencies {
-    ktlint(libs.ktlint, ::ktlintConfig)
+    ktlint(libs.ktlint, ::configureKtlint)
     ktlint(libs.rulebook.ktlint)
     implementation(libs.osdetector)
     testImplementation(gradleTestKit())
