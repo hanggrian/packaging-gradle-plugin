@@ -2,14 +2,16 @@ pluginManagement.repositories {
     gradlePluginPortal()
     mavenCentral()
 }
-dependencyResolutionManagement.repositories.mavenCentral()
+dependencyResolutionManagement.repositories {
+    mavenCentral()
+    maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+}
 
 rootProject.name = "packaging-gradle-plugin"
 
-include("packaging")
+include("packaging-gradle-plugin")
 include("website")
-// Enabling sample modules will break Travis CI because JavaFX SDK is no longer free to download
-// includeDir("samples")
+includeDir("samples") // enabling samples will break Travis because JavaFX SDK is no longer free to download
 
 fun includeDir(dir: String) = file(dir)
     .listFiles()!!

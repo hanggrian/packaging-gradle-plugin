@@ -1,12 +1,8 @@
 buildscript {
-    repositories {
-        gradlePluginPortal()
-        mavenCentral()
-    }
+    repositories.mavenCentral()
     dependencies {
         classpath files('../packaging-gradle-plugin-0.2.jar')
-        classpath 'com.google.gradle:osdetector-gradle-plugin:1.7.0'
-        classpath 'org.openjfx:javafx-plugin:0.0.10'
+        classpath libs.osdetector
     }
 }
 
@@ -14,13 +10,7 @@ group 'com.example'
 version '1.0'
 
 apply plugin: 'application'
-apply plugin: 'org.openjfx.javafxplugin'
 apply plugin: 'com.hendraanggrian.packaging'
-
-javafx {
-    sdk = System.getenv('JAVAFX_HOME')
-    modules = ['javafx.controls']
-}
 
 application {
     applicationName = 'My App'

@@ -1,15 +1,21 @@
 package com.hendraanggrian.packaging
 
+import org.gradle.language.base.plugins.LifecycleBasePlugin.CHECK_TASK_NAME
 import org.gradle.testkit.runner.GradleRunner
-import org.gradle.testkit.runner.TaskOutcome
+import org.gradle.testkit.runner.TaskOutcome.UP_TO_DATE
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import java.io.File
 import java.io.IOException
 import kotlin.test.BeforeTest
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class PackagingFunctionalTest {
+/**
+ * Integration test are migrated here until this is fixed:
+ * https://stackoverflow.com/questions/44679007/plugin-under-test-metadata-properties-not-created-by-gradle-testkit-when-running
+ */
+class PackagingIntegrationTest {
     @Rule @JvmField
     val testProjectDir = TemporaryFolder()
     private lateinit var buildFile: File
@@ -20,7 +26,7 @@ class PackagingFunctionalTest {
     fun setup() {
         testProjectDir.newFile("settings.gradle.kts").writeText(
             """
-            rootProject.name = "functional-test"
+            rootProject.name = "integration-test"
             """.trimIndent()
         )
         buildFile = testProjectDir.newFile("build.gradle.kts")
@@ -30,25 +36,23 @@ class PackagingFunctionalTest {
             .withTestKitDir(testProjectDir.newFolder())
     }
 
-    // TODO: fix NullPointerException
-    // @Test
-    fun minimalConfiguration() {
-        testProjectDir.newFolder("lib").resolve("sample.jar").createNewFile()
+    @Test
+    fun withApplicationPlugin() {
         buildFile.writeText(
             """
             plugins {
+                application
                 id("com.hendraanggrian.packaging")
             }
-            packaging {
-                mainJar.set("sample.jar")
+            application {
+                applicationName = "MyApp"
                 mainClass.set("com.example.App")
-                inputDirectory.set(projectDir.resolve("lib"))
             }
             """.trimIndent()
         )
         assertEquals(
-            TaskOutcome.UP_TO_DATE,
-            runner.withArguments("check").build().task(":check")!!.outcome
+            UP_TO_DATE,
+            runner.withArguments(CHECK_TASK_NAME).build().task(":$CHECK_TASK_NAME")!!.outcome
         )
     }
 }

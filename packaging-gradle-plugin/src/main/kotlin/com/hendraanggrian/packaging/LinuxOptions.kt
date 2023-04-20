@@ -3,8 +3,8 @@ package com.hendraanggrian.packaging
 import org.gradle.api.model.ObjectFactory
 
 /**
- * Platform-specific options than can be configured using [PackagingExtension.linux]. This [PackSpec] will also inherit
- * configuration from extension.
+ * Platform-specific options than can be configured using [PackagingExtension.linux].
+ * This [PackSpec] will also inherit configuration from extension.
  */
 interface LinuxOptions : PackSpec {
     //region Platform dependent options for creating the application package
@@ -36,6 +36,7 @@ interface LinuxOptions : PackSpec {
 
 internal class LinuxOptionsImpl(objects: ObjectFactory, defaultPackSpec: PackSpec) :
     PlatformOptionsImpl(objects, defaultPackSpec), LinuxOptions {
+
     //region Platform dependent options for creating the application package
     override var packageName: String? = null
     override var debMaintainer: String? = null

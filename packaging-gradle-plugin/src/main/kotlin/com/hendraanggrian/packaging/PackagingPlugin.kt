@@ -139,7 +139,7 @@ class PackagingPlugin : Plugin<Project> {
         packaging: PackagingExtension,
         detector: OsDetector
     ) {
-        val jpackageType = taskName.takeLast(3).toLowerCase()
+        val jpackageType = taskName.takeLast(3).lowercase()
         val outputFile = packaging.outputDirectory.asFile.get()
             .resolve("${packaging.appName.get()}-${packaging.appVersion.get()}.$jpackageType")
         project.tasks.getByName<Exec>(taskName) {
@@ -195,7 +195,7 @@ class PackagingPlugin : Plugin<Project> {
                 spec.menuGroup?.let { add("--win-menu-group"); add(it) }
                 if (spec.perUserInstall) add("--win-per-user-install")
                 if (spec.shortcut) add("--win-shortcut")
-                spec.upgradeUUID?.let { add("--win-upgrade-uuid"); add(it) }
+                spec.upgradeUuid?.let { add("--win-upgrade-uuid"); add(it) }
             }
             is MacOptions -> {
                 spec.packageIdentifier?.let { add("--mac-package-identifier"); add(it) }

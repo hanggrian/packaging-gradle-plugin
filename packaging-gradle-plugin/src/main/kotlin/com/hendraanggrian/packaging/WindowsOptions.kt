@@ -3,12 +3,15 @@ package com.hendraanggrian.packaging
 import org.gradle.api.model.ObjectFactory
 
 /**
- * Platform-specific options than can be configured using [PackagingExtension.windows]. This [PackSpec] will also
- * inherit configuration from extension.
+ * Platform-specific options than can be configured using [PackagingExtension.windows].
+ * This [PackSpec] will also inherit configuration from extension.
  */
 interface WindowsOptions : PackSpec {
     //region Platform dependent option for creating the application launcher
-    /** Creates a console launcher for the application, should be specified for application which requires console interactions. */
+    /**
+     * Creates a console launcher for the application, should be specified for application which
+     * requires console interactions.
+     */
     var console: Boolean
     //endregion
 
@@ -29,12 +32,13 @@ interface WindowsOptions : PackSpec {
     var shortcut: Boolean
 
     /** UUID associated with upgrades for this package. */
-    var upgradeUUID: String?
+    var upgradeUuid: String?
     //endregion
 }
 
 internal class WindowsOptionsImpl(objects: ObjectFactory, defaultPackSpec: PackSpec) :
     PlatformOptionsImpl(objects, defaultPackSpec), WindowsOptions {
+
     //region Platform dependent option for creating the application launcher
     override var console: Boolean = false
     //endregion
@@ -45,6 +49,6 @@ internal class WindowsOptionsImpl(objects: ObjectFactory, defaultPackSpec: PackS
     override var menuGroup: String? = null
     override var perUserInstall: Boolean = false
     override var shortcut: Boolean = false
-    override var upgradeUUID: String? = null
+    override var upgradeUuid: String? = null
     //endregion
 }

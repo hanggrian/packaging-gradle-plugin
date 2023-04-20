@@ -36,6 +36,7 @@ internal fun denormalizeArch(value: String): String = when {
 
 internal abstract class PlatformOptionsImpl(objects: ObjectFactory, defaultPackSpec: PackSpec) :
     PackSpec {
+
     //region Generic Options
     override val appVersion: Property<String> = objects.property<String>()
         .convention(defaultPackSpec.appVersion)

@@ -7,10 +7,12 @@ import org.gradle.api.provider.Property
 import org.gradle.api.provider.SetProperty
 import java.io.File
 
-/** A specification for packaging native bundler. Sub-interface of this interface should target a specific platform. */
+/**
+ * A specification for packaging native bundler. Sub-interface of this interface should target a
+ * specific platform.
+ */
 @PackConfigurationDsl
 interface PackSpec {
-
     //region Generic Options
     /** Version of the application and/or package`. Default is project's version. */
     val appVersion: Property<String>
@@ -24,7 +26,9 @@ interface PackSpec {
     /** Name of the application and/or package. Default is project's name. */
     val appName: Property<String>
 
-    /** Path where generated output file is placed. Default is `build/install` in project directory. */
+    /**
+     * Path where generated output file is placed. Default is `build/install` in project directory.
+     */
     val outputDirectory: DirectoryProperty
 
     /** Returns [outputDirectory] represented as [File]. */
@@ -39,15 +43,18 @@ interface PackSpec {
 
     //region Options for creating the runtime image
     /**
-     * This module list, along with the main module (if specified) will be passed to jlink as the --add-module
-     * argument.
+     * This module list, along with the main module (if specified) will be passed to jlink as
+     * the `--add-module` argument.
      */
     val modules: SetProperty<String>
 
     /** Each path is either a directory of modules or the path to a modular jar. */
     val modulePaths: SetProperty<File>
 
-    /** Pass on --bind-services option to jlink (which will link in service provider modules and their dependences). */
+    /**
+     * Pass on --bind-services option to jlink (which will link in service provider modules and
+     * their dependencies).
+     */
     val bindServices: Property<String>
 
     /** Path of the predefined runtime image that will be copied into the application image. */
@@ -66,10 +73,15 @@ interface PackSpec {
     //endregion
 
     //region Options for creating the application launcher(s)
-    /** Name of launcher, and a path to a Properties file that contains a list of key, value pairs. */
+    /**
+     * Name of launcher, and a path to a Properties file that contains a list of key, value pairs.
+     */
     val launcher: RegularFileProperty
 
-    /** Command line arguments to pass to the main class if no command line arguments are given to the launcher. */
+    /**
+     * Command line arguments to pass to the main class if no command line arguments are given to
+     * the launcher.
+     */
     val args: ListProperty<String>
 
     /** Options to pass to the Java runtime. */
@@ -79,20 +91,22 @@ interface PackSpec {
     val mainClass: Property<String>
 
     /**
-     * The main JAR of the application; containing the main class (specified as a path relative to the input path).
-     * Default is `$projectName-$projectVersion.jar`
+     * The main JAR of the application; containing the main class (specified as a path relative to
+     * the input path). Default is `$projectName-$projectVersion.jar`
      */
     val mainJar: Property<String>
 
     /**
-     * The main module (and optionally main class) of the application This module must be located on the module
-     * path.
+     * The main module (and optionally main class) of the application This module must be located on
+     * the module path.
      */
     val mainModule: Property<String>
     //endregion
 
     //region Options for creating the application package
-    /** Location of the predefined application image that is used to build an installable package. */
+    /**
+     * Location of the predefined application image that is used to build an installable package.
+     */
     val appImage: RegularFileProperty
 
     /** Path to a Properties file that contains list of key, value pairs. */

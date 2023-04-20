@@ -1,33 +1,29 @@
 plugins {
-    `java-gradle-plugin`
-    `kotlin-dsl` version libs.versions.gradle.kotlin.dsl
     kotlin("jvm") version libs.versions.kotlin
     alias(libs.plugins.dokka)
     alias(libs.plugins.gradle.publish)
 }
 
-gradlePlugin {
-    plugins.register("packagingPlugin") {
-        id = "$RELEASE_GROUP.packaging"
-        implementationClass = "$id.PackagingPlugin"
-        displayName = "Packaging Plugin"
-        description = RELEASE_DESCRIPTION
-    }
-    testSourceSets(sourceSets.test.get())
-}
-
 kotlin.jvmToolchain(libs.versions.jdk.get().toInt())
 
-pluginBundle {
-    website = RELEASE_URL
-    vcsUrl = "$RELEASE_URL.git"
-    description = RELEASE_DESCRIPTION
-    tags = listOf("packaging", "jpackage", "native", "installer", "bundle")
+gradlePlugin {
+    website.set(RELEASE_URL)
+    vcsUrl.set("$RELEASE_URL.git")
+    plugins.register("packagingPlugin") {
+        id = RELEASE_GROUP
+        displayName = "Packaging Plugin"
+        description = RELEASE_DESCRIPTION
+        tags.set(listOf("packaging", "jpackage", "native", "installer", "bundle"))
+        implementationClass = "$RELEASE_GROUP.PackagingPlugin"
+    }
+    testSourceSets(sourceSets.test.get())
 }
 
 dependencies {
     ktlint(libs.ktlint, ::configureKtlint)
     ktlint(libs.rulebook.ktlint)
+    compileOnly(kotlin("gradle-plugin-api"))
+    implementation(gradleKotlinDsl())
     implementation(libs.osdetector)
     testImplementation(gradleTestKit())
     testImplementation(kotlin("test-junit", libs.versions.kotlin.get()))

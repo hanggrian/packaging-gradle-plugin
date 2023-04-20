@@ -4,8 +4,8 @@ import org.gradle.api.model.ObjectFactory
 import java.io.File
 
 /**
- * Platform-specific options than can be configured using [PackagingExtension.mac]. This [PackSpec] will also inherit
- * configuration from extension.
+ * Platform-specific options than can be configured using [PackagingExtension.mac].
+ * This [PackSpec] will also inherit configuration from extension.
  */
 interface MacOptions : PackSpec {
     //region Platform dependent option for creating the application launcher
@@ -16,8 +16,8 @@ interface MacOptions : PackSpec {
     var packageName: String?
 
     /**
-     * When signing the application bundle, this value is prefixed to all components that need to be signed that don't
-     * have an existing bundle identifier.
+     * When signing the application bundle, this value is prefixed to all components that need to be
+     * signed that don't have an existing bundle identifier.
      */
     var bundleSigningPrefix: String?
 
@@ -34,6 +34,7 @@ interface MacOptions : PackSpec {
 
 internal class MacOptionsImpl(objects: ObjectFactory, defaultPackSpec: PackSpec) :
     PlatformOptionsImpl(objects, defaultPackSpec), MacOptions {
+
     //region Platform dependent option for creating the application launcher
     override var packageIdentifier: String? = null
     override var packageName: String? = null
