@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html>
     <head>
         <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="UTF-8">
@@ -8,8 +8,8 @@
         <meta content="chrome=1" http-equiv="X-UA-Compatible">
         <link href="styles/main.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,1,0" rel="stylesheet">
-        <link href="styles/prism-tomorrow.min.css" rel="stylesheet">
-        <script src="scripts/theme.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-groovy.min.js"></script>
+        <link href="styles/prism-tomorrow.css" rel="stylesheet">
+        <script src="scripts/theme.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-gradle.min.js"></script>
         <!--Primary meta tags-->
         <meta content="packaging-gradle-plugin" name="title">
         <meta content="Start making native distributions for your JAR" name="description">
@@ -20,7 +20,7 @@
                 <h1>packaging-gradle-plugin</h1>
                 <p>Start making native distributions for your JAR</p>
                 <p class="view">
-                    <a href="https://github.com/hendraanggrian/packaging-gradle-plugin/">View the Project on GitHub <small>hendraanggrian/packaging-gradle-plugin</small></a>
+                    <a href="https://github.com/hanggrian/packaging-gradle-plugin/">View the Project on GitHub <small>hanggrian/packaging-gradle-plugin</small></a>
                 </p>
                 <ul>
                     <li>
@@ -30,140 +30,88 @@
             </header>
             <section>
                 <p>
-                    <a href="https://travis-ci.com/github/hendraanggrian/packaging-gradle-plugin/"><img alt="Travis CI" src="https://img.shields.io/travis/com/hendraanggrian/packaging-gradle-plugin"></a>
-<a href="https://plugins.gradle.org/plugin/com.hendraanggrian.packaging"><img alt="Plugin Portal" src="https://img.shields.io/maven-metadata/v.svg?label=plugin-portal&amp;metadataUrl=https%3A%2F%2Fplugins.gradle.org%2Fm2%2Fcom%2Fhendraanggrian%2Fpackaging%2Fcom.hendraanggrian.packaging.gradle.plugin%2Fmaven-metadata.xml"></a>
-<a href="https://openjdk.java.net/projects/jdk/17/"><img alt="OpenJDK" src="https://img.shields.io/badge/jdk-17%2B-informational"></a>
+                    <a href="https://app.circleci.com/pipelines/github/hanggrian/packaging-gradle-plugin/"><img alt="CircleCI" src="https://img.shields.io/circleci/build/gh/hanggrian/packaging-gradle-plugin"></a>
+<a href="https://plugins.gradle.org/plugin/com.hanggrian.packaging"><img alt="Plugin Portal" src="https://img.shields.io/gradle-plugin-portal/v/com.hanggrian.packaging"></a>
+<a href="https://docs.oracle.com/javase/17/"><img alt="Java" src="https://img.shields.io/badge/java-17+-informational"></a>
                 </p>
-
+                
                 <h1>Packaging Gradle Plugin</h1>
-
+                
                 <p>Gradle plugin that wraps JARs into native bundle for Windows, macOS, and Linux.</p>
-
+                
                 <ul>
-
+                    
                     <li>Complete customization for each distribution.</li>
-
+                    
                     <li>Pack multiple distributions with a single task.</li>
-
+                    
                 </ul>
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>Version</th>
-<th>Method</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        <tr>
-
-                            <td>0.1</td>
-<td><a href="https://github.com/libgdx/packr/">packr</a></td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td>0.2+</td>
-<td><a href="https://docs.oracle.com/en/java/javase/14/jpackage/packaging-overview.html">jpackage</a></td>
-
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
+                
                 <h2>Download</h2>
-
+                
                 <p>Using plugins DSL:</p>
-
-                <pre><code class="language-groovy">plugins {
-    id('com.hendraanggrian.packaging') version "$version"
+                
+                <pre><code class="language-gradle">plugins {
+    id('com.hanggrian.packaging') version "$version"
 }
 </code></pre>
-
+                
                 <p>Using legacy plugin application:</p>
-
-                <pre><code class="language-groovy">buildscript {
+                
+                <pre><code class="language-gradle">buildscript {
     repositories {
         gradlePluginPortal()
     }
     dependencies {
-        classpath("com.hendraanggrian:packaging-gradle-plugin:$version")
+        classpath("com.hanggrian:packaging-gradle-plugin:$version")
     }
 }
 
-apply plugin: 'com.hendraanggrian.packaging'
+apply plugin: 'com.hanggrian.packaging'
 </code></pre>
-
+                
                 <h2>Usage</h2>
-
+                
                 <p>
                     Below are example configuration for <code>Windows64</code> and <code>MacOS</code> distributions. Note
 that properties of distribution configuration may override extension
 configuration.
                 </p>
-
-                <pre><code class="language-groovy">packaging {
-    executable.set('example')
-    classpath.set(new File('path/to/jar'))
+                
+                <pre><code class="language-gradle">packaging {
+    appName.set('Custom Directory')
     mainClass.set('com.example.App')
-    vmArgs.addAll('-Xmx1G')
-    resources.addAll(new File('image.jpg'), new File('path/to/other.jpg'))
-    minimizeJre.set('hard')
-    outputDirectory.set(new File('my/folder'))
+    modules = ['javafx.controls', 'javafx.graphics']
+    modulePaths.add(new File('/path/to/javafx-sdk/lib'))
     verbose.set(true)
-    autoOpen.set(true)
-}
-
-tasks {
-    packWindows64 {
-        executable.set('example64')
-        vmArgs.add('-Xdebug')
-        appName.set('Example Windows 64-bit')
-        jdk.set('path/to/windows_64_jdk')
-    }
-    packMacOS {
-        name.set('Example.app')
-        jdk.set('path/to/mac_jdk')
-        icon.set(new File('path/to/mac_icon.icns'))
-        bundleId.set('com.example.app')
-    }
 }
 </code></pre>
-
+                
                 <h3>
                     Using <a href="https://docs.gradle.org/current/userguide/application_plugin.html">Application Plugin</a>
                 </h3>
-
+                
                 <p>
                     For easier setup, also use <code>application</code> plugin to distribute classpath
 with <code>installDist</code> command.
                 </p>
-
-                <pre><code class="language-groovy">apply plugin: 'application'
-apply plugin: 'com.hendraanggrian.packaging'
+                
+                <pre><code class="language-gradle">apply plugin: 'application'
+apply plugin: 'com.hanggrian.packaging'
 
 application {
     applicationName = 'My App'
     mainClass.set('com.example.App')
 }
 </code></pre>
-
+                
             </section>
             <footer>
                 <p>
                     <button class="material-symbols-sharp" id="theme-toggle" onclick="toggleDarkMode()" title="Toggle dark mode"></button>
                 </p>
                 <p>
-                    This project is maintained by <a href="https://github.com/hendraanggrian/">Hendra Anggrian</a>
+                    This project is maintained by <a href="https://github.com/hanggrian/">Hendra Anggrian</a>
                 </p>
                 <small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist/">orderedlist</a></small>
             </footer>

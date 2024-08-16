@@ -1,1 +1,1 @@
-sourceset_dependencies='{":packaging:dokkaHtml/main":[]}'
+sourceset_dependencies='{":packaging-gradle-plugin:dokkaHtml/main":[]}'

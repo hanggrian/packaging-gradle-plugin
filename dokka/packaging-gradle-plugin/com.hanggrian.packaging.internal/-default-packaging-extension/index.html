@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>DefaultPackagingExtension</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+</head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+                    <a class="library-name--link" href="../../../index.html">
+                            packaging-gradle-plugin
+                    </a>
+            </div>
+            <div class="library-version">
+0.1            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":packaging-gradle-plugin:dokkaHtml/main">jvm</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="packaging-gradle-plugin::com.hanggrian.packaging.internal/DefaultPackagingExtension///PointingToDeclaration//1905640900">
+  <div class="breadcrumbs"><a href="../../../index.html">packaging-gradle-plugin</a><span class="delimiter">/</span><a href="../index.html">com.hanggrian.packaging.internal</a><span class="delimiter">/</span><span class="current">DefaultPackagingExtension</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Default</span><wbr></wbr><span>Packaging</span><wbr></wbr><span><span>Extension</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">DefaultPackagingExtension</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">objects<span class="token operator">: </span><span data-unresolved-link="org.gradle.api.model/ObjectFactory///PointingToDeclaration/">ObjectFactory</span><span class="token punctuation">, </span></span><span class="parameter ">layout<span class="token operator">: </span><span data-unresolved-link="org.gradle.api.file/ProjectLayout///PointingToDeclaration/">ProjectLayout</span></span></span><span class="token punctuation">)</span> : <a href="../../com.hanggrian.packaging/-packaging-extension/index.html">PackagingExtension</a></div></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="">Constructors</h2>
+        <div class="table"><a data-name="-2074755581%2FConstructors%2F1905640900" anchor-label="DefaultPackagingExtension" id="-2074755581%2FConstructors%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-default-packaging-extension.html"><span>Default</span><wbr></wbr><span>Packaging</span><wbr></wbr><span><span>Extension</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2074755581%2FConstructors%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">objects<span class="token operator">: </span><span data-unresolved-link="org.gradle.api.model/ObjectFactory///PointingToDeclaration/">ObjectFactory</span><span class="token punctuation">, </span></span><span class="parameter ">layout<span class="token operator">: </span><span data-unresolved-link="org.gradle.api.file/ProjectLayout///PointingToDeclaration/">ProjectLayout</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="2009456107%2FProperties%2F1905640900" anchor-label="appDescription" id="2009456107%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="app-description.html"><span>app</span><wbr></wbr><span><span>Description</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2009456107%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="app-description.html">appDescription</a><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.provider/Property///PointingToDeclaration/">Property</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Description of the application.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="394918124%2FProperties%2F1905640900" anchor-label="appImage" id="394918124%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="app-image.html"><span>app</span><wbr></wbr><span><span>Image</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="394918124%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="app-image.html">appImage</a><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.file/RegularFileProperty///PointingToDeclaration/">RegularFileProperty</span></div><div class="brief "><p class="paragraph">Location of the predefined application image that is used to build an installable package.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1697821656%2FProperties%2F1905640900" anchor-label="appName" id="-1697821656%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="app-name.html"><span>app</span><wbr></wbr><span><span>Name</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1697821656%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="app-name.html">appName</a><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.provider/Property///PointingToDeclaration/">Property</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Name of the application and/or package. Default is project's name.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="460888463%2FProperties%2F1905640900" anchor-label="appVersion" id="460888463%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="app-version.html"><span>app</span><wbr></wbr><span><span>Version</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="460888463%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="app-version.html">appVersion</a><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.provider/Property///PointingToDeclaration/">Property</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Version of the application and/or package`. Default is project's version.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2110075479%2FProperties%2F1905640900" anchor-label="args" id="-2110075479%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="args.html"><span><span>args</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2110075479%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="args.html">args</a><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.provider/ListProperty///PointingToDeclaration/">ListProperty</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Command line arguments to pass to the main class if no command line arguments are given to the launcher.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-133582965%2FProperties%2F1905640900" anchor-label="bindServices" id="-133582965%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="bind-services.html"><span>bind</span><wbr></wbr><span><span>Services</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-133582965%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="bind-services.html">bindServices</a><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.provider/Property///PointingToDeclaration/">Property</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Pass on --bind-services option to jlink (which will link in service provider modules and their dependencies).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="449357645%2FProperties%2F1905640900" anchor-label="copyright" id="449357645%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="copyright.html"><span><span>copyright</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="449357645%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="copyright.html">copyright</a><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.provider/Property///PointingToDeclaration/">Property</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Copyright for the application.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1462754696%2FProperties%2F1905640900" anchor-label="fileAssociations" id="-1462754696%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="file-associations.html"><span>file</span><wbr></wbr><span><span>Associations</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1462754696%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="file-associations.html">fileAssociations</a><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.file/RegularFileProperty///PointingToDeclaration/">RegularFileProperty</span></div><div class="brief "><p class="paragraph">Path to a Properties file that contains list of key, value pairs.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1908697485%2FProperties%2F1905640900" anchor-label="icon" id="1908697485%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="icon.html"><span><span>icon</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1908697485%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="icon.html">icon</a><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.file/RegularFileProperty///PointingToDeclaration/">RegularFileProperty</span></div><div class="brief "><p class="paragraph">Path of the icon of the application bundle.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="116843587%2FProperties%2F1905640900" anchor-label="inputDirectory" id="116843587%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="input-directory.html"><span>input</span><wbr></wbr><span><span>Directory</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="116843587%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="input-directory.html">inputDirectory</a><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.file/DirectoryProperty///PointingToDeclaration/">DirectoryProperty</span></div><div class="brief "><p class="paragraph">Path of the input directory that contains the files to be packaged.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="601384852%2FProperties%2F1905640900" anchor-label="installDirectory" id="601384852%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="install-directory.html"><span>install</span><wbr></wbr><span><span>Directory</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="601384852%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="install-directory.html">installDirectory</a><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.file/DirectoryProperty///PointingToDeclaration/">DirectoryProperty</span></div><div class="brief "><p class="paragraph">Absolute path of the installation directory of the application on OS X or Linux.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="351887911%2FProperties%2F1905640900" anchor-label="javaArgs" id="351887911%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="java-args.html"><span>java</span><wbr></wbr><span><span>Args</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="351887911%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="java-args.html">javaArgs</a><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.provider/ListProperty///PointingToDeclaration/">ListProperty</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Options to pass to the Java runtime.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1535417402%2FProperties%2F1905640900" anchor-label="launcher" id="-1535417402%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="launcher.html"><span><span>launcher</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1535417402%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="launcher.html">launcher</a><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.file/RegularFileProperty///PointingToDeclaration/">RegularFileProperty</span></div><div class="brief "><p class="paragraph">Name of launcher, and a path to a Properties file that contains a list of key, value pairs.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="577709523%2FProperties%2F1905640900" anchor-label="license" id="577709523%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="license.html"><span><span>license</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="577709523%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="license.html">license</a><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.file/RegularFileProperty///PointingToDeclaration/">RegularFileProperty</span></div><div class="brief "><p class="paragraph">Path to the license file.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-944874944%2FProperties%2F1905640900" anchor-label="linux" id="-944874944%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="linux.html"><span><span>linux</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-944874944%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="linux.html">linux</a><span class="token operator">: </span><a href="../../com.hanggrian.packaging/-linux-options/index.html">LinuxOptions</a></div><div class="brief "><p class="paragraph">Linux options that will be packaged.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1782034204%2FProperties%2F1905640900" anchor-label="linuxOptions" id="1782034204%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="linux-options.html"><span>linux</span><wbr></wbr><span><span>Options</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1782034204%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">var </span><a href="linux-options.html">linuxOptions</a><span class="token operator">: </span><a href="../../com.hanggrian.packaging/-linux-options/index.html">LinuxOptions</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1358699515%2FProperties%2F1905640900" anchor-label="mac" id="-1358699515%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mac.html"><span><span>mac</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1358699515%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="mac.html">mac</a><span class="token operator">: </span><a href="../../com.hanggrian.packaging/-mac-options/index.html">MacOptions</a></div><div class="brief "><p class="paragraph">Mac options that will be packaged.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-91386441%2FProperties%2F1905640900" anchor-label="macOptions" id="-91386441%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mac-options.html"><span>mac</span><wbr></wbr><span><span>Options</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-91386441%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">var </span><a href="mac-options.html">macOptions</a><span class="token operator">: </span><a href="../../com.hanggrian.packaging/-mac-options/index.html">MacOptions</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="685773525%2FProperties%2F1905640900" anchor-label="mainClass" id="685773525%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="main-class.html"><span>main</span><wbr></wbr><span><span>Class</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="685773525%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="main-class.html">mainClass</a><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.provider/Property///PointingToDeclaration/">Property</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Qualified name of the application main class to execute.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1373293678%2FProperties%2F1905640900" anchor-label="mainJar" id="-1373293678%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="main-jar.html"><span>main</span><wbr></wbr><span><span>Jar</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1373293678%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="main-jar.html">mainJar</a><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.provider/Property///PointingToDeclaration/">Property</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The main JAR of the application; containing the main class (specified as a path relative to the input path). Default is <code class="lang-kotlin">$projectName-$projectVersion.jar</code></p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-703398079%2FProperties%2F1905640900" anchor-label="mainModule" id="-703398079%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="main-module.html"><span>main</span><wbr></wbr><span><span>Module</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-703398079%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="main-module.html">mainModule</a><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.provider/Property///PointingToDeclaration/">Property</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The main module (and optionally main class) of the application This module must be located on the module path.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1068896302%2FProperties%2F1905640900" anchor-label="modulePaths" id="-1068896302%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="module-paths.html"><span>module</span><wbr></wbr><span><span>Paths</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1068896302%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="module-paths.html">modulePaths</a><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.provider/SetProperty///PointingToDeclaration/">SetProperty</span><span class="token operator">&lt;</span><a href="https://docs.oracle.com/javase/8/docs/api/java/io/File.html">File</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Each path is either a directory of modules or the path to a modular jar.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-745497267%2FProperties%2F1905640900" anchor-label="modules" id="-745497267%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="modules.html"><span><span>modules</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-745497267%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="modules.html">modules</a><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.provider/SetProperty///PointingToDeclaration/">SetProperty</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">This module list, along with the main module (if specified) will be passed to jlink as the <code class="lang-kotlin">--add-module</code> argument.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-612433144%2FProperties%2F1905640900" anchor-label="outputDirectory" id="-612433144%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="output-directory.html"><span>output</span><wbr></wbr><span><span>Directory</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-612433144%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="output-directory.html">outputDirectory</a><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.file/DirectoryProperty///PointingToDeclaration/">DirectoryProperty</span></div><div class="brief "><p class="paragraph">Path where generated output file is placed. Default is <code class="lang-kotlin">build/install</code> in project directory.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="279074654%2FProperties%2F1905640900" anchor-label="resourcesDirectory" id="279074654%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="resources-directory.html"><span>resources</span><wbr></wbr><span><span>Directory</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="279074654%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="resources-directory.html">resourcesDirectory</a><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.file/DirectoryProperty///PointingToDeclaration/">DirectoryProperty</span></div><div class="brief "><p class="paragraph">Path to override jpackage resources, <i>not application resources</i>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2008463331%2FProperties%2F1905640900" anchor-label="runtimeImage" id="2008463331%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="runtime-image.html"><span>runtime</span><wbr></wbr><span><span>Image</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2008463331%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="runtime-image.html">runtimeImage</a><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.file/RegularFileProperty///PointingToDeclaration/">RegularFileProperty</span></div><div class="brief "><p class="paragraph">Path of the predefined runtime image that will be copied into the application image.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1447612766%2FProperties%2F1905640900" anchor-label="vendor" id="1447612766%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="vendor.html"><span><span>vendor</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1447612766%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="vendor.html">vendor</a><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.provider/Property///PointingToDeclaration/">Property</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Vendor of the application.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1615991886%2FProperties%2F1905640900" anchor-label="verbose" id="-1615991886%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="verbose.html"><span><span>verbose</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1615991886%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="verbose.html">verbose</a><span class="token operator">: </span><span data-unresolved-link="org.gradle.api.provider/Property///PointingToDeclaration/">Property</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Enables verbose output. Default is false.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-896191023%2FProperties%2F1905640900" anchor-label="windows" id="-896191023%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="windows.html"><span><span>windows</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-896191023%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="windows.html">windows</a><span class="token operator">: </span><a href="../../com.hanggrian.packaging/-windows-options/index.html">WindowsOptions</a></div><div class="brief "><p class="paragraph">Windows options that will be packaged.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-260120981%2FProperties%2F1905640900" anchor-label="windowsOptions" id="-260120981%2FProperties%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="windows-options.html"><span>windows</span><wbr></wbr><span><span>Options</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-260120981%2FProperties%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">var </span><a href="windows-options.html">windowsOptions</a><span class="token operator">: </span><a href="../../com.hanggrian.packaging/-windows-options/index.html">WindowsOptions</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="1280888144%2FFunctions%2F1905640900" anchor-label="linux" id="1280888144%2FFunctions%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="linux.html"><span><span>linux</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1280888144%2FFunctions%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">fun </span><a href="linux.html"><span class="token function">linux</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">action<span class="token operator">: </span><span data-unresolved-link="org.gradle.api/Action///PointingToDeclaration/">Action</span><span class="token operator">&lt;</span><span class="token keyword">in </span><a href="../../com.hanggrian.packaging/-linux-options/index.html">LinuxOptions</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Configures the linux options that will be packaged.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2008855536%2FFunctions%2F1905640900" anchor-label="mac" id="2008855536%2FFunctions%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mac.html"><span><span>mac</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2008855536%2FFunctions%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">fun </span><a href="mac.html"><span class="token function">mac</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">action<span class="token operator">: </span><span data-unresolved-link="org.gradle.api/Action///PointingToDeclaration/">Action</span><span class="token operator">&lt;</span><span class="token keyword">in </span><a href="../../com.hanggrian.packaging/-mac-options/index.html">MacOptions</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Configures the Mac options that will be packaged.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1580778352%2FFunctions%2F1905640900" anchor-label="windows" id="1580778352%2FFunctions%2F1905640900" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packaging-gradle-plugin:dokkaHtml/main" data-filterable-set=":packaging-gradle-plugin:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="windows.html"><span><span>windows</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1580778352%2FFunctions%2F1905640900"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packaging-gradle-plugin:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">fun </span><a href="windows.html"><span class="token function">windows</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">action<span class="token operator">: </span><span data-unresolved-link="org.gradle.api/Action///PointingToDeclaration/">Action</span><span class="token operator">&lt;</span><span class="token keyword">in </span><a href="../../com.hanggrian.packaging/-windows-options/index.html">WindowsOptions</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Configures the windows options that will be packaged.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
