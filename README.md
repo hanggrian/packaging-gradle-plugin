@@ -1,6 +1,6 @@
-[![Travis CI](https://img.shields.io/travis/com/hendraanggrian/packaging-gradle-plugin)](https://travis-ci.com/github/hendraanggrian/packaging-gradle-plugin/)
-[![Plugin Portal](https://img.shields.io/maven-metadata/v.svg?label=plugin-portal&metadataUrl=https%3A%2F%2Fplugins.gradle.org%2Fm2%2Fcom%2Fhendraanggrian%2Fpackaging%2Fcom.hendraanggrian.packaging.gradle.plugin%2Fmaven-metadata.xml)](https://plugins.gradle.org/plugin/com.hendraanggrian.packaging)
-[![OpenJDK](https://img.shields.io/badge/jdk-17%2B-informational)](https://openjdk.java.net/projects/jdk/17/)
+[![CircleCI](https://img.shields.io/circleci/build/gh/hanggrian/packaging-gradle-plugin)](https://app.circleci.com/pipelines/github/hanggrian/packaging-gradle-plugin/)
+[![Plugin Portal](https://img.shields.io/gradle-plugin-portal/v/com.hanggrian.packaging)](https://plugins.gradle.org/plugin/com.hanggrian.packaging)
+[![Java](https://img.shields.io/badge/java-17+-informational)](https://docs.oracle.com/javase/17/)
 
 # Packaging Gradle Plugin
 
@@ -9,18 +9,13 @@ Gradle plugin that wraps JARs into native bundle for Windows, macOS, and Linux.
 - Complete customization for each distribution.
 - Pack multiple distributions with a single task.
 
-| Version | Method |
-| --- | --- |
-| 0.1 | [packr](https://github.com/libgdx/packr/) |
-| 0.2+ | [jpackage](https://docs.oracle.com/en/java/javase/14/jpackage/packaging-overview.html) |
-
 ## Download
 
 Using plugins DSL:
 
 ```gradle
 plugins {
-    id('com.hendraanggrian.packaging') version "$version"
+    id('com.hanggrian.packaging') version "$version"
 }
 ```
 
@@ -32,11 +27,11 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        classpath("com.hendraanggrian:packaging-gradle-plugin:$version")
+        classpath("com.hanggrian:packaging-gradle-plugin:$version")
     }
 }
 
-apply plugin: 'com.hendraanggrian.packaging'
+apply plugin: 'com.hanggrian.packaging'
 ```
 
 ## Usage
@@ -47,30 +42,11 @@ configuration.
 
 ```gradle
 packaging {
-    executable.set('example')
-    classpath.set(new File('path/to/jar'))
+    appName.set('Custom Directory')
     mainClass.set('com.example.App')
-    vmArgs.addAll('-Xmx1G')
-    resources.addAll(new File('image.jpg'), new File('path/to/other.jpg'))
-    minimizeJre.set('hard')
-    outputDirectory.set(new File('my/folder'))
+    modules = ['javafx.controls', 'javafx.graphics']
+    modulePaths.add(new File('/path/to/javafx-sdk/lib'))
     verbose.set(true)
-    autoOpen.set(true)
-}
-
-tasks {
-    packWindows64 {
-        executable.set('example64')
-        vmArgs.add('-Xdebug')
-        appName.set('Example Windows 64-bit')
-        jdk.set('path/to/windows_64_jdk')
-    }
-    packMacOS {
-        name.set('Example.app')
-        jdk.set('path/to/mac_jdk')
-        icon.set(new File('path/to/mac_icon.icns'))
-        bundleId.set('com.example.app')
-    }
 }
 ```
 
@@ -81,7 +57,7 @@ with `installDist` command.
 
 ```gradle
 apply plugin: 'application'
-apply plugin: 'com.hendraanggrian.packaging'
+apply plugin: 'com.hanggrian.packaging'
 
 application {
     applicationName = 'My App'

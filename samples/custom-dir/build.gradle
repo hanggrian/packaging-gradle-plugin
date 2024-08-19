@@ -1,21 +1,33 @@
 buildscript {
-    repositories.mavenCentral()
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
     dependencies {
-        classpath files('../packaging-gradle-plugin-0.2.jar')
+        classpath files('../packaging-gradle-plugin-0.1.jar')
         classpath libs.osdetector
+        classpath 'org.openjfx:javafx-plugin:0.1.0'
     }
 }
 
 group 'com.example'
 version '1.0'
 
-apply plugin: 'com.hendraanggrian.packaging'
+apply plugin: 'java'
+apply plugin: 'com.hanggrian.packaging'
+apply plugin: 'org.openjfx.javafxplugin'
+
+javafx {
+    version = "21.0.4"
+    modules 'javafx.controls', 'javafx.graphics'
+}
 
 packaging {
     appName.set('Custom Directory')
     mainClass.set('com.example.App')
     outputDirectory.set(new File(buildDir, 'awesome'))
     inputDirectory.set(new File(buildDir, 'libs'))
-    modules = ['javafx.controls']
+    modules = ['javafx.controls', 'javafx.graphics']
+    modulePaths = [file('~/SDK/javafx-sdk-21.0.4/lib')]
     verbose.set(true)
 }

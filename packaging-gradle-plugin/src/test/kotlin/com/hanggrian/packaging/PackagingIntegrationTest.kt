@@ -1,4 +1,4 @@
-package com.hendraanggrian.packaging
+package com.hanggrian.packaging
 
 import org.gradle.language.base.plugins.LifecycleBasePlugin.CHECK_TASK_NAME
 import org.gradle.testkit.runner.GradleRunner
@@ -27,13 +27,15 @@ class PackagingIntegrationTest {
         testProjectDir.newFile("settings.gradle.kts").writeText(
             """
             rootProject.name = "integration-test"
-            """.trimIndent()
+            """.trimIndent(),
         )
         buildFile = testProjectDir.newFile("build.gradle.kts")
-        runner = GradleRunner.create()
-            .withPluginClasspath()
-            .withProjectDir(testProjectDir.root)
-            .withTestKitDir(testProjectDir.newFolder())
+        runner =
+            GradleRunner
+                .create()
+                .withPluginClasspath()
+                .withProjectDir(testProjectDir.root)
+                .withTestKitDir(testProjectDir.newFolder())
     }
 
     @Test
@@ -42,17 +44,17 @@ class PackagingIntegrationTest {
             """
             plugins {
                 application
-                id("com.hendraanggrian.packaging")
+                id("com.hanggrian.packaging")
             }
             application {
                 applicationName = "MyApp"
                 mainClass.set("com.example.App")
             }
-            """.trimIndent()
+            """.trimIndent(),
         )
         assertEquals(
             UP_TO_DATE,
-            runner.withArguments(CHECK_TASK_NAME).build().task(":$CHECK_TASK_NAME")!!.outcome
+            runner.withArguments(CHECK_TASK_NAME).build().task(":$CHECK_TASK_NAME")!!.outcome,
         )
     }
 }

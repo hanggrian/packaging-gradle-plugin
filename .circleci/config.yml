@@ -1,0 +1,18 @@
+version: 2.1
+
+executors:
+  linux:
+    docker:
+      - image: cimg/openjdk:21.0
+
+jobs:
+  unit-test:
+    executor: linux
+    steps:
+      - checkout
+      - run: ./gradlew test
+
+workflows:
+  build:
+    jobs:
+      - unit-test

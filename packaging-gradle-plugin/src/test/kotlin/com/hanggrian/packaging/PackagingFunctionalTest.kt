@@ -1,4 +1,4 @@
-package com.hendraanggrian.packaging
+package com.hanggrian.packaging
 
 import org.gradle.language.base.plugins.LifecycleBasePlugin.CHECK_TASK_NAME
 import org.gradle.testkit.runner.GradleRunner
@@ -22,34 +22,36 @@ class PackagingFunctionalTest {
         testProjectDir.newFile("settings.gradle.kts").writeText(
             """
             rootProject.name = "functional-test"
-            """.trimIndent()
+            """.trimIndent(),
         )
         buildFile = testProjectDir.newFile("build.gradle.kts")
-        runner = GradleRunner.create()
-            .withPluginClasspath()
-            .withProjectDir(testProjectDir.root)
-            .withTestKitDir(testProjectDir.newFolder())
+        runner =
+            GradleRunner
+                .create()
+                .withPluginClasspath()
+                .withProjectDir(testProjectDir.root)
+                .withTestKitDir(testProjectDir.newFolder())
     }
 
-    // TODO: fix NullPointerException
+    // TODO fix NullPointerException
     // @Test
     fun minimalConfiguration() {
         testProjectDir.newFolder("lib").resolve("sample.jar").createNewFile()
         buildFile.writeText(
             """
             plugins {
-                id("com.hendraanggrian.packaging")
+                id("com.hanggrian.packaging")
             }
             packaging {
                 mainJar.set("sample.jar")
                 mainClass.set("com.example.App")
                 inputDirectory.set(projectDir.resolve("lib"))
             }
-            """.trimIndent()
+            """.trimIndent(),
         )
         assertEquals(
             UP_TO_DATE,
-            runner.withArguments(CHECK_TASK_NAME).build().task(":$CHECK_TASK_NAME")!!.outcome
+            runner.withArguments(CHECK_TASK_NAME).build().task(":$CHECK_TASK_NAME")!!.outcome,
         )
     }
 }

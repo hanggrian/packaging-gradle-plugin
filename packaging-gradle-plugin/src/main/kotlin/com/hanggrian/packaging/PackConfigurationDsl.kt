@@ -1,4 +1,4 @@
-package com.hendraanggrian.packaging
+package com.hanggrian.packaging
 
 /**
  * Forces platform packaging configurations to be on the same level, such as:
@@ -13,4 +13,4 @@ package com.hendraanggrian.packaging
  */
 @DslMarker
 @Target(AnnotationTarget.CLASS)
-annotation class PackConfigurationDsl
+public annotation class PackConfigurationDsl
